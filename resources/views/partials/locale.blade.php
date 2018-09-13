@@ -1,0 +1,1 @@
+<?php App::setLocale(Session::get('preferedLocale')); ?>
