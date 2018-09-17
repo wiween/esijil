@@ -125,7 +125,7 @@
                             <div class="media-right media-middle">
                                 <ul class="icons-list">
                                     <li>
-                                        <a href="/user/profile"><i class="icon-cog3"></i></a>
+                                        <a href="{{ url('user/profile') }}"><i class="icon-cog3"></i></a>
                                     </li>
                                 </ul>
                             </div>
