@@ -1,4 +1,6 @@
 <?php
+Url::forceRootUrl(env('APP_URL'));
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
