@@ -9,12 +9,12 @@
 
 @section('topButton')
     @if (Auth::user()->role == 'super_admin')
-        <a href="/user" class="btn btn-link btn-float has-text">
+        <a href="{{ url('') }}/user" class="btn btn-link btn-float has-text">
             <i class="icon-list-numbered text-primary"></i>
             <span>All Users</span>
         </a>
     @endif
-    <a href="/user/edit-profile" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/user/edit-profile" class="btn btn-link btn-float has-text">
         <i class="icon-pencil text-primary"></i>
         <span>Edit</span>
     </a>
@@ -89,7 +89,7 @@
                     </tr>
                 </table>
                 <br>
-                <a href="/user/edit-profile" class="btn btn-primary btn-block">Edit My Profile</a>
+                <a href="{{ url('') }}/user/edit-profile" class="btn btn-primary btn-block">Edit My Profile</a>
 
             </div>
         </div>

@@ -26,7 +26,7 @@
                         @foreach ($certificates as $certificate)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="/certificate/job-done/{{ $certificate->batch_id }}">{{ $certificate->batch_id }}</a></td>
+                                <td><a href="{{ url('') }}/certificate/job-done/{{ $certificate->batch_id }}">{{ $certificate->batch_id }}</a></td>
                                 <td>{{ $certificate->state->name }}</td>
                                 {{--<td>--}}
                                 {{--<ul class="icons-list">--}}

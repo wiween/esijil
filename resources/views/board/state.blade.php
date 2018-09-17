@@ -39,7 +39,7 @@
                 {{--</div>--}}
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/dashboard/target-min.jpg">
-                    <a href="/board/state/pt" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT BERTAULIAH</a>
+                    <a href="{{ url('') }}/board/state/pt" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT BERTAULIAH</a>
                 </div>
                 {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
                     {{--<img class="img-responsive img-rounded" src="/images/dashboard/user-min.jpg">--}}
@@ -56,7 +56,7 @@
                 @foreach($espkms as $espkm)
                     <div class="col-md-2 col-xs-6 thumbnail">
                         <img class="img-responsive img-rounded" src="/images/dashboard/audit-min.jpg">
-                        <a href="/board/statelist/{{$espkm->state_id}}" class="btn btn-success btn-block">{{ $espkm->state->name }}</a>
+                        <a href="{{ url('') }}/board/statelist/{{$espkm->state_id}}" class="btn btn-success btn-block">{{ $espkm->state->name }}</a>
                         {{--@foreach($batches as $batch)--}}
                             {{--<a href="/board/list/{{$batch->id}}">{{ $batch->batch_number }}</a>--}}
                         {{--@endforeach--}}

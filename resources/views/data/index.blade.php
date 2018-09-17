@@ -35,11 +35,11 @@
 
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/dashboard/lookups-min.jpg">
-                    <a href="/api/pelajar" class="btn btn-info btn-block" style="margin-top: 4px">PENGAJIAN LAIN</a>
+                    <a href="{{ url('') }}/api/pelajar" class="btn btn-info btn-block" style="margin-top: 4px">PENGAJIAN LAIN</a>
                 </div>
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/dashboard/target-min.jpg">
-                    <a href="/api/board/pelajar" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT
+                    <a href="{{ url('') }}/api/board/pelajar" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT
                         BERTAULIAH</a>
                 </div>
                 {{--<div class="col-md-3 col-xs-6 thumbnail">--}}

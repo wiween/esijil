@@ -30,20 +30,20 @@
                 <h3>Jenis Pengajian : </h3>
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/dashboard/audit-min.jpg">
-                    <a href="/certificate/state/ppt" class="btn btn-info btn-block" style="margin-top: 4px">PPT</a>
+                    <a href="{{ url('') }}/certificate/state/ppt" class="btn btn-info btn-block" style="margin-top: 4px">PPT</a>
                 </div>
 
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/dashboard/lookups-min.jpg">
-                    <a href="/certificate/state/ndt" class="btn btn-info btn-block" style="margin-top: 4px">NDT</a>
+                    <a href="{{ url('') }}/certificate/state/ndt" class="btn btn-info btn-block" style="margin-top: 4px">NDT</a>
                 </div>
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/dashboard/target-min.jpg">
-                    <a href="/certificate/state/pb" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT BERTAULIAH</a>
+                    <a href="{{ url('') }}/certificate/state/pb" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT BERTAULIAH</a>
                 </div>
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/dashboard/user-min.jpg">
-                    <a href="/certificate/state/sldn" class="btn btn-info btn-block" style="margin-top: 4px">SLDN</a>
+                    <a href="{{ url('') }}/certificate/state/sldn" class="btn btn-info btn-block" style="margin-top: 4px">SLDN</a>
                 </div>
             </div>
             <div class="row">
@@ -56,7 +56,7 @@
                 @foreach($certificates as $certificate)
                     <div class="col-md-2 col-xs-6 thumbnail">
                         <img class="img-responsive img-rounded" src="/images/dashboard/audit-min.jpg">
-                        <a href="/certificate/statelist/{{$certificate->state_id}}/{{ Request::segment(3) }}" class="btn btn-success btn-block">{{ $certificate->state->name }}</a>
+                        <a href="{{ url('') }}/certificate/statelist/{{$certificate->state_id}}/{{ Request::segment(3) }}" class="btn btn-success btn-block">{{ $certificate->state->name }}</a>
                     {{--@foreach($batches as $batch)--}}
                     {{--<a href="/certificate/batch/{{$batch->id}}">{{ $batch->batch_number }}</a>--}}
                     {{--@endforeach--}}

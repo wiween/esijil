@@ -111,7 +111,7 @@
                     </tr>
                 </table>
                 <br>
-                <a href="/certificate/edit/{{ $certificate->id }}" class="btn btn-primary btn-block">Kemaskini Rekod</a>
+                <a href="{{ url('') }}/certificate/edit/{{ $certificate->id }}" class="btn btn-primary btn-block">Kemaskini Rekod</a>
 
             </div>
         </div>

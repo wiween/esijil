@@ -119,7 +119,7 @@
                     </tr>
                 </table>
                 <br>
-                <a href="/print/edit/{{ $certificate->id }}" class="btn btn-primary btn-block">Kemaskini Rekod</a>
+                <a href="{{ url('') }}/print/edit/{{ $certificate->id }}" class="btn btn-primary btn-block">Kemaskini Rekod</a>
 
             </div>
         </div>

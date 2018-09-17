@@ -8,7 +8,7 @@
 @endsection
 
 @section('topButton')
-    <a href="/user/create" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/user/create" class="btn btn-link btn-float has-text">
         <i class="icon-plus-circle2 text-primary"></i>
         <span>New User</span>
     </a>

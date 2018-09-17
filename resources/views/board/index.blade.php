@@ -9,7 +9,7 @@
 
 @section('topButton')
     @if (Auth::user()->access_power >= 2000)
-        <a href="/board/fetch-data" class="btn btn-link btn-float has-text">
+        <a href="{{ url('') }}/board/fetch-data" class="btn btn-link btn-float has-text">
             <i class="icon-user-tie text-primary"></i>
             <span>Tarik Data SKM</span>
         </a>
@@ -39,7 +39,7 @@
                 {{--</div>--}}
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/dashboard/target-min.jpg">
-                    <a href="/board/state/pb" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT BERTAULIAH</a>
+                    <a href="{{ url('') }}/board/state/pb" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT BERTAULIAH</a>
                 </div>
                 {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
                     {{--<img class="img-responsive img-rounded" src="/images/dashboard/user-min.jpg">--}}
@@ -57,14 +57,14 @@
                 <div class="col-md-6">
                     @foreach ($states as $state)
                         @if (($loop->index %2) == 0)
-                    <a href="/board/statelist/{{ $state->id }}" class="btn btn-info btn-block" style="margin-top: 4px">{{ $state->name }}</a>
+                    <a href="{{ url('') }}/board/statelist/{{ $state->id }}" class="btn btn-info btn-block" style="margin-top: 4px">{{ $state->name }}</a>
                         @endif
                     @endforeach
                 </div>
                 <div class="col-md-6">
                     @foreach ($states as $state)
                         @if (($loop->index %2) == 1)
-                            <a href="/board/statelist/{{ $state->id }}" class="btn btn-info btn-block" style="margin-top: 4px">{{ $state->name }}</a>
+                            <a href="{{ url('') }}/board/statelist/{{ $state->id }}" class="btn btn-info btn-block" style="margin-top: 4px">{{ $state->name }}</a>
                        @endif
                     @endforeach
                 </div>

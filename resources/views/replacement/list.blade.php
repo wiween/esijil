@@ -28,7 +28,7 @@
                         @foreach ($certificates as $certificate)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="/replacement/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+                                <td><a href="{{ url('') }}/replacement/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
                                 <td>{{ $certificate->certificate_number }}</td>
                                 <td>{{ $certificate->type }}</td>
                                 <td>
@@ -48,8 +48,8 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/replacement/show/{{ $certificate->id }}/{{ $certificate->certificate_number }}"><i class="icon-display"></i>Lihat</a></li>
-                                                <li><a href="/replacement/create/{{ $certificate->id }}/{{ $certificate->certificate_number }}"><i class="icon-chair"></i>Penggantian</a></li>
+                                                <li><a href="{{ url('') }}/replacement/show/{{ $certificate->id }}/{{ $certificate->certificate_number }}"><i class="icon-display"></i>Lihat</a></li>
+                                                <li><a href="{{ url('') }}/replacement/create/{{ $certificate->id }}/{{ $certificate->certificate_number }}"><i class="icon-chair"></i>Penggantian</a></li>
                                               </ul>
                                         </li>
                                     </ul>

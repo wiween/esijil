@@ -23,20 +23,20 @@
 
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/E1" class="btn btn-success btn-block" style="margin-top: 4px">E1</a>
+                    <a href="{{ url('') }}/report/E1" class="btn btn-success btn-block" style="margin-top: 4px">E1</a>
                 </div>
 
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/E2" class="btn btn-success btn-block" style="margin-top: 4px">E2</a>
+                    <a href="{{ url('') }}/report/E2" class="btn btn-success btn-block" style="margin-top: 4px">E2</a>
                 </div>
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/E3" class="btn btn-success btn-block" style="margin-top: 4px">E3</a>
+                    <a href="{{ url('') }}/report/E3" class="btn btn-success btn-block" style="margin-top: 4px">E3</a>
                 </div>
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/E4" class="btn btn-success btn-block" style="margin-top: 4px">E4</a>
+                    <a href="{{ url('') }}/report/E4" class="btn btn-success btn-block" style="margin-top: 4px">E4</a>
                 </div>
 
             </div>
@@ -49,20 +49,20 @@
 
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/f1" class="btn btn-info btn-block" style="margin-top: 4px">F1</a>
+                    <a href="{{ url('') }}/report/f1" class="btn btn-info btn-block" style="margin-top: 4px">F1</a>
                 </div>
 
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/F2" class="btn btn-info btn-block" style="margin-top: 4px">F2</a>
+                    <a href="{{ url('') }}/report/F2" class="btn btn-info btn-block" style="margin-top: 4px">F2</a>
                 </div>
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/F3" class="btn btn-info btn-block" style="margin-top: 4px">F3</a>
+                    <a href="{{ url('') }}/report/F3" class="btn btn-info btn-block" style="margin-top: 4px">F3</a>
                 </div>
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/F4" class="btn btn-info btn-block" style="margin-top: 4px">F4</a>
+                    <a href="{{ url('') }}/report/F4" class="btn btn-info btn-block" style="margin-top: 4px">F4</a>
                 </div>
             </div>
 
@@ -74,20 +74,20 @@
 
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/G1" class="btn btn-warning btn-block" style="margin-top: 4px">G1</a>
+                    <a href="{{ url('') }}/report/G1" class="btn btn-warning btn-block" style="margin-top: 4px">G1</a>
                 </div>
 
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/G2" class="btn btn-warning btn-block" style="margin-top: 4px">G2</a>
+                    <a href="{{ url('') }}/report/G2" class="btn btn-warning btn-block" style="margin-top: 4px">G2</a>
                 </div>
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/G3" class="btn btn-warning btn-block" style="margin-top: 4px">G3</a>
+                    <a href="{{ url('') }}/report/G3" class="btn btn-warning btn-block" style="margin-top: 4px">G3</a>
                 </div>
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="/images/report/pdf.png">
-                    <a href="/report/G4" class="btn btn-warning btn-block" style="margin-top: 4px">G4</a>
+                    <a href="{{ url('') }}/report/G4" class="btn btn-warning btn-block" style="margin-top: 4px">G4</a>
                 </div>
                
             </div>

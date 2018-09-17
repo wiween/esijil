@@ -42,7 +42,7 @@
                     </tr>
                     <tr>
                         <th class=" col-md-5">Markah :</th>
-                        <td><a href="/board/mark/{{ $espkm->ic_number }}/{{ $espkm->batch_id  }}" target="_new">Markah Keseluruhan</a></td>
+                        <td><a href="{{ url('') }}/board/mark/{{ $espkm->ic_number }}/{{ $espkm->batch_id  }}" target="_new">Markah Keseluruhan</a></td>
                     </tr>
                     {{--<tr>--}}
                         {{--<th>No Kumpulan :</th>--}}
@@ -119,7 +119,7 @@
                     </tr>
                 </table>
                 <br>
-                <a href="/board/edit/{{ $espkm->id }}" class="btn btn-primary btn-block">Kemaskini Rekod</a>
+                <a href="{{ url('') }}/board/edit/{{ $espkm->id }}" class="btn btn-primary btn-block">Kemaskini Rekod</a>
 
             </div>
         </div>

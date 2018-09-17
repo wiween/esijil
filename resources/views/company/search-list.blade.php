@@ -8,7 +8,7 @@
 @endsection
 
 @section('topButton')
-    <a href="/certificate/print" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/certificate/print" class="btn btn-link btn-float has-text">
         <i class="icon-printer2 text-primary"></i>
         <span>Cetak Senarai Ini</span>
     </a>
@@ -57,7 +57,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-post/create/{{ $certificate->id }}"><i class="icon-database-edit2 text-primary"></i>Pembungkusan</a></li>
+                                                <li><a href="{{ url('') }}/company-post/create/{{ $certificate->id }}"><i class="icon-database-edit2 text-primary"></i>Pembungkusan</a></li>
                                             </ul>
                                         </li>
                                     </ul>

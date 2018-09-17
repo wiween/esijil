@@ -36,7 +36,7 @@
                     <div class="col-md-6">
                         @foreach($batches as $batch)
                             <input type="checkbox" name="batch[]" value="{{ old('batch', $batch->batch_id) }}">
-                            <a href="/board/list/{{ $batch->batch_id }}">[ {{  $batch->batch_id }} ]</a>
+                            <a href="{{ url('') }}/board/list/{{ $batch->batch_id }}">[ {{  $batch->batch_id }} ]</a>
                             <br>
                             @include('partials.error_block', ['item' => 'batch'])
                         @endforeach

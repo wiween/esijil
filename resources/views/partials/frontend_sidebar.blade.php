@@ -54,13 +54,13 @@
     </li> {{--  DONE --}}
     <li @if (Request::segment(1) == 'status') class="active" @endif><a href="{{ url('') }}/status"><i class="icon-grid"></i> <span>Status</span></a>
     <ul>
-        <li><a href="/search">Semak Status</a></li>
+        <li><a href="{{ url('') }}/search">Semak Status</a></li>
     </ul>
     </li> {{--  DONE --}}
 <li @if (Request::segment(1) == 'replacement') class="active" @endif><a href="{{ url('') }}/replacement"><i class="icon-add-to-list"></i> <span>Penggantian</span></a>
     <ul>
-        <li><a href="/search">Penggantian Baru</a></li>
-        <li><a href="/replacement">Senarai Penggantian</a></li>
+        <li><a href="{{ url('') }}/search">Penggantian Baru</a></li>
+        <li><a href="{{ url('') }}/replacement">Senarai Penggantian</a></li>
     </ul>
 </li> {{--  DONE --}}
 <li @if (Request::segment(1) == 'post') class="active" @endif><a href="{{ url('') }}/post"><i class="icon-mailbox"></i> <span>Pembungkusan</span></a>

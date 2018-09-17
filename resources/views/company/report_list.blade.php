@@ -41,8 +41,8 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-report/pdf/F/{{ $batch->batch_id }}/{{ $batch->type }}"><i class="icon-file-pdf text-primary"></i>Papar Laporan F</a></li>
-                                                <li><a href="/company-report/pdf/G/{{ $batch->batch_id }}/{{ $batch->type }}"><i class="icon-file-pdf text-danger"></i>Papar Laporan G</a></li>
+                                                <li><a href="{{ url('') }}/company-report/pdf/F/{{ $batch->batch_id }}/{{ $batch->type }}"><i class="icon-file-pdf text-primary"></i>Papar Laporan F</a></li>
+                                                <li><a href="{{ url('') }}/company-report/pdf/G/{{ $batch->batch_id }}/{{ $batch->type }}"><i class="icon-file-pdf text-danger"></i>Papar Laporan G</a></li>
                                             </ul>
                                         </li>
                                     </ul>
