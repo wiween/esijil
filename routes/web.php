@@ -1,6 +1,4 @@
 <?php
-use Illuminate\Routing\UrlGenerator as Url;
-
 Url::forceRootUrl(env('APP_URL'));
 
 Auth::routes();
