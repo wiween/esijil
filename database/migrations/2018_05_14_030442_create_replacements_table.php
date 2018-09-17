@@ -22,7 +22,7 @@ class CreateReplacementsTable extends Migration
             $table->text('remark')->nullable();
             $table->string('status')->default('active');
             $table->integer('certificate_id')->unsigned()->index();
-            $table->foreign('certificate_id')->references('id')->on('certificates')->onDelete('restrict');
+            $table->foreign('certificate_id')->references('id')->on('certificates');
             $table->string('printed_remark')->default('cetakan kedua');
             $table->string('updated_by')->default('super.admin@gmail.com');
             $table->softDeletes();

@@ -8,34 +8,34 @@
 
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-    <link href="/themes/limitless/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
-    <link href="/themes/limitless/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="/themes/limitless/assets/css/core.css" rel="stylesheet" type="text/css">
-    <link href="/themes/limitless/assets/css/components.css" rel="stylesheet" type="text/css">
-    <link href="/themes/limitless/assets/css/colors.css" rel="stylesheet" type="text/css">
-    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ url("themes/limitless/assets/css/icons/icomoon/styles.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ url("themes/limitless/assets/css/bootstrap.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ url("themes/limitless/assets/css/core.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ url("themes/limitless/assets/css/components.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ url("themes/limitless/assets/css/colors.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ url("css/font-awesome.min.css") }}" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
 
     <!-- Core JS files -->
-    <script type="text/javascript" src="/themes/limitless/assets/js/plugins/loaders/pace.min.js"></script>
-    <script type="text/javascript" src="/themes/limitless/assets/js/core/libraries/jquery.min.js"></script>
-    <script type="text/javascript" src="/themes/limitless/assets/js/core/libraries/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/themes/limitless/assets/js/plugins/loaders/blockui.min.js"></script>
+    <script type="text/javascript" src="{{ url("themes/limitless/assets/js/plugins/loaders/pace.min.js") }}"></script>
+    <script type="text/javascript" src="{{ url("themes/limitless/assets/js/core/libraries/jquery.min.js") }}"></script>
+    <script type="text/javascript" src="{{ url("themes/limitless/assets/js/core/libraries/bootstrap.min.js") }}"></script>
+    <script type="text/javascript" src="{{ url("themes/limitless/assets/js/plugins/loaders/blockui.min.js") }}"></script>
     <!-- /core JS files -->
 
     <!-- Theme JS files -->
-    <script type="text/javascript" src="/themes/limitless/assets/js/plugins/tables/datatables/datatables.min.js"></script>
-    <script type="text/javascript" src="/themes/limitless/assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script type="text/javascript" src="{{ url("themes/limitless/assets/js/plugins/tables/datatables/datatables.min.js") }}"></script>
+    <script type="text/javascript" src="{{ url("themes/limitless/assets/js/plugins/forms/selects/select2.min.js") }}"></script>
 
-    <script type="text/javascript" src="/themes/limitless/assets/js/core/app.js"></script>
-    <script type="text/javascript" src="/themes/limitless/assets/js/pages/datatables_basic.js"></script>
+    <script type="text/javascript" src="{{ url("themes/limitless/assets/js/core/app.js") }}"></script>
+    <script type="text/javascript" src="{{ url("themes/limitless/assets/js/pages/datatables_basic.js") }}"></script>
     <!-- /theme JS files -->
 
     {{-- My Script --}}
-    <link href="/css/mystyle.css" rel="stylesheet" type="text/css">
+    <link href="{{ url("css/mystyle.css") }}" rel="stylesheet" type="text/css">
 
     <!--vue -->
-    <script src="/js/vue.js"></script>
+    <script src="{{ url("js/vue.js") }}"></script>
     {{-- Touch Icon --}}
     @include('partials.touchicon')
 
@@ -49,7 +49,7 @@
 <!-- Main navbar -->
 <div class="navbar navbar-default header-highlight">
     <div class="navbar-header">
-        <a class="navbar-brand" href="/home"><img src="/themes/limitless/assets/images/esijil.png" alt=""></a>
+        <a class="navbar-brand" href="/home"><img src="{{ url("themes/limitless/assets/images/esijil.png") }}" alt=""></a>
 
         <ul class="nav navbar-nav visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
