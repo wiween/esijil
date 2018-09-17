@@ -1,5 +1,5 @@
 <?php
-Url::forceRootUrl(env('APP_URL'));
+\URL::forceRootUrl(env('APP_URL'));
 
 Auth::routes();
 
