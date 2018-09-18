@@ -36,6 +36,7 @@
 
     <!--vue -->
     <script src="/js/vue.js"></script>
+
     {{-- Touch Icon --}}
     @include('partials.touchicon')
 

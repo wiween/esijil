@@ -84,6 +84,15 @@ class ReplacementController extends Controller
         $replacement->certificate_id = $id;
         $replacement->old_certificate_number = $cn;
 
+        //buat agihan semula masukkan dalam senarai agihan
+
+        $certificate = Certificate::where('certificate_number', $cn)->first();
+
+        //masukkan dalam table
+        $agihan = New Certificate();
+        $agihan->name = $certificate->name;
+
+
         if ($replacement->save()) {
             return redirect('/replacement/payment/' . $id)->with('successMessage', 'Maklumat Penggantian Telah Dijana');
         } else {

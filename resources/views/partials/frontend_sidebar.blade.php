@@ -15,12 +15,12 @@
     {{--</ul>--}}
 {{--</li>--}}
 
-<li class="navigation-header"><span>Tarik Data</span> <i class="icon-menu" title="Main pages"></i></li>
-<li @if (Request::segment(1) == 'board') class="active" @endif><a href="/board/type"><i class="icon-checkmark"></i> <span>eSPKM</span></a>
-<ul>
-<li><a href="/data">Data SKM</a></li>
-</ul>
-</li>
+{{--<li class="navigation-header"><span>Tarik Data</span> <i class="icon-menu" title="Main pages"></i></li>--}}
+{{--<li @if (Request::segment(1) == 'board') class="active" @endif><a href="/board/type"><i class="icon-checkmark"></i> <span>eSPKM</span></a>--}}
+{{--<ul>--}}
+{{--<li><a href="/data">Data SKM</a></li>--}}
+{{--</ul>--}}
+{{--</li>--}}
 {{--accredited center--}}
 <li class="navigation-header"><span>Pegawai Agihan</span> <i class="icon-menu" title="Main pages"></i></li>
 <li @if (Request::segment(1) == 'certificate') class="active" @endif><a href="/certificate/list"><i class="icon-add-to-list"></i> <span>Agihan Tugasan</span></a>
