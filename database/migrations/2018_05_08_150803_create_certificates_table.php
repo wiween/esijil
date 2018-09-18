@@ -15,11 +15,11 @@ class CreateCertificatesTable extends Migration
     {
         Schema::create('certificates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('ic_number');
+            $table->string('name')->nullable();
+            $table->string('ic_number')->nullable();
 //            $table->string('training_group_number');
-            $table->string('programme_name');
-            $table->string('programme_code');
+            $table->string('programme_name')->nullable();
+            $table->string('programme_code')->nullable();
             $table->string('type')->nullable();
             $table->string('level')->nullable();
             $table->string('pb_name')->nullable();
