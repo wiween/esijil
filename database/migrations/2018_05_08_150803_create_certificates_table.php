@@ -16,7 +16,7 @@ class CreateCertificatesTable extends Migration
         Schema::create('certificates', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('ic_number')->unique();
+            $table->string('ic_number');
 //            $table->string('training_group_number');
             $table->string('programme_name');
             $table->string('programme_code');
@@ -41,6 +41,7 @@ class CreateCertificatesTable extends Migration
             $table->string('status')->default('active');
             $table->string('current_status')->default('dalam proses percetakan');
             $table->string('updated_by')->default('super.admin@gmail.com');
+            $table->unique(['ic_number', 'batch_id']);
             $table->softDeletes();
             $table->timestamps();
         });
