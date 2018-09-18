@@ -25,7 +25,7 @@ class CreateCertificatesTable extends Migration
             $table->string('pb_name');
             $table->integer('state_id')->unsigned()->index();
             $table->foreign('state_id')->references('id')->on('states');
-            $table->dateTime('date_ppl')->nullable();
+            $table->string('date_ppl')->nullable();
             $table->string('result_ppl');
             $table->string('batch_id');
             $table->string('address');
