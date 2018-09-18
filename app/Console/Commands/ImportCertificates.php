@@ -67,7 +67,7 @@ class ImportCertificates extends Command
             or a.keputusan_jpp = 1)
             union select a.nama as name, a.no_ic as ic_number, b.nama_program as programme_name, a.kod_program as programme_code, 
             a.jenis_tauliah as type, substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level,
-            c.nama_pusat as pb_name, d.id as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
+            c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
             a.no_batch as batch_id, c.alamat_sykt as address
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
