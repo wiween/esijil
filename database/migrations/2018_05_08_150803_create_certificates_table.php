@@ -22,7 +22,7 @@ class CreateCertificatesTable extends Migration
             $table->string('programme_code');
             $table->string('type')->nullable();
             $table->string('level')->nullable();
-            $table->string('pb_name');
+            $table->string('pb_name')->nullable();
             $table->integer('state_id')->unsigned()->index();
             $table->foreign('state_id')->references('id')->on('states');
             $table->string('date_ppl')->nullable();
