@@ -80,6 +80,7 @@ class DataExport implements FromQuery, WithHeadings, Responsable
             'Sumber',
             'Pegawai Bertanggungjawab',
             'No Sijil',
+            'Tarikh Cetak',
             'QR Code',
             'Remark',
             'printed_remark',
