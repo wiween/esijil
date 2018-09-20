@@ -59,9 +59,22 @@ class UserTableSeeder extends Seeder
         $admin->ic_number = '800707074445';
         $admin->phone_number = '0198899555';
         $admin->role = 'pencetak';
+        $admin->access_power = 1000;
+        $admin->status = 'active';
+        $admin->save();
+
+        //akaun
+        $admin = new \App\User();
+        $admin->name = 'Mr. Akauntan';
+        $admin->email = 'akaun@gmail.com';
+        $admin->password = bcrypt('akaun1234');
+        $admin->ic_number = '800707074499';
+        $admin->phone_number = '0198899555';
+        $admin->role = 'akauntan';
         $admin->access_power = 2000;
         $admin->status = 'active';
         $admin->save();
+
 
         //Pencetak luar
         $admin = new \App\User();

@@ -4,47 +4,37 @@
 @endsection
 
 @section('mainTitle')
-    Dashboard
+    Inbox
 @endsection
 
 @section('topButton')
-    @if (Auth::user()->access_power >= 2000)
-        <a href="#" class="btn btn-link btn-float has-text">
-            <i class="icon-printer2 text-primary"></i>
-            <span>Cetak Sijil</span>
-        </a>
-    @endif
-    @if (Auth::user()->access_power >= 1000)
-        <a href="#" class="btn btn-link btn-float has-text">
-            <i class="icon-coin-dollar text-primary"></i>
-            <span>Bayaran</span>
-        </a>
-    @endif
-@endsection
+   @endsection
 
 @section('content')
     <div class="panel panel-default">
         <div class="panel-body">
             {{--@if (Auth::user()->access_power >= 1000)--}}
-                <div class="row">
-                    <div class="col-md-3 col-xs-6 thumbnail">
-                        <img class="img-responsive img-rounded" src="{{ url('images/dashboard/audit-min.jpg') }}">
-                        <a href="{{ url('admin/course') }}" class="btn btn-info btn-block" style="margin-top: 4px">Cetak Sijil</a>
-                    </div>
 
-                    <div class="col-md-3 col-xs-6 thumbnail">
-                        <img class="img-responsive img-rounded" src="{{ url('images/dashboard/lookups-min.jpg') }}">
-                        <a href="{{ url('admin/session') }}" class="btn btn-info btn-block" style="margin-top: 4px">Carian</a>
-                    </div>
-                    <div class="col-md-3 col-xs-6 thumbnail">
-                        <img class="img-responsive img-rounded" src="{{ url('images/dashboard/statistic-min.jpg') }}">
-                        <a href="{{ url('admin/monthlyreport') }}" class="btn btn-info btn-block" style="margin-top: 4px">Laporan</a>
-                    </div>
-                    <div class="col-md-3 col-xs-6 thumbnail">
-                        <img class="img-responsive img-rounded" src="{{ url('images/dashboard/user-min.jpg') }}">
-                        <a href="{{ url('admin/report/chart') }}" class="btn btn-info btn-block" style="margin-top: 4px">Admin</a>
-                    </div>
-                </div>
+                {{--<div class="row">--}}
+                    {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
+                        {{--<img class="img-responsive img-rounded" src="/images/dashboard/audit-min.jpg">--}}
+                        {{--<a href="/admin/course" class="btn btn-info btn-block" style="margin-top: 4px">Cetak Sijil</a>--}}
+                    {{--</div>--}}
+
+                    {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
+                        {{--<img class="img-responsive img-rounded" src="/images/dashboard/lookups-min.jpg">--}}
+                        {{--<a href="/admin/session" class="btn btn-info btn-block" style="margin-top: 4px">Carian</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
+                        {{--<img class="img-responsive img-rounded" src="/images/dashboard/statistic-min.jpg">--}}
+                        {{--<a href="/admin/monthlyreport" class="btn btn-info btn-block" style="margin-top: 4px">Laporan</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
+                        {{--<img class="img-responsive img-rounded" src="/images/dashboard/user-min.jpg">--}}
+                        {{--<a href="/admin/report/chart" class="btn btn-info btn-block" style="margin-top: 4px">Admin</a>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
             <div>
                 <hr>
             </div>

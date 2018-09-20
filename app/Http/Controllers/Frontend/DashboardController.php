@@ -18,24 +18,33 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        $officer = Auth::user()->email;
-        if ($officer == 'super.admin@gmail.com'){
+        $role = Auth::user()->role;
 
-            $certificates = Certificate::distinct('batch_id')->whereNotNull('officer')
-                ->where('flag_printed', 'N')->orderBy('id', 'desc')
-                ->groupBy('batch_id')->groupBy('state_id')->get();
-            //$certificates = Certificate::where('officer', $officer)->where('flag_printed', 'N')->orderBy('id', 'desc')->get();
-            return view('dashboard.home', compact('certificates'));
-
+        if ($role == 'company') {
+            return redirect('/company-download');
+        } else if ($role == 'akauntan') {
+            return redirect('/finance/confirm');
         } else {
+            $officer = Auth::user()->email;
 
-            $certificates = Certificate::distinct('batch_id')->where('officer', $officer)
-                ->where('flag_printed', 'N')->orderBy('id', 'desc')
-                ->groupBy('batch_id')->groupBy('state_id')->get();
-            //$certificates = Certificate::where('officer', $officer)->where('flag_printed', 'N')->orderBy('id', 'desc')->get();
-            return view('dashboard.home', compact('certificates'));
+            if ($officer == 'super.admin@gmail.com') {
+
+                $certificates = Certificate::distinct('batch_id')->whereNotNull('officer')
+                    ->where('flag_printed', 'N')->orderBy('id', 'desc')
+                    ->groupBy('batch_id')->groupBy('state_id')->get();
+                //$certificates = Certificate::where('officer', $officer)->where('flag_printed', 'N')->orderBy('id', 'desc')->get();
+                return view('dashboard.home', compact('certificates'));
+
+            } else {
+
+                $certificates = Certificate::distinct('batch_id')->where('officer', $officer)
+                    ->where('flag_printed', 'N')->orderBy('id', 'desc')
+                    ->groupBy('batch_id')->groupBy('state_id')->get();
+                //$certificates = Certificate::where('officer', $officer)->where('flag_printed', 'N')->orderBy('id', 'desc')->get();
+                return view('dashboard.home', compact('certificates'));
+            }
+
         }
-
     }
 
     /**
@@ -51,7 +60,7 @@ class DashboardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -62,7 +71,7 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Dashboard  $dashboard
+     * @param  \App\Dashboard $dashboard
      * @return \Illuminate\Http\Response
      */
     public function show(Dashboard $dashboard)
@@ -73,7 +82,7 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Dashboard  $dashboard
+     * @param  \App\Dashboard $dashboard
      * @return \Illuminate\Http\Response
      */
     public function edit(Dashboard $dashboard)
@@ -84,8 +93,8 @@ class DashboardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Dashboard  $dashboard
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Dashboard $dashboard
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Dashboard $dashboard)
@@ -96,7 +105,7 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Dashboard  $dashboard
+     * @param  \App\Dashboard $dashboard
      * @return \Illuminate\Http\Response
      */
     public function destroy(Dashboard $dashboard)
