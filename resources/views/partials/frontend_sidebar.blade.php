@@ -1,18 +1,19 @@
-<!-- Admin ministry -->
-{{--@if (Auth::user()->access_power >= 1000)--}}
+<!-- officer and above -->
+@if (Auth::user()->access_power == 1000 || Auth::user()->access_power >= 5000)
     <!-- User & Above -->
     <li class="navigation-header"><span>Module</span> <i class="icon-menu" title="Main pages"></i></li>
-    <li @if (Request::segment(1) == 'dashboard') class="active" @endif><a href="/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
-
+    <li @if (Request::segment(1) == 'dashboard') class="active" @endif><a href="/dashboard"><i class="icon-home4"></i>
+            <span>Inbox</span></a></li>
+@endif
 {{--jwatan kuasa--}}
 {{--<li class="navigation-header"><span>Jawatan Kuasa Pengesahan</span> <i class="icon-menu" title="Main pages"></i></li>--}}
 {{--<li @if (Request::segment(1) == 'board') class="active" @endif><a href="/board/type"><i class="icon-checkmark"></i> <span>Pengesahan</span></a>--}}
-    {{--<ul>--}}
-        {{--<li><a href="/board/type">Buat Pengesahan</a></li>--}}
-        {{--<li><a href="/board/list-done">Selesai Pengesahan</a></li>--}}
-        {{--<li><a href="/board/list-tolak">Ditolak Pengesahan</a></li>--}}
-        {{--<li><a href="/board/list-kiv">KIV Pengesahan</a></li>--}}
-    {{--</ul>--}}
+{{--<ul>--}}
+{{--<li><a href="/board/type">Buat Pengesahan</a></li>--}}
+{{--<li><a href="/board/list-done">Selesai Pengesahan</a></li>--}}
+{{--<li><a href="/board/list-tolak">Ditolak Pengesahan</a></li>--}}
+{{--<li><a href="/board/list-kiv">KIV Pengesahan</a></li>--}}
+{{--</ul>--}}
 {{--</li>--}}
 
 {{--<li class="navigation-header"><span>Tarik Data</span> <i class="icon-menu" title="Main pages"></i></li>--}}
@@ -21,65 +22,81 @@
 {{--<li><a href="/data">Data SKM</a></li>--}}
 {{--</ul>--}}
 {{--</li>--}}
-{{--accredited center--}}
-<li class="navigation-header"><span>Pegawai Agihan</span> <i class="icon-menu" title="Main pages"></i></li>
-<li @if (Request::segment(1) == 'certificate') class="active" @endif><a href="/certificate/list"><i class="icon-add-to-list"></i> <span>Agihan Tugasan</span></a>
-    <ul>
-        <li><a href="/certificate/type">Agihan Tugasan</a></li>
-        <li><a href="/certificate/done-batch">Selesai Agihan Tugasan</a></li>
-    </ul>
-</li>
+{{--admin officer--}}
+@if (Auth::user()->access_power >= 5000)
+    <li class="navigation-header"><span>Pegawai Agihan</span> <i class="icon-menu" title="Main pages"></i></li>
+    <li @if (Request::segment(1) == 'certificate') class="active" @endif><a href="/certificate/list"><i
+                    class="icon-add-to-list"></i> <span>Agihan Tugasan</span></a>
+        <ul>
+            <li><a href="/certificate/type">Agihan Tugasan</a></li>
+            <li><a href="/certificate/done-batch">Selesai Agihan Tugasan</a></li>
+        </ul>
+    </li>
+@endif
 {{--  DONE --}}
 
 {{--accredited center--}}
+@if (Auth::user()->access_power == 1000)
     <li class="navigation-header"><span>Pegawai Pencetak</span> <i class="icon-menu" title="Main pages"></i></li>
-    <li @if (Request::segment(1) == 'print') class="active" @endif><a href="/print/list"><i class="icon-printer2"></i> <span>Cetak</span></a>
+    <li @if (Request::segment(1) == 'print') class="active" @endif><a href="/print/list"><i class="icon-printer2"></i>
+            <span>Cetak</span></a>
         <ul>
             <li><a href="/print">Cetak Sijil</a></li>
             <li><a href="/print/list-done">Selesai Cetak Sijil</a></li>
         </ul>
     </li>
+@endif
 {{--  DONE --}}
-    {{--payment--}}
+{{--payment--}}
+@if (Auth::user()->access_power >= 5000)
     <li class="navigation-header"><span>Pegawai</span> <i class="icon-menu" title="Main pages"></i></li>
-<li @if (Request::segment(1) == 'search') class="active" @endif><a href="/search"><i class="icon-search4"></i> <span>Carian</span></a>
-    <ul>        <li><a href="/search">Carian Baru</a></li>
-    </ul>
-</li> {{--  DONE --}}
-    <li @if (Request::segment(1) == 'payment') class="active" @endif><a href="/payment"><i class="icon-coin-dollar"></i> <span>ePayment</span></a>
+    <li @if (Request::segment(1) == 'search') class="active" @endif><a href="/search"><i class="icon-search4"></i>
+            <span>Carian</span></a>
+        <ul>
+            <li><a href="/search">Carian Baru</a></li>
+        </ul>
+    </li> {{--  DONE --}}
+    <li @if (Request::segment(1) == 'payment') class="active" @endif><a href="/payment"><i class="icon-coin-dollar"></i>
+            <span>ePayment</span></a>
         <ul>
             <li><a href="/search">Kemaskini ePayment</a></li>
             <li><a href="/payment/list">Senarai Bayaran</a></li>
         </ul>
     </li> {{--  DONE --}}
     <li @if (Request::segment(1) == 'status') class="active" @endif><a href="/status"><i class="icon-grid"></i> <span>Status</span></a>
-    <ul>
-        <li><a href="/search">Semak Status</a></li>
-    </ul>
+        <ul>
+            <li><a href="/search">Semak Status</a></li>
+        </ul>
     </li> {{--  DONE --}}
-<li @if (Request::segment(1) == 'replacement') class="active" @endif><a href="/replacement"><i class="icon-add-to-list"></i> <span>Penggantian</span></a>
-    <ul>
-        <li><a href="/search">Penggantian Baru</a></li>
-        <li><a href="/replacement">Senarai Penggantian</a></li>
-    </ul>
-</li> {{--  DONE --}}
-<li @if (Request::segment(1) == 'post') class="active" @endif><a href="/post"><i class="icon-mailbox"></i> <span>Pembungkusan</span></a>
-    <ul>
-        <li><a href="/search">Pembungkusan Baru</a></li>
-        <li><a href="/post">Senarai Selesai</a></li>
-        <li><a href="/post/company">Senarai Syarikat Luar</a></li>
-    </ul>
-</li> {{--  DONE --}}
+    <li @if (Request::segment(1) == 'replacement') class="active" @endif><a href="/replacement"><i
+                    class="icon-add-to-list"></i> <span>Penggantian</span></a>
+        <ul>
+            <li><a href="/search">Penggantian Baru</a></li>
+            <li><a href="/replacement">Senarai Penggantian</a></li>
+        </ul>
+    </li> {{--  DONE --}}
+    <li @if (Request::segment(1) == 'post') class="active" @endif><a href="/post"><i class="icon-mailbox"></i> <span>Pembungkusan</span></a>
+        <ul>
+            <li><a href="/search">Pembungkusan Baru</a></li>
+            <li><a href="/post">Senarai Selesai</a></li>
+            <li><a href="/post/company">Senarai Syarikat Luar</a></li>
+        </ul>
+    </li> {{--  DONE --}}
+@endif
 
-<li class="navigation-header"><span>Laporan-Laporan</span> <i class="icon-menu" title="Main pages"></i></li>
-<li @if (Request::segment(1) == 'report') class="active" @endif><a href="/report"><i class="icon-statistics"></i> <span>Laporan</span></a>
-    <ul>
-        <li><a href="/report">Senarai Laporan</a></li>
-    </ul>
-</li> {{--  DONE --}}
+@if (Auth::user()->access_power >= 5000)
+    <li class="navigation-header"><span>Laporan-Laporan</span> <i class="icon-menu" title="Main pages"></i></li>
+    <li @if (Request::segment(1) == 'report') class="active" @endif><a href="/report"><i class="icon-statistics"></i>
+            <span>Laporan</span></a>
+        <ul>
+            <li><a href="/report">Senarai Laporan</a></li>
+        </ul>
+    </li> {{--  DONE --}}
+@endif
 
-{{--Marking--}}
-<li class="navigation-header"><span>Pencetak Luar</span> <i class="icon-menu" title="Main pages"></i></li>
+{{--company--}}
+@if (Auth::user()->access_power == 500 || Auth::user()->access_power >= 5000 )
+    <li class="navigation-header"><span>Pencetak Luar</span> <i class="icon-menu" title="Main pages"></i></li>
 
     <li @if (Request::segment(1) == 'company-download') class="active" @endif>
         <a href="/company-download"><i class="icon-download7"></i> <span>Muat Turun</span></a>
@@ -87,34 +104,37 @@
             <li><a href="/company-download">Muat Turun Senarai</a></li>
         </ul>
     </li>
-<li @if (Request::segment(1) == 'company-print') class="active" @endif>
-    <a href="/company-print/search"><i class="icon-printer4"></i> <span>Kemaskini Percetakan</span></a>
-    <ul>
-        <li><a href="/company-print/search">Carian</a></li>
-    </ul>
-</li>
-<li @if (Request::segment(1) == 'company-search') class="active" @endif>
-    <a href="/company-search/post"><i class="icon-mail-read"></i> <span>Pembungkusan</span></a>
-    <ul>
-        <li><a href="/company-search/post">Carian</a></li>
-        <li><a href="/company-search/list">Selesai Pembungkusan</a></li>
-    </ul>
-</li>
-<li @if (Request::segment(1) == 'company-download') class="active" @endif>
-    <a href="/company-report"><i class="icon-stack-check"></i> <span>Laporan</span></a>
-    <ul>
-        <li><a href="/company-report">Papar Laporan</a></li>
-    </ul>
-</li>
-
-{{--jwatan kuasa--}}
-<li class="navigation-header"><span>Pengesahan Bayaran</span> <i class="icon-menu" title="Main pages"></i></li>
-<li @if (Request::segment(1) == 'finance') class="active" @endif><a href="/board/type"><i class="icon-checkmark"></i> <span>Pengesahan Bayaran</span></a>
-    <ul>
-        <li><a href="/finance/confirm">Pengesahan Bayaran</a></li>
-        <li><a href="/finance/list">Selesai Disahkan Bayaran</a></li>
-    </ul>
-</li>
+    <li @if (Request::segment(1) == 'company-print') class="active" @endif>
+        <a href="/company-print/search"><i class="icon-printer4"></i> <span>Kemaskini Percetakan</span></a>
+        <ul>
+            <li><a href="/company-print/search">Carian</a></li>
+        </ul>
+    </li>
+    <li @if (Request::segment(1) == 'company-search') class="active" @endif>
+        <a href="/company-search/post"><i class="icon-mail-read"></i> <span>Pembungkusan</span></a>
+        <ul>
+            <li><a href="/company-search/post">Carian</a></li>
+            <li><a href="/company-search/list">Selesai Pembungkusan</a></li>
+        </ul>
+    </li>
+    <li @if (Request::segment(1) == 'company-report') class="active" @endif>
+        <a href="/company-report"><i class="icon-stack-check"></i> <span>Laporan</span></a>
+        <ul>
+            <li><a href="/company-report">Papar Laporan</a></li>
+        </ul>
+    </li>
+@endif
+@if (Auth::user()->access_power >= 2000)
+    {{--jwatan kuasa--}}
+    <li class="navigation-header"><span>Pengesahan Bayaran</span> <i class="icon-menu" title="Main pages"></i></li>
+    <li @if (Request::segment(1) == 'finance') class="active" @endif><a href="/board/type"><i
+                    class="icon-checkmark"></i> <span>Pengesahan Bayaran</span></a>
+        <ul>
+            <li><a href="/finance/confirm">Pengesahan Bayaran</a></li>
+            <li><a href="/finance/list">Selesai Disahkan Bayaran</a></li>
+        </ul>
+    </li>
+@endif
 
 
 {{-- Super Admin Only --}}

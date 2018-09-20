@@ -40,6 +40,14 @@ class RoleTableSeeder extends Seeder
         ]);
 
         Role::create([
+            'name'      => 'akauntan',
+            'nick'      => 'Pegawai Pembayar',
+            'access_power' => 2000,
+            'status'    => 'active',
+            'description' => ''
+        ]);
+
+        Role::create([
             'name'      => 'pegawai_admin',
             'nick'      => 'Officer Admin',
             'access_power' => 5000,

@@ -37,6 +37,12 @@ class RoleMiddleware
                 }
             }
 
+            if ($routeRole == 'akauntan') {
+                if ($userRole == 'akauntan' || $userRole == 'pegawai_admin' || $userRole == 'admin' || $userRole == 'super_admin') {
+                    return $next($request); //izinkan masuk page mana
+                }
+            }
+
             if ($routeRole == 'pegawai_admin') {
                 if ($userRole == 'pegawai_admin' || $userRole == 'admin' || $userRole == 'super_admin') {
                     return $next($request); //izinkan masuk page mana
