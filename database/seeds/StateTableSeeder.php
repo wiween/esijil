@@ -15,14 +15,14 @@ class StateTableSeeder extends Seeder
         DB::table('states')->delete();
 
         State::create([
-            'state_code' => '10',
-            'name' => 'Johor',
+            'state_code' => '01',
+            'name' => 'WP Putrajaya',
             'status' => 'active'
         ]);
 
         State::create([
-            'state_code' => '08',
-            'name' => 'Kedah',
+            'state_code' => '02',
+            'name' => 'WP Kuala Lumpur',
             'status' => 'active'
         ]);
 
@@ -33,14 +33,8 @@ class StateTableSeeder extends Seeder
         ]);
 
         State::create([
-            'state_code' => '15',
-            'name' => 'Melaka',
-            'status' => 'active'
-        ]);
-
-        State::create([
-            'state_code' => '14',
-            'name' => 'Negeri Sembilan',
+            'state_code' => '04',
+            'name' => 'Terengganu',
             'status' => 'active'
         ]);
 
@@ -51,20 +45,20 @@ class StateTableSeeder extends Seeder
         ]);
 
         State::create([
-            'state_code' => '07',
-            'name' => 'Pulau Pinang',
-            'status' => 'active'
-        ]);
-
-        State::create([
             'state_code' => '06',
             'name' => 'Perak',
             'status' => 'active'
         ]);
 
         State::create([
-            'state_code' => '11',
-            'name' => 'Perlis',
+            'state_code' => '07',
+            'name' => 'Pulau Pinang',
+            'status' => 'active'
+        ]);
+
+        State::create([
+            'state_code' => '08',
+            'name' => 'Kedah',
             'status' => 'active'
         ]);
 
@@ -75,8 +69,14 @@ class StateTableSeeder extends Seeder
         ]);
 
         State::create([
-            'state_code' => '04',
-            'name' => 'Terengganu',
+            'state_code' => '10',
+            'name' => 'Johor',
+            'status' => 'active'
+        ]);
+
+        State::create([
+            'state_code' => '11',
+            'name' => 'Perlis',
             'status' => 'active'
         ]);
 
@@ -93,20 +93,20 @@ class StateTableSeeder extends Seeder
         ]);
 
         State::create([
-            'state_code' => '02',
-            'name' => 'WP Kuala Lumpur',
+            'state_code' => '14',
+            'name' => 'Negeri Sembilan',
+            'status' => 'active'
+        ]);
+
+        State::create([
+            'state_code' => '15',
+            'name' => 'Melaka',
             'status' => 'active'
         ]);
 
         State::create([
             'state_code' => '16',
             'name' => 'WP Labuan',
-            'status' => 'active'
-        ]);
-
-        State::create([
-            'state_code' => '01',
-            'name' => 'WP Putrajaya',
             'status' => 'active'
         ]);
     }
