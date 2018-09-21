@@ -36,12 +36,12 @@
                                 <td><a href="/post/show/{{ $post->id }}">{{ $post->certificate->name }}</a> </td>
                                 <td>{{ $post->tracking_number }}</td>
                                 <td>{{ $post->date_post->format('d M, Y') }}</td>
-                                @if($post->flag_recieved == 'Y')
+                                @if($post->flag_received == 'Y')
                                     <td>{{ $post->date_receive->format('d M, Y') }}</td>
                                     <td>{{ $post->receiver }}</td>
                                 @else
                                     <td>Tidak Diterima</td>
-                                    <td>Tiada</td>
+                                    <td>Tiada Penerima</td>
                                 @endif
 
                                 <td>

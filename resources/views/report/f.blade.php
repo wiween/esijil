@@ -17,6 +17,7 @@
                <br>JPK/CS/03(PB)</strong>
        </div>
     </div>
+    <div align="center"><img src="images/jatasmall.jpg"></div>
     <div align="center">
         <h3>BORANG LAPORAN DATA PENGELUARAN SIJIL KEMAHIRAN MALAYSIA (SKM)/DIPLOMA KEMAHIRAN MALAYSIA(DKM)/DIPLOMA LANJUTAN KEMAHIRAN MALAYSIA(DLKM)
             {{--</div>--}}
@@ -40,7 +41,7 @@
         <tr align="center">
             <th>Bil</th>
             <th>Nama Pelatih</th>
-            <th>No ID</th>
+            <th>No KP</th>
             <th>No Batch</th>
             <th>Nama Program/Kod Program</th>
             <th>Nama PB</th>
