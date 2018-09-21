@@ -15,13 +15,13 @@ class StateTableSeeder extends Seeder
         DB::table('states')->delete();
 
         State::create([
-            'state_code' => '01',
+            'state_code' => '10',
             'name' => 'Johor',
             'status' => 'active'
         ]);
 
         State::create([
-            'state_code' => '02',
+            'state_code' => '08',
             'name' => 'Kedah',
             'status' => 'active'
         ]);
@@ -33,19 +33,19 @@ class StateTableSeeder extends Seeder
         ]);
 
         State::create([
-            'state_code' => '04',
+            'state_code' => '15',
             'name' => 'Melaka',
             'status' => 'active'
         ]);
 
         State::create([
-            'state_code' => '05',
+            'state_code' => '14',
             'name' => 'Negeri Sembilan',
             'status' => 'active'
         ]);
 
         State::create([
-            'state_code' => '06',
+            'state_code' => '05',
             'name' => 'Pahang',
             'status' => 'active'
         ]);
@@ -57,25 +57,25 @@ class StateTableSeeder extends Seeder
         ]);
 
         State::create([
-            'state_code' => '08',
+            'state_code' => '06',
             'name' => 'Perak',
             'status' => 'active'
         ]);
 
         State::create([
-            'state_code' => '09',
+            'state_code' => '11',
             'name' => 'Perlis',
             'status' => 'active'
         ]);
 
         State::create([
-            'state_code' => '10',
+            'state_code' => '09',
             'name' => 'Selangor',
             'status' => 'active'
         ]);
 
         State::create([
-            'state_code' => '11',
+            'state_code' => '04',
             'name' => 'Terengganu',
             'status' => 'active'
         ]);
@@ -93,19 +93,19 @@ class StateTableSeeder extends Seeder
         ]);
 
         State::create([
-            'state_code' => '14',
+            'state_code' => '02',
             'name' => 'WP Kuala Lumpur',
             'status' => 'active'
         ]);
 
         State::create([
-            'state_code' => '15',
+            'state_code' => '16',
             'name' => 'WP Labuan',
             'status' => 'active'
         ]);
 
         State::create([
-            'state_code' => '16',
+            'state_code' => '01',
             'name' => 'WP Putrajaya',
             'status' => 'active'
         ]);
