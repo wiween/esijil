@@ -3,7 +3,7 @@
 
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/esijil/pelajar/{id}', 'Api\PelajarController@view');
+Route::get('/pelajar/{id}', 'Api\PelajarController@view');
 
 Route::get('/dashboard', 'Frontend\DashboardController@index');
 
