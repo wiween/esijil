@@ -20,17 +20,27 @@ class StatusController extends Controller
 
     public function show(Request $request)
     {
-        $certificate = Certificate::where('ic_number',$id)->first();
-        $current_status = $certificate->current_status;
-//        /cho $current_status;
+        //
+        $ic_number = $request->input('ic_number');
+        //echo $ic_number;
+        $exist = Certificate::where('ic_number',$ic_number)->count();
 
-        if ($current_status == 'dalam proses percetakan' || $current_status == 'telah dicetak') {
-            return view('status.result', compact('certificate'));
+        if ($exist > 0) {
 
-        } else if ($current_status == 'telah dipos' || $current_status == 'telah diterima') {
+            $certificate = Certificate::where('ic_number', $ic_number)->first();
+            //dd($certificate);
+            $current_status = $certificate->current_status;
+            if ($current_status == 'dalam proses percetakan' || $current_status == 'telah dicetak') {
+                return view('status.result', compact('certificate'));
 
-            $post = Post::where('certificate_id', $certificate->id)->first();
-            return view('status.result', compact('certificate', 'post'));
+            } else if ($current_status == 'telah dipos' || $current_status == 'telah diterima') {
+
+                $post = Post::where('certificate_id', $certificate->id)->first();
+                return view('status.result', compact('certificate', 'post'));
+            }
+        }
+        else {
+            return view('status.noresult');
         }
 
     }
