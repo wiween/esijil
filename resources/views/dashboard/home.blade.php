@@ -4,38 +4,18 @@
 @endsection
 
 @section('mainTitle')
-    Inbox
+    My Inbox
 @endsection
 
 @section('topButton')
-   @endsection
+
+@endsection
 
 @section('content')
     <div class="panel panel-default">
         <div class="panel-body">
-            {{--@if (Auth::user()->access_power >= 1000)--}}
 
-                {{--<div class="row">--}}
-                    {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
-                        {{--<img class="img-responsive img-rounded" src="/images/dashboard/audit-min.jpg">--}}
-                        {{--<a href="/admin/course" class="btn btn-info btn-block" style="margin-top: 4px">Cetak Sijil</a>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
-                        {{--<img class="img-responsive img-rounded" src="/images/dashboard/lookups-min.jpg">--}}
-                        {{--<a href="/admin/session" class="btn btn-info btn-block" style="margin-top: 4px">Carian</a>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
-                        {{--<img class="img-responsive img-rounded" src="/images/dashboard/statistic-min.jpg">--}}
-                        {{--<a href="/admin/monthlyreport" class="btn btn-info btn-block" style="margin-top: 4px">Laporan</a>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
-                        {{--<img class="img-responsive img-rounded" src="/images/dashboard/user-min.jpg">--}}
-                        {{--<a href="/admin/report/chart" class="btn btn-info btn-block" style="margin-top: 4px">Admin</a>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-            <div>
+               <div>
                 <hr>
             </div>
             <div>
@@ -62,11 +42,10 @@
                                     </a>
 
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="{{ url()}}/print/show/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Lihat & Edit</a></li>
-                                        {{--<li><a href="/certificate/job/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Agihan Tugasan</a></li>--}}
-                                        <li><a href="{{ url() }}/print/print/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak</a></li>
-                                        <li><a href="{{ url() }}/print/destroy/{{ $certificate->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>
-                                        {{--<li><a href="/print/set-flag/Y/{{ $certificate->id }}"><i class="icon-flag8 text-black-600"></i>Set Flag Cetak</a></li>--}}
+
+                                        <li><a href="{{ url('') }}/print/show/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Lihat & Edit</a></li>
+                                        <li><a href="{{ url('') }}/print/print/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak</a></li>
+                                        <li><a href="{{ url('') }}/print/destroy/{{ $certificate->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>
                                     </ul>
                                 </li>
                             </ul>
