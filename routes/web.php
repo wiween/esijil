@@ -3,6 +3,9 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/esijil/pelajar/{id}', 'Api\PelajarController@view');
+Route::get('/dashboard', 'Frontend\DashboardController@index');
+Route::get('/semak-status', 'Frontend\StatusController@checkStatus');
+Route::post('/semak-status', 'Frontend\StatusController@show');
 
 ################### BAck end #######################################
 
@@ -42,12 +45,8 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
 
 });
 
-// SUPER ADMIN ONLY
+// pencetak and above
 Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
-
-    Route::get('/dashboard', 'Frontend\DashboardController@index');
-    Route::get('/semak-status', 'Frontend\StatusController@checkStatus');
-    Route::post('/semak-status', 'Frontend\StatusController@show');
 
 //tarik data
     Route::get('/data', 'Frontend\BoardController@data');
