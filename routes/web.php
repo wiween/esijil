@@ -4,6 +4,9 @@
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/esijil/pelajar/{id}', 'Api\PelajarController@view');
+
+Route::get('/dashboard', 'Frontend\DashboardController@index');
+
 Route::get('/semak-status', 'Frontend\StatusController@checkStatus');
 Route::post('/semak-status', 'Frontend\StatusController@show');
 
@@ -53,17 +56,12 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
 
 });
 
-// pencetak ONLY
+
+// pencetak and above
 Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
 
-    Route::get('/dashboard', 'Frontend\DashboardController@index');
-
-    // User session
-    Route::get('/user/profile', 'Frontend\UserController@profile');
-    Route::get('/user/edit-profile', 'Frontend\UserController@editProfile');
-    Route::post('/user/edit-profile', 'Frontend\UserController@updateProfile');
-    Route::get('/user/change-password', 'Frontend\UserController@changePassword');
-    Route::post('/user/change-password', 'Frontend\UserController@updatePassword');
+//tarik data
+Route::get('/data', 'Frontend\BoardController@data');
 
 ////board
 //Route::get('/board/type', 'Frontend\BoardController@index');

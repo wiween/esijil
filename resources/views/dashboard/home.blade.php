@@ -32,7 +32,10 @@
                     @foreach ($certificates as $certificate)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
+
+
                     <td><a href="{{ url('') }}/print/print-list/{{ $certificate->batch_id }}">{{ $certificate->batch_id }}</a></td>
+
                         <td>{{ $certificate->state->name }}</td>
                         <td>
                             <ul class="icons-list">
