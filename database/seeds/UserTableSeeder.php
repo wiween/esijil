@@ -31,35 +31,23 @@ class UserTableSeeder extends Seeder
         $admin = new \App\User();
         $admin->name = 'Mr. Admin';
         $admin->email = 'admin@gmail.com';
-        $admin->password = bcrypt('haha1234');
+        $admin->password = bcrypt('admin1234');
         $admin->ic_number = '800707077777';
         $admin->phone_number = '0198899777';
         $admin->role = 'pegawai';
-        $admin->access_power = 5000;
+        $admin->access_power =8000;
         $admin->status = 'active';
         $admin->save();
 
         //Ketua Officer
         $admin = new \App\User();
         $admin->name = 'Mr.Head of Officer';
-        $admin->email = 'head_officer@gmail.com';
-        $admin->password = bcrypt('haha1234');
+        $admin->email = 'officer@gmail.com';
+        $admin->password = bcrypt('officer1234');
         $admin->ic_number = '800707076666';
         $admin->phone_number = '0198899666';
-        $admin->role = 'ketua_pegawai';
-        $admin->access_power = 4000;
-        $admin->status = 'active';
-        $admin->save();
-
-        //Pegawai
-        $admin = new \App\User();
-        $admin->name = 'Mr. officer';
-        $admin->email = 'officer@gmail.com';
-        $admin->password = bcrypt('haha1234');
-        $admin->ic_number = '800707075555';
-        $admin->phone_number = '0198899555';
-        $admin->role = 'pegawai';
-        $admin->access_power = 3000;
+        $admin->role = 'pegawai_admin';
+        $admin->access_power = 5000;
         $admin->status = 'active';
         $admin->save();
 
@@ -67,7 +55,7 @@ class UserTableSeeder extends Seeder
         $admin = new \App\User();
         $admin->name = 'Mr. Pencetak';
         $admin->email = 'pencetak@gmail.com';
-        $admin->password = bcrypt('haha1234');
+        $admin->password = bcrypt('pencetak1234');
         $admin->ic_number = '800707074445';
         $admin->phone_number = '0198899555';
         $admin->role = 'pencetak';
@@ -79,7 +67,7 @@ class UserTableSeeder extends Seeder
         $admin = new \App\User();
         $admin->name = 'Mr. Company';
         $admin->email = 'company@gmail.com';
-        $admin->password = bcrypt('haha1234');
+        $admin->password = bcrypt('company1234');
         $admin->ic_number = '800707074444';
         $admin->phone_number = '0198899444';
         $admin->role = 'company';
@@ -91,7 +79,7 @@ class UserTableSeeder extends Seeder
         $user = new \App\User();
         $user->name = 'Mr. User';
         $user->email = 'user@gmail.com';
-        $user->password = bcrypt('haha1234');
+        $user->password = bcrypt('abcd1234');
         $user->ic_number = '800707071111';
         $user->phone_number = '0198899111';
         $user->role = 'user';

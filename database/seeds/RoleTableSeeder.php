@@ -24,33 +24,33 @@ class RoleTableSeeder extends Seeder
         ]);
 
         Role::create([
-            'name'      => 'pegawai_penilai',
-            'nick'      => 'pegawai_penilai',
+            'name'      => 'company',
+            'nick'      => 'Syarikat Pencetak',
+            'access_power' => 500,
+            'status'    => 'active',
+            'description' => ''
+        ]);
+
+        Role::create([
+            'name'      => 'pencetak',
+            'nick'      => 'Pegawai Pencetak',
             'access_power' => 1000,
             'status'    => 'active',
             'description' => ''
         ]);
 
         Role::create([
-            'name'      => 'pegawai_peperiksaan',
-            'nick'      => 'pegawai_peperiksaan',
-            'access_power' => 2000,
+            'name'      => 'pegawai_admin',
+            'nick'      => 'Officer Admin',
+            'access_power' => 5000,
             'status'    => 'active',
             'description' => ''
         ]);
 
         Role::create([
-            'name'      => 'pegawai_bayaran',
-            'nick'      => 'pegawai_bayaran',
-            'access_power' => 3000,
-            'status'    => 'active',
-            'description' => ''
-        ]);
-
-        Role::create([
-            'name'      => 'pegawai_sijil',
-            'nick'      => 'pegawai_sijil',
-            'access_power' => 4000,
+            'name'      => 'admin',
+            'nick'      => 'Admin JPK',
+            'access_power' => 8000,
             'status'    => 'active',
             'description' => ''
         ]);

@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\AuditTrail;
 use Closure;
-use Auth;
-use Request;
+use Illuminate\Support\Facades\Auth;
+use App\AuditTrail;
+use Illuminate\Support\Facades\Request;
 
 class AuditTrailMiddleware
 {
@@ -18,13 +18,14 @@ class AuditTrailMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check()) {        // kalau dia dah login, akan jadi true
+        if (Auth::check()) {
             $audit = new AuditTrail();
             $audit->ip = Request::ip();
             $audit->url = Request::url();
             $audit->user_id = Auth::user()->id;
             $audit->save();
         } else {
+
             return redirect('login');
         }
 

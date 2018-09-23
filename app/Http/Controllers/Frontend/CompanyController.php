@@ -529,7 +529,7 @@ class CompanyController extends Controller
     public function showGReport($batch, $type)
     {
         $certificates = Certificate::where('batch_id', $batch)->where('flag_printed', 'Y')->orderBy('name', 'asc')
-            ->where('source', 'syarikat')->where('type',$type)->get();;
+            ->where('source', 'syarikat')->where('type',$type)->first();
         $siries_number = Certificate::distinct('session')->where('batch_id', $batch)->where('type',$type)->groupBy('session')->first();
         $pdf = PDF::loadView('report.g1', compact('certificates', 'siries_number'))->setPaper('a4', 'landscape');
         //return $pdf->download('report.pdf');

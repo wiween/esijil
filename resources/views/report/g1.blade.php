@@ -1,6 +1,6 @@
 <style type="text/css">
-    table td, table th{
-        border:1px solid black;
+    table td, table th {
+        border: 1px solid black;
     }
 
     .page-break {
@@ -15,15 +15,17 @@
         <h4>LAMPIRAN G
             <br>JPK/CS/03(PB)</h4>
     </div>
+    <div align="center"><img src="images/jatasmall.jpg"></div>
     <div align="center">
-        <h3>BORANG LAPORAN DATA PENGELUARAN SIJIL KEMAHIRAN MALAYSIA (SKM)/DIPLOMA KEMAHIRAN MALAYSIA(DKM)/DIPLOMA LANJUTAN KEMAHIRAN MALAYSIA(DLKM)
+        <h3>BORANG LAPORAN DATA PENGELUARAN SIJIL KEMAHIRAN MALAYSIA (SKM)/DIPLOMA KEMAHIRAN MALAYSIA(DKM)/DIPLOMA
+            LANJUTAN KEMAHIRAN MALAYSIA(DLKM)
             {{--</div>--}}
             {{--<div align="center">--}}
             <br>
             Disediakan oleh Syarikat bagi tujuan tuntutan</h3>
     </div>
     <div align="left">
-        <h3>Kaedah Penilaian :  @if (Request::segment(5) == 'pb')
+        <h3>Kaedah Penilaian : @if (Request::segment(5) == 'pb')
                 Pusat Bertauliah
             @elseif (Request::segment(5) == 'sldn')
                 SLDN
@@ -34,48 +36,31 @@
             @endif
         </h3>
     </div>
-    <table class="table table-bordered">
-        <tr align="center">
-            <th>Bil</th>
-            <th>Nama Pelatih</th>
-            <th>No KP</th>
-            <th>No Batch</th>
-            <th>Nama Program/Kod Program</th>
-            <th>Nama PB</th>
-            <th>Tahap</th>
-            <th>Tarikh Cetak Sijil</th>
-            <th>No Siri Sijil</th>
-            <th>No Tracking</th>
-            <th>Tarikh Pos</th>
-            <th>Penerima</th>
-        </tr>
-        @foreach($certificates as $certificate)
-            <tr align="center">
-                <td>{{ $loop->index + 1 }}</td>
-                <td>{{  $certificate->name }}</td>
-                <td>{{  $certificate->ic_number }}</td>
-                <td>{{  $certificate->batch_id }}</td>
-                <td>{{  $certificate->programme_name }}<br>[{{  $certificate->programme_code }}]</td>
-                <td>{{  $certificate->pb_name }}</td>
-                <td>{{  $certificate->level }}</td>
-                <td>{{  $certificate->date_print->format('d/m/Y') }}</td>
-                <td>{{  $certificate->certificate_number }}</td>
-                {{--<td>{{  $certificate->post->tracking_number}}</td>--}}
-                {{--<td>{{  $certificate->post->post_date->format('d/m/Y') }}</td>--}}
-                {{--<td>{{  $certificate->post->receiver }}</td>--}}
-                {{--<td>{{  $certificate->result_ppl }}</td>--}}
-                {{--<td>{{  $certificate->result_ppl }}</td>--}}
-                {{--<td>{{  $certificate->result_ppl }}</td>--}}
-            </tr>
-        @endforeach
-    </table>
-    <br><br>
+    <hr>
+    <div class="row">
+        <div class="form-group">
+        <div class="col-md-6">
+            <h4>1. Nama PB : {{  $certificates->pb_name }}</h4>
+        </div>
+        <div class="col-md-3">
+            <h4>2. No Batch : {{  $certificates->batch_id }}</h4>
+        </div>
+        </div>
+        <div>
+            <h4> 3. Bilangan Sijil : {{  $a = \App\Certificate::where('batch_id', $certificates->batch_id)->where('flag_printed', 'Y')->orderBy('name', 'asc')
+            ->where('source', 'syarikat')->where('type',$certificates->type)->count() }}</h4>
+        </div>
+        {{--<div>--}}
+            {{--<h4> 4. Harga Per Sijil (RM) : 2.80</h4>--}}
+        {{--</div>--}}
+        <hr>
+        <div>
+            <h4>Jumlah Bayaran (RM) : {{ $a }} x 2.80 = {{ $total = $a * 2.80 }}</h4>
+        </div>
+    </div>
+    <br>
     <div align="center" class="footer">
-    @if ($finances->finance_remark == 'Y')
-            <h4>Siri ini telah disahkan oleh pegawai</h4>
-        @else
-            <strong>Siri ini BELUM disahakan</strong>
-        @endif
+        <strong>Siri ini BELUM disahkan lagi oleh kewangan KSM</strong>
     </div>
     <div>
 
