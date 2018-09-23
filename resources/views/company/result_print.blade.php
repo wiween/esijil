@@ -24,7 +24,7 @@
                             <th>#</th>
                             <th>No ID</th>
                             <th>Name</th>
-                            <th>Keputusan PPL</th>
+                            <th>Batch No</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -33,7 +33,7 @@
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
                                 <td><a href="/company-print/edit/{{$certificate->id}}">{{ $certificate->name }}</a></td>
-                                <td>{{ $certificate->result_ppl }}</td>
+                                <td>{{ $certificate->batch_id }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
                                         <span class="label label-success">{{ $certificate->status }}</span>

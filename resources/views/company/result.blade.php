@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Maklumat Pembungkusan Oleh Syarikat
+    Maklumat Pengeposan Oleh Syarikat
 @endsection
 
 @section('topButton')
@@ -20,11 +20,16 @@
             <div class="row">
                 <div class="col-md-12 table-responsive">
                     <table class="table">
+                        @if ($certificates == 'tiada')
+                            <tr>
+                                <th>Maklumat tiada atau telah dipos</th>
+                            </tr>
+                        @else
                         <tr>
                             <th>#</th>
                             <th>No ID</th>
                             <th>Name</th>
-                            <th>Keputusan PPL</th>
+                            <th>Batch No</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -33,7 +38,7 @@
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
                                 <td>{{ $certificate->name }}</td>
-                                <td>{{ $certificate->result_ppl }}</td>
+                                <td>{{ $certificate->batch_id }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
                                         <span class="label label-success">{{ $certificate->status }}</span>
@@ -51,14 +56,14 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-post/create/{{ $certificate->id }}"><i class="icon-mailbox text-success"></i>Pembungkusan</a></li>
-                                                {{--<li><a href="/company-list/set-flag/Y/{{ $certificate->id }}"><i class="icon-flag8 text-black-600"></i>Set Flag Cetak</a></li>--}}
+                                                <li><a href="/company-post/create/{{ $certificate->id }}"><i class="icon-mailbox text-success"></i>Pengeposan</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </td>
                             </tr>
                         @endforeach
+                        @endif
                     </table>
                 </div>
             </div>

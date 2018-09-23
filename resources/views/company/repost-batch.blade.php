@@ -18,26 +18,14 @@
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="col-md-4 control-label">
-                        Nama Pelajar
+                        Batch No
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        {{ $post->certificate->name }}
+                        {{ $post->certificate->batch_id }}
                         @include('partials.error_block', ['item' => 'name'])
                     </div>
                 </div>
-
-                <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
-                    <label for="ic_number" class="col-md-4 control-label">
-                        No ID
-                        <span class="text-danger"> * </span>
-                    </label>
-                    <div class="col-md-6">
-                        {{ $post->certificate->ic_number }}
-                        @include('partials.error_block', ['item' => 'ic_number'])
-                    </div>
-                </div>
-
                 {{-- tracking number --}}
                 <div class="form-group{{ $errors->has('tracking_number') ? ' has-error' : '' }}">
                     <label for="tracking_number" class="col-md-4 control-label">

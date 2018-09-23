@@ -1,17 +1,14 @@
 <?php
 Auth::routes();
-
 Route::get('/', 'HomeController@index')->name('home');
-
-Route::get('/pelajar/{id}', 'Api\PelajarController@view');
-
-Route::get('/dashboard', 'Frontend\DashboardController@index');
+Route::get('/esijil/pelajar/{id}', 'Api\PelajarController@view');
 Route::get('/semak-status', 'Frontend\StatusController@checkStatus');
 Route::post('/semak-status', 'Frontend\StatusController@show');
 
 ################### BAck end #######################################
 
 Route::get('logout', 'Auth\LoginController@logout');
+
 //
 Route::group(['middleware' => ['audit', 'role:company']], function () {
 
@@ -35,23 +32,46 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
     Route::get('/company-post/create-batch/{batch}/{type}', 'Frontend\CompanyController@createBatch');
     Route::post('/company-post/create-batch/{batch}/{type}', 'Frontend\CompanyController@storeBatch');
     Route::get('/company-search/list', 'Frontend\CompanyController@companyPost');
+    //edit after post -- single
     Route::get('/company-search/detail/{id}', 'Frontend\CompanyController@editPost');
     Route::post('/company-search/detail/{id}', 'Frontend\CompanyController@updatePost');
+    //edit batch after post
+    Route::get('/company-search/detail-batch/{id}', 'Frontend\CompanyController@editPostBatch');
+    Route::post('/company-search/detail-batch/{id}', 'Frontend\CompanyController@updatePostBatch');
+
+
     Route::get('/company-print/search', 'Frontend\CompanyController@searchPrint');
+    Route::get('/company-print/search-edit', 'Frontend\CompanyController@searchEditPrint');
     Route::post('/company-print/search', 'Frontend\CompanyController@printResult');
+    Route::post('/company-print/search-edit', 'Frontend\CompanyController@printEditResult');
+    Route::get('/company-print/edit-batchlist/{batch}', 'Frontend\CompanyController@editList');
     Route::get('/company-print/edit/{id}', 'Frontend\CompanyController@edit');
     Route::post('/company-print/edit/{id}', 'Frontend\CompanyController@update');
     Route::get('/company-report', 'Frontend\CompanyController@reportList');
     Route::get('/company-report/pdf/F/{batch}/{type}', 'Frontend\CompanyController@showFReport');
     Route::get('/company-report/pdf/G/{batch}/{type}', 'Frontend\CompanyController@showGReport');
 
+    // User session
+    Route::get('/user/profile', 'Frontend\UserController@profile');
+    Route::get('/user/edit-profile', 'Frontend\UserController@editProfile');
+    Route::post('/user/edit-profile', 'Frontend\UserController@updateProfile');
+    Route::get('/user/change-password', 'Frontend\UserController@changePassword');
+    Route::post('/user/change-password', 'Frontend\UserController@updatePassword');
+
 });
 
-// pencetak and above
+// pencetak ONLY
 Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
 
-//tarik data
-    Route::get('/data', 'Frontend\BoardController@data');
+    Route::get('/dashboard', 'Frontend\DashboardController@index');
+
+    // User session
+    Route::get('/user/profile', 'Frontend\UserController@profile');
+    Route::get('/user/edit-profile', 'Frontend\UserController@editProfile');
+    Route::post('/user/edit-profile', 'Frontend\UserController@updateProfile');
+    Route::get('/user/change-password', 'Frontend\UserController@changePassword');
+    Route::post('/user/change-password', 'Frontend\UserController@updatePassword');
+
 ////board
 //Route::get('/board/type', 'Frontend\BoardController@index');
 //Route::get('/board/state/{type}', 'Frontend\BoardController@state');
@@ -139,6 +159,9 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/report/F4', 'Frontend\ReportController@reportF4');
     Route::get('/report/download', 'Frontend\ReportController@export');
 
+});
+
+Route::group(['middleware' => ['audit', 'role:akauntan']], function () {
 //pengesahan bayaran
     Route::get('/finance/confirm', 'Frontend\FinanceController@index');
     Route::get('/finance/create/{batch}', 'Frontend\FinanceController@create');
@@ -146,19 +169,19 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/finance/list', 'Frontend\FinanceController@list'); // dah selesai
     Route::get('/finance/report-g/{batch}/{type}', 'Frontend\FinanceController@showGReport');
     Route::get('/finance/report-f/{batch}/{type}', 'Frontend\FinanceController@showFReport');
-
-
-// Route for view/blade file.
-    Route::get('importExport', 'Frontend\CompanyController@importExport');
-// Route for export/download tabledata to .csv, .xls or .xlsx
-    Route::get('downloadExcel/{type}', 'Frontend\CompanyController@downloadExcel');
-// Route for import excel data to database.
-    Route::post('importExcel', 'Frontend\CompanyController@importExcel');
-
-//api espkm
-    Route::get('/board/fetch-data', 'Frontend\BoardController@fetchStudent');
-
 });
+
+//// Route for view/blade file.
+//    Route::get('importExport', 'Frontend\CompanyController@importExport');
+//// Route for export/download tabledata to .csv, .xls or .xlsx
+//    Route::get('downloadExcel/{type}', 'Frontend\CompanyController@downloadExcel');
+//// Route for import excel data to database.
+//    Route::post('importExcel', 'Frontend\CompanyController@importExcel');
+//
+////api espkm
+//    Route::get('/board/fetch-data', 'Frontend\BoardController@fetchStudent');
+
+
 
 // SUPER ADMIN ONLY
 Route::group(['middleware' => ['audit', 'role:super_admin']], function () {
@@ -171,14 +194,6 @@ Route::group(['middleware' => ['audit', 'role:super_admin']], function () {
     Route::post('/user/edit/{id}', 'Frontend\UserController@update');
     Route::get('/user/reset-password/{id}', 'Frontend\UserController@resetPassword');
     Route::get('/user/destroy/{id}', 'Frontend\UserController@destroy');
-
-// User session
-    Route::get('/user/profile', 'Frontend\UserController@profile');
-    Route::get('/user/edit-profile', 'Frontend\UserController@editProfile');
-    Route::post('/user/edit-profile', 'Frontend\UserController@updateProfile');
-    Route::get('/user/change-password', 'Frontend\UserController@changePassword');
-    Route::post('/user/change-password', 'Frontend\UserController@updatePassword');
-
 
 // Audit
     Route::get('/audit-trail', 'Frontend\AuditTrailController@index');

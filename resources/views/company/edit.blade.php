@@ -27,7 +27,7 @@
                 {{-- ic number --}}
                 <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
                     <label for="ic_number" class="col-md-4 control-label">
-                        No ID
+                        No KP
                     </label>
                     <div class="col-md-6">
                         {{ $certificate->ic_number }}
@@ -47,39 +47,17 @@
                 {{-- ic number --}}
                 <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
                     <label for="ic_number" class="col-md-4 control-label">
-                        No Kumpulan Latihan
+                        Batch No
                     </label>
                     <div class="col-md-6">
-                        {{ $certificate->training_group_number }}
+                        {{ $certificate->batch_id }}
                     </div>
                 </div>
 
-                {{-- ic number --}}
-                <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
-                    <label for="ic_number" class="col-md-4 control-label">
-                        Kod Program
-                    </label>
-                    <div class="col-md-6">
-                        {{ $certificate->programme_code }}
-                    </div>
-                </div>
-
-                {{-- ic number --}}
-                <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
-                    <label for="ic_number" class="col-md-4 control-label">
-                        Nama Program
-                    </label>
-                    <div class="col-md-6">
-                        {{ $certificate->programme_name }}
-                    </div>
-                </div>
-
-
-
-                {{-- Venue --}}
+               {{-- Venue --}}
                 <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                     <label for="address" class="col-md-4 control-label">
-                        Address
+                       Alamat
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">{{  $certificate->address }}
@@ -129,16 +107,51 @@
                     </div>
                 </div>
 
-                {{-- certificate number --}}
-                <div class="form-group{{ $errors->has('certificate_number') ? ' has-error' : '' }}">
-                    <label for="certificate_number" class="col-md-4 control-label">
-                        No Sijil
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <h6>PANDUAN : No Digit Terahir Bagi Setiap Sijil</h6>
+                    </div>
+                    <div class="col-md-6">
+                        NULL - 000000 <br>
+                        A    - 000000 <br>
+                        B    - 000000 <br>
+                        C    - 000000 <br>
+                        D    - 000000 <br>
+                        E    - 000000
+                    </div>
+                </div>
+
+
+                {{-- Mula No Siri --}}
+                <div class="form-group">
+                    <label for="siries" class="col-md-4 control-label">
+                        Masukkan Permulaan No Siri
                         <span class="text-danger"> * </span>
                     </label>
-                    <div class="col-md-6">
-                        <input name="certificate_number" type="text" class="form-control" value="{{ old('certificate_number') }}" required autofocus>
-                        @include('partials.error_block', ['item' => 'certificate_number'])
+                    <div class="col-md-2 {{ $errors->has('start_siries') ? ' has-error' : '' }}">
+                        <select name="start_siries" class="form-control">
+                            <option value=""><< Sila Pilih >></option>
+                            <option value=" "></option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                        @include('partials.error_block', ['item' => 'start_siries'])
                     </div>
+                    {{--<div class="col-md-2">No Akhir ialah : @if ($a == '')--}}
+                    {{--000000--}}
+                    {{--@else--}}
+                    {{--{{ $a->certificate_number }}--}}
+                    {{--@endif--}}
+                    {{--</div>--}}
+                    <div class="col-md-3 {{ $errors->has('siries') ? ' has-error' : '' }}">
+                        <input name="siries" type="text" class="form-control" value="{{ old('siries') }}"
+                               placeholder="6 Digit No cth: 000998" required>
+                        @include('partials.error_block', ['item' => 'siries'])
+                    </div>
+
                 </div>
 
                 {{-- Remark --}}

@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Carian : Kemaskini Maklumat Percetakan
+    Carian : Tambah Maklumat Percetakan Baru
 @endsection
 
 @section('topButton')

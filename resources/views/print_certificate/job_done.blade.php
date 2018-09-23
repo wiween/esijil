@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Senarai Sijil Yang Telah Selesai Agihan Tugasan
+    Senarai Selesai Agihan Tugasan : No Batch [ {{ Request::segment(3) }} ]
 @endsection
 
 @section('topButton')
@@ -22,8 +22,8 @@
                     <table class="table">
                         <tr>
                             <th>#</th>
-                            <th>No ID</th>
-                            <th>Name</th>
+                            <th>No KP</th>
+                            <th>Nama</th>
                             <th>Sumber</th>
                             <th>Pegawai</th>
                             {{--<th>Keputusan PPL</th>--}}

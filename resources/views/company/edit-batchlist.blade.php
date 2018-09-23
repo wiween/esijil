@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Muat Turun Data Pelajar
+    Edit Maklumat Percetakan : {{ Request::segment(3) }}
 @endsection
 
 @section('topButton')
@@ -19,12 +19,10 @@
                     <table class="table">
                         <tr>
                             <th>#</th>
-                            <th>No ID</th>
-                            <th>Name</th>
-                            <th>Nama Program</th>
-                            <th>Kod Program</th>
-                            <th>Keputusan PPL</th>
-                            <th>Tahap</th>
+                            <th>No KP</th>
+                            <th>Nama</th>
+                            <th>Batch No</th>
+                            <th>No Sijil</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -32,11 +30,9 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="/company-download/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
-                                <td>{{ $certificate->programme_name }}</td>
-                                <td>{{ $certificate->programme_code }}</td>
-                                <td>{{ $certificate->result_ppl }}</td>
-                                <td>{{ $certificate->level }}</td>
+                                <td>{{ $certificate->name }}</td>
+                                <td>{{ $certificate->batch_id }}</td>
+                                <td>{{ $certificate->certificate_number }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
                                         <span class="label label-success">{{ $certificate->status }}</span>
@@ -54,8 +50,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-download/show/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Lihat</a></li>
-                                                <li><a href="/company-download/single/{{ $certificate->ic_number }}"><i class="icon-download10 text-primary"></i>Muat Turun</a></li>
+                                                <li><a href="/company-print/edit/{{ $certificate->id }}"><i class="icon-database-edit2 text-primary"></i>Edit</a></li>
                                             </ul>
                                         </li>
                                     </ul>

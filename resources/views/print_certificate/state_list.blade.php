@@ -29,7 +29,7 @@
 
                 <div class="form-group{{ $errors->has('batch') ? ' has-error' : '' }}">
                     <label for="batch" class="col-md-4 control-label">
-                        Senarai Batch
+                        Senarai Batch No
                         <span class="text-danger"> * </span>
                     </label>
 
@@ -121,7 +121,7 @@
 
                 <div v-if="officer =='syarikat'" class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
                     <label class="col-md-4 control-label">
-                        Sesi
+                        Ref
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">

@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Carian : Pengeposan
+    Carian : Edit Maklumat Percetakan
 @endsection
 
 @section('topButton')
@@ -24,7 +24,7 @@
                         <select name="source" class="form-control" v-model="carian">
                             <option value="">Sila Pilih..</option>
                             <option value="noid">No KP</option>
-                            <option value="batch">No Batch</option>
+                            <option value="batch">Batch ID</option>
                         </select>
                         @include('partials.error_block', ['item' => 'source'])
                     </div>
@@ -33,7 +33,7 @@
                 {{-- ID --}}
                 <div v-if="carian =='noid'" class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
                     <label for="ic_number" class="col-md-4 control-label">
-                        No KP :
+                        No KP:
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
@@ -45,7 +45,7 @@
                 {{-- Batch--}}
                 <div v-if="carian =='batch'" class="form-group{{ $errors->has('batch') ? ' has-error' : '' }}">
                     <label for="batch" class="col-md-4 control-label">
-                        No Batch :
+                        Batch ID :
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
