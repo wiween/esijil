@@ -30,7 +30,7 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 {{--<td> <input type="checkbox" name="batch[]" value="{{ old('batch', $certificate->batch_id) }}"></td>--}}
-                                <td><a href="/print/print-list/{{ $certificate->batch_id }}/{{ $certificate->type }}">{{ $certificate->batch_id }}</a></td>
+                                <td><a href="{{ url('') }}/print/print-list/{{ $certificate->batch_id }}/{{ $certificate->type }}">{{ $certificate->batch_id }}</a></td>
                                 <td>{{ ucwords($certificate->type) }}</td>
                                 <td>{{ $certificate->state->name }}</td>
                                 <td>
@@ -41,9 +41,9 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/print/print-list/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-display text-primary"></i>Senarai Pelajar</a></li>
+                                                <li><a href="{{ url('') }}/print/print-list/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-display text-primary"></i>Senarai Pelajar</a></li>
                                                 {{--<li><a href="/certificate/job/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Agihan Tugasan</a></li>--}}
-                                                <li><a href="/print/print/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-printer text-success"></i>Cetak</a></li>
+                                                <li><a href="{{ url('') }}/print/print/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-printer text-success"></i>Cetak</a></li>
                                                 {{--<li><a href="/print/destroy/{{ $certificate->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>--}}
                                                 {{--<li><a href="/print/set-flag/Y/{{ $certificate->id }}"><i class="icon-flag8 text-black-600"></i>Set Flag Cetak</a></li>--}}
                                             </ul>

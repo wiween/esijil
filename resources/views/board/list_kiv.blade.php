@@ -26,7 +26,7 @@
                         @foreach ($espkms as $espkm)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="/board/list-kiv/{{ $espkm->batch_id }}">{{ $espkm->batch_id }}</a></td>
+                                <td><a href="{{ url('') }}/board/list-kiv/{{ $espkm->batch_id }}">{{ $espkm->batch_id }}</a></td>
                                 <td>{{ $espkm->state->name }}</td>
                                 {{--<td>--}}
                                 {{--<ul class="icons-list">--}}

@@ -34,7 +34,7 @@
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $audit->id }}</td>
-                            <td><a href="/user/show/{{ $audit->user_id }}">{{ $audit->user->name }}</a> </td>
+                            <td><a href="{{ url('') }}/user/show/{{ $audit->user_id }}">{{ $audit->user->name }}</a> </td>
                             <td>{{ $audit->ip }}</td>
                             <td>{{ $audit->url }}</td>
                             <td>
@@ -59,10 +59,10 @@
                                         </a>
 
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="/audit-trail/show/{{ $audit->id }}"><i class="icon-display"></i> View & Edit</a></li>
-                                            <li><a href="/audit-trail/set/normal/{{ $audit->id }}"><i class="icon-flag3 text-success"></i> Set to Normal</a></li>
-                                            <li><a href="/audit-trail/set/warning/{{ $audit->id }}"><i class="icon-flag7 text-warning"></i> Set to Warning</a></li>
-                                            <li><a href="/audit-trail/destroy/{{ $audit->id }}"><i class="icon-trash text-danger-600"></i> Delete</a></li>
+                                            <li><a href="{{ url('') }}/audit-trail/show/{{ $audit->id }}"><i class="icon-display"></i> View & Edit</a></li>
+                                            <li><a href="{{ url('') }}/audit-trail/set/normal/{{ $audit->id }}"><i class="icon-flag3 text-success"></i> Set to Normal</a></li>
+                                            <li><a href="{{ url('') }}/audit-trail/set/warning/{{ $audit->id }}"><i class="icon-flag7 text-warning"></i> Set to Warning</a></li>
+                                            <li><a href="{{ url('') }}/audit-trail/destroy/{{ $audit->id }}"><i class="icon-trash text-danger-600"></i> Delete</a></li>
                                         </ul>
                                     </li>
                                 </ul>

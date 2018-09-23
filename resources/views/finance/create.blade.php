@@ -22,7 +22,7 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <a href="/finance/report/{{ $certificate->batch_id }}/{{ $certificate->type }}">{{ $certificate->batch_id }}</a>
+                        <a href="{{ url('') }}/finance/report/{{ $certificate->batch_id }}/{{ $certificate->type }}">{{ $certificate->batch_id }}</a>
                         @include('partials.error_block', ['item' => 'ic_number'])
                     </div>
                 </div>

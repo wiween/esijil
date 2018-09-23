@@ -51,7 +51,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-post/create/{{ $certificate->id }}"><i class="icon-mailbox text-success"></i>Pembungkusan</a></li>
+                                                <li><a href="{{ url('') }}/company-post/create/{{ $certificate->id }}"><i class="icon-mailbox text-success"></i>Pembungkusan</a></li>
                                                 {{--<li><a href="/company-list/set-flag/Y/{{ $certificate->id }}"><i class="icon-flag8 text-black-600"></i>Set Flag Cetak</a></li>--}}
                                             </ul>
                                         </li>

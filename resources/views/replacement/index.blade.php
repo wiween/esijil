@@ -33,7 +33,7 @@
                         @foreach ($replacements as $replacement)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="/replacement/show/{{ $replacement->id }}">{{ $replacement->certificate->name }}</a> </td>
+                                <td><a href="{{ url('') }}/replacement/show/{{ $replacement->id }}">{{ $replacement->certificate->name }}</a> </td>
                                 <td>{{ ucwords($replacement->type_replacement) }}</td>
                                 <td>{{ ucwords($replacement->reason) }}</td>
                                 <td>{{ ucwords($replacement->printed_remark) }}</td>
@@ -55,12 +55,12 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/replacement/show/{{ $replacement->id }}"><i class="icon-display"></i>Lihat & Edit</a></li>
+                                                <li><a href="{{ url('') }}/replacement/show/{{ $replacement->id }}"><i class="icon-display"></i>Lihat & Edit</a></li>
                                                 {{--@if (($replacement->type_replacement == 'rosak') || ($replacement->type_replacement == 'ganti'))--}}
-                                                <li><a href="/replacement/epayment/{{ $replacement->id }}"><i class="icon-coins"></i>Pembayaran</a></li>
+                                                <li><a href="{{ url('') }}/replacement/epayment/{{ $replacement->id }}"><i class="icon-coins"></i>Pembayaran</a></li>
                                                 {{--@endif--}}
-                                                <li><a href="/print/print/{{ $replacement->certificate_id }}"><i class="icon-printer text-success"></i>Cetak</a></li>
-                                                <li><a href="/replacement/destroy/{{ $replacement->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>
+                                                <li><a href="{{ url('') }}/print/print/{{ $replacement->certificate_id }}"><i class="icon-printer text-success"></i>Cetak</a></li>
+                                                <li><a href="{{ url('') }}/replacement/destroy/{{ $replacement->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>
                                             </ul>
                                         </li>
                                     </ul>

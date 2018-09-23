@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Certificate;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
+use App\Repositories\CertificateSource;
 
 class ImportCertificates extends Command
 {
@@ -30,11 +30,13 @@ class ImportCertificates extends Command
      */
 
     private $client = null;
+    private $certificateSource = null;
 
-    public function __construct(Client $guzzleClient)
+    public function __construct(Client $guzzleClient, CertificateSource $certificateSource)
     {
         parent::__construct();
         $this->client = $guzzleClient;
+        $this->certificateSource = $certificateSource;
     }
 
     /**
@@ -48,20 +50,7 @@ class ImportCertificates extends Command
         /* $response = $this->client->request('GET', env('MOSQ_IMPORT_CERTIFICATES_URL'));
         $data = json_decode($response->getBody()); */
 
-        $data = DB::select("select c.nama_pelatih as name, c.ic_or_passport as ic_number,
-            d.nama_program as programme_name, d.kod_program as programme_code, null as type,
-            null as level, e.nama_pusat as pb_name, g.id as state_id,
-            if(f.to_visit_date_tamat = '0000-00-00', null, to_visit_date_tamat) as date_ppl,
-            a.keputusan_ppl as result_ppl, b.no_batch as batch_id, IFNULL(c.no_rumah, e.alamat_sykt) as address
-            from mosq.penilaian_bukan_kredit as a
-            join mosq.daftar_batch as b on a.batch_id = b.id
-            join mosq.profil_pelatih as c on a.pelatih_id = c.id
-            join mosq.program as d on b.program_id = d.id
-            join mosq.pb as e on b.pusat_id = e.id
-            left join mosq.urus_ppl as f on a.urus_ppl_id = f.id
-            join mosq.negeri as g on g.kod_negeri = e.kod_negeri
-            where 1 = 1
-            and keputusan_ppl = 1");
+        $data = $this->certificateSource->certSource();
         
         $bar = $this->output->createProgressBar(count($data));
 
@@ -71,7 +60,7 @@ class ImportCertificates extends Command
                 $this->info("\nImport ". $row->name);
 
             Certificate::updateOrCreate(
-                ['ic_number' => $row->ic_number],
+                ['ic_number' => $row->ic_number, 'batch_id' => $row->batch_id],
                 [
                     'name' => $row->name,
                     'ic_number' => $row->ic_number,

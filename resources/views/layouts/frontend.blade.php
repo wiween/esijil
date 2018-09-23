@@ -75,8 +75,8 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="/user/profile"><i class="icon-user-plus"></i> My profile</a></li>
-                        <li><a href="user/change-password"><i class="icon-cog5"></i> Change Password</a></li>
+                        <li><a href="{{ url('user/profile') }}"><i class="icon-user-plus"></i> My profile</a></li>
+                        <li><a href="{{ url('user/change-password') }}"><i class="icon-cog5"></i> Change Password</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
@@ -126,7 +126,7 @@
                             <div class="media-right media-middle">
                                 <ul class="icons-list">
                                     <li>
-                                        <a href="/user/profile"><i class="icon-cog3"></i></a>
+                                        <a href="{{ url('user/profile') }}"><i class="icon-cog3"></i></a>
                                     </li>
                                 </ul>
                             </div>

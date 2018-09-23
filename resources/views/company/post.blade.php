@@ -33,7 +33,7 @@
                         @foreach ($posts as $post)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="/post/show/{{ $post->id }}">{{ $post->certificate->name }}</a> </td>
+                                <td><a href="{{ url('') }}/post/show/{{ $post->id }}">{{ $post->certificate->name }}</a> </td>
                                 <td>{{ $post->tracking_number }}</td>
                                 <td>{{ $post->date_post->format('d M, Y') }}</td>
                                 @if($post->flag_received == 'Y')
@@ -61,7 +61,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-search/detail/{{ $post->id }}"><i class="icon-display"></i>Lihat & Edit</a></li>
+                                                <li><a href="{{ url('') }}/company-search/detail/{{ $post->id }}"><i class="icon-display"></i>Lihat & Edit</a></li>
                                                 {{--<li><a href="/post/{{ $post->id }}"><i class="icon-printer text-success"></i>Cetak</a></li>--}}
                                                 {{--<li><a href="/post/destroy/{{ $post->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>--}}
                                             </ul>

@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Semak Status</div>
+                    <div class="card-header"><img src="{{ asset('images/jatasmall.jpg') }}"> Semak Status</div>
 
                     <div class="card-body">
                         <form method="POST" class="form-horizontal" role="form">

@@ -32,7 +32,7 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="/print/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+                                <td><a href="{{ url('') }}/print/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
                                 <td>{{ $certificate->result_ppl }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
@@ -51,7 +51,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/print/print/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak Semula</a></li>
+                                                <li><a href="{{ url('') }}/print/print/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak Semula</a></li>
                                             </ul>
                                         </li>
                                     </ul>
