@@ -32,7 +32,8 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="{{ url('') }}/certificate/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+
+                                <td><a href="{{ url('') }}/company-download/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
                                 <td>{{ $certificate->programme_name }}</td>
                                 <td>{{ $certificate->programme_code }}</td>
                                 <td>{{ $certificate->result_ppl }}</td>

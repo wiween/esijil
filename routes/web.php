@@ -1,12 +1,9 @@
 <?php
-\URL::forceRootUrl(env('APP_URL'));
 
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/pelajar/{id}', 'Api\PelajarController@view');
-
-Route::get('/dashboard', 'Frontend\DashboardController@index');
-
+Route::get('/esijil/pelajar/{id}', 'Api\PelajarController@view');
+>>>>>>> master
 Route::get('/semak-status', 'Frontend\StatusController@checkStatus');
 Route::post('/semak-status', 'Frontend\StatusController@show');
 
@@ -37,10 +34,19 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
     Route::get('/company-post/create-batch/{batch}/{type}', 'Frontend\CompanyController@createBatch');
     Route::post('/company-post/create-batch/{batch}/{type}', 'Frontend\CompanyController@storeBatch');
     Route::get('/company-search/list', 'Frontend\CompanyController@companyPost');
+    //edit after post -- single
     Route::get('/company-search/detail/{id}', 'Frontend\CompanyController@editPost');
     Route::post('/company-search/detail/{id}', 'Frontend\CompanyController@updatePost');
+    //edit batch after post
+    Route::get('/company-search/detail-batch/{id}', 'Frontend\CompanyController@editPostBatch');
+    Route::post('/company-search/detail-batch/{id}', 'Frontend\CompanyController@updatePostBatch');
+
+
     Route::get('/company-print/search', 'Frontend\CompanyController@searchPrint');
+    Route::get('/company-print/search-edit', 'Frontend\CompanyController@searchEditPrint');
     Route::post('/company-print/search', 'Frontend\CompanyController@printResult');
+    Route::post('/company-print/search-edit', 'Frontend\CompanyController@printEditResult');
+    Route::get('/company-print/edit-batchlist/{batch}', 'Frontend\CompanyController@editList');
     Route::get('/company-print/edit/{id}', 'Frontend\CompanyController@edit');
     Route::post('/company-print/edit/{id}', 'Frontend\CompanyController@update');
     Route::get('/company-report', 'Frontend\CompanyController@reportList');
@@ -56,12 +62,18 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
 
 });
 
-
-// pencetak and above
+// pencetak ONLY
 Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
 
-//tarik data
-Route::get('/data', 'Frontend\BoardController@data');
+    Route::get('/dashboard', 'Frontend\DashboardController@index');
+
+    // User session
+    Route::get('/user/profile', 'Frontend\UserController@profile');
+    Route::get('/user/edit-profile', 'Frontend\UserController@editProfile');
+    Route::post('/user/edit-profile', 'Frontend\UserController@updateProfile');
+    Route::get('/user/change-password', 'Frontend\UserController@changePassword');
+    Route::post('/user/change-password', 'Frontend\UserController@updatePassword');
+>>>>>>> master
 
 ////board
 //Route::get('/board/type', 'Frontend\BoardController@index');

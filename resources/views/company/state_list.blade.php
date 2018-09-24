@@ -64,9 +64,10 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
+
                                                 <li><a href="{{ url('') }}/company-download/list/{{ $batch->batch_id }}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
                                                 <li><a href="{{ url('') }}/company-download/download/{{ $batch->batch_id }}"><i class="icon-download10 text-primary"></i>Muat Turun</a></li>
-                                                <li><a href="{{ url('') }}/company-download/printed/{{ $batch->batch_id }}/{{ Request::segment(4) }}"><i class="icon-database-edit2 text-primary"></i>Kemaskini Percetakan</a></li>
+                                                <li><a href="{{ url('') }}/company-download/printed/{{ $batch->batch_id }}/{{ Request::segment(4) }}"><i class="icon-database-edit2 text-primary"></i>Percetakan</a></li>
                                             </ul>
                                         </li>
                                     </ul>

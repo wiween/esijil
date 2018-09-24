@@ -41,13 +41,13 @@
                                                 @else
                                                     <td>Tiada</td>
                                                 @endif
-                                                @if ($certificate->flag_received == 'Y')
-                                                    <td>{{ $certificate->date_receive->format('d M, Y') }}</td>
-                                                    <td>{{ $certificate->receiver }}</td>
-                                                @else
-                                                    <td>Tiada</td>
-                                                    <td>Tiada</td>
-                                                @endif
+                                                    @if ($certificate->flag_received == 'Y')
+                                                        <td>{{ $certificate->date_receive->format('d M, Y') }}</td>
+                                                        <td>{{ $certificate->receiver }}</td>
+                                                    @else
+                                                        <td>Tiada</td>
+                                                        <td>Tiada</td>
+                                                    @endif
 
                                             </tr>
                                         @endforeach

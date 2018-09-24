@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Kemaskini Maklumat Pembungkusan (Syarikat): {{ $certificate->ic_number }}
+    Kemaskini Maklumat Pengeposan (Syarikat): {{ $certificate->ic_number }}
 @endsection
 
 @section('topButton')
@@ -92,7 +92,7 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="received" type="radio" value="Y" @if(old('received')) checked @endif  v-model="mypost">Ya
+                        <input name="received" type="radio" value="Y" @if(old('received') ) checked @endif  v-model="mypost">Ya
                         <input name="received" type="radio" value="N" @if(old('received')) checked @endif  v-model="mypost">Tidak
                         @include('partials.error_block', ['item' => 'received'])
                     </div>

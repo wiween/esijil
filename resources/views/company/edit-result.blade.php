@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Senarai Selesai Agihan Tugasan : No Batch [ {{ Request::segment(3) }} ]
+    Hasil Carian : Edit Maklumat Percetakan
 @endsection
 
 @section('topButton')
@@ -24,9 +24,8 @@
                             <th>#</th>
                             <th>No KP</th>
                             <th>Nama</th>
-                            <th>Sumber</th>
-                            <th>Pegawai</th>
-                            {{--<th>Keputusan PPL</th>--}}
+                            <th>Batch No</th>
+                            <th>No Sijil</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -34,10 +33,9 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="{{ url('') }}/certificate/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
-                                <td>{{ $certificate->source }}</td>
-                                <td>{{ $certificate->officer }}</td>
-                                {{--<td>{{ $certificate->result_ppl }}</td>--}}
+                                <td><a href="/company-print/edit/{{$certificate->id}}">{{ $certificate->name }}</a></td>
+                                <td>{{ $certificate->batch_id }}</td>
+                                <td>{{ $certificate->certificate_number }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
                                         <span class="label label-success">{{ $certificate->status }}</span>
@@ -55,7 +53,8 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="{{ url('') }}/certificate/job/{{ $certificate->id }}"><i class="icon-list3 text-success"></i>Agihan Tugasan</a></li>
+                                                <li><a href="/company-print/edit/{{ $certificate->id }}"><i class="icon-display4 text-success"></i>Lihat & Edit</a></li>
+                                                {{--<li><a href="/company-list/set-flag/Y/{{ $certificate->id }}"><i class="icon-flag8 text-black-600"></i>Set Flag Cetak</a></li>--}}
                                             </ul>
                                         </li>
                                     </ul>

@@ -13,6 +13,6 @@ class Post extends Model
 
     // each audit trails record, belong to ONE user only
     public function certificate() {
-        return $this->belongsTo('App\Certificate', 'certificate_id');
+        return $this->belongsTo('App\Certificate');
     }
 }

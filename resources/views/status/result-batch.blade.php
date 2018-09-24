@@ -20,7 +20,7 @@
                                             <th>No KP</th>
                                             <th>Status Semasa</th>
                                             <th>Tarikh Cetak</th>
-                                            <th>Tarikh Hantar</th>
+                                            <th>Tarikh Pos</th>
                                             <th>Tarikh Terima</th>
                                             <th>Nama Penerima</th>
                                         </tr>
@@ -33,7 +33,7 @@
                                                 <td>{{ ucwords($certificate->current_status) }}</td>
                                                 @if ($certificate->current_status == 'telah dicetak' || $certificate->current_status == 'telah dipos' || $certificate->current_status == 'telah diterima')
                                                     <td>{{ $certificate->date_print }}</td>
-                                                @else
+                                                    @else
                                                     <td>Tiada</td>
                                                 @endif
                                                 @if ($certificate->current_status == 'telah dipos' || $certificate->current_status == 'telah diterima')
@@ -41,13 +41,13 @@
                                                 @else
                                                     <td>Tiada</td>
                                                 @endif
-                                                @if ($certificate->flag_received == 'Y')
-                                                    <td>{{ $certificate->date_receive->format('d M, Y') }}</td>
-                                                    <td>{{ $certificate->receiver }}</td>
-                                                @else
-                                                    <td>Tiada</td>
-                                                    <td>Tiada</td>
-                                                @endif
+                                                    @if ($certificate->flag_received == 'Y')
+                                                        <td>{{ $certificate->date_receive->format('d M, Y') }}</td>
+                                                        <td>{{ $certificate->receiver }}</td>
+                                                    @else
+                                                        <td>Tiada</td>
+                                                        <td>Tiada</td>
+                                                    @endif
 
                                             </tr>
                                         @endforeach

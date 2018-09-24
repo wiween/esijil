@@ -19,7 +19,7 @@
                     <table class="table">
                         <tr>
                             <th>#</th>
-                            <th>Batch ID</th>
+                            <th>Batch No</th>
                             <th>Negeri</th>
                             {{--<th>Action</th>--}}
                         </tr>
