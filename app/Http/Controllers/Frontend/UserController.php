@@ -193,10 +193,28 @@ class UserController extends Controller
 //        $user->password = $request->input('password');
         $user->ic_number = $request->input('ic_number');
         $user->phone_number = $request->input('phone_number');
-        $user->role = $request->input('role');
-        $user->access_power = 100;
+
+        if (Auth::user()->role == 'super_admin' || Auth::user()->role == 'admin') {
+            $user->role = $request->input('role');
+
+            if ($request->input('role') == 'user') {
+                $user->access_power = 100;
+            } else if ($request->input('role') == 'company') {
+                $user->access_power = 500;
+            } else if ($request->input('role') == 'pencetak') {
+                $user->access_power = 1000;
+            } else if ($request->input('role') == 'pegawai_admin') {
+                $user->access_power = 5000;
+            } else if ($request->input('role') == 'admin') {
+                $user->access_power = 8000;
+            }else {
+                $user->access_power = 10000;
+            }
+            $user->status = $request->input('status');
+        }
+
         $user->remark = $request->input('remark');
-        $user->status = $request->input('status');
+
         // Untuk upload gambar avatar
         if (isset($request->avatar)) {
             if ($request->file('avatar')->isValid()) {
@@ -266,8 +284,8 @@ class UserController extends Controller
         //hantar mail
         Mail::send('emails.reset_password', $data, function($message) use ($data)
         {
-            $message->from('ceds@mohr.gov.my', "Admin CEDS");
-            $message->subject("New Password - System CEDS");
+            $message->from('esijil@mohr.gov.my', "Admin eSijil");
+            $message->subject("New Password - System eSijil");
             $message->to($data['email']);
         });
 
