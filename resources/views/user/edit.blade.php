@@ -74,6 +74,7 @@
                     </div>
                 </div>
 
+                @if (Auth::user()->role == 'super_admin' || Auth::user()->role == 'admin' )
                 {{-- Status --}}
                 <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                     <label class="col-md-4 control-label">
@@ -127,7 +128,7 @@
                     </div>
                     @include('partials.error_block', ['item' => 'remark'])
                 </div>
-
+                @endif
                 {{-- Submit Button --}}
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
