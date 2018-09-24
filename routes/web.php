@@ -73,7 +73,6 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::post('/user/edit-profile', 'Frontend\UserController@updateProfile');
     Route::get('/user/change-password', 'Frontend\UserController@changePassword');
     Route::post('/user/change-password', 'Frontend\UserController@updatePassword');
->>>>>>> master
 
 ////board
 //Route::get('/board/type', 'Frontend\BoardController@index');
