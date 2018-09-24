@@ -31,7 +31,9 @@ class CertificateSource
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat
-            left join mosq.negeri as d on d.kod_negeri = c.kod_negeri");
+            left join mosq.negeri as d on d.kod_negeri = c.kod_negeri
+            where 1 = 1
+            and a.sebab_cetak = 0");
     }
 
     public function numToWord($num)
@@ -49,6 +51,6 @@ class CertificateSource
             9 => 'sembilan',
         ];
 
-        return $data[$num];
+        return $data[trim($num)];
     }
 }

@@ -68,7 +68,7 @@ class ImportCertificates extends Command
                     'programme_name' => $row->programme_name,
                     'programme_code' => $row->programme_code,
                     'type' => $row->type,
-                    'level' => (isset((explode('-', $row->programme_code))[2])) ? 'tahap ' . $this->certificateSource->numToWord($row->level) : 'pc',
+                    'level' => $this->contructLevel($row->programme_code, 'tahap'),
                     'pb_name' => $row->pb_name,
                     'state_id' => $row->state_id,
                     'date_ppl' => $row->date_ppl,
@@ -84,5 +84,31 @@ class ImportCertificates extends Command
         $bar->finish();
 
         $this->info("\nDone!");
+    }
+
+    private function contructLevel($code, $pre = '')
+    {
+        if (strpos($code, ':') || strpos($code, ';'))
+        {
+            if(strpos($code, ':'))
+                return $this->hasYearDeli($code, $pre, ':');
+            elseif (strpos($code, ';'))
+                return $this->hasYearDeli($code, $pre, ';');
+        }
+        else
+        {
+            if(isset(explode('-', $code)[2]))
+                return ($pre) ? trim($pre) . " " . $this->certificateSource->numToWord(explode('-', $code)[2]) : $this->certificateSource->numToWord(explode('-', $code)[2]);
+            
+            return 'pc';
+        }
+    }
+
+    private function hasYearDeli($code, $pre, $deli)
+    {
+        if (isset(explode('-', $code)[2]))
+            return ($pre) ? trim($pre) . " " . $this->certificateSource->numToWord(explode($deli, explode('-', $code)[2])[0]) : $this->certificateSource->numToWord(explode($deli, explode('-', $code)[2])[0]);
+
+        return 'pc';
     }
 }
