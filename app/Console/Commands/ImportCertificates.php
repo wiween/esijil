@@ -32,7 +32,6 @@ class ImportCertificates extends Command
     private $client = null;
     private $certificateSource = null;
 
-
     public function __construct(CertificateSource $certificateSource)
     {
         parent::__construct();
