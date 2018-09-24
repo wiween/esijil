@@ -25,7 +25,13 @@ class CertificateSource
             and (a.keputusan_ppl = 1
             or (a.keputusan_jpp = 1 or a.keputusan_senat_induk = 1))
             union select a.nama as name, a.no_ic as ic_number, b.nama_program as programme_name, a.kod_program as programme_code, 
-            a.jenis_tauliah as type, substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level,
+            case 
+            	when a.jenis_tauliah=1 then 'mosq'
+            	when a.jenis_tauliah=2 then 'sldn'
+            	when a.jenis_tauliah=3 then 'ppt'
+            	when a.jenis_tauliah=4 then 'ndt'
+            END as type,
+            substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level,
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
             a.no_batch as batch_id, c.alamat_sykt as address
             from mosq.skm as a
@@ -34,6 +40,17 @@ class CertificateSource
             left join mosq.negeri as d on d.kod_negeri = c.kod_negeri
             where 1 = 1
             and a.sebab_cetak = 0");
+    }
+
+    public function updateSKMSource()
+    {
+        return DB::select("select b.`id_skm`, a.`name`, a.`ic_number`, a.`certificate_number`, a.`date_print`
+            from certificates a
+            join mosq.skm b on (a.ic_number = b.no_ic and a.batch_id = b.no_batch)
+            where 1 = 1
+            and b.sebab_cetak = 0
+            and a.certificate_number is not null
+            and a.date_print is not null");
     }
 
     public function numToWord($num)

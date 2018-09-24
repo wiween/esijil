@@ -6,7 +6,6 @@ use App\Certificate;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use App\Repositories\CertificateSource;
-use Riskihajar\Terbilang\Facades\Terbilang;
 
 class ImportCertificates extends Command
 {
@@ -33,10 +32,9 @@ class ImportCertificates extends Command
     private $client = null;
     private $certificateSource = null;
 
-    public function __construct(Client $guzzleClient, CertificateSource $certificateSource)
+    public function __construct(CertificateSource $certificateSource)
     {
         parent::__construct();
-        $this->client = $guzzleClient;
         $this->certificateSource = $certificateSource;
     }
 
