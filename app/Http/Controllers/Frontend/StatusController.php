@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Certificate;
 use App\Post;
+use App\Replacement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,27 +22,46 @@ class StatusController extends Controller
     public function show(Request $request)
     {
         //
+        $category = $request->input('category');
         $ic_number = $request->input('ic_number');
+        $batch = $request->input('batch');
         //echo $ic_number;
-        $exist = Certificate::where('ic_number',$ic_number)->count();
+        if ($category == 'baru') {
 
-        if ($exist > 0) {
-
-            $certificate = Certificate::where('ic_number', $ic_number)->first();
-            //dd($certificate);
-            $current_status = $certificate->current_status;
-            if ($current_status == 'dalam proses percetakan' || $current_status == 'telah dicetak') {
-                return view('status.result', compact('certificate'));
-
-            } else if ($current_status == 'telah dipos' || $current_status == 'telah diterima') {
-
-                $post = Post::where('certificate_id', $certificate->id)->first();
-                return view('status.result', compact('certificate', 'post'));
+            if ($ic_number <> '' && $batch <> '') {
+                $certificates = Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id')->where('ic_number', $ic_number)->where('batch_id', $batch)->get();
+//                dd($certificate);
+                return view('status.result', compact('certificates'));
+            } else if ($ic_number <> '' && $batch == '') {
+                $certificates = Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id')->where('ic_number', $ic_number)->get();
+                return view('status.result-ic', compact('certificates'));
+            } else if ($ic_number == '' && $batch <> '') {
+                $certificates = Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id')->where('batch_id', $batch)->get();
+                return view('status.result-batch', compact('certificates'));
+            } else {
+                return view('status.noresult');
             }
-        }
-        else {
+
+           //dd($certificate);
+//sijil Gantian join dengan repalcement
+        } else if ($category == 'gantian') {
+            if ($ic_number <> '' && $batch <> '') {
+                $certificates = Certificate::join('replacement', 'certificates.id', '=', 'replacements.certificate_id')->where('ic_number', $ic_number)->where('batch_id', $batch)->get();
+                return view('status.result', compact('certificates'));
+            } else if ($ic_number <> '' && $batch == '') {
+                $certificates = Certificate::join('replacement', 'certificates.id', '=', 'replacements.certificate_id')->where('ic_number', $ic_number)->get();
+                return view('status.result', compact('certificates'));
+            } else if ($ic_number == '' && $batch <> '') {
+                $certificates = Certificate::join('replacement', 'certificates.id', '=', 'replacements.certificate_id')->where('batch_id', $batch)->get();
+                return view('status.result', compact('certificates'));
+            } else {
+                return view('status.noresult');
+            }
+
+        } else {
             return view('status.noresult');
         }
+
 
     }
 

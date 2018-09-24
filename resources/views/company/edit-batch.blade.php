@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Kemaskini Maklumat Pengeposan Oleh Syarikat Mengikut Batch ID
+    Edit Maklumat Percetakan Oleh Syarikat : Maklumat Batch
 @endsection
 
 @section('topButton')
@@ -16,11 +16,6 @@
         <div class="panel-body">
             <div class="col-md-12">
                 <table class="table">
-                    @if ($certificates == 'tiada')
-                        <tr>
-                            <th>Maklumat tiada atau telah dipos</th>
-                        </tr>
-                    @else
                     <tr>
                         <th>#</th>
                         {{--<th></th>--}}
@@ -32,8 +27,9 @@
                     @foreach($certificates as $certificate)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td><a href="{{ url('') }}/company-post/list/{{ $certificate->batch_id }}/{{$certificate->type}}">[ {{  $certificate->batch_id }} ]</a></td>
-                            <td>{{ $certificate->jumlahsutudent }}</td>
+                            {{--<td><input name="batch[]" type="checkbox" value="{{ old('batch',$certificate->batch_id) }}"></td>--}}
+                            <td><a href="/company-print/edit-batchlist/{{ $certificate->batch_id }}">[ {{  $certificate->batch_id }} ]</a></td>
+                            <td>{{ $total = \App\Certificate::where('batch_id', $certificate->batch_id)->where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->count() }}</td>
                             <td>{{ $certificate->type }}</td>
                             <td>
                                 <ul class="icons-list">
@@ -43,8 +39,7 @@
                                         </a>
 
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="{{ url('') }}/company-post/list/{{ $certificate->batch_id }}/{{$certificate->type}}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
-                                            <li><a href="{{ url('') }}/company-post/create-batch/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-database-edit2 text-primary"></i>Pengeposan</a></li>
+                                            <li><a href="/company-print/edit-batchlist/{{ $certificate->batch_id }}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -52,7 +47,6 @@
                         </tr>
                         @include('partials.error_block', ['item' => 'batch'])
                     @endforeach
-                        @endif
                 </table>
             </div>
 

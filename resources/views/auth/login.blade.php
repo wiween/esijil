@@ -8,6 +8,7 @@
 
                 <div class="card-header"><img src="{{ asset('images/jatasmall.jpg') }}"> {{ __('Login') }}</div>
 
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

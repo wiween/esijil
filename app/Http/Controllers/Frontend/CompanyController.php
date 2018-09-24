@@ -101,14 +101,22 @@ class CompanyController extends Controller
     {
         //
         $certificate = Certificate::where('id', $id)->first();
-        return view('company.create', compact('certificate'));
+        $post = Post::where('certificate_id', $id)->first();
+        return view('company.create', compact('certificate', 'post'));
     }
 
     public function editPost($id)
     {
         //
-        $post = Post::where('id', $id)->first();
+        $post = Post::where('certificate_id', $id)->first();
         return view('company.repost', compact('post'));
+    }
+
+    public function editPostBatch($id)
+    {
+        //
+        $post = Post::where('tracking_number', $id)->first();
+        return view('company.repost-batch', compact('post'));
     }
 
     public function updatePost(Request $request, $id)
@@ -127,7 +135,7 @@ class CompanyController extends Controller
         }
         $certificate->save();
 
-        $post = new Post();
+        $post = Post::where('certificate_id',$id)->first();
         $post->tracking_number = $request->input('tracking_number');
         $post->date_post = $request->input('date_post');
 
@@ -148,6 +156,56 @@ class CompanyController extends Controller
 
     }
 
+    public function updatePostBatch(Request $request, $id)
+    {
+        //
+//        id adalah trackking number
+        $certificates = Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id')
+            ->where('posts.tracking_number', $id)->where('flag_printed', 'Y')->get();
+//        dd ($certificates);
+
+        foreach($certificates as $certificate) {
+//            dd($certificate);
+//            echo $request->input('received');
+//            exit();
+            if ($request->input('received') == 'N') {
+
+                $certificate->current_status = 'telah dipos';
+
+            } else if ($request->input('received') == 'Y') {
+                $certificate->current_status = 'telah diterima';
+            } else {
+                $certificate->current_status = 'dalam proses percetakan';
+            }
+
+            $certificate->save();
+
+        }
+
+            $posts = Post::where('tracking_number',$id)->get();
+
+            foreach($posts as $post) {
+                $post->tracking_number = $request->input('tracking_number');
+                $post->date_post = $request->input('date_post');
+
+                $post->flag_received = $request->input('received');
+                $post->post_company = $request->input('post_company');
+                $post->date_receive = $request->input('date_receive');
+                $post->receiver = $request->input('receiver');
+                $post->source = 'syarikat';
+
+                $post->remark = $request->input('remark');
+//                $post->certificate_id = $certificate->id;
+                $post->save();
+            }
+
+    if ($post->save()) {
+            return redirect('company-search/post')->with('successMessage', 'Maklumat Pos Telah Dijana');
+        } else {
+            return back()->with('errorMessage', 'Tidak boleh jana maklumat pos. Sila hubungi Admin');
+        }
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -301,7 +359,7 @@ class CompanyController extends Controller
 //        $certificate->flag_printed = $request->input('flag');
         $certificate->flag_printed = 'Y';
         $certificate->current_status = 'telah dicetak';
-        $certificate->certificate_number = $request->input('certificate_number');
+        $certificate->certificate_number = $request->input('start_siries') . $request->input('siries');
         $certificate->date_print = $request->input('date_print');
         $certificate->remark = $request->input('remark');
 
@@ -360,13 +418,15 @@ class CompanyController extends Controller
         $b = $request->input('batch');
         //dd ($a);
         if ($a <> '') {
-            $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->
-            where('flag_printed', 'Y')->where('source', 'syarikat')->get();
-            //dd ($certificates);
+                $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->
+                where('flag_printed', 'Y')->where('source', 'syarikat')->get();
+                //dd ($certificates);
+
             return view('company.result', compact('certificates'));
         }
 
         if ($b <> '') {
+
             $certificates = Certificate::select('batch_id', 'type', DB::raw("count(id) as jumlahsutudent"))->where('batch_id',$b)->
             where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->get();
             //dd ($certificates);
@@ -387,6 +447,12 @@ class CompanyController extends Controller
     {
         //
         return view('company.search_print');
+    }
+
+    public function searchEditPrint()
+    {
+        //
+        return view('company.edit-print');
     }
 
     public function printResult(Request $request)
@@ -413,6 +479,38 @@ class CompanyController extends Controller
 
     }
 
+    public function printEditResult(Request $request)
+    {
+        //
+        $a = $request->input('ic_number');
+        $b = $request->input('batch');
+//        echo "a" . $a;
+//        echo "b" . $b;
+        if ($a <> '') {
+            $certificates = Certificate::where('ic_number', 'like', '%' . $a .'%')->
+            where('flag_printed', 'Y')->where('source', 'syarikat')->get();
+            //dd ($certificates);
+            return view('company.edit-result', compact('certificates'));
+        }
+
+        if ($b <> '') {
+            $certificates = Certificate::where('batch_id', $b)->
+            where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->get();
+            //dd ($certificates);
+            return view('company.edit-batch', compact('certificates'));
+        }
+
+
+    }
+
+    public function editList($batch)
+    {
+        //
+        $certificates = Certificate::where('batch_id', $batch)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('name', 'asc')->get();
+        //dd($certificates);
+        return view('company.edit-batchlist', compact('certificates'));
+    }
+
     public function setFlag($flag, $id)
     {
 //        echo $id;
@@ -434,7 +532,9 @@ class CompanyController extends Controller
         //
         $total_certificates = Certificate::where('batch_id', $batch)->where('type', $type)
             ->where('flag_printed', 'N')->where('source', 'syarikat')->count();
-        return view('company.siries', compact('total_certificates'));
+        $a  = Certificate::where('batch_id', $batch)->where('type', $type)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('certificate_number', 'desc')->first();
+        $b  = Certificate::where('batch_id', $batch)->where('type', $type)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('certificate_number', 'desc')->first();
+        return view('company.siries', compact('total_certificates', 'a', 'b'));
     }
 
     /**
@@ -488,7 +588,7 @@ class CompanyController extends Controller
             $certificates->certificate_number = $new_siries;
             $certificates->date_print = $request->input('date_print');
             $certificates->current_status = 'telah dicetak';
-            $certificates->qrlink = '/esijil/pelajar/'. $certificates->id;
+            $certificates->qrlink = 'http://staging.skkm.gov.my/esijil/pelajar/'. $certificates->id;
             $certificates->save();
 
         }
@@ -540,7 +640,7 @@ class CompanyController extends Controller
     {
         //
         $posts = Post::where('source', 'syarikat')->orderBy('id', 'desc')->get();
-        return view('company.post', compact('posts'));
+        return view('company.post-batch', compact('posts'));
     }
 
 
