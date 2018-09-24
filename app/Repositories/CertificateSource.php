@@ -33,4 +33,22 @@ class CertificateSource
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat
             left join mosq.negeri as d on d.kod_negeri = c.kod_negeri");
     }
+
+    public function numToWord($num)
+    {
+        $data = [
+            0 => 'kosong',
+            1 => 'satu',
+            2 => 'dua',
+            3 => 'tiga',
+            4 => 'empat',
+            5 => 'lima',
+            6 => 'ename',
+            7 => 'tujuh',
+            8 => 'lapan',
+            9 => 'sembilan',
+        ];
+
+        return $data[$num];
+    }
 }

@@ -56,9 +56,7 @@ class ImportCertificates extends Command
         $bar = $this->output->createProgressBar(count($data));
 
         foreach($data as $row)
-        {
-            dd(Terbilang::make($row->level));
-            
+        {            
             if($this->getOutput()->isVerbose())
                 $this->info("\nImport ". $row->name);
 
@@ -70,7 +68,7 @@ class ImportCertificates extends Command
                     'programme_name' => $row->programme_name,
                     'programme_code' => $row->programme_code,
                     'type' => $row->type,
-                    'level' => Terbilang::make($row->level),
+                    'level' => 'tahap '.$this->certificateSource->numToWord($row->level),
                     'pb_name' => $row->pb_name,
                     'state_id' => $row->state_id,
                     'date_ppl' => $row->date_ppl,
