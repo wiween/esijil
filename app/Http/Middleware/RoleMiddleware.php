@@ -26,7 +26,7 @@ class RoleMiddleware
             }
 
             if ($routeRole == 'company') {
-                if ($userRole == 'company' || $userRole == 'pegawai_admin' || $userRole == 'admin' || $userRole == 'super_admin') {
+                if ($userRole == 'company' || $userRole == 'pencetak' || $userRole == 'akauntan' || $userRole == 'pegawai_admin' || $userRole == 'admin' || $userRole == 'super_admin') {
                     return $next($request); //izinkan masuk page mana
                 }
             }

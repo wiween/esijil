@@ -136,10 +136,11 @@
         </ul>
     </li>
 @endif
+
 @if (Auth::user()->access_power >= 2000)
     {{--jwatan kuasa--}}
     <li class="navigation-header"><span>Pengesahan Bayaran</span> <i class="icon-menu" title="Main pages"></i></li>
-    <li @if (Request::segment(1) == 'finance') class="active" @endif><a href="{{ url('') }}/board/type"><i
+    <li @if (Request::segment(1) == 'finance') class="active" @endif><a href="{{ url('') }}/finance/confirm"><i>
                     class="icon-checkmark"></i> <span>Pengesahan Bayaran</span></a>
         <ul>
 

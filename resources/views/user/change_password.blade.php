@@ -4,14 +4,15 @@
 @endsection
 
 @section('mainTitle')
-    Change Password
+    Tukar Password
 @endsection
 
 @section('topButton')
-    <a href="{{ url('') }}/user/create" class="btn btn-link btn-float has-text">
-        <i class="icon-plus-circle2 text-primary"></i>
-        <span>New User</span>
-    </a>
+
+    {{--<a href="{{ url('') }}/user/create" class="btn btn-link btn-float has-text">--}}
+        {{--<i class="icon-plus-circle2 text-primary"></i>--}}
+        {{--<span>New User</span>--}}
+    {{--</a>--}}
 @endsection
 
 @section('content')
@@ -60,7 +61,7 @@
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
-                            Change Password
+                            Tukar Password
                         </button>
                     </div>
                 </div>

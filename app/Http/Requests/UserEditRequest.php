@@ -27,10 +27,10 @@ class UserEditRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email',
             'ic_number' => 'required|size:12',
-            'status' => 'required',
-            'role' => 'required',
+//            'status' => 'required',
+//            'role' => 'required',
             'phone' => 'min:10|max:12',
-            'avatar' => 'required|file|mimes:jpeg,jpg,png'
+            'avatar' => 'file|mimes:jpeg,jpg,png'
         ];
     }
 }
