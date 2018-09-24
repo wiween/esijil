@@ -48,7 +48,7 @@
 @endif
 {{--  DONE --}}
 {{--payment--}}
-@if (Auth::user()->access_power >= 5000)
+@if (Auth::user()->access_power >= 1000)
     <li class="navigation-header"><span>Pegawai</span> <i class="icon-menu" title="Main pages"></i></li>
     <li @if (Request::segment(1) == 'search') class="active" @endif><a href="/search"><i class="icon-search4"></i>
             <span>Carian</span></a>
@@ -84,7 +84,7 @@
     </li> {{--  DONE --}}
 @endif
 
-@if (Auth::user()->access_power >= 5000)
+@if (Auth::user()->access_power >= 1000)
     <li class="navigation-header"><span>Laporan-Laporan</span> <i class="icon-menu" title="Main pages"></i></li>
     <li @if (Request::segment(1) == 'report') class="active" @endif><a href="/report"><i class="icon-statistics"></i>
             <span>Laporan</span></a>
