@@ -6,6 +6,7 @@ use App\Certificate;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use App\Repositories\CertificateSource;
+use Riskihajar\Terbilang\Facades\Terbilang;
 
 class ImportCertificates extends Command
 {
@@ -56,6 +57,8 @@ class ImportCertificates extends Command
 
         foreach($data as $row)
         {
+            dd(Terbilang::make($row->level));
+            
             if($this->getOutput()->isVerbose())
                 $this->info("\nImport ". $row->name);
 
@@ -67,7 +70,7 @@ class ImportCertificates extends Command
                     'programme_name' => $row->programme_name,
                     'programme_code' => $row->programme_code,
                     'type' => $row->type,
-                    'level' => $row->level,
+                    'level' => Terbilang::make($row->level),
                     'pb_name' => $row->pb_name,
                     'state_id' => $row->state_id,
                     'date_ppl' => $row->date_ppl,

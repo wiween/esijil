@@ -13,7 +13,7 @@ class CertificateSource
             substring_index(substring_index(d.kod_program,':', 1),'-',-1) as level,
             e.nama_pusat as pb_name, g.id as state_id,
             if(f.to_visit_date_tamat = '0000-00-00', null, date_format(to_visit_date_tamat,'%m%Y')) as date_ppl,
-            a.keputusan_ppl as result_ppl, b.no_batch as batch_id, IFNULL(c.no_rumah, e.alamat_sykt) as address
+            null as result_ppl, b.no_batch as batch_id, e.alamat_sykt as address
             from mosq.penilaian_bukan_kredit as a
             join mosq.daftar_batch as b on a.batch_id = b.id
             join mosq.profil_pelatih as c on a.pelatih_id = c.id
@@ -23,7 +23,7 @@ class CertificateSource
             join mosq.negeri as g on g.kod_negeri = e.kod_negeri
             where 1 = 1
             and (a.keputusan_ppl = 1
-            or a.keputusan_jpp = 1)
+            or (a.keputusan_jpp = 1 or a.keputusan_senat_induk = 1))
             union select a.nama as name, a.no_ic as ic_number, b.nama_program as programme_name, a.kod_program as programme_code, 
             a.jenis_tauliah as type, substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level,
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
