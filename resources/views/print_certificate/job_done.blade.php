@@ -34,7 +34,7 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="/certificate/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+                                <td><a href="{{ url('') }}/certificate/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
                                 <td>{{ $certificate->source }}</td>
                                 <td>{{ $certificate->officer }}</td>
                                 {{--<td>{{ $certificate->result_ppl }}</td>--}}
@@ -55,7 +55,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/certificate/job/{{ $certificate->id }}"><i class="icon-list3 text-success"></i>Agihan Tugasan</a></li>
+                                                <li><a href="{{ url('') }}/certificate/job/{{ $certificate->id }}"><i class="icon-list3 text-success"></i>Agihan Tugasan</a></li>
                                             </ul>
                                         </li>
                                     </ul>

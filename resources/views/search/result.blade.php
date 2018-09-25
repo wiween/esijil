@@ -32,8 +32,8 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="/certificate/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
-                                <td>{{ $certificate->batch_id }}</td>
+                                <td><a href="{{ url('') }}/certificate/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+                                <td>{{ $certificate->result_ppl }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
                                         <span class="label label-success">{{ $certificate->status }}</span>
@@ -51,9 +51,9 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/replacement/list/{{ $certificate->ic_number }}"><i class="icon-add-to-list text-success"></i>Penggantian</a></li>
+                                                <li><a href="{{ url('') }}/replacement/list/{{ $certificate->ic_number }}"><i class="icon-add-to-list text-success"></i>Penggantian</a></li>
                                                 <li><a href="post/create/{{ $certificate->id }}"><i class="icon-mailbox text-success"></i>Pembungkusan</a></li>
-                                                <li><a href="/status/{{ $certificate->ic_number }}"><i class="icon-reading text-success"></i>Semak Status</a></li>
+                                                <li><a href="{{ url('') }}/status/{{ $certificate->ic_number }}"><i class="icon-reading text-success"></i>Semak Status</a></li>
                                             </ul>
                                         </li>
                                     </ul>

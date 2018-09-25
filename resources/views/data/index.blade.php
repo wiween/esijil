@@ -29,21 +29,21 @@
             <div class="row">
                 <h3>Jenis Data : </h3>
                 {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
-                {{--<img class="img-responsive img-rounded" src="/images/dashboard/audit-min.jpg">--}}
+                {{--<img class="img-responsive img-rounded" src="{{ url('') }}/images/dashboard/audit-min.jpg">--}}
                 {{--<a href="/board/state/ppt" class="btn btn-info btn-block" style="margin-top: 4px">PPT</a>--}}
                 {{--</div>--}}
 
                 <div class="col-md-3 col-xs-6 thumbnail">
-                    <img class="img-responsive img-rounded" src="/images/dashboard/lookups-min.jpg">
-                    <a href="/api/pelajar" class="btn btn-info btn-block" style="margin-top: 4px">PENGAJIAN LAIN</a>
+                    <img class="img-responsive img-rounded" src="{{ url('') }}/images/dashboard/lookups-min.jpg">
+                    <a href="{{ url('') }}/api/pelajar" class="btn btn-info btn-block" style="margin-top: 4px">PENGAJIAN LAIN</a>
                 </div>
                 <div class="col-md-3 col-xs-6 thumbnail">
-                    <img class="img-responsive img-rounded" src="/images/dashboard/target-min.jpg">
-                    <a href="/api/board/pelajar" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT
+                    <img class="img-responsive img-rounded" src="{{ url('') }}/images/dashboard/target-min.jpg">
+                    <a href="{{ url('') }}/api/board/pelajar" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT
                         BERTAULIAH</a>
                 </div>
                 {{--<div class="col-md-3 col-xs-6 thumbnail">--}}
-                {{--<img class="img-responsive img-rounded" src="/images/dashboard/user-min.jpg">--}}
+                {{--<img class="img-responsive img-rounded" src="{{ url('') }}/images/dashboard/user-min.jpg">--}}
                 {{--<a href="/board/state/sldn" class="btn btn-info btn-block" style="margin-top: 4px">SLDN</a>--}}
                 {{--</div>--}}
             </div>

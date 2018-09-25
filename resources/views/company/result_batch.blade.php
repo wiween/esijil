@@ -28,7 +28,7 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 {{--<td><input name="batch[]" type="checkbox" value="{{ old('batch',$certificate->batch_id) }}"></td>--}}
-                                <td><a href="/company-download/list/{{ $certificate->batch_id }}">[ {{  $certificate->batch_id }} ]</a></td>
+                                <td><a href="{{ url('') }}/company-download/list/{{ $certificate->batch_id }}">[ {{  $certificate->batch_id }} ]</a></td>
                                 <td>{{ $certificate->count() }}</td>
                                 <td>{{ $certificate->type }}</td>
                                 <td>
@@ -39,9 +39,9 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-download/list/{{ $certificate->batch_id }}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
+                                                <li><a href="{{ url('') }}/company-download/list/{{ $certificate->batch_id }}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
                                                 {{--<li><a href="/company-download/download/{{ $certificate->batch_id }}"><i class="icon-download10 text-primary"></i>Muat Turun</a></li>--}}
-                                                <li><a href="/company-download/printed/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-database-edit2 text-primary"></i>Kemaskini Percetakan</a></li>
+                                                <li><a href="{{ url('') }}/company-download/printed/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-database-edit2 text-primary"></i>Kemaskini Percetakan</a></li>
                                             </ul>
                                         </li>
                                     </ul>

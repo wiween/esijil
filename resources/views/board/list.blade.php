@@ -32,7 +32,7 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $espkm->ic_number }}</td>
-                                <td><a href="/board/show/{{ $espkm->id }}">{{ $espkm->name }}</a> </td>
+                                <td><a href="{{ url('') }}/board/show/{{ $espkm->id }}">{{ $espkm->name }}</a> </td>
                                 <td>{{ $espkm->programme_name }}</td>
                                 <td>{{ $espkm->programme_code }}</td>
                                 <td>{{ $espkm->result_ppl }}</td>
@@ -54,10 +54,10 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/board/show/{{ $espkm->id }}"><i class="icon-display text-primary"></i>Lihat</a></li>
-                                                <li><a href="/board/set-flag/Y/{{ $espkm->id }}"><i class="icon-flag8 text-black-600"></i>DiSahkan</a></li>
-                                                <li><a href="/board/set-flag/R/{{ $espkm->id }}"><i class="icon-flag4 text-danger"></i>Ditolak</a></li>
-                                                <li><a href="/board/set-flag/K/{{ $espkm->id }}"><i class="icon-flag7 text-warning"></i>KIV</a></li>
+                                                <li><a href="{{ url('') }}/board/show/{{ $espkm->id }}"><i class="icon-display text-primary"></i>Lihat</a></li>
+                                                <li><a href="{{ url('') }}/board/set-flag/Y/{{ $espkm->id }}"><i class="icon-flag8 text-black-600"></i>DiSahkan</a></li>
+                                                <li><a href="{{ url('') }}/board/set-flag/R/{{ $espkm->id }}"><i class="icon-flag4 text-danger"></i>Ditolak</a></li>
+                                                <li><a href="{{ url('') }}/board/set-flag/K/{{ $espkm->id }}"><i class="icon-flag7 text-warning"></i>KIV</a></li>
                                             </ul>
                                         </li>
                                     </ul>

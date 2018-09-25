@@ -70,7 +70,7 @@
                     </tr>
                 </table>
                 <br>
-                <a href="/board/show/{{ $espkm->id }}" class="btn btn-primary btn-block">Kembali</a>
+                <a href="{{ url('') }}/board/show/{{ $espkm->id }}" class="btn btn-primary btn-block">Kembali</a>
 
             </div>
         </div>

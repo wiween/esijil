@@ -8,7 +8,7 @@
 @endsection
 
 @section('topButton')
-    <a href="/lookup/role" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/lookup/role" class="btn btn-link btn-float has-text">
         <i class="icon-plus-circle2 text-primary"></i>
         <span>Role</span>
     </a>
@@ -31,7 +31,7 @@
                         @foreach ($roles as $role)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="/lookups/role/{{ $role->id }}">{{ $role->name }}</a> </td>
+                                <td><a href="{{ url('') }}/lookups/role/{{ $role->id }}">{{ $role->name }}</a> </td>
 
 
 
@@ -54,8 +54,8 @@
 
                                             <ul class="dropdown-menu dropdown-menu-right">
 
-                                                <li><a href="/lookups/role/edit/{{ $role->id }}"><i class="icon-pencil"></i> Edit</a></li>
-                                                <li><a href="/lookups/role/destroy/{{ $role->id }}"><i class="icon-trash"></i> Delete</a></li>
+                                                <li><a href="{{ url('') }}/lookups/role/edit/{{ $role->id }}"><i class="icon-pencil"></i> Edit</a></li>
+                                                <li><a href="{{ url('') }}/lookups/role/destroy/{{ $role->id }}"><i class="icon-trash"></i> Delete</a></li>
                                             </ul>
                                         </li>
                                     </ul>

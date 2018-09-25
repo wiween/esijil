@@ -32,7 +32,8 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="/company-download/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+
+                                <td><a href="{{ url('') }}/company-download/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
                                 <td>{{ $certificate->programme_name }}</td>
                                 <td>{{ $certificate->programme_code }}</td>
                                 <td>{{ $certificate->result_ppl }}</td>
@@ -54,8 +55,8 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-download/show/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Lihat</a></li>
-                                                <li><a href="/company-download/single/{{ $certificate->ic_number }}"><i class="icon-download10 text-primary"></i>Muat Turun</a></li>
+                                                <li><a href="{{ url('') }}/company-download/show/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Lihat</a></li>
+                                                <li><a href="{{ url('') }}/company-download/single/{{ $certificate->ic_number }}"><i class="icon-download10 text-primary"></i>Muat Turun</a></li>
                                             </ul>
                                         </li>
                                     </ul>

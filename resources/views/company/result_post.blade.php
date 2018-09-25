@@ -32,7 +32,7 @@
                     @foreach($certificates as $certificate)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td><a href="/company-post/list/{{ $certificate->batch_id }}/{{$certificate->type}}">[ {{  $certificate->batch_id }} ]</a></td>
+                            <td><a href="{{ url('') }}/company-post/list/{{ $certificate->batch_id }}/{{$certificate->type}}">[ {{  $certificate->batch_id }} ]</a></td>
                             <td>{{ $certificate->jumlahsutudent }}</td>
                             <td>{{ $certificate->type }}</td>
                             <td>
@@ -43,8 +43,8 @@
                                         </a>
 
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="/company-post/list/{{ $certificate->batch_id }}/{{$certificate->type}}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
-                                            <li><a href="/company-post/create-batch/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-database-edit2 text-primary"></i>Pengeposan</a></li>
+                                            <li><a href="{{ url('') }}/company-post/list/{{ $certificate->batch_id }}/{{$certificate->type}}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
+                                            <li><a href="{{ url('') }}/company-post/create-batch/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-database-edit2 text-primary"></i>Pengeposan</a></li>
                                         </ul>
                                     </li>
                                 </ul>

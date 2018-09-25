@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Log Status : {{ $certificate->ic_number }}
+    <img src="/images/jatasmall.jpg"> Log Status eSijil : {{ $certificate->ic_number }}
 @endsection
 
 @section('topButton')

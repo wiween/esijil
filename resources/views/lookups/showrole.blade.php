@@ -8,11 +8,11 @@
 @endsection
 
 @section('topButton')
-    <a href="/lookups/role" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/lookups/role" class="btn btn-link btn-float has-text">
         <i class="icon-list-numbered text-primary"></i>
         <span>All role</span>
     </a>
-    <a href="/lookups/role/edit/{{ $role->id }}" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/lookups/role/edit/{{ $role->id }}" class="btn btn-link btn-float has-text">
         <i class="icon-pencil text-primary"></i>
         <span>Edit</span>
     </a>
@@ -47,7 +47,7 @@
 
                 </table>
                 <br>
-                <a href="/lookups/role/edit/{{ $role->id }}" class="btn btn-primary btn-block">Update role</a>
+                <a href="{{ url('') }}/lookups/role/edit/{{ $role->id }}" class="btn btn-primary btn-block">Update role</a>
 
             </div>
         </div>

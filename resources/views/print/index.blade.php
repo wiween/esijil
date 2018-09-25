@@ -8,7 +8,7 @@
 @endsection
 
 @section('topButton')
-    <a href="/print/printed/{{ Request::segment(3) }}" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/print/printed/{{ Request::segment(3) }}" class="btn btn-link btn-float has-text">
         <i class="icon-printer2 text-primary"></i>
         <span>Cetak Senarai Ini</span>
     </a>
@@ -35,7 +35,7 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="/print/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+                                <td><a href="{{ url('') }}/print/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
                                 <td>{{ $certificate->programme_name }}</td>
                                 <td>{{ $certificate->programme_code }}</td>
                                 <td>{{ $certificate->result_ppl }}</td>
@@ -57,9 +57,9 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/print/show/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Lihat & Edit</a></li>
+                                                <li><a href="{{ url('') }}/print/show/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Lihat & Edit</a></li>
                                                 {{--<li><a href="/certificate/job/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Agihan Tugasan</a></li>--}}
-                                                <li><a href="/print/print-single/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak</a></li>
+                                                <li><a href="{{ url('') }}/print/print-single/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak</a></li>
                                                 {{--<li><a href="/print/destroy/{{ $certificate->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>--}}
                                                 {{--<li><a href="/print/set-flag/Y/{{ $certificate->id }}"><i class="icon-flag8 text-black-600"></i>Set Flag Cetak</a></li>--}}
                                             </ul>

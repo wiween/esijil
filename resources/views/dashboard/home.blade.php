@@ -33,7 +33,9 @@
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
 
-                    <td><a href="{{ url('') }}/print/print-list/{{ $certificate->batch_id }}/{{ $certificate->type }}">{{ $certificate->batch_id }}</a></td>
+
+
+                    <td><a href="{{ url('') }}/print/print-list/{{ $certificate->batch_id }}">{{ $certificate->batch_id }}</a></td>
 
                         <td>{{ $certificate->state->name }}</td>
                         <td>
@@ -44,9 +46,9 @@
                                     </a>
 
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="{{ url('') }}/print/print-list/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-display text-primary"></i>Lihat & Edit</a></li>
-                                        <li><a href="/print/print/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-printer text-success"></i>Cetak</a></li>
-                                        {{--<li><a href="/print/destroy/{{ $certificate->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>--}}
+                                        <li><a href="{{ url('') }}/print/show/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Lihat & Edit</a></li>
+                                        <li><a href="{{ url('') }}/print/print/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak</a></li>
+                                        <li><a href="{{ url('') }}/print/destroy/{{ $certificate->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>
                                     </ul>
                                 </li>
                             </ul>

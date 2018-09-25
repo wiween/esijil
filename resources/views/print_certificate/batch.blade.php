@@ -55,7 +55,7 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <a href="/certificate/list/{{ $batch->batch_number }}">[ {{ $certificates }} ]</a>
+                        <a href="{{ url('') }}/certificate/list/{{ $batch->batch_number }}">[ {{ $certificates }} ]</a>
                         @include('partials.error_block', ['item' => 'type'])
                     </div>
                 </div>

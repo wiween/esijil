@@ -8,11 +8,11 @@
 @endsection
 
 @section('topButton')
-    <a href="/user" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/user" class="btn btn-link btn-float has-text">
         <i class="icon-list-numbered text-primary"></i>
         <span>All Users</span>
     </a>
-    <a href="/admin/user/edit/{{ $user->id }}" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/admin/user/edit/{{ $user->id }}" class="btn btn-link btn-float has-text">
         <i class="icon-pencil text-primary"></i>
         <span>Edit</span>
     </a>
@@ -87,7 +87,7 @@
                     </tr>
                 </table>
                 <br>
-                <a href="/user/edit/{{ $user->id }}" class="btn btn-primary btn-block">Edit User Record</a>
+                <a href="{{ url('') }}/user/edit/{{ $user->id }}" class="btn btn-primary btn-block">Edit User Record</a>
 
             </div>
         </div>

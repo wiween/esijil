@@ -8,7 +8,7 @@
 @endsection
 
 @section('topButton')
-    <a href="/admin/audit-trail" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/admin/audit-trail" class="btn btn-link btn-float has-text">
         <i class="icon-list-numbered text-primary"></i>
         <span>All Trails</span>
     </a>

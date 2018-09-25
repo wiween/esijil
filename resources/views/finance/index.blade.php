@@ -26,7 +26,7 @@
                         @foreach ($certificates as $certificate)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="/finance/detail/{{ $certificate->batch_id }}">{{ $certificate->batch_id }}</a></td>
+                                <td><a href="{{ url('') }}/finance/detail/{{ $certificate->batch_id }}">{{ $certificate->batch_id }}</a></td>
                                 <td>{{ $certificate->state->name }}</td>
                                 <td>
                                 <ul class="icons-list">
@@ -36,9 +36,9 @@
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="/finance/report-f/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-file-pdf text-primary"></i>Laporan F</a></li>
-                                    <li><a href="/finance/create/{{ $certificate->batch_id }}"><i class="icon-flag4 text-primary"></i>Pengesahan</a></li>
-                                    <li><a href="/finance/report-g/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-file-pdf text-primary"></i>Laporan G</a></li>
+                                    <li><a href="{{ url('') }}/finance/report-f/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-file-pdf text-primary"></i>Laporan F</a></li>
+                                    <li><a href="{{ url('') }}/finance/create/{{ $certificate->batch_id }}"><i class="icon-flag4 text-primary"></i>Pengesahan</a></li>
+                                    <li><a href="{{ url('') }}/finance/report-g/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-file-pdf text-primary"></i>Laporan G</a></li>
 
                                 </ul>
                                 </li>

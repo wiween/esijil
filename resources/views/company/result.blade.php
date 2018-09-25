@@ -56,7 +56,8 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-post/create/{{ $certificate->id }}"><i class="icon-mailbox text-success"></i>Pengeposan</a></li>
+
+                                                <li><a href="{{ url('') }}/company-post/create/{{ $certificate->id }}"><i class="icon-mailbox text-success"></i>Pengeposan</a></li>
                                             </ul>
                                         </li>
                                     </ul>

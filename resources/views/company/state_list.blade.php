@@ -54,7 +54,7 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 {{--<td><input name="batch[]" type="checkbox" value="{{ old('batch',$batch->batch_id) }}"></td>--}}
-                                <td><a href="/company-download/list/{{ $batch->batch_id }}">[ {{  $batch->batch_id }} ]</a></td>
+                                <td><a href="{{ url('') }}/company-download/list/{{ $batch->batch_id }}">[ {{  $batch->batch_id }} ]</a></td>
                                 {{--<td>{{ $batch->count() }}</td>--}}
                                 <td>
                                     <ul class="icons-list">
@@ -64,9 +64,10 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-download/list/{{ $batch->batch_id }}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
-                                                <li><a href="/company-download/download/{{ $batch->batch_id }}"><i class="icon-download10 text-primary"></i>Muat Turun</a></li>
-                                                <li><a href="/company-download/printed/{{ $batch->batch_id }}/{{ Request::segment(4) }}"><i class="icon-database-edit2 text-primary"></i>Percetakan</a></li>
+
+                                                <li><a href="{{ url('') }}/company-download/list/{{ $batch->batch_id }}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
+                                                <li><a href="{{ url('') }}/company-download/download/{{ $batch->batch_id }}"><i class="icon-download10 text-primary"></i>Muat Turun</a></li>
+                                                <li><a href="{{ url('') }}/company-download/printed/{{ $batch->batch_id }}/{{ Request::segment(4) }}"><i class="icon-database-edit2 text-primary"></i>Percetakan</a></li>
                                             </ul>
                                         </li>
                                     </ul>

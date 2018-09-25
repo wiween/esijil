@@ -8,7 +8,7 @@
 @endsection
 
 @section('topButton')
-    <a href="/admin/user/create" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/admin/user/create" class="btn btn-link btn-float has-text">
         <i class="icon-plus-circle2 text-primary"></i>
         <span>New User</span>
     </a>
@@ -37,7 +37,7 @@
                             <td class="col-md-1">
                                 <img class="img-responsive img-thumbnail" src="{{ $user->avatar }}">
                             </td>
-                            <td><a href="/user/show/{{ $user->id }}">{{ $user->name }}</a> </td>
+                            <td><a href="{{ url('') }}/user/show/{{ $user->id }}">{{ $user->name }}</a> </td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->ic_number }}</td>
                             <td>{{ $user->phone_number }}</td>
@@ -59,10 +59,10 @@
                                         </a>
 
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="/user/show/{{ $user->id }}"><i class="icon-display"></i> View</a></li>
-                                            <li><a href="/user/reset-password/{{ $user->id }}"><i class="icon-lock"></i> Reset Password</a></li>
-                                            <li><a href="/user/edit/{{ $user->id }}"><i class="icon-pencil"></i> Edit</a></li>
-                                            <li><a href="/user/destroy/{{ $user->id }}"><i class="icon-trash"></i> Delete</a></li>
+                                            <li><a href="{{ url('') }}/user/show/{{ $user->id }}"><i class="icon-display"></i> View</a></li>
+                                            <li><a href="{{ url('') }}/user/reset-password/{{ $user->id }}"><i class="icon-lock"></i> Reset Password</a></li>
+                                            <li><a href="{{ url('') }}/user/edit/{{ $user->id }}"><i class="icon-pencil"></i> Edit</a></li>
+                                            <li><a href="{{ url('') }}/user/destroy/{{ $user->id }}"><i class="icon-trash"></i> Delete</a></li>
                                         </ul>
                                     </li>
                                 </ul>
