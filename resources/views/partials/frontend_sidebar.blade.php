@@ -59,14 +59,14 @@
             <li><a href="{{ url('') }}/search">Carian Baru</a></li>
         </ul>
     </li> {{--  DONE --}}
-    <li @if (Request::segment(1) == 'payment') class="active" @endif><a href="{{ url('') }}/payment"><i class="icon-coin-dollar"></i>
-            <span>ePayment</span></a>
-        <ul>
-            <li><a href="{{ url('search') }}">Penggantian Baru</a></li>
-            <li><a href="{{ url('replacement') }}">Senarai Penggantian</a></li>
-        </ul>
-    </li> {{--  DONE --}}
-    <li @if (Request::segment(1) == 'status') class="active" @endif><a href="{{ url('') }}/status"><i class="icon-grid"></i> <span>Status</span></a>
+    {{--<li @if (Request::segment(1) == 'payment') class="active" @endif><a href="/payment"><i class="icon-coin-dollar"></i>--}}
+            {{--<span>ePayment</span></a>--}}
+        {{--<ul>--}}
+            {{--<li><a href="/search">Kemaskini ePayment</a></li>--}}
+            {{--<li><a href="/payment/list">Senarai Bayaran</a></li>--}}
+        {{--</ul>--}}
+    {{--</li> --}}{{--  DONE --}}
+    <li @if (Request::segment(1) == 'status') class="active" @endif><a href="/status"><i class="icon-grid"></i> <span>Status</span></a>
         <ul>
             <li><a href="{{ url('') }}/search">Semak Status</a></li>
         </ul>
@@ -134,8 +134,8 @@
 @if (Auth::user()->access_power >= 2000)
     {{--jwatan kuasa--}}
     <li class="navigation-header"><span>Pengesahan Bayaran</span> <i class="icon-menu" title="Main pages"></i></li>
-    <li @if (Request::segment(1) == 'finance') class="active" @endif><a href="/finance/confirm"><i
-                    class="icon-checkmark"></i> <span>Pengesahan Bayaran</span></a>
+    <li @if (Request::segment(1) == 'finance') class="active" @endif><a href="/finance/confirm">
+        <i class="icon-checkmark"></i> <span>Pengesahan Bayaran</span></a>
         <ul>
             <li><a href="{{ url('') }}/finance/confirm">Pengesahan Bayaran</a></li>
             <li><a href="{{ url('') }}/finance/list">Selesai Disahkan Bayaran</a></li>

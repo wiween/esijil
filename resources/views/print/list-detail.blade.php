@@ -22,17 +22,20 @@
                     <table class="table">
                         <tr>
                             <th>#</th>
+                            <th>No ID</th>
+                            <th>Name</th>
                             <th>Batch No</th>
-                            <th>Jenis Pentauliahan</th>
+                            <th>No Sijil</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         @foreach ($certificates as $certificate)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-<<<<<<< HEAD
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="{{ url('') }}/print/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
-                                <td>{{ $certificate->result_ppl }}</td>
+                                <td><a href="/print/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+                                <td>{{ $certificate->batch_id }}</td>
+                                <td>{{ $certificate->certificate_number }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
                                         <span class="label label-success">{{ $certificate->status }}</span>
@@ -42,10 +45,6 @@
                                         <span class="label label-default">{{ $certificate->status }}</span>
                                     @endif
                                 </td>
-=======
-                                <td><a href="/print/list-detail/{{ $certificate->batch_id }}">{{ $certificate->batch_id }}</a> </td>
-                                <td>{{ strtoupper($certificate->type) }}</td>
->>>>>>> master
                                 <td>
                                     <ul class="icons-list">
                                         <li class="dropdown">
@@ -54,7 +53,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="{{ url('') }}/print/print/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak Semula</a></li>
+                                                <li><a href="/print/print/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak Semula</a></li>
                                             </ul>
                                         </li>
                                     </ul>

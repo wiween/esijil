@@ -38,7 +38,7 @@
                 <h2 align="center">{{  $certificate->ic_number }}</h2>
         <br/>
         <br/>
-        <h2 align="center">PENILAIAN TELAH DILAKSANAKAN DI PUST BERTAULIAH</h2>
+        <h2 align="center">PENILAIAN TELAH DILAKSANAKAN DI PUSAT BERTAULIAH</h2>
         <h2 align="center">{{  $certificate->pb_name }}</h2>
         <h2 align="center">{{  $certificate->state->name }}</h2>
    </div>

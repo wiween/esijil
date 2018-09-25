@@ -29,14 +29,15 @@ class StatusController extends Controller
         if ($category == 'baru') {
 
             if ($ic_number <> '' && $batch <> '') {
-                $certificates = Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id')->where('ic_number', $ic_number)->where('batch_id', $batch)->get();
+                $certificates = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $ic_number)->where('certificates.batch_id', $batch)->get();
 //                dd($certificate);
                 return view('status.result', compact('certificates'));
             } else if ($ic_number <> '' && $batch == '') {
-                $certificates = Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id')->where('ic_number', $ic_number)->get();
+                $certificates = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $ic_number)->get();
+//                dd($certificates);
                 return view('status.result-ic', compact('certificates'));
             } else if ($ic_number == '' && $batch <> '') {
-                $certificates = Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id')->where('batch_id', $batch)->get();
+                $certificates = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.batch_id', $batch)->get();
                 return view('status.result-batch', compact('certificates'));
             } else {
                 return view('status.noresult');

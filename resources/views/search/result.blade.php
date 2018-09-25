@@ -24,7 +24,7 @@
                             <th>#</th>
                             <th>No ID</th>
                             <th>Name</th>
-                            <th>Keputusan PPL</th>
+                            <th>Batch No</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>

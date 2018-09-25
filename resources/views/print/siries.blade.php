@@ -54,6 +54,20 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <h6>PANDUAN : No Digit Terahir Bagi Setiap Sijil</h6>
+                    </div>
+                    <div class="col-md-6">
+                        NULL - 000000 <br>
+                        A    - 000000 <br>
+                        B    - 000000 <br>
+                        C    - 000000 <br>
+                        D    - 000000 <br>
+                        E    - 000000
+                    </div>
+                </div>
+
                 {{-- Mula No Siri --}}
                 <div class="form-group">
                     <label for="siries" class="col-md-4 control-label">

@@ -22,7 +22,7 @@
                             <th>#</th>
                             {{--<th>[ Tanda ]</th>--}}
                             <th>Batch ID</th>
-                            <th>Jenis Pengajian</th>
+                            <th>Jenis Pentauliahan</th>
                             <th>Negeri</th>
                             <th>Action</th>
                         </tr>
