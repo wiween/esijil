@@ -18,6 +18,7 @@ use App\StudentExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 
 class CompanyController extends Controller
 {
@@ -535,8 +536,14 @@ class CompanyController extends Controller
             ->where('flag_printed', 'N')->where('source', 'syarikat')->count();
         $a  = Certificate::where('batch_id', $batch)->where('type', $type)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('certificate_number', 'desc')->first();
         $b  = Certificate::where('batch_id', $batch)->where('type', $type)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('certificate_number', 'desc')->first();
-        $seqs = CertSeq::get();
         
+        foreach(CertSeq::get() as $seq)
+        {
+            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
+        }
+
+        $seqs = Config::get('esijil.cert');
+
         return view('company.siries', compact('total_certificates', 'a', 'b', 'seqs'));
     }
 
