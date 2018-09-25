@@ -7,11 +7,13 @@
  */
 
 namespace App;
-use Illuminate\Contracts\Support\Responsable;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Contracts\Support\Responsable;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
 class DataExport implements FromQuery, WithHeadings, Responsable
 {
@@ -42,8 +44,14 @@ class DataExport implements FromQuery, WithHeadings, Responsable
 
     public function query()
     {
-        return Certificate::query()->where('batch_id', $this->batch)->where('flag_printed', 'N')
-            ->where('source', 'syarikat')->orderBy('name','asc');
+        return Certificate::query()
+            ->select('certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
+                'certificates.programme_code','certificates.level','certificates.pb_name',
+                'states.name', 'certificates.date_ppl', 'certificates.result_ppl',
+                'certificates.batch_id', 'certificates.address', 'certificates.qrlink', DB::raw('concat(certificates.batch_id, "-", certificates.date_ppl)'))
+            ->join('states', 'certificates.state_id', '=', 'states.id')
+            ->where('certificates.batch_id', $this->batch)->where('certificates.flag_printed', 'N')
+            ->where('certificates.source', 'syarikat')->orderBy('certificates.Name','asc');
     }
 
 
@@ -63,33 +71,10 @@ class DataExport implements FromQuery, WithHeadings, Responsable
     {
         //Ini untuk beri nama column
         return [
-            'Id',
-            'Name',
-            'NoKP',
-            'Nama Program',
-            'Kod Program',
-            'Jenis Pengajian',
-            'Tahap',
-            'Nama PB',
-            'State ID',
-            'Tarikh PPL',
-            'Keputusan PPL',
-            'No Batch',
-            'Alamat',
-            'Flag Print',
-            'Sumber',
-            'Pegawai Bertanggungjawab',
-            'No Sijil',
-            'Tarikh Cetak',
-            'QR Code',
-            'Remark',
-            'printed_remark',
-            'Sesi',
-            'Status',
-            'Status Semasa',
-            'Updated By',
-            'Created At',
-            'Deleted At',
+            'Name', 'NoKP', 'Nama Program',
+            'Kod Program', 'Tahap', 'Nama PB',
+            'State ID', 'Tarikh PPL', 'Keputusan PPL',
+            'No Batch', 'Alamat', 'QR Code', 'Footer',
         ];
     }
 
