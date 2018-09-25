@@ -71,12 +71,9 @@
                     <h6>PANDUAN : No Digit Terahir Bagi Setiap Sijil</h6>
                 </div>
                     <div class="col-md-6">
-                    NULL - 000000 <br>
-                    A    - 000000 <br>
-                    B    - 000000 <br>
-                    C    - 000000 <br>
-                    D    - 000000 <br>
-                    E    - 000000
+                    @foreach ($seqs as $seq)
+                        {{ ($seq->abjad) ? $seq->abjad : 'NULL' }} - {{ str_pad($seq->run_num, 6, '0', STR_PAD_LEFT) }} <br>
+                    @endforeach
                 </div>
                 </div>
 

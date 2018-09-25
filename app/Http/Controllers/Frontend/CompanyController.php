@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Company;
-use App\Certificate;
-use App\DataExport;
-use App\StudentExport;
-use App\Lookup;
+use DB;
+use PDF;
+use Input;
+use Excel;
 use App\Post;
 use App\State;
+use App\Lookup;
+use App\CertSeq;
+use App\Company;
 use Carbon\Carbon;
-use DB;
+use App\DataExport;
+use App\Certificate;
+use App\StudentExport;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Excel;
 use Illuminate\Support\Collection;
-use Input;
-use PDF;
+use App\Http\Controllers\Controller;
 
 class CompanyController extends Controller
 {
@@ -534,7 +535,9 @@ class CompanyController extends Controller
             ->where('flag_printed', 'N')->where('source', 'syarikat')->count();
         $a  = Certificate::where('batch_id', $batch)->where('type', $type)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('certificate_number', 'desc')->first();
         $b  = Certificate::where('batch_id', $batch)->where('type', $type)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('certificate_number', 'desc')->first();
-        return view('company.siries', compact('total_certificates', 'a', 'b'));
+        $seqs = CertSeq::get();
+        
+        return view('company.siries', compact('total_certificates', 'a', 'b', 'seqs'));
     }
 
     /**
