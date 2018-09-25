@@ -66,7 +66,7 @@ class ImportCertificates extends Command
                     'programme_name' => $row->programme_name,
                     'programme_code' => $row->programme_code,
                     'type' => $row->type,
-                    'level' => $this->contructLevel($row->programme_code, 'tahap'),
+                    'level' => strtoupper($this->contructLevel($row->programme_code, 'tahap')),
                     'pb_name' => $row->pb_name,
                     'state_id' => $row->state_id,
                     'date_ppl' => $row->date_ppl,
