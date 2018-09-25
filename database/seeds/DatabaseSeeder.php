@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StateTableSeeder::class);
         $this->call(SourceTableSeeder::class);
         //$this->call(EspkmTableSeeder::class);
-        //$this->call(CertificateTableSeeder::class);
+//        $this->call(CertificateTableSeeder::class);
 
     }
 }

@@ -118,6 +118,7 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/print/printed/{batch}', 'Frontend\PrintedController@reportPdf');
     Route::get('/print/print/{id}', 'Frontend\PrintedController@singleReportPdf');
     Route::get('/print/list-done', 'Frontend\PrintedController@listDone');
+    Route::get('/print/list-detail/{batch}', 'Frontend\PrintedController@listDetail');
 
 
 //post

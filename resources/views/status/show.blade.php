@@ -38,7 +38,7 @@
                     @if ($certificate->current_status == 'telah dicetak' || $certificate->current_status == 'telah dipos' || $certificate->current_status == 'telah diterima')
                            <tr>
                             <th class="col-md-3">Tarikh Cetak</th>
-                            <td>{{ $certificate->date_print }}</td>
+                            <td>{{ $certificate->date_print->format('d M, Y') }}</td>
                         </tr>
                     @endif
 

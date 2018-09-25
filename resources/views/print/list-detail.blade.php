@@ -4,13 +4,13 @@
 @endsection
 
 @section('mainTitle')
-    Hasil Carian
+    Senarai Sijil Yang Telah Selesai Dicetak
 @endsection
 
 @section('topButton')
     {{--<a href="/printcertificate/print" class="btn btn-link btn-float has-text">--}}
-        {{--<i class="icon-printer2 text-primary"></i>--}}
-        {{--<span>Cetak Senarai Ini</span>--}}
+    {{--<i class="icon-printer2 text-primary"></i>--}}
+    {{--<span>Cetak Senarai Ini</span>--}}
     {{--</a>--}}
 @endsection
 
@@ -25,6 +25,7 @@
                             <th>No ID</th>
                             <th>Name</th>
                             <th>Batch No</th>
+                            <th>No Sijil</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -32,8 +33,9 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="/certificate/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+                                <td><a href="/print/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
                                 <td>{{ $certificate->batch_id }}</td>
+                                <td>{{ $certificate->certificate_number }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
                                         <span class="label label-success">{{ $certificate->status }}</span>
@@ -51,9 +53,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/replacement/list/{{ $certificate->ic_number }}"><i class="icon-add-to-list text-success"></i>Penggantian</a></li>
-                                                <li><a href="post/create/{{ $certificate->id }}"><i class="icon-mailbox text-success"></i>Pembungkusan</a></li>
-                                                <li><a href="/status/{{ $certificate->ic_number }}"><i class="icon-reading text-success"></i>Semak Status</a></li>
+                                                <li><a href="/print/print/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak Semula</a></li>
                                             </ul>
                                         </li>
                                     </ul>

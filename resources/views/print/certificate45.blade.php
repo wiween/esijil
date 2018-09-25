@@ -42,7 +42,7 @@
         <br/>
         <br/>
         <div>
-            <h5 align="center">{{  strtoupper($certificate->batch_id }}</h5>
+            <h5 align="center">{{  strtoupper($certificate->batch_id) }}</h5>
             <h5 align="center">{{  strtoupper($certificate->date_print->format('d/m/Y')) }}</h5>
         </div>
 

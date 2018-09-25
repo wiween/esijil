@@ -166,11 +166,26 @@ class PrintedController extends Controller
         $officer = Auth::user()->email;
         if ($officer == 'super.admin@gmail.com'){
 
-            $certificates = Certificate::where('flag_printed', 'Y')->orderBy('id', 'desc')->get();
+            $certificates = Certificate::where('flag_printed', 'Y')->groupBy('batch_id')->orderBy('id', 'desc')->get();
             return view('print.list_done', compact('certificates'));
         } else {
-            $certificates = Certificate::where('flag_printed', 'Y')->where('officer', $officer)->orderBy('id', 'desc')->get();
+            $certificates = Certificate::where('flag_printed', 'Y')->where('officer', $officer)->groupBy('batch_id')->orderBy('id', 'desc')->get();
             return view('print.list_done', compact('certificates'));
+        }
+
+    }
+
+    public function listDetail($batch)
+    {
+        //
+        $officer = Auth::user()->email;
+        if ($officer == 'super.admin@gmail.com'){
+
+            $certificates = Certificate::where('batch_id', $batch)->where('flag_printed', 'Y')->orderBy('id', 'desc')->get();
+            return view('print.list-detail', compact('certificates'));
+        } else {
+            $certificates = Certificate::where('batch_id', $batch)->where('flag_printed', 'Y')->where('officer', $officer)->orderBy('id', 'desc')->get();
+            return view('print.list-detail', compact('certificates'));
         }
 
     }

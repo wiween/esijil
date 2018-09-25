@@ -56,13 +56,13 @@
             <li><a href="/search">Carian Baru</a></li>
         </ul>
     </li> {{--  DONE --}}
-    <li @if (Request::segment(1) == 'payment') class="active" @endif><a href="/payment"><i class="icon-coin-dollar"></i>
-            <span>ePayment</span></a>
-        <ul>
-            <li><a href="/search">Kemaskini ePayment</a></li>
-            <li><a href="/payment/list">Senarai Bayaran</a></li>
-        </ul>
-    </li> {{--  DONE --}}
+    {{--<li @if (Request::segment(1) == 'payment') class="active" @endif><a href="/payment"><i class="icon-coin-dollar"></i>--}}
+            {{--<span>ePayment</span></a>--}}
+        {{--<ul>--}}
+            {{--<li><a href="/search">Kemaskini ePayment</a></li>--}}
+            {{--<li><a href="/payment/list">Senarai Bayaran</a></li>--}}
+        {{--</ul>--}}
+    {{--</li> --}}{{--  DONE --}}
     <li @if (Request::segment(1) == 'status') class="active" @endif><a href="/status"><i class="icon-grid"></i> <span>Status</span></a>
         <ul>
             <li><a href="/search">Semak Status</a></li>
