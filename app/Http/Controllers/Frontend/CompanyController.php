@@ -621,8 +621,9 @@ class CompanyController extends Controller
     {
         //
         $batches = Certificate::select('batch_id', 'type', DB::raw("count(id) as jumlahstudent"))->where('flag_printed', 'Y')
-        ->where('source', 'syarikat')->groupBy('batch_id')->get();
+            ->where('source', 'syarikat')->groupBy('batch_id')->get();
         $statuses = Lookup::where('name', 'user_status')->get();
+
         return view('company.report_list', compact('batches', 'statuses'));
     }
 
@@ -649,6 +650,29 @@ class CompanyController extends Controller
             ->where('source', 'syarikat')->where('type',$type)->first();
         $siries_number = Certificate::distinct('session')->where('batch_id', $batch)->where('type',$type)->groupBy('session')->first();
         $pdf = PDF::loadView('report.g1', compact('certificates', 'siries_number'))->setPaper('a4', 'landscape');
+        //return $pdf->download('report.pdf');
+        return $pdf->stream('G.pdf');
+    }
+
+    public function showGMultiReport(Request $request)
+    {
+        $batchs = [];
+        $types = [];
+        $col = collect($request->batch_id);
+        $col->map(function ($item, $key) use (&$batchs, &$types) {
+                $row = explode('|', $item);
+                 //dd($row);
+                array_push($batchs, $row[0]);
+                array_push($types, $row[1]);
+            return;
+        });
+        
+        $certificates = Certificate::select('type', 'pb_name', 'batch_id', 'session')->distinct('type', 'pb_name', 'batch_id', 'session')->whereIn('batch_id', $batchs)->where('flag_printed', 'Y')->orderBy('name', 'asc')
+            ->where('source', 'syarikat')->whereIn('type', $types)->groupBy('type', 'pb_name', 'batch_id', 'session')->get();
+        //dd($certificates);
+        //$siries_number = Certificate::distinct('session')->whereIn('batch_id', $batchs)->whereIn('type', $types)->groupBy('session')->get();
+        
+        $pdf = PDF::loadView('report.g2', compact('certificates'))->setPaper('a4', 'landscape');
         //return $pdf->download('report.pdf');
         return $pdf->stream('G.pdf');
     }

@@ -14,11 +14,12 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form-horizontal" role="form" method="POST">
+            <form class="form-horizontal frmBorangG" role="form" method="POST" action="{{ url('company-report/pdf/F') }}">
                 {{ csrf_field() }}
                 <div class="col-md-12">
                     <table class="table">
                         <tr>
+                            <th></th>
                             <th>#</th>
                             {{--<th></th>--}}
                             <th>No Batch</th>
@@ -28,8 +29,11 @@
                         </tr>
                         @foreach($batches as $batch)
                             <tr>
+                                <td>
+                                    <input class="chkPilih" name="batch_id[]" type="checkbox" value="{{ $batch->batch_id }}|{{ $batch->type }}">
+                                
+                                </td>
                                 <td>{{ $loop->index + 1 }}</td>
-                                {{--<td><input name="batch[]" type="checkbox" value="{{ old('batch',$batch->batch_id) }}"></td>--}}
                                 <td>{{  $batch->batch_id }}</td>
                                 <td>{{ $batch->jumlahstudent }}</td>
                                 <td>{{ strtoupper($batch->type) }}</td>
@@ -42,7 +46,7 @@
 
                                             <ul class="dropdown-menu dropdown-menu-right">
                                                 <li><a href="{{ url('') }}/company-report/pdf/F/{{ $batch->batch_id }}/{{ $batch->type }}"><i class="icon-file-pdf text-primary"></i>Papar Laporan F</a></li>
-                                                <li><a href="{{ url('') }}/company-report/pdf/G/{{ $batch->batch_id }}/{{ $batch->type }}"><i class="icon-file-pdf text-danger"></i>Papar Laporan G</a></li>
+                                                <li><a class="ctkBorangG" href="{{ url('') }}/company-report/pdf/G/{{ $batch->batch_id }}/{{ $batch->type }}" data-batchid="{{ $batch->batch_id }}"><i class="icon-file-pdf text-danger"></i>Papar Laporan G</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -68,4 +72,18 @@
 @endsection
 
 @section('footer_script')
+<script>
+    $(document).ready(function(){
+        $('.ctkBorangG').on('click', function(e){
+            e.preventDefault();
+            var numberOfChecked = $('input:checkbox:checked').length;
+
+            if(numberOfChecked == 0) {
+                return window.location.href = $(this).attr('href');
+            }
+
+            return $('.frmBorangG').submit();
+        });
+    });
+</script>
 @endsection

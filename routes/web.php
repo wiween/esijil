@@ -50,6 +50,7 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
     Route::post('/company-print/edit/{id}', 'Frontend\CompanyController@update');
     Route::get('/company-report', 'Frontend\CompanyController@reportList');
     Route::get('/company-report/pdf/F/{batch}/{type}', 'Frontend\CompanyController@showFReport');
+    Route::post('/company-report/pdf/F', 'Frontend\CompanyController@showGMultiReport');
     Route::get('/company-report/pdf/G/{batch}/{type}', 'Frontend\CompanyController@showGReport');
 
     // User session
