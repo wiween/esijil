@@ -554,6 +554,12 @@ class CompanyController extends Controller
      */
     public function storeSiries(Request $request, $batch, $type)
     {
+        $request->validate([
+            'date_print' => 'required',
+            'start_siries' => 'required|min:1',
+            'siries' => 'required'
+        ]);
+
         $total_certificates = Certificate::where('batch_id', $batch)->where('type', $type)
             ->where('flag_printed', 'N')->where('source', 'syarikat')->count();
 
