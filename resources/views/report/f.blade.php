@@ -7,6 +7,38 @@
         page-break-after: always;
     }
 </style>
+
+<style type="text/css">
+	table.biasa, table.listing {
+		border-collapse: collapse;
+		border-color: #666666;
+		border-width: 1px;
+		color: #333333;
+        font: 11px;
+        text-transform: uppercase;
+	}
+	table.biasa th, table.listing th {
+		background: #333;
+		border-color: #262628;
+		border-style: solid;
+		border-width: 1px;
+		color: #FDFDFF;
+		font-weight: bold;
+		padding: 2px;
+	}
+	table.biasa tr, table.listing tr {
+		background-color: #FFFFFF;
+	}
+	table.biasa tr.even, table.listing tr.even {
+		background-color: #F5F5F7;
+	}
+	table.biasa td, table.listing td {
+		border-color: #D2D2D4;
+		border-style: solid;
+		border-width: 1px;
+		padding: 2px;
+	}
+</style>
 <div class="container">
     <div>
         <div>
@@ -37,7 +69,7 @@
             @endif
         </h3>
     </div>
-    <table class="table table-bordered">
+    <table class="biasa">
         <tr align="center">
             <th>Bil</th>
             <th>Nama Pelatih</th>
