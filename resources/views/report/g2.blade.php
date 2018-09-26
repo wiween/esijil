@@ -73,9 +73,6 @@
 <body>
   <main>
     <div class="container">
-        <div>
-            <strong>SESI : {{  $siries_number->session }} </strong>
-        </div>
         <div align="right">
             <h4>LAMPIRAN G
                 <br>JPK/CS/03(PB)</h4>
@@ -89,39 +86,45 @@
                 <br>
                 Disediakan oleh Syarikat bagi tujuan tuntutan</h3>
         </div>
-        <div align="left">
-            <h3>Kaedah Penilaian : @if (Request::segment(5) == 'pb')
-                    Pusat Bertauliah
-                @elseif (Request::segment(5) == 'sldn')
-                    SLDN
-                @elseif (Request::segment(5) == 'ndt')
-                    NDT
-                @elseif (Request::segment(5) == 'ppt')
-                    PPT
-                @endif
-            </h3>
-        </div>
-
         <table class="biasa">
             <thead>
                 <tr>
+                    <th>Jenis Penilaian</th>
                     <th>Nama PB</th>
                     <th>Batch No</th>
+                    <th>Sesi</th>
                     <th>Bilangan Sijil</th>
                     <th>Jumlah perlu dibayar (rm)</th>
                 </tr>          
             </thead>
             <tbody>
+                {{ $subtotal = 0 }}
+                @foreach($certificates as $cert)
                 <tr>
-                    <td>{{  $certificates->pb_name }}</td>
-                    <td>{{  $certificates->batch_id }}</td>
-                    <td>{{  $a = \App\Certificate::where('batch_id', $certificates->batch_id)->where('flag_printed', 'Y')->orderBy('name', 'asc')
-                ->where('source', 'syarikat')->where('type',$certificates->type)->count() }}</td>
+                    <td>
+                        @if ($cert->type == 'pb')
+                            Pusat Bertauliah
+                        @elseif ($cert->type == 'sldn')
+                            SLDN
+                        @elseif ($cert->type == 'ndt')
+                            NDT
+                        @elseif ($cert->type == 'ppt')
+                            PPT
+                        @endif
+                    </td>
+                    <td>{{  $cert->pb_name }}</td>
+                    <td>{{  $cert->batch_id }}</td>
+                    <td>{{  $cert->session }}</td>
+                    <td>{{  $a = \App\Certificate::where('batch_id', $cert->batch_id)->where('flag_printed', 'Y')->orderBy('name', 'asc')
+                            ->where('source', 'syarikat')->where('type',$cert->type)->count() }}
+                    </td>
                     <td style="text-align: right;">{{ $total = $a * 2.80 }}</td>
                 </tr>
+                {{ $subtotal += $total }}
+                @endforeach
                 <tr>
-                    <td class="footer" style="text-align: right;" colspan="3">Jumlah Keseluruhan (RM)</td>
-                    <td class="footer" style="text-align: right;">{{ $total = $a * 2.80 }}</td>
+                    <td class="footer" style="text-align: right;" colspan="5">Jumlah Keseluruhan (RM)</td>
+                    <td class="footer" style="text-align: right;">{{ $subtotal }}</td>
                 </tr>
             </tbody>
         </table>
