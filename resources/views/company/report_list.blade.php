@@ -46,7 +46,7 @@
 
                                             <ul class="dropdown-menu dropdown-menu-right">
                                                 <li><a href="{{ url('') }}/company-report/pdf/F/{{ $batch->batch_id }}/{{ $batch->type }}"><i class="icon-file-pdf text-primary"></i>Papar Laporan F</a></li>
-                                                <li><a class="ctkBorangG" href="{{ url('') }}/company-report/pdf/G/{{ $batch->batch_id }}/{{ $batch->type }}" data-batchid="{{ $batch->batch_id }}"><i class="icon-file-pdf text-danger"></i>Papar Laporan G</a></li>
+                                                <li><a class="ctkBorangG" href="{{ url('') }}/company-report/pdf/G/{{ $batch->batch_id }}/{{ $batch->type }}" data-batchid="{{ $batch->batch_id }}" data-type="{{ $batch->type }}"><i class="icon-file-pdf text-danger"></i>Papar Laporan G</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -73,6 +73,7 @@
 
 @section('footer_script')
 <script>
+    
     $(document).ready(function(){
         $('.ctkBorangG').on('click', function(e){
             e.preventDefault();
@@ -80,6 +81,13 @@
 
             if(numberOfChecked == 0) {
                 return window.location.href = $(this).attr('href');
+            }
+
+            if(numberOfChecked == 1) {
+                var url = "{{ url('') }}";
+                var $chkVal = $('input:checkbox:checked').val().split("|");
+
+                return window.location.href = url + "/company-report/pdf/G/" + $chkVal[0] + "/" + $chkVal[1];
             }
 
             return $('.frmBorangG').submit();
