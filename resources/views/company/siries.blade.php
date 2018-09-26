@@ -133,7 +133,12 @@
     $(document).ready(function() {
         $('#start_siries').on('change', function(){
             var runnum = $(this).find(':selected').data('runnum');
-            $('#siries').val(padLeft(parseInt(runnum)+1, 6))
+            if($(this).val() != '0')
+            {
+                return $('#siries').val(padLeft(parseInt(runnum)+1, 6))
+            }
+
+            $('#siries').val('');
         });
     });
 
