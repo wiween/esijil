@@ -1,21 +1,41 @@
-<style type="text/css">
-    table td, table th{
-        border:1px solid black;
-    }
 
-    .page-break {
-        page-break-after: always;
-    }
-</style>
+<html>
+<head>
+  <style>
+    @page { margin: 50px 50px; }
+    header { position: fixed; top: -60px; left: 0px; right: 0px; background-color: white; height: 50px; font: 9px; }
+    footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color: white; height: 50px; font: 9px; }
+    p { page-break-after: always; }
+    p:last-child { page-break-after: never; }
 
-<style type="text/css">
+    table.top{
+		border-collapse: collapse;
+		border-color: #FFFFFF;
+		border-width: 1px;
+        text-transform: uppercase;
+	}
+
+	table.top tr {
+		background-color: #FFFFFF;
+	}
+	table.top tr.even {
+		background-color: #F5F5F7;
+	}
+	table.top td, table.listing td {
+		border-color: #FFFFFF;
+		border-style: solid;
+		border-width: 1px;
+		padding: 2px;
+	}
+
 	table.biasa, table.listing {
 		border-collapse: collapse;
 		border-color: #666666;
 		border-width: 1px;
 		color: #333333;
-        font: 11px;
+        font: 13px;
         text-transform: uppercase;
+        width: 100%
 	}
 	table.biasa th, table.listing th {
 		background: #333;
@@ -38,8 +58,11 @@
 		border-width: 1px;
 		padding: 2px;
 	}
-</style>
-<div class="container">
+  </style>
+</head>
+<body>
+  <main>
+    <div class="container">
     <div>
         <div>
             <strong>SESI : {{  $siries_number->session }} </strong>
@@ -57,28 +80,37 @@
             <br>
             Disediakan oleh Syarikat</h3>
     </div>
-    <div align="left">
-        <h3>Kaedah Penilaian :  @if (Request::segment(5) == 'pb')
-                Pusat Bertauliah
-            @elseif (Request::segment(5) == 'sldn')
-                SLDN
-            @elseif (Request::segment(5) == 'ndt')
-                NDT
-            @elseif (Request::segment(5) == 'ppt')
-                PPT
-            @endif
-        </h3>
-    </div>
+    
+    <table class="top" width="100%">
+        <tr>
+            <td width="50%"><b>Kaedah Penilaian :</b>  @if (Request::segment(5) == 'pb')
+                    Pusat Bertauliah
+                @elseif (Request::segment(5) == 'sldn')
+                    SLDN
+                @elseif (Request::segment(5) == 'ndt')
+                    NDT
+                @elseif (Request::segment(5) == 'ppt')
+                    PPT
+                @endif
+            </td>
+            <td width="50%"><b>Kod Program :</b> {{  $first->programme_name }} - [{{  $first->programme_code }}]</td>
+        </tr>
+        <tr>
+            <td width="50%"><b>No Batch :</b> {{$first->batch_id }} </td>
+            <td width="50%"><b>Tarikh Cetak Sijil :</b> {{  $first->date_print->format('d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <td width="50%"><b>Nama PB :</b> {{$first->pb_name }} </td>
+            <td width="50%">&nbsp;</td>
+        </tr>
+    </table>
+    <br>
     <table class="biasa">
         <tr align="center">
             <th>Bil</th>
             <th>Nama Pelatih</th>
             <th>No KP</th>
-            <th>No Batch</th>
-            <th>Nama Program/Kod Program</th>
-            <th>Nama PB</th>
             <th>Tahap</th>
-            <th>Tarikh Cetak Sijil</th>
             <th>No Siri Sijil</th>
             <th>No Tracking</th>
             <th>Tarikh Pos</th>
@@ -89,11 +121,7 @@
                 <td>{{ $loop->index + 1 }}</td>
                 <td>{{  $certificate->name }}</td>
                 <td>{{  $certificate->ic_number }}</td>
-                <td>{{  $certificate->batch_id }}</td>
-                <td>{{  $certificate->programme_name }}<br>[{{  $certificate->programme_code }}]</td>
-                <td>{{  $certificate->pb_name }}</td>
-                <td>{{  $certificate->level }}</td>
-                <td>{{  $certificate->date_print->format('d/m/Y') }}</td>
+                <td>{{  $first->level }}</td>
                 <td>{{  $certificate->certificate_number }}</td>
                 <td>{{  $certificate->tracking_number }}</td>
                 <td>{{  $certificate->date_post->format('d/m/Y') ?? 'empty' }}</td>
@@ -101,11 +129,13 @@
             </tr>
         @endforeach
     </table>
-
 </div>
-<script type="text/php">
+  </main>
+  <script type="text/php">
     if ( isset($pdf) ) {
         $font = Font_Metrics::get_font("helvetica", "bold");
         $pdf->page_text(72, 18, "Header: {PAGE_NUM} of {PAGE_COUNT}", $font, 6, array(0,0,0));
     }
 </script>
+</body>
+</html>
