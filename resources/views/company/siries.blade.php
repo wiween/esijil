@@ -76,7 +76,6 @@
                         {
                             echo strtoupper($key) . " - " . str_pad($val, 6, '0', STR_PAD_LEFT) . "<br/>";
                         }
-                    @php
                     @endphp
                 </div>
                 </div>
@@ -88,14 +87,14 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-2 {{ $errors->has('start_siries') ? ' has-error' : '' }}">
-                        <select name="start_siries" class="form-control">
-                            <option value=""><< Sila Pilih >></option>
-                            <option value=" "></option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
+                        <select id="start_siries" name="start_siries" class="form-control">
+                            <option value="0"><< Sila Pilih >></option>
+                            <?php
+                                foreach($seqs as $key => $val)
+                                {
+                                    echo "<option value=\"" . strtoupper($key) . "\" data-runnum=\"" . $val . "\">" . strtoupper($key) . "</option>";
+                                }
+                            ?>
                         </select>
                         @include('partials.error_block', ['item' => 'start_siries'])
                     </div>
@@ -106,7 +105,7 @@
                         {{--@endif--}}
                     {{--</div>--}}
                     <div class="col-md-3 {{ $errors->has('siries') ? ' has-error' : '' }}">
-                        <input name="siries" type="text" class="form-control" value="{{ old('siries') }}"
+                        <input id="siries" name="siries" type="text" class="form-control" value="{{ old('siries') }}" 
                                placeholder="6 Digit No cth: 000998" required>
                         @include('partials.error_block', ['item' => 'siries'])
                     </div>
@@ -130,4 +129,16 @@
 @endsection
 
 @section('footer_script')
+<script>
+    $(document).ready(function() {
+        $('#start_siries').on('change', function(){
+            var runnum = $(this).find(':selected').data('runnum');
+            $('#siries').val(padLeft(parseInt(runnum)+1, 6))
+        });
+    });
+
+    function padLeft(nr, n, str){
+    return Array(n-String(nr).length+1).join(str||'0')+nr;
+    }
+</script>
 @endsection
