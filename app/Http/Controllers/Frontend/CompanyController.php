@@ -637,7 +637,8 @@ class CompanyController extends Controller
             ->orderBy('certificates.name', 'asc')
             ->get();
         $siries_number = Certificate::distinct('session')->where('batch_id', $batch)->where('type',$type)->groupBy('session')->first();
-        $pdf = PDF::loadView('report.f', compact('certificates', 'siries_number'))->setPaper('a4', 'landscape');
+        $first = $certificates->first();
+        $pdf = PDF::loadView('report.f', compact('certificates', 'siries_number', 'first'))->setPaper('a4', 'landscape');
         //return $pdf->download('report.pdf');
         return $pdf->stream('F.pdf');
     }
