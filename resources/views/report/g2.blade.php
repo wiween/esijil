@@ -118,7 +118,7 @@
                     <td>{{  $a = \App\Certificate::where('batch_id', $cert->batch_id)->where('flag_printed', 'Y')->orderBy('name', 'asc')
                             ->where('source', 'syarikat')->where('type',$cert->type)->count() }}
                     </td>
-                    <td style="text-align: right;">{{ number_format($total = $a * 2.80, 2) }}</td>
+                    <td style="text-align: right;">{{ number_format($total = $a * $rate, 2) }}</td>
                 </tr>
                 {{ $subtotal += $total }}
                 @endforeach

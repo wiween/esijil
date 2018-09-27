@@ -117,11 +117,11 @@
                     <td>{{  $certificates->batch_id }}</td>
                     <td>{{  $a = \App\Certificate::where('batch_id', $certificates->batch_id)->where('flag_printed', 'Y')->orderBy('name', 'asc')
                 ->where('source', 'syarikat')->where('type',$certificates->type)->count() }}</td>
-                    <td style="text-align: right;">{{ number_format($total = $a * 2.80, 2) }}</td>
+                    <td style="text-align: right;">{{ number_format($total = $a * $rate, 2) }}</td>
                 </tr>
                 <tr>
                     <td class="footer" style="text-align: right;" colspan="3">Jumlah Keseluruhan (RM)</td>
-                    <td class="footer" style="text-align: right;">{{ number_format($total = $a * 2.80, 2) }}</td>
+                    <td class="footer" style="text-align: right;">{{ number_format($total = $a * $rate, 2) }}</td>
                 </tr>
             </tbody>
         </table>
