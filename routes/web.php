@@ -206,4 +206,6 @@ Route::group(['middleware' => ['audit', 'role:super_admin']], function () {
 
     //setting sys var
     Route::get('/settings/sysvar', 'Frontend\SysvarsController@index');
+    Route::get('/settings/sysvar/{var}', 'Frontend\SysvarsController@show');
+    Route::post('/settings/sysvar/{var}', 'Frontend\SysvarsController@update');
 });
