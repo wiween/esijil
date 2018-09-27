@@ -160,7 +160,7 @@
                 <td style="width:34%;">&nbsp;</td>
                 <td style="width:33%;"><table class="top">
                         <tr>
-                            <td>Tandatangan&nbsp;Wakil&nbsp;Pencetak</td>
+                            <td>Tandatangan&nbsp;Wakil&nbsp;Syarikat</td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
