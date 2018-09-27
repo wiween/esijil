@@ -22,7 +22,7 @@
                     <table class="table">
                         <tr>
                             <th>#</th>
-                            <th>No ID</th>
+                            <th>No KP</th>
                             <th>Name</th>
                             <th>Batch No</th>
                             <th>No Sijil</th>

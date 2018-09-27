@@ -27,7 +27,7 @@
                 {{-- ic number --}}
                 <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
                     <label for="ic_number" class="col-md-4 control-label">
-                        No ID
+                        No KP
                     </label>
                     <div class="col-md-6">
                         {{ $certificate->ic_number }}
@@ -47,10 +47,10 @@
                 {{-- ic number --}}
                 <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
                     <label for="ic_number" class="col-md-4 control-label">
-                        No Kumpulan Latihan
+                        Batch No
                     </label>
                     <div class="col-md-6">
-                        {{ $certificate->training_group_number }}
+                        {{ $certificate->batch_id }}
                     </div>
                 </div>
 

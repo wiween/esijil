@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><img src="{{ asset('images/jatasmall.jpg') }}">Semak Status</div>
+                    <div class="card-header"><img src="{{ asset('images/jatasmall.jpg') }}"> Maklumat Persijilan Pelatih</div>
 
                     <div class="card-body">
                         <div class="panel panel-default">
@@ -22,8 +22,8 @@
                         <td>{{ $certificate->name }}</td>
                     </tr>
                     <tr>
-                        <th>No Kumpulan :</th>
-                        <td>{{ $certificate->training_group_number }}</td>
+                        <th>Batch No :</th>
+                        <td>{{ $certificate->batch_id }}</td>
                     </tr>
                     <tr>
                         <th>Kod Program :</th>
@@ -57,10 +57,10 @@
                         <th>Tarikh PPL</th>
                         <td>{{ $certificate->date_ppl }}</td>
                     </tr>
-                    <tr>
-                        <th>Keputusan</th>
-                        <td>Terampil</td>
-                    </tr>
+                    {{--<tr>--}}
+                        {{--<th>Keputusan</th>--}}
+                        {{--<td>Terampil</td>--}}
+                    {{--</tr>--}}
                     {{--<tr>--}}
                         {{--<th>Address</th>--}}
                         {{--<td>{{ $certificate->address }}</td>--}}

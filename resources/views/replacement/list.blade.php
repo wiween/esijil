@@ -21,7 +21,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>No Sijil</th>
-                            <th>Jenis Pengajian</th>
+                            <th>Jenis Pentauliahan</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
