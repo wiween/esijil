@@ -160,6 +160,7 @@
         <a href="#"><i class="icon-hammer-wrench"></i> <span>Lookups Management</span></a>
         <ul>
             <li><a href="{{ url('') }}/lookups/role">Role</a></li>
+            <li><a href="{{ url('') }}/setting/sysvar">Pembolehubah Sistem</a></li>
         </ul>
 
 @endif

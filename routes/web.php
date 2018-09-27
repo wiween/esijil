@@ -203,4 +203,7 @@ Route::group(['middleware' => ['audit', 'role:super_admin']], function () {
     Route::get('/lookups/role/edit/{id}', 'Frontend\RoleController@edit');
     Route::post('/lookups/role/edit/{id}', 'Frontend\RoleController@update');
     Route::get('/lookups/role/destroy/{id}', 'Frontend\RoleController@destroy');
+
+    //setting sys var
+    Route::get('/settings/sysvar', 'Frontend\SysvarsController@index');
 });
