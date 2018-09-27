@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div><a href="/semak-status"><button class="btn btn-primary">Semak Status</button></a></div>
+    <div><a href="{{ url('semak-status') }}"><button class="btn btn-primary">Semak Status</button></a></div>
     </div>
 </div>
 @endsection
