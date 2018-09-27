@@ -9,6 +9,7 @@ use Excel;
 use App\Post;
 use App\State;
 use App\Lookup;
+use App\Sysvars;
 use App\CertSeq;
 use App\Company;
 use Carbon\Carbon;
@@ -649,7 +650,9 @@ class CompanyController extends Controller
         $certificates = Certificate::where('batch_id', $batch)->where('flag_printed', 'Y')->orderBy('name', 'asc')
             ->where('source', 'syarikat')->where('type',$type)->first();
         $siries_number = Certificate::distinct('session')->where('batch_id', $batch)->where('type',$type)->groupBy('session')->first();
-        $pdf = PDF::loadView('report.g1', compact('certificates', 'siries_number'))->setPaper('a4', 'landscape');
+        $rate = Sysvars::where('code', 'TUNTUT_G')->first()->value * 1.0;
+
+        $pdf = PDF::loadView('report.g1', compact('certificates', 'siries_number', 'rate'))->setPaper('a4', 'landscape');
         //return $pdf->download('report.pdf');
         return $pdf->stream('G.pdf');
     }
@@ -669,10 +672,8 @@ class CompanyController extends Controller
         
         $certificates = Certificate::select('type', 'pb_name', 'batch_id', 'session')->distinct('type', 'pb_name', 'batch_id', 'session')->whereIn('batch_id', $batchs)->where('flag_printed', 'Y')->orderBy('name', 'asc')
             ->where('source', 'syarikat')->whereIn('type', $types)->groupBy('type', 'pb_name', 'batch_id', 'session')->get();
-        //dd($certificates);
-        //$siries_number = Certificate::distinct('session')->whereIn('batch_id', $batchs)->whereIn('type', $types)->groupBy('session')->get();
-        
-        $pdf = PDF::loadView('report.g2', compact('certificates'))->setPaper('a4', 'landscape');
+        $rate = Sysvars::where('code', 'TUNTUT_G')->first()->value * 1.0;        
+        $pdf = PDF::loadView('report.g2', compact('certificates', 'rate'))->setPaper('a4', 'landscape');
         //return $pdf->download('report.pdf');
         return $pdf->stream('G.pdf');
     }
