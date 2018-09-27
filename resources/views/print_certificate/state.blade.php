@@ -51,19 +51,19 @@
             </div>
 
 
-            <div class="row">
-                <h3>Bilangan Batch Mengikut Negeri :  {{ strtoupper(Request::segment(3)) }}</h3>
-                @foreach($certificates as $certificate)
-                    <div class="col-md-2 col-xs-6 thumbnail">
-                        <img class="img-responsive img-rounded" src="{{ url('') }}/images/dashboard/audit-min.jpg">
-                        <a href="{{ url('') }}/certificate/statelist/{{$certificate->state_id}}/{{ Request::segment(3) }}" class="btn btn-success btn-block">{{ $certificate->state->name }}</a>
+            {{--<div class="row">--}}
+                {{--<h3>Bilangan Batch Mengikut Negeri :  {{ strtoupper(Request::segment(3)) }}</h3>--}}
+                {{--@foreach($certificates as $certificate)--}}
+                    {{--<div class="col-md-2 col-xs-6 thumbnail">--}}
+                        {{--<img class="img-responsive img-rounded" src="{{ url('') }}/images/dashboard/audit-min.jpg">--}}
+                        {{--<a href="{{ url('') }}/certificate/statelist/{{$certificate->state_id}}/{{ Request::segment(3) }}" class="btn btn-success btn-block">{{ $certificate->state->name }}</a>--}}
                     {{--@foreach($batches as $batch)--}}
                     {{--<a href="/certificate/batch/{{$batch->id}}">{{ $batch->batch_number }}</a>--}}
                     {{--@endforeach--}}
 
-                </div>
-                @endforeach
-            </div>
+                {{--</div>--}}
+                {{--@endforeach--}}
+            {{--</div>--}}
 
 
 

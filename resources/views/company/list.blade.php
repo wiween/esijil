@@ -23,7 +23,7 @@
                             <th>Name</th>
                             <th>Nama Program</th>
                             <th>Kod Program</th>
-                            <th>Keputusan PPL</th>
+                            <th>Batch No</th>
                             <th>Tahap</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -36,7 +36,7 @@
                                 <td><a href="{{ url('') }}/company-download/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
                                 <td>{{ $certificate->programme_name }}</td>
                                 <td>{{ $certificate->programme_code }}</td>
-                                <td>{{ $certificate->result_ppl }}</td>
+                                <td>{{ $certificate->batch_id }}</td>
                                 <td>{{ $certificate->level }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')

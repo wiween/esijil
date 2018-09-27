@@ -29,17 +29,17 @@
                 {{-- TABLE HERE --}}
                 <table class="table table-striped">
                     <tr>
-                        <th class=" col-md-5">No ID :</th>
+                        <th class=" col-md-5">No KP :</th>
                         <td>{{ $certificate->ic_number }}</td>
                     </tr>
                     <tr>
-                        <th class=" col-md-5">Name :</th>
+                        <th class=" col-md-5">Nama :</th>
                         <td>{{ $certificate->name }}</td>
                     </tr>
-                    <tr>
-                        <th>No Kumpulan :</th>
-                        <td>{{ $certificate->training_group_number }}</td>
-                    </tr>
+                    {{--<tr>--}}
+                        {{--<th>No Kumpulan :</th>--}}
+                        {{--<td>{{ $certificate->training_group_number }}</td>--}}
+                    {{--</tr>--}}
                     <tr>
                         <th>Kod Program :</th>
                         <td>{{ $certificate->programme_code }}</td>
@@ -49,7 +49,7 @@
                         <td>{{ $certificate->programme_name }}</td>
                     </tr>
                     <tr>
-                        <th>No Batch :</th>
+                        <th>Batch No :</th>
                         <td>{{ $certificate->batch_id }}</td>
                     </tr>
                     <tr>
@@ -64,12 +64,12 @@
                         <th>Negeri :</th>
                         <td>{{ $certificate->state->name }}</td>
                     </tr>
+                    {{--<tr>--}}
+                        {{--<th>Keputusan PPL</th>--}}
+                        {{--<td>{{ $certificate->result_ppl }}</td>--}}
+                    {{--</tr>--}}
                     <tr>
-                        <th>Keputusan PPL</th>
-                        <td>{{ $certificate->result_ppl }}</td>
-                    </tr>
-                    <tr>
-                        <th>Address</th>
+                        <th>Alamat</th>
                         <td>{{ $certificate->address }}</td>
                     </tr>
                     <tr>

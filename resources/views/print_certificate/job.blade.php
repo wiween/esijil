@@ -27,7 +27,7 @@
                 {{-- batch number --}}
                 <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
                     <label for="ic_number" class="col-md-4 control-label">
-                        No Batch
+                        Batch No
                     </label>
                     <div class="col-md-6">
                         {{ $certificate->batch_id }}
@@ -37,7 +37,7 @@
                 {{-- ic number --}}
                 <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
                     <label for="ic_number" class="col-md-4 control-label">
-                        No ID
+                        No KP
                     </label>
                     <div class="col-md-6">
                         {{ $certificate->ic_number }}
@@ -55,14 +55,14 @@
                 </div>
 
                 {{-- ic number --}}
-                <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
-                    <label for="ic_number" class="col-md-4 control-label">
-                        No Kumpulan Latihan
-                    </label>
-                    <div class="col-md-6">
-                        {{ $certificate->training_group_number }}
-                    </div>
-                </div>
+                {{--<div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">--}}
+                    {{--<label for="ic_number" class="col-md-4 control-label">--}}
+                        {{--No Kumpulan Latihan--}}
+                    {{--</label>--}}
+                    {{--<div class="col-md-6">--}}
+                        {{--{{ $certificate->training_group_number }}--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
                 {{-- ic number --}}
                 <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">

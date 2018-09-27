@@ -26,7 +26,7 @@
                             <th>Name</th>
                             <th>Nama Program</th>
                             <th>Kod Program</th>
-                            <th>Keputusan PPL</th>
+                            {{--<th>Keputusan PPL</th>--}}
                             <th>Tahap</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -38,7 +38,7 @@
                                 <td>{{ $certificate->name }}</td>
                                 <td>{{ $certificate->programme_name }}</td>
                                 <td>{{ $certificate->programme_code }}</td>
-                                <td>{{ $certificate->result_ppl }}</td>
+                                {{--<td>{{ $certificate->result_ppl }}</td>--}}
                                 <td>{{ $certificate->level }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
