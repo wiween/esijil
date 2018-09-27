@@ -42,7 +42,7 @@
                                                     <td>Tiada</td>
                                                 @endif
                                                     @if ($certificate->flag_received == 'Y')
-                                                        <td>{{ $certificate->date_receive->format('d M, Y') }}</td>
+                                                        <td>{{ date('d M, Y', strtotime($certificate->date_receive)) }}</td>
                                                         <td>{{ $certificate->receiver }}</td>
                                                     @else
                                                         <td>Tiada</td>
