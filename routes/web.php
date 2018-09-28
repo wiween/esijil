@@ -39,6 +39,7 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
     //edit batch after post
     Route::get('/company-search/detail-batch/{id}', 'Frontend\CompanyController@editPostBatch');
     Route::post('/company-search/detail-batch/{id}', 'Frontend\CompanyController@updatePostBatch');
+    Route::get('/company-search/detail-student/{id}', 'Frontend\CompanyController@detailStudentPost');
 
 
     Route::get('/company-report', 'Frontend\CompanyController@reportList');

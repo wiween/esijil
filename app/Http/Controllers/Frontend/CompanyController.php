@@ -421,19 +421,41 @@ class CompanyController extends Controller
         $b = $request->input('batch');
         //dd ($a);
         if ($a <> '') {
+
+            $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.source', 'syarikat')->where('certificates.ic_number', 'like', '%' . $a . '%')->count();
+
+            if ($post < 0) {
                 $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->
                 where('flag_printed', 'Y')->where('source', 'syarikat')->get();
                 //dd ($certificates);
 
-            return view('company.result', compact('certificates'));
+                return view('company.result', compact('certificates'));
+            } else {
+
+                $certificates = "tiada";
+                return view('company.result', compact('certificates'));
+
+            }
+
         }
 
         if ($b <> '') {
 
-            $certificates = Certificate::select('batch_id', 'type', DB::raw("count(id) as jumlahsutudent"))->where('batch_id',$b)->
-            where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->get();
-            //dd ($certificates);
-            return view('company.result_post', compact('certificates'));
+            $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.batch_id', $b)->where('certificates.source', 'syarikat')->count();
+
+            if ($post < 0) {
+                $certificates = Certificate::select('batch_id', 'type', DB::raw("count(id) as jumlahstudent"))->where('batch_id',$b)->
+                where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->get();
+                //dd ($certificates);
+                return view('company.result_post', compact('certificates'));
+            } else {
+
+                $certificates = "tiada";
+                return view('company.result_post', compact('certificates'));
+
+            }
+
+
         }
     }
 
@@ -681,8 +703,17 @@ class CompanyController extends Controller
     public function companyPost()
     {
         //
-        $posts = Post::where('source', 'syarikat')->orderBy('id', 'desc')->get();
+//        $posts = Post::where('source', 'syarikat')->orderBy('id', 'desc')->get();
+        $posts = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.source', 'syarikat')->groupBy('certificates.batch_id')->get();
         return view('company.post-batch', compact('posts'));
+    }
+
+    public function detailStudentPost($batch)
+    {
+        //
+//        $posts = Post::where('source', 'syarikat')->orderBy('id', 'desc')->get();
+        $posts = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.source', 'syarikat')->where('batch_id', $batch)->get();
+        return view('company.post-batchdetail', compact('posts'));
     }
 
 
