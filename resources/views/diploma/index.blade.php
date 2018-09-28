@@ -8,7 +8,7 @@
 @endsection
 
 @section('topButton')
-    <a href="{{ url('') }}/admin/diploma/create" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/diploma/create" class="btn btn-link btn-float has-text">
         <i class="icon-plus-circle2 text-primary"></i>
         <span>New diploma</span>
     </a>
