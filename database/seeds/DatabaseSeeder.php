@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
 
         //$this->call(EspkmTableSeeder::class);
         $this->call(CertificateTableSeeder::class);
+        $this->call(DiplomaTableSeeder::class);
     }
 }
