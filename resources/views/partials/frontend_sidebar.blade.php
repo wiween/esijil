@@ -28,6 +28,14 @@
 {{--admin officer--}}
 @if (Auth::user()->access_power >= 5000)
     <li class="navigation-header"><span>Pegawai Agihan</span> <i class="icon-menu" title="Main pages"></i></li>
+    <li @if (Request::segment(1) == 'diploma') class="active" @endif><a href="{{ url('') }}/diploma/batch"><i
+                    class="icon-pen-plus"></i> <span>DKM/DLKM</span></a>
+        <ul>
+            <li><a href="{{ url('') }}/diploma/batch">Senarai Batch</a></li>
+            <li><a href="{{ url('') }}/diploma/create">DKM/DLKM Baru</a></li>
+            <li><a href="{{ url('') }}/diploma">Senarai DKM/DLKM</a></li>
+        </ul>
+    </li>
     <li @if (Request::segment(1) == 'certificate') class="active" @endif><a href="{{ url('') }}/certificate/list"><i
                     class="icon-add-to-list"></i> <span>Agihan Tugasan</span></a>
         <ul>
@@ -35,6 +43,7 @@
             <li><a href="{{ url('') }}/certificate/done-batch">Selesai Agihan Tugasan</a></li>
         </ul>
     </li>
+
 @endif
 
 {{--  DONE --}}

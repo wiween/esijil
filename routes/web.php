@@ -85,6 +85,18 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     //Route::get('/board/set-flag/{flag}/{id}', 'Frontend\BoardController@setFlag');
     //Route::get('/board/mark/{id}/{batch}', 'Frontend\BoardController@mark');
 
+    //diploma
+    Route::get('/diploma/batch', 'Frontend\DiplomaController@batch');
+    Route::get('/diploma', 'Frontend\DiplomaController@index');
+    Route::get('/diploma/create', 'Frontend\DiplomaController@create');
+    Route::post('/diploma/create', 'Frontend\DiplomaController@store');
+    Route::get('/diploma/edit-batch/{id}', 'Frontend\DiplomaController@editBatch');
+    Route::post('/diploma/edit-batch/{id}', 'Frontend\DiplomaController@updateBatch');
+    Route::get('/diploma/edit/{id}', 'Frontend\DiplomaController@edit');
+    Route::post('/diploma/edit/{id}', 'Frontend\DiplomaController@update');
+    Route::get('/diploma/show', 'Frontend\DiplomaController@show');
+
+
     //Cetificates
     Route::get('/certificate/type', 'Frontend\CertificateController@type');
     Route::get('/certificate/job/{id}', 'Frontend\CertificateController@job');
