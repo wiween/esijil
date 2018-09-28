@@ -32,7 +32,7 @@
                                                 <td>{{ $certificate->ic_number }}</td>
                                                 <td>{{ ucwords($certificate->current_status) }}</td>
                                                 @if ($certificate->current_status == 'telah dicetak' || $certificate->current_status == 'telah dipos' || $certificate->current_status == 'telah diterima')
-                                                    <td>{{ $certificate->date_print }}</td>
+                                                    <td>{{ $certificate->date_print->format('d M, Y') }}</td>
                                                     @else
                                                     <td>Tiada</td>
                                                 @endif
@@ -42,7 +42,7 @@
                                                     <td>Tiada</td>
                                                 @endif
                                                     @if ($certificate->flag_received == 'Y')
-                                                        <td>{{ date('d M, Y', strtotime($certificate->date_receive)) }}</td>
+                                                        <td>{{ $certificate->date_receive->format('d M, Y') }}</td>
                                                         <td>{{ $certificate->receiver }}</td>
                                                     @else
                                                         <td>Tiada</td>
