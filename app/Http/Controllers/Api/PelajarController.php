@@ -46,9 +46,17 @@ class PelajarController extends Controller
 
     public function view($id)
     {
-        $certificate = Certificate::where('id', $id)->where('flag_printed', 'Y')->first();
+        $exist = Certificate::where('id', $id)->where('flag_printed', 'Y')->count();
+        if ($exist <= 0) {
+              return view('pelajar.show-none');
+        } else {
+
+            $certificate = Certificate::where('id', $id)->where('flag_printed', 'Y')->first();
+            return view('pelajar.show', compact('certificate'));
+        }
+
 //        dd($certificate);
-        return view('pelajar.show', compact('certificate'));
+
     }
 
 }

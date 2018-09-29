@@ -41,11 +41,11 @@
                 {{-- date_post--}}
                 <div class="form-group{{ $errors->has('date_post') ? ' has-error' : '' }}">
                     <label for="date_post" class="col-md-4 control-label">
-                        Tarikh Pos
+                        Tarikh Pos : {{ $post->date_post->format('m/d/Y') }}
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="date_post" type="date" class="form-control" value="{{ old('date_post', $post->date_post) }}" required>
+                        <input name="date_post" type="date" class="form-control" value="{{ old('date_post', $post->date_post->format('m/d/Y')) }}" required>
                         @include('partials.error_block', ['item' => 'date_post'])
                     </div>
                 </div>
@@ -64,12 +64,12 @@
                 {{-- diterima?--}}
                 <div class="form-group{{ $errors->has('received') ? ' has-error' : '' }}">
                     <label class="col-md-4 control-label">
-                        Diterima ?
+                        Diterima ?  {{ $post->flag_received }}
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="received" type="radio" value="Y" @if(old('received', $post->flag_received)) checked @endif  v-model="mypost">Ya
-                        <input name="received" type="radio" value="N" @if(old('received', $post->flag_received)) checked @endif  v-model="mypost">Tidak
+                        <input name="received" type="radio" value="Y" @if(old('received', $post->flag_received == 'Y')) checked @endif  v-model="mypost">Ya
+                        <input name="received" type="radio" value="N" @if(old('received', $post->flag_received == 'N')) checked @endif  v-model="mypost">Tidak
                         @include('partials.error_block', ['item' => 'received'])
                     </div>
                 </div>
