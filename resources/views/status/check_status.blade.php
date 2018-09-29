@@ -58,8 +58,6 @@
                                 </div>
                             </div>
 
-
-
                             {{-- Submit Button --}}
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
