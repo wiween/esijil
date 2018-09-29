@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Certificate;
-use App\Lookup;
 use Auth;
+use App\Lookup;
+use App\CertSeq;
 use Carbon\Carbon;
+use App\Certificate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
+
 use PDF;
 class PrintedController extends Controller
 {
@@ -192,10 +195,17 @@ class PrintedController extends Controller
 
     public function createSiries($batch, $type)
     {
-        //
         $total_certificates = Certificate::where('batch_id', $batch)->where('type', $type)
             ->where('flag_printed', 'N')->count();
-        return view('print.siries', compact('total_certificates'));
+
+        foreach (CertSeq::get() as $seq) {
+            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
+        }
+
+        $seqs = Config::get('esijil.cert');
+
+
+        return view('print.siries', compact('total_certificates', 'seqs'));
     }
 
     /**

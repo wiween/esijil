@@ -59,12 +59,12 @@
                         <h6>PANDUAN : No Digit Terahir Bagi Setiap Sijil</h6>
                     </div>
                     <div class="col-md-6">
-                        NULL - 000000 <br>
-                        A    - 000000 <br>
-                        B    - 000000 <br>
-                        C    - 000000 <br>
-                        D    - 000000 <br>
-                        E    - 000000
+                        @php
+                            foreach($seqs as $key => $val)
+                            {
+                                echo strtoupper($key) . " - " . str_pad($val, 6, '0', STR_PAD_LEFT) . "<br/>";
+                            }
+                        @endphp
                     </div>
                 </div>
 
@@ -75,19 +75,19 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-2 {{ $errors->has('start_siries') ? ' has-error' : '' }}">
-                        <select name="start_siries" class="form-control">
-                            <option value=""><< Sila Pilih >></option>
-                            <option value=" "> </option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-                       </select>
+                        <select id="start_siries" name="start_siries" class="form-control">
+                            <option value="0"><< Sila Pilih >></option>
+                            <?php
+                                foreach($seqs as $key => $val)
+                                {
+                                    echo "<option value=\"" . strtoupper($key) . "\" data-runnum=\"" . $val . "\">" . strtoupper($key) . "</option>";
+                                }
+                            ?>
+                        </select>
                         @include('partials.error_block', ['item' => 'start_siries'])
                     </div>
                     <div class="col-md-4 {{ $errors->has('siries') ? ' has-error' : '' }}">
-                        <input name="siries" type="text" class="form-control" value="{{ old('siries') }}" required>
+                        <input id="siries" name="siries" type="text" class="form-control" value="{{ old('siries') }}" required>
                         @include('partials.error_block', ['item' => 'siries'])
                     </div>
                 </div>
@@ -108,4 +108,21 @@
 @endsection
 
 @section('footer_script')
+<script>
+    $(document).ready(function() {
+        $('#start_siries').on('change', function(){
+            var runnum = $(this).find(':selected').data('runnum');
+            if($(this).val() != '0')
+            {
+                return $('#siries').val(padLeft(parseInt(runnum)+1, 6))
+            }
+
+            $('#siries').val('');
+        });
+    });
+
+    function padLeft(nr, n, str){
+    return Array(n-String(nr).length+1).join(str||'0')+nr;
+    }
+</script>
 @endsection

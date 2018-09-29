@@ -67,17 +67,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                <div class="col-md-4">
-                    <h6>PANDUAN : No Digit Terahir Bagi Setiap Sijil</h6>
-                </div>
+                    <div class="col-md-4">
+                        <h6>PANDUAN : No Digit Terahir Bagi Setiap Sijil</h6>
+                    </div>
                     <div class="col-md-6">
-                    @php
-                        foreach($seqs as $key => $val)
-                        {
-                            echo strtoupper($key) . " - " . str_pad($val, 6, '0', STR_PAD_LEFT) . "<br/>";
-                        }
-                    @endphp
-                </div>
+                        @php
+                            foreach($seqs as $key => $val)
+                            {
+                                echo strtoupper($key) . " - " . str_pad($val, 6, '0', STR_PAD_LEFT) . "<br/>";
+                            }
+                        @endphp
+                    </div>
                 </div>
 
                 {{-- Mula No Siri --}}
