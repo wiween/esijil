@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Senarai Selesai Pengeposan Oleh Syarikat Percetakan Luar
+    Senarai Batch Yang Selesai Pengeposan Oleh Syarikat Percetakan Luar
 @endsection
 
 @section('topButton')

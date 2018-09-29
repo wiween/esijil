@@ -29,16 +29,35 @@ class StatusController extends Controller
         if ($category == 'baru') {
 
             if ($ic_number <> '' && $batch <> '') {
-                $certificates = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $ic_number)->where('certificates.batch_id', $batch)->get();
+                $exist = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $ic_number)->where('certificates.batch_id', $batch)->count();
+                if ($exist <= 0) {
+                    return view('status.noresult');
+                } else {
+                    $certificates = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $ic_number)->where('certificates.batch_id', $batch)->get();
 //                dd($certificate);
-                return view('status.result', compact('certificates'));
+                    return view('status.result', compact('certificates'));
+                }
             } else if ($ic_number <> '' && $batch == '') {
-                $certificates = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $ic_number)->get();
+                $exist = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $ic_number)->count();
+                if ($exist <= 0) {
+                    return view('status.noresult');
+                } else {
+                    $certificates = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $ic_number)->get();
 //                dd($certificates);
-                return view('status.result-ic', compact('certificates'));
+                    return view('status.result-ic', compact('certificates'));
+                }
             } else if ($ic_number == '' && $batch <> '') {
-                $certificates = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.batch_id', $batch)->get();
-                return view('status.result-batch', compact('certificates'));
+
+                //exist
+                $exist = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.batch_id', $batch)->count();
+
+                if ($exist <= 0) {
+                    return view('status.noresult');
+                } else {
+                    $certificates = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.batch_id', $batch)->get();
+                    return view('status.result-batch', compact('certificates'));
+                }
+
             } else {
                 return view('status.noresult');
             }

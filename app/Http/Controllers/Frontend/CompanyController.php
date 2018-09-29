@@ -342,6 +342,7 @@ class CompanyController extends Controller
     {
         //
         $certificate = Certificate::findOrFail($id);
+//        $post = Post::where('certificate_id', $id)->first();
         $statuses = Lookup::where('name', 'user_status')->get();
         return view('company.edit', compact('certificate', 'statuses'));
     }
@@ -363,11 +364,11 @@ class CompanyController extends Controller
         $certificate->flag_printed = 'Y';
         $certificate->current_status = 'telah dicetak';
         $certificate->certificate_number = $request->input('start_siries') . $request->input('siries');
-        $certificate->date_print = $request->input('date_print');
+//        $certificate->date_print = $request->input('date_print');
         $certificate->remark = $request->input('remark');
 
         if ($certificate->save()) {
-            return redirect('/company-print/search')->with('successMessage', 'Maklumat telah dikemaskini');
+            return redirect('/company-print/search-edit')->with('successMessage', 'Maklumat telah dikemaskini');
         } else {
             return back()->with('errorMessage', 'Tidak dapat kemaskini rekod. Hubungi Admin');
         }
@@ -420,7 +421,12 @@ class CompanyController extends Controller
         $a = $request->input('ic_number');
         $b = $request->input('batch');
         //dd ($a);
-        if ($a <> '') {
+        if ($a <> '')
+        {
+
+            $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.source', 'syarikat')->where('certificates.ic_number', 'like', '%' . $a . '%')->count();
+
+            if ($post <= 0)
                 $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->
                 where('flag_printed', 'Y')->where('source', 'syarikat')->get();
                 //dd ($certificates);
@@ -428,12 +434,22 @@ class CompanyController extends Controller
             return view('company.result', compact('certificates'));
         }
 
-        if ($b <> '') {
+        if ($b <> '')
+        {
+            $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.batch_id', $b)->where('certificates.source', 'syarikat')->count();
 
-            $certificates = Certificate::select('batch_id', 'type', DB::raw("count(id) as jumlahsutudent"))->where('batch_id',$b)->
-            where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->get();
-            //dd ($certificates);
-            return view('company.result_post', compact('certificates'));
+            if ($post <= 0)
+            {
+                $certificates = Certificate::select('batch_id', 'type', DB::raw("count(id) as jumlahstudent"))->where('batch_id',$b)->
+                where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->get();
+                //dd ($certificates);
+                return view('company.result_post', compact('certificates'));
+            }
+            else
+            {
+                $certificates = "tiada";
+                return view('company.result_post', compact('certificates'));
+            }
         }
     }
 
