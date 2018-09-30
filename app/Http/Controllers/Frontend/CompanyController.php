@@ -118,7 +118,7 @@ class CompanyController extends Controller
     public function editPostBatch($id)
     {
         //
-        $post = Post::where('tracking_number', $id)->first();
+        $post = Post::where('tracking_number', $id)->firstOrFail();
         return view('company.repost-batch', compact('post'));
     }
 
