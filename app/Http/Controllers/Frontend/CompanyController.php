@@ -203,7 +203,7 @@ class CompanyController extends Controller
             }
 
     if ($post->save()) {
-            return redirect('company-search/post')->with('successMessage', 'Maklumat Pos Telah Dijana');
+            return redirect('/company-search/list')->with('successMessage', 'Maklumat Pos Telah Dijana');
         } else {
             return back()->with('errorMessage', 'Tidak boleh jana maklumat pos. Sila hubungi Admin');
         }
