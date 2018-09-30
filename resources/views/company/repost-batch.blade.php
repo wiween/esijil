@@ -41,7 +41,7 @@
                 {{-- date_post--}}
                 <div class="form-group{{ $errors->has('date_post') ? ' has-error' : '' }}">
                     <label for="date_post" class="col-md-4 control-label">
-                        Tarikh Pos : {{ $post->date_post->format('m/d/Y') }}
+                        Tarikh Pos :
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
@@ -81,7 +81,7 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="date_receive" type="date" class="form-control" value="{{ old('date_receive', $post->date_receive->format('Y-m-d')) }}" required>
+                        <input name="date_receive" type="date" class="form-control" value="@if($post->flag_received <> NULL) {{$post->date_receive}} @else {{old('date_receive', $post->date_receive->format('Y-m-d'))}}  @endif" required>
                         @include('partials.error_block', ['item' => 'date_receive'])
                     </div>
                 </div>
