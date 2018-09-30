@@ -45,7 +45,7 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="date_post" type="date" class="form-control" value="{{ old('date_post', $post->date_post->format('m/d/Y')) }}" required>
+                        <input name="date_post" type="date" class="form-control" value="{{ old('date_post', $post->date_post->format('Y-m-d')) }}" required>
                         @include('partials.error_block', ['item' => 'date_post'])
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="date_receive" type="date" class="form-control" value="{{ old('date_receive', $post->date_receive) }}" required>
+                        <input name="date_receive" type="date" class="form-control" value="{{ old('date_receive', $post->date_receive->format('Y-m-d')) }}" required>
                         @include('partials.error_block', ['item' => 'date_receive'])
                     </div>
                 </div>
@@ -119,8 +119,7 @@
         var app = new Vue({
             el: '#app',
             data: {
-                mypost: ''
-
+                mypost: '{{ $post->flag_received }}'
             }
         })
     </script>
