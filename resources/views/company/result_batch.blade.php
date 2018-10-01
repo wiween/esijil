@@ -29,7 +29,7 @@
                                 <td>{{ $loop->index + 1 }}</td>
                                 {{--<td><input name="batch[]" type="checkbox" value="{{ old('batch',$certificate->batch_id) }}"></td>--}}
                                 <td><a href="{{ url('') }}/company-download/list/{{ $certificate->batch_id }}">[ {{  $certificate->batch_id }} ]</a></td>
-                                <td>{{ $certificate->count() }}</td>
+                                <td>{{  $totalstudent = \App\Certificate::where('batch_id', $certificate->batch_id)->where('flag_printed', 'N')->groupBy('batch_id')->where('source', 'syarikat')->count() }}</td>
                                 <td>{{ $certificate->type }}</td>
                                 <td>
                                     <ul class="icons-list">

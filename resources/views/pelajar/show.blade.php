@@ -14,11 +14,11 @@
                 {{-- TABLE HERE --}}
                 <table class="table table-striped">
                     <tr>
-                        <th class=" col-md-5">No KP :</th>
+                        <th>No KP :</th>
                         <td>{{ $certificate->ic_number }}</td>
                     </tr>
                     <tr>
-                        <th class=" col-md-5">Nama :</th>
+                        <th>Nama :</th>
                         <td>{{ $certificate->name }}</td>
                     </tr>
                     <tr>
@@ -56,6 +56,10 @@
                     <tr>
                         <th>Tarikh PPL</th>
                         <td>{{ $certificate->date_ppl }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tarikh Cetak Sijil</th>
+                        <td>{{ $certificate->date_print->format('d M, Y') }}</td>
                     </tr>
                     {{--<tr>--}}
                         {{--<th>Keputusan</th>--}}
