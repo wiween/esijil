@@ -77,8 +77,6 @@
         <h3>BORANG LAPORAN DATA PENGELUARAN SIJIL KEMAHIRAN MALAYSIA (SKM)/DIPLOMA KEMAHIRAN MALAYSIA(DKM)/DIPLOMA LANJUTAN KEMAHIRAN MALAYSIA(DLKM)
             {{--</div>--}}
             {{--<div align="center">--}}
-            <br>
-            Disediakan oleh Syarikat</h3>
     </div>
     
     <table class="top" width="100%">
