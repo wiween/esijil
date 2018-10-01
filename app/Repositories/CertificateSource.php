@@ -13,7 +13,7 @@ class CertificateSource
             substring_index(substring_index(d.kod_program,':', 1),'-',-1) as level,
             e.nama_pusat as pb_name, g.id as state_id,
             if(f.to_visit_date_tamat = '0000-00-00', null, date_format(to_visit_date_tamat,'%m%Y')) as date_ppl,
-            null as result_ppl, b.no_batch as batch_id, e.alamat_sykt as address
+            null as result_ppl, b.no_batch as batch_id, e.alamat as address
             from mosq.penilaian_bukan_kredit as a
             join mosq.daftar_batch as b on a.batch_id = b.id
             join mosq.profil_pelatih as c on a.pelatih_id = c.id
@@ -33,7 +33,7 @@ class CertificateSource
             END as type,
             substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level,
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
-            a.no_batch as batch_id, c.alamat_sykt as address
+            a.no_batch as batch_id, c.alamat as address
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat
