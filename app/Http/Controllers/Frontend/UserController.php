@@ -60,7 +60,23 @@ class UserController extends Controller
         $user->ic_number = $request->input('ic_number');
         $user->phone_number = $request->input('phone_number');
         $user->role = $request->input('role');
-        $user->access_power = 100;
+
+        if ($request->input('role') == 'super_admin') {
+            $user->access_power = 10000;
+        } else if ($request->input('role') == 'pegawai') {
+            $user->access_power = 8000;
+        } else if ($request->input('role') == 'pegawai_admin') {
+            $user->access_power = 5000;
+        } else if ($request->input('role') == 'pencetak') {
+            $user->access_power = 1000;
+        } else if ($request->input('role') == 'akauntan') {
+            $user->access_power = 2000;
+        } else if ($request->input('role') == 'company') {
+            $user->access_power = 500;
+        } else {
+            $user->access_power = 100;
+        }
+
         $user->remark = $request->input('remark');
         $user->status = $request->input('status');
         // Untuk upload gambar avatar
@@ -128,7 +144,23 @@ class UserController extends Controller
         $user->ic_number = $request->input('ic_number');
         $user->phone_number = $request->input('phone_number');
         $user->role = $request->input('role');
-        $user->access_power = 100;
+//        access power
+        if ($request->input('role') == 'super_admin') {
+            $user->access_power = 10000;
+        } else if ($request->input('role') == 'pegawai') {
+            $user->access_power = 8000;
+        } else if ($request->input('role') == 'pegawai_admin') {
+            $user->access_power = 5000;
+        } else if ($request->input('role') == 'pencetak') {
+            $user->access_power = 1000;
+        } else if ($request->input('role') == 'akauntan') {
+            $user->access_power = 2000;
+        } else if ($request->input('role') == 'company') {
+            $user->access_power = 500;
+        } else {
+            $user->access_power = 100;
+        }
+        
         $user->remark = $request->input('remark');
         $user->status = $request->input('status');
         // Untuk upload gambar avatar
