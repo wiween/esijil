@@ -160,7 +160,7 @@ class UserController extends Controller
         } else {
             $user->access_power = 100;
         }
-        
+
         $user->remark = $request->input('remark');
         $user->status = $request->input('status');
         // Untuk upload gambar avatar
