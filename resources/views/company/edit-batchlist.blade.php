@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Edit Maklumat Percetakan : {{ Request::segment(3) }}
+    Edit Maklumat Percetakan Secara Batch : {{ Request::segment(3) }}
 @endsection
 
 @section('topButton')

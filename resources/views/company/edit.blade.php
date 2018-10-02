@@ -102,7 +102,18 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="date_print" type="date" class="form-control" value="{{ old('date_print') }}" required>
+                        <input name="date_print" type="date" class="form-control" value="{{ old('date_print', $certificate->date_print->format('Y-m-d')) }}" required>
+                        @include('partials.error_block', ['item' => 'date_print'])
+                    </div>
+                </div>
+                {{-- No sijil asal--}}
+                <div class="form-group{{ $errors->has('certificate_number') ? ' has-error' : '' }}">
+                    <label for="date_print" class="col-md-4 control-label">
+                        No Sijil Asal
+                        <span class="text-danger"> * </span>
+                    </label>
+                    <div class="col-md-6">
+                        {{ $certificate->certificate_number }}
                         @include('partials.error_block', ['item' => 'date_print'])
                     </div>
                 </div>
