@@ -22,7 +22,6 @@
                     <table class="table">
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
                             <th>Batch No</th>
                             <th>No Tracking</th>
                             <th>Tarikh Pos</th>
@@ -34,7 +33,6 @@
                         @foreach ($posts as $post)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                {{--<td><a href="{{ url('') }}/company-search/detail/{{ $post->certificate_id }}">{{ $post->certificate->name }}</a> </td>--}}
                                 <td><a href="{{ url('') }}/company-search/detail-batch/{{ $post->tracking_number }}">{{ $post->certificate->batch_id }}</a></td>
                                 <td>{{ $post->tracking_number }}</td>
                                 <td>{{ $post->date_post->format('d M, Y') }}</td>
