@@ -50,7 +50,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/company-print/edit/{{ $certificate->id }}"><i class="icon-database-edit2 text-primary"></i>Edit</a></li>
+                                                <li><a href="{{ url('') }}/company-print/edit/{{ $certificate->id }}"><i class="icon-database-edit2 text-primary"></i>Edit</a></li>
                                             </ul>
                                         </li>
                                     </ul>
