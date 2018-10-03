@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             {{--<td><input name="batch[]" type="checkbox" value="{{ old('batch',$certificate->batch_id) }}"></td>--}}
-                            <td><a href="/company-print/edit-batchlist/{{ $certificate->batch_id }}">[ {{  $certificate->batch_id }} ]</a></td>
+                            <td><a href="{{ url('') }}/company-print/edit-batchlist/{{ $certificate->batch_id }}">[ {{  $certificate->batch_id }} ]</a></td>
                             <td>{{ $total = \App\Certificate::where('batch_id', $certificate->batch_id)->where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->count() }}</td>
                             <td>{{ $certificate->type }}</td>
                             <td>
@@ -39,7 +39,7 @@
                                         </a>
 
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="/company-print/edit-batchlist/{{ $certificate->batch_id }}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
+                                            <li><a href="{{ url('') }}/company-print/edit-batchlist/{{ $certificate->batch_id }}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
                                         </ul>
                                     </li>
                                 </ul>
