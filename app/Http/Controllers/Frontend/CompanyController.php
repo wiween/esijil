@@ -344,7 +344,14 @@ class CompanyController extends Controller
         $certificate = Certificate::findOrFail($id);
 //        $post = Post::where('certificate_id', $id)->first();
         $statuses = Lookup::where('name', 'user_status')->get();
-        return view('company.edit', compact('certificate', 'statuses'));
+
+        foreach (CertSeq::get() as $seq) {
+            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
+        }
+
+        $seqs = Config::get('esijil.cert');
+
+        return view('company.edit', compact('certificate', 'statuses', 'seqs'));
     }
 
     /**
