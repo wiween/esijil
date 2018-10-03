@@ -14,7 +14,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form-horizontal frmBorangG" role="form" method="POST" action="{{ url('company-report/pdf/F') }}">
+            <form class="form-horizontal frmBorangG" role="form" method="POST" action="{{ url('company-report/pdf/G') }}">
                 {{ csrf_field() }}
                 <div class="col-md-12">
                     <table class="table">

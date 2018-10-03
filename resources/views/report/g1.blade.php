@@ -125,6 +125,7 @@
                 </tr>
             </tbody>
         </table>
+        <span style="font: 12px;">NOTA : Harga Seunit Sijil RM{{ number_format($rate, 2) }}</span>
         <br>
         <br>
         <table class="top">
