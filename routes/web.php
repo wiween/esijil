@@ -16,11 +16,11 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
     //company
     Route::get('/company-download', 'Frontend\CompanyController@index');
     Route::get('/company-search/post', 'Frontend\CompanyController@search');
+    Route::post('/company-search/post', 'Frontend\CompanyController@searchResult');
     Route::get('/company-post/create/{id}', 'Frontend\CompanyController@create');
     Route::post('/company-post/create/{id}', 'Frontend\CompanyController@store');
     Route::get('/company-download/show/{id}', 'Frontend\CompanyController@show');
     Route::get('/company-search/list', 'Frontend\CompanyController@companyPost');
-    Route::post('/company-search/post', 'Frontend\CompanyController@searchResult');
     Route::get('/company-download/list/{batch}', 'Frontend\CompanyController@list');
     Route::get('/company-download/state/{type}', 'Frontend\CompanyController@state');
     Route::get('/company-download/download/{batch}', 'Frontend\CompanyController@export'); //download batch

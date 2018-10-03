@@ -33,7 +33,7 @@
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             <td><a href="{{ url('') }}/company-post/list/{{ $certificate->batch_id }}/{{$certificate->type}}">[ {{  $certificate->batch_id }} ]</a></td>
-                            <td>{{ $certificate->jumlahsutudent }}</td>
+                            <td>{{ $totalstudent = \App\Certificate::where('batch_id',$certificate->batch_id)->where('flag_printed', 'Y')->where('source', 'syarikat') ->groupBy('batch_id')->count()}}</td>
                             <td>{{ $certificate->type }}</td>
                             <td>
                                 <ul class="icons-list">
