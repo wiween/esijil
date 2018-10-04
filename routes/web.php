@@ -95,6 +95,7 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/diploma/edit/{id}', 'Frontend\DiplomaController@edit');
     Route::post('/diploma/edit/{id}', 'Frontend\DiplomaController@update');
     Route::get('/diploma/show', 'Frontend\DiplomaController@show');
+    Route::get('/diploma/destroy/{id}', 'Frontend\DiplomaController@destroy');
 
 
     //Cetificates

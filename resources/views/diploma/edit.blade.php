@@ -18,38 +18,38 @@
                 {{ csrf_field() }}
 
                 {{-- Name --}}
-                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name" class="col-md-4 control-label">
+                <div class="form-group{{ $errors->has('code_programmed') ? ' has-error' : '' }}">
+                    <label for="code_programmed" class="col-md-4 control-label">
                         Kod Program
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="name" type="text" class="form-control" value="{{ old('name', $diploma->name) }}" required autofocus>
-                        @include('partials.error_block', ['item' => 'name'])
+                        <input name="code_programmed" type="text" class="form-control" value="{{ old('code_programmed', $diploma->code_programmed) }}" required autofocus>
+                        @include('partials.error_block', ['item' => 'code_programmed'])
                     </div>
                 </div>
 
                 {{-- IC Number --}}
-                <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
-                    <label for="name" class="col-md-4 control-label">
+                <div class="form-group{{ $errors->has('old_name') ? ' has-error' : '' }}">
+                    <label for="old_name" class="col-md-4 control-label">
                         Nama NOSS
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="ic_number" type="text" class="form-control" value="{{ old('ic_number', $diploma->ic_number) }}" required>
-                        @include('partials.error_block', ['item' => 'ic_number'])
+                        <input name="old_name" type="text" class="form-control" value="{{ old('old_name', $diploma->old_name) }}" required>
+                        @include('partials.error_block', ['item' => 'old_name'])
                     </div>
                 </div>
 
                 {{-- Email --}}
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="col-md-4 control-label">
+                <div class="form-group{{ $errors->has('new_name') ? ' has-error' : '' }}">
+                    <label for="new_name" class="col-md-4 control-label">
                       Nama Baru
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="email" type="email" class="form-control" value="{{ old('email', $diploma->email) }}" required>
-                        @include('partials.error_block', ['item' => 'email'])
+                        <input name="new_name" type="text" class="form-control" value="{{ old('new_name', $diploma->new_name) }}" required>
+                        @include('partials.error_block', ['item' => 'new_name'])
                     </div>
                 </div>
 
@@ -80,7 +80,7 @@
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
-                            Update User
+                            Kemaskini
                         </button>
                     </div>
                 </div>

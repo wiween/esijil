@@ -132,6 +132,24 @@
                     </div>
                 </div>
 
+                {{-- user type --}}
+                <div class="form-group{{ $errors->has('jenispersijilan') ? ' has-error' : '' }}">
+                    <label class="col-md-4 control-label">
+                        Jenis Pengguna
+                        <span class="text-danger"> * </span>
+                    </label>
+                    <div class="col-md-6">
+                        <select name="jenispersijilan" class="form-control">
+                            <option selected>Select one..</option>
+                            @foreach ($jenispersijilans as $jenispersijilan)
+                                <option @if (old('jenispersijilan') == $jenispersijilan->name) selected @endif value="{{ $jenispersijilan->name }}">{{ $jenispersijilan->name }}</option>
+                            @endforeach
+                        </select>
+                        @include('partials.error_block', ['item' => 'jenispersijilan'])
+                    </div>
+                </div>
+
+
                 {{-- Remark --}}
                 <div class="form-group{{ $errors->has('remark') ? ' has-error' : '' }}">
                     <label class="col-md-4 control-label">Remark</label>

@@ -29,7 +29,7 @@
                         @foreach ($certificates as $certificate)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="{{ url('') }}/diploma/show/{{ $certificate->id }}">{{ $certificate->batch_id }}</a> </td>
+                                <td><a href="{{ url('') }}/diploma/edit-batch/{{ $certificate->batch_id }}">{{ $certificate->batch_id }}</a> </td>
                                 <td>{{ $certificate->programme_name }}</td>
                                 <td>{{ $certificate->programme_code }}</td>
                                 <td>{{ $certificate->level }}</td>
@@ -50,8 +50,8 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="{{ url('') }}/diploma/edit-batch/{{ $certificate->id }}"><i class="icon-display text-primary"></i>Edit</a></li>
-                                                <li><a href="{{ url('') }}/diploma/destroy/{{ $certificate->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>
+                                                <li><a href="{{ url('') }}/diploma/edit-batch/{{ $certificate->batch_id }}"><i class="icon-display text-primary"></i>Edit</a></li>
+                                                {{--<li><a href="{{ url('') }}/diploma/destroy/{{ $certificate->batch_id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>--}}
                                             </ul>
                                         </li>
                                     </ul>
