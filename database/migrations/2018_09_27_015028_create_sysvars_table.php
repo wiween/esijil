@@ -1,5 +1,6 @@
 <?php
 
+use DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -31,6 +32,6 @@ class CreateSysvarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sysvars');
+        DB::statement("DROP VIEW sysvars");
     }
 }
