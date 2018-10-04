@@ -60,6 +60,7 @@ class UserTableSeeder extends Seeder
         $admin->phone_number = '0198899555';
         $admin->role = 'pencetak';
         $admin->access_power = 1000;
+        $admin->user_type = 'sldn';
         $admin->status = 'active';
         $admin->save();
 
@@ -83,6 +84,18 @@ class UserTableSeeder extends Seeder
         $admin->password = bcrypt('company1234');
         $admin->ic_number = '800707074444';
         $admin->phone_number = '0198899444';
+        $admin->role = 'company';
+        $admin->access_power = 500;
+        $admin->status = 'active';
+        $admin->save();
+
+        //Pencetak luar
+        $admin = new \App\User();
+        $admin->name = 'PKNSB';
+        $admin->email = 'zaini@pknsb.com.my';
+        $admin->password = bcrypt('nasional1234');
+        $admin->ic_number = '878765456783';
+        $admin->phone_number = '09876540';
         $admin->role = 'company';
         $admin->access_power = 500;
         $admin->status = 'active';

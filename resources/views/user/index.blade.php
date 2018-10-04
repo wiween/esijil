@@ -8,7 +8,7 @@
 @endsection
 
 @section('topButton')
-    <a href="{{ url('') }}/admin/user/create" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/user/create" class="btn btn-link btn-float has-text">
         <i class="icon-plus-circle2 text-primary"></i>
         <span>New User</span>
     </a>
@@ -22,12 +22,13 @@
                     <table class="table table-striped">
                         <tr>
                             <th>#</th>
-                            <th>Photo</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>IC Number</th>
-                            <th>Phone</th>
+                            <th>Foto</th>
+                            <th>Nama</th>
+                            <th>Emel</th>
+                            {{--<th>IC Number</th>--}}
+                            {{--<th>Phone</th>--}}
                             <th>Role</th>
+                            <th>Jenis Pengguna</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -39,9 +40,11 @@
                             </td>
                             <td><a href="{{ url('') }}/user/show/{{ $user->id }}">{{ $user->name }}</a> </td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->ic_number }}</td>
-                            <td>{{ $user->phone_number }}</td>
+                            {{--<td>{{ $user->ic_number }}</td>--}}
                             <td class="text-capitalize">{{ str_replace('_', ' ', $user->role )}}</td>
+                            <td>{{ $user->user_type }}</td>
+                            {{--<td>{{ $user->phone_number }}</td>--}}
+
                             <td>
                                 @if ($user->status == 'active')
                                     <span class="label label-success">{{ $user->status }}</span>

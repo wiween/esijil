@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->default('/images/user/default.png');
             $table->string('role')->default('user');
             $table->integer('access_power')->default(100);
+            $table->string('user_type')->default('Tiada');
             $table->text('remark')->nullable();
             $table->string('status')->default('active');
             $table->string('updated_by')->default('super.admin@gmail.com');

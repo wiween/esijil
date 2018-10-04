@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Requests\UserChangePasswordRequest;
 use App\Http\Requests\UserEditRequest;
 use App\Http\Requests\UserRequest;
+use App\Jenispersijilan;
 use App\Lookup;
 use App\Role;
 use App\User;
@@ -39,8 +40,9 @@ class UserController extends Controller
         $statuses = Lookup::where('name', 'user_status')->where('status', 'active')->orderBy('value', 'asc')->get();
         // SELECT * FROM lookups WHERE 'name' = 'user_status' AND 'status' = 'active' ORDERBY ASC
         $roles = Role::where('status', 'active')->get();
+        $jenispersijilans = Jenispersijilan::where('status', 'active')->get();
         // SELECT * FROM roles WHERE 'status' = 'active'
-        return view('user.create', compact('statuses', 'roles'));
+        return view('user.create', compact('statuses', 'roles', 'jenispersijilans'));
     }
 
     /**
@@ -60,6 +62,7 @@ class UserController extends Controller
         $user->ic_number = $request->input('ic_number');
         $user->phone_number = $request->input('phone_number');
         $user->role = $request->input('role');
+        $user->user_type = $request->input('jenispersijilan');
 
         if ($request->input('role') == 'super_admin') {
             $user->access_power = 10000;
@@ -125,7 +128,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $statuses = Lookup::where('name', 'user_status')->where('status', 'active')->orderBy('value', 'asc')->get();
         $roles = Role::where('status', 'active')->get();
-        return view('user.edit', compact('user', 'statuses', 'roles'));
+        $jenispersijilans = Jenispersijilan::where('status', 'active')->get();
+        return view('user.edit', compact('user', 'statuses', 'roles', 'jenispersijilans'));
     }
 
     /**
@@ -144,6 +148,7 @@ class UserController extends Controller
         $user->ic_number = $request->input('ic_number');
         $user->phone_number = $request->input('phone_number');
         $user->role = $request->input('role');
+        $user->user_type = $request->input('jenispersijilan');
 //        access power
         if ($request->input('role') == 'super_admin') {
             $user->access_power = 10000;

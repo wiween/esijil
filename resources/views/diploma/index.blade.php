@@ -31,7 +31,7 @@
                         @foreach ($diplomas as $diploma)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="{{ url('') }}/diploma/show/{{ $diploma->id }}">{{ $diploma->code_programmed }}</a> </td>
+                                <td><a href="{{ url('') }}/diploma/edit/{{ $diploma->id }}">{{ $diploma->code_programmed }}</a> </td>
                                 <td>{{ $diploma->old_name }}</td>
                                 <td>{{ $diploma->new_name }}</td>
                                 <td>
@@ -51,7 +51,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="{{ url('') }}/diploma/show/{{ $diploma->id }}"><i class="icon-display"></i> View</a></li>
+                                                {{--<li><a href="{{ url('') }}/diploma/show/{{ $diploma->id }}"><i class="icon-display"></i> View</a></li>--}}
                                                 <li><a href="{{ url('') }}/diploma/edit/{{ $diploma->id }}"><i class="icon-pencil"></i> Edit</a></li>
                                                 <li><a href="{{ url('') }}/diploma/destroy/{{ $diploma->id }}"><i class="icon-trash"></i> Delete</a></li>
                                             </ul>

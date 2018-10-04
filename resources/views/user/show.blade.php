@@ -12,7 +12,7 @@
         <i class="icon-list-numbered text-primary"></i>
         <span>All Users</span>
     </a>
-    <a href="{{ url('') }}/admin/user/edit/{{ $user->id }}" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/user/edit/{{ $user->id }}" class="btn btn-link btn-float has-text">
         <i class="icon-pencil text-primary"></i>
         <span>Edit</span>
     </a>
@@ -29,11 +29,11 @@
                 {{-- TABLE HERE --}}
                 <table class="table table-striped">
                     <tr>
-                        <th class="col-md-3">Name</th>
+                        <th class="col-md-3">Nama</th>
                         <td>{{ $user->name }}</td>
                     </tr>
                     <tr>
-                        <th>IC Number</th>
+                        <th>No KP</th>
                         <td>{{ $user->ic_number }}</td>
                     </tr>
                     <tr>
@@ -41,7 +41,11 @@
                         <td class="text-capitalize">{{ str_replace('_', ' ', $user->role) }}</td>
                     </tr>
                     <tr>
-                        <th>Email</th>
+                        <th>Jenis Pengguna</th>
+                        <td class="text-capitalize">{{ str_replace('_', ' ', $user->user_type) }}</td>
+                    </tr>
+                    <tr>
+                        <th>Emel</th>
                         {{-- <a href="mailto:arhamzul@gmail.com">Click Here to send mail</a> --}}
                         <td><a href="mailto:{{ $user->email }}">
                                 {{ $user->email }}
@@ -49,7 +53,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Phone</th>
+                        <th>No Tel</th>
                         <td>
                             <a href="tel:{{ $user->phone_number }}">
                                 {{ $user->phone_number }}
@@ -70,7 +74,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Remark</th>
+                        <th>Catatan</th>
                         <td>{{ $user->remark }}</td>
                     </tr>
                     <tr>

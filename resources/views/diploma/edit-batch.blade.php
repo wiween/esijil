@@ -24,7 +24,7 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                      B0109
+                     {{ $certificate->batch_id }}
                         @include('partials.error_block', ['item' => 'name'])
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        C-051-4
+                        {{ $certificate->programme_code }}
                         @include('partials.error_block', ['item' => 'name'])
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        PEMBANTU JURUTERA ELEKTRIK
+                        {{ $certificate->programme_name }}
                         @include('partials.error_block', ['item' => 'ic_number'])
                     </div>
                 </div>
@@ -60,20 +60,20 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <select name="status" class="form-control">
-                            <option selected>Select one..</option>
+                        <select name="diploma" class="form-control">
+                            <option selected>Pilih Satu..</option>
                             @foreach ($diplomas as $diploma)
-                                <option @if (old('diploma') == $diploma->new_name) selected @endif value="{{ $diploma->new_name }}">{{ $diploma->new_name }}</option>
+                                <option @if (old('diploma') == $diploma->new_name) selected @endif value="{{ $diploma->new_name }}">{{ $diploma->code_programmed . '/' . $diploma->new_name }}</option>
                             @endforeach
                         </select>
-                        @include('partials.error_block', ['item' => 'status'])
+                        @include('partials.error_block', ['item' => 'diploma'])
                     </div>
                 </div>
                 {{-- Submit Button --}}
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
-                            Update User
+                            Kemaskini
                         </button>
                     </div>
                 </div>

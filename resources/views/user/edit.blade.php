@@ -120,6 +120,32 @@
                     </div>
                 </div>
 
+
+                    {{-- user type --}}
+                    <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label">
+                            Jenis Pengguna
+                            <span class="text-danger"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            {{--                        {{ $user->role }}--}}
+                            <select name="jenispersijilan" class="form-control">
+                                <option>Pilih Satu...</option>
+                                {{--<option value="admin" @if($user->role == 'admin') selected  @endif>Admin</option>--}}
+                                {{--<option value="super_admin" @if($user->role == 'super_admin') selected  @endif>Super Admin</option>--}}
+                                {{--<option value="admin.ministry" @if($user->role == 'admin.ministry') selected  @endif>Admin Ministry</option>--}}
+                                {{--<option value="user" @if($user->role == 'user') selected  @endif>User</option>--}}
+
+                                @foreach ($jenispersijilans as $jenispersijilan)
+                                    <option @if (old('jenispersijilan', $user->user_type) == $jenispersijilan->name) selected @endif value="{{ $jenispersijilan->name }}">
+                                        {{ $jenispersijilan->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @include('partials.error_block', ['item' => 'jenispersijilan'])
+                        </div>
+                    </div>
+
                 {{-- Remark --}}
                 <div class="form-group{{ $errors->has('remark') ? ' has-error' : '' }}">
                     <label class="col-md-4 control-label">Remark</label>

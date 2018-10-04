@@ -17,39 +17,39 @@
             <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
-                {{-- Name --}}
-                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name" class="col-md-4 control-label">
+                {{-- code --}}
+                <div class="form-group{{ $errors->has('programme_code') ? ' has-error' : '' }}">
+                    <label for="programme_code" class="col-md-4 control-label">
                         Kod Program
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="name" type="text" class="form-control" value="{{ old('name') }}" required autofocus>
-                        @include('partials.error_block', ['item' => 'name'])
+                        <input name="programme_code" type="text" class="form-control" value="{{ old('programme_code') }}" required autofocus>
+                        @include('partials.error_block', ['item' => 'programme_code'])
                     </div>
                 </div>
 
-                {{-- IC Number --}}
-                <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
-                    <label for="name" class="col-md-4 control-label">
+                {{-- noss--}}
+                <div class="form-group{{ $errors->has('old_name') ? ' has-error' : '' }}">
+                    <label for="old_name" class="col-md-4 control-label">
                         Nama NOSS
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="ic_number" type="text" class="form-control" value="{{ old('ic_number') }}" required>
-                        @include('partials.error_block', ['item' => 'ic_number'])
+                        <input name="old_name" type="text" class="form-control" value="{{ old('old_name') }}" required>
+                        @include('partials.error_block', ['item' => 'old_name'])
                     </div>
                 </div>
 
-                {{-- Email --}}
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="col-md-4 control-label">
+                {{-- new--}}
+                <div class="form-group{{ $errors->has('new_name') ? ' has-error' : '' }}">
+                    <label for="new_name" class="col-md-4 control-label">
                        Nama Baru
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="email" type="email" class="form-control" value="{{ old('email') }}" required>
-                        @include('partials.error_block', ['item' => 'email'])
+                        <input name="new_name" type="text" class="form-control" value="{{ old('new_name') }}" required>
+                        @include('partials.error_block', ['item' => 'new_name'])
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                     </label>
                     <div class="col-md-6">
                         <select name="status" class="form-control">
-                            <option selected>Select one..</option>
+                            <option selected>Pilih satu..</option>
                             @foreach ($statuses as $status)
                                 <option @if (old('status') == $status->key) selected @endif value="{{ $status->key }}">{{ $status->value }}</option>
                             @endforeach
@@ -76,7 +76,7 @@
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
-                            Create New User
+                            Tambah DKM/DLKM
                         </button>
                     </div>
                 </div>
