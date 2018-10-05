@@ -59,7 +59,7 @@ class ImportCertificates extends Command
                 $this->info("\nImport ". $row->name);
 
             Certificate::updateOrCreate(
-                ['ic_number' => $row->ic_number, 'batch_id' => $row->batch_id],
+                ['ic_number' => $row->ic_number, 'batch_id' => $row->batch_id, 'programme_code' => $row->programme_code, 'level' => strtoupper($this->contructLevel($row->programme_code, 'tahap'))],
                 [
                     'name' => $row->name,
                     'ic_number' => $row->ic_number,
