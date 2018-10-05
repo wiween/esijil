@@ -14,7 +14,7 @@ class CreateCertSeq extends Migration
      */
     public function up()
     {
-        DB::statement("CREATE VIEW `certseq` AS 
+        DB::statement("CREATE OR REPLACE VIEW `certseq` AS 
             select a.abjad, max(a.seq) as run_num from (
                 select substr(certificate_number,1,length(certificate_number)-6) as abjad,
                 convert(substr(certificate_number,-6,6), UNSIGNED INTEGER) as seq 
