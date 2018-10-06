@@ -8,13 +8,13 @@
                 <img src="{{ asset('images/jata.png') }}" alt="Jata Malaysia">
             </div>
             <div class="row justify-content-center">
-                <h1>Sistem eSijil</h1>
+                <h2 style="text-align: center"><b>MAKLUMAT PERSIJILAN PELATIH DIBAWAH SISTEM PERSIJILAN KEMAHIRAN MALAYSIA(SPKM)</b></h2>
             </div>
             <div class="row justify-content-center">
-                <h2>Jabatan Pembangunan Kemahiran</h2>
+                <h3>JABATAN PEMBANGUNAN KEMAHIRAN</h2>
             </div>
              <div class="row justify-content-center">
-                <h2>Kementerian Sumber Manusia</h2>
+                <h3>KEMENTERIAN SUMBER MANUSIA</h2>
             </div>
             <div class="card">
                 <div class="card-body">
