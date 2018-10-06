@@ -68,7 +68,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-4">
-                        <h6>PANDUAN : No Digit Terahir Bagi Setiap Sijil</h6>
+                        <h6>PANDUAN : No Digit Terakhir Bagi Setiap Sijil</h6>
                     </div>
                     <div class="col-md-6">
                         @php

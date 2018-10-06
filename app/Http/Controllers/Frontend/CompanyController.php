@@ -146,6 +146,7 @@ class CompanyController extends Controller
         $post->date_receive = $request->input('date_receive');
         $post->post_company = $request->input('post_company');
         $post->receiver = $request->input('receiver');
+        $post->icno_receiver = $request->input('icno_receiver');
         $post->source = 'syarikat';
 
         $post->remark = $request->input('remark');
@@ -195,6 +196,7 @@ class CompanyController extends Controller
                 $post->post_company = $request->input('post_company');
                 $post->date_receive = $request->input('date_receive');
                 $post->receiver = $request->input('receiver');
+                $post->icno_receiver = $request->input('icno_receiver');
                 $post->source = 'syarikat';
 
                 $post->remark = $request->input('remark');
@@ -240,6 +242,7 @@ class CompanyController extends Controller
         $post->date_receive = $request->input('date_receive');
         $post->post_company = $request->input('post_company');
         $post->receiver = $request->input('receiver');
+        $post->icno_receiver = $request->input('icno_receiver');
         $post->source = 'syarikat';
 
         $post->remark = $request->input('remark');
@@ -307,6 +310,7 @@ class CompanyController extends Controller
         $post->post_company = $request->input('post_company');
         $post->date_receive = $request->input('date_receive');
         $post->receiver = $request->input('receiver');
+        $post->icno_receiver = $request->input('icno_receiver');
         $post->source = 'syarikat';
 
         $post->remark = $request->input('remark');
@@ -601,22 +605,24 @@ class CompanyController extends Controller
 
 //           echo "new number" . $new_number;
 
+            //runing number untuk cetak sijil betulkan untuk 10
+
             if ($new_number > 0 && $new_number < 10) {
                 $new_siries = $request->input('start_siries') . '00000' . $new_number;
             }
-            if ($new_number > 10 && $new_number < 100) {
+            if ($new_number >= 10 && $new_number < 100) {
                 $new_siries = $request->input('start_siries') . '0000' . $new_number;
             }
-            if ($new_number > 100 && $new_number < 1000) {
+            if ($new_number >= 100 && $new_number < 1000) {
                 $new_siries = $request->input('start_siries') . '000' . $new_number;
             }
-            if ($new_number > 1000 && $new_number < 10000) {
+            if ($new_number >= 1000 && $new_number < 10000) {
                 $new_siries = $request->input('start_siries') . '00' . $new_number;
             }
-            if ($new_number > 10000 && $new_number < 100000) {
+            if ($new_number >= 10000 && $new_number < 100000) {
                 $new_siries = $request->input('start_siries') . '0' . $new_number;
             }
-            if ($new_number > 100000)  {
+            if ($new_number >= 100000)  {
                 $new_siries = $request->input('start_siries') . $new_number;
             }
             //echo "<br>new siri" . $new_siries;

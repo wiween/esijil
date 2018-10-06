@@ -232,22 +232,24 @@ class PrintedController extends Controller
 
 //           echo "new number" . $new_number;
 
+            //runing number untuk cetak sijil betulkan untuk 10
+
             if ($new_number > 0 && $new_number < 10) {
                 $new_siries = $request->input('start_siries') . '00000' . $new_number;
             }
-                if ($new_number > 10 && $new_number < 100) {
+                if ($new_number >= 10 && $new_number < 100) {
                     $new_siries = $request->input('start_siries') . '0000' . $new_number;
                 }
-                    if ($new_number > 100 && $new_number < 1000) {
+                    if ($new_number >= 100 && $new_number < 1000) {
                         $new_siries = $request->input('start_siries') . '000' . $new_number;
                     }
-                        if ($new_number > 1000 && $new_number < 10000) {
+                        if ($new_number >= 1000 && $new_number < 10000) {
                             $new_siries = $request->input('start_siries') . '00' . $new_number;
                         }
-                            if ($new_number > 10000 && $new_number < 100000) {
+                            if ($new_number >= 10000 && $new_number < 100000) {
                                 $new_siries = $request->input('start_siries') . '0' . $new_number;
                             }
-                                if ($new_number > 100000)  {
+                                if ($new_number >= 100000)  {
                                     $new_siries = $request->input('start_siries') . $new_number;
                                 }
             //echo "<br>new siri" . $new_siries;

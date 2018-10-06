@@ -95,6 +95,15 @@
                     </div>
                 </div>
 
+                {{-- Ic Penerima--}}
+                <div v-if="mypost == 'Y'" class="form-group{{ $errors->has('icno_receiver') ? ' has-error' : '' }}">
+                    <label class="col-md-4 control-label">N0 KP Penerima</label>
+                    <div class="col-md-6">
+                        <input type="text" value="{{ old('icno_receiver', $post->icno_receiver) }}" class="form-control" name="icno_receiver">
+                        @include('partials.error_block', ['item' => 'icno_receiver'])
+                    </div>
+                </div>
+
                 {{-- Remark --}}
                 <div class="form-group{{ $errors->has('remark') ? ' has-error' : '' }}">
                     <label class="col-md-4 control-label">Remark</label>

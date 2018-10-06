@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('flag_received');
             $table->date('date_receive')->nullable();
             $table->string('receiver')->nullable();
+            $table->string('icno_receiver')->nullable();
             $table->string('tracking_number');
             $table->string('source')->default('dalaman');
             $table->text('remark')->nullable();
