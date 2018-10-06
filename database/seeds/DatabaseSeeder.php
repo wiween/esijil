@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SourceTableSeeder::class);
 
         //$this->call(EspkmTableSeeder::class);
-        $this->call(CertificateTableSeeder::class);
+//        $this->call(CertificateTableSeeder::class);
         $this->call(JenispersijilanTableSeeder::class);
         $this->call(DiplomaTableSeeder::class);
         $this->call(SysvarsSeeder::class);
