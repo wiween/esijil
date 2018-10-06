@@ -27,6 +27,7 @@
                             <th>Tarikh Pos</th>
                             <th>Tarikh Terima</th>
                             <th>Penerima</th>
+                            <th>No KP Penerima</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -39,8 +40,10 @@
                                 @if($post->flag_received == 'Y')
                                     <td>{{ $post->date_receive->format('d M, Y') }}</td>
                                     <td>{{ $post->receiver }}</td>
+                                    <td>{{ $post->icno_receiver }}</td>
                                 @else
                                     <td>Tidak Diterima</td>
+                                    <td>Tiada Penerima</td>
                                     <td>Tiada Penerima</td>
                                 @endif
 
