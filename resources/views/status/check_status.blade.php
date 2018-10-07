@@ -5,8 +5,19 @@
         <div class="row justify-content-center">
             <div class="col-md-9">
                 <div class="card">
-
-                    <div class="card-header"><img src="{{ url('') }}/images/jatasmall.jpg"> Semak Status</div>
+                    <div class="row justify-content-center">
+                        <img src="{{ asset('images/jata.png') }}" alt="Jata Malaysia">
+                    </div>
+                    <div class="row justify-content-center">
+                        <h2 style="text-align: center"><b>SEMAKAN STATUS PENGELUARAN SIJIL</b></h2>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h3>JABATAN PEMBANGUNAN KEMAHIRAN</h3>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h3>KEMENTERIAN SUMBER MANUSIA</h3>
+                    </div>
+                    {{--<div class="card-header"><img src="{{ url('') }}/images/jatasmall.jpg"> Semak Status</div>--}}
 
                     <div class="card-body" id="app">
                         <form method="POST" class="form-horizontal" role="form">

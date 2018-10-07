@@ -8,7 +8,7 @@
                 <img src="{{ asset('images/jata.png') }}" alt="Jata Malaysia">
             </div>
             <div class="row justify-content-center">
-                <h2 style="text-align: center"><b>MAKLUMAT PERSIJILAN PELATIH DIBAWAH SISTEM PERSIJILAN KEMAHIRAN MALAYSIA(SPKM)</b></h2>
+                <h2 style="text-align: center"><b>SISTEM eSIJIL</b></h2>
             </div>
             <div class="row justify-content-center">
                 <h3>JABATAN PEMBANGUNAN KEMAHIRAN</h3>
