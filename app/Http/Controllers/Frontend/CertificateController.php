@@ -135,7 +135,7 @@ class CertificateController extends Controller
         $certificate->status = $request->input('status');
         $certificate->flag_printed = $request->input('flag');
         $certificate->remark = $request->input('remark');
-        $certificate->qrlink = 'http://staging.skkm.gov.my/esijil/pelajar/'. $id;
+        $certificate->qrlink = 'http://skkm.gov.my/esijil/pelajar/'. $id;
 
         if ($certificate->save()) {
             return redirect('/certificate/show/'.$id)->with('successMessage', 'Maklumat telah dikemaskini');
@@ -185,7 +185,7 @@ class CertificateController extends Controller
                 $certificate->officer = $request->input('officer');
                 $certificate->source = $request->input('source');
                 $certificate->session = $request->input('session');
-                $certificate->qrlink = 'http://staging.skkm.gov.my/esijil/pelajar/'. $certificate->id;
+                $certificate->qrlink = 'http://skkm.gov.my/esijil/pelajar/'. $certificate->id;
                 $certificate->save();
             }
 //
