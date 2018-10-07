@@ -17,7 +17,7 @@
                                             <th>#</th>
                                             <th>Nama</th>
                                             <th>No KP</th>
-                                            <th>Batch No</th>
+                                            <th>Batch No/Angka Giliran</th>
                                             <th>Status Semasa</th>
                                             <th>No Tracking</th>
                                             <th>Tarikh Cetak</th>
@@ -30,8 +30,8 @@
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $certificate->name }}</td>
-                                                <td>{{ $certificate->batch_id }}</td>
                                                 <td>{{ $certificate->ic_number }}</td>
+                                                <td>{{ $certificate->batch_id }}</td>
                                                 <td>{{ ucwords($certificate->current_status) }}</td>
                                                 <td>{{ $certificate->tracking_number }}</td>
                                                 @if ($certificate->current_status == 'telah dicetak' || $certificate->current_status == 'telah dipos' || $certificate->current_status == 'telah diterima')

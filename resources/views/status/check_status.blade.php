@@ -39,7 +39,7 @@
                             {{-- Batch--}}
                             <div class="form-group{{ $errors->has('batch') ? ' has-error' : '' }}">
                                 <label for="batch" class="col-md-4 control-label">
-                                    Batch No :
+                                    Batch No/Angka Giliran :
                                 </label>
                                 <div class="col-md-8">
                                     <input name="batch" type="text" class="form-control" value="{{ old('batch') }}">

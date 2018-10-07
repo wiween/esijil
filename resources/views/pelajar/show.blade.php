@@ -19,11 +19,21 @@
                     </tr>
                     <tr>
                         <th>Nama :</th>
-                        <td>{{ $certificate->name }}</td>
+                        <td>{{ strtoupper($certificate->name) }}</td>
                     </tr>
                     <tr>
-                        <th>Batch No :</th>
-                        <td>{{ $certificate->batch_id }}</td>
+                        <th>Batch No/Angka Giliran :</th>
+                        <td>{{ strtoupper($certificate->batch_id) }}</td>
+                    </tr>
+                    <tr>
+                    <th>Nama Sijil :</th>
+                        @if ($certificate->level == 'TAHAP LIMA' || $certificate->level == 'Tahap Lima' || $certificate->level == '5')
+                    <td>DIPLOMA LANJUTAN KEMAHIRAN MALAYSIA</td>
+                        @elseif ($certificate->level == 'TAHAP EMPAT' || $certificate->level == 'Tahap Empat' || $certificate->level == '4')
+                    <td>DIPLOMA KEMAHIRAN MALAYSIA</td>
+                        @else
+                    <td>SIJIL KEMAHIRAN MALAYSIA</td>
+                            @endif
                     </tr>
                     <tr>
                         <th>Kod Program :</th>
@@ -31,23 +41,19 @@
                     </tr>
                     <tr>
                         <th>Nama Program :</th>
-                        <td>{{ $certificate->programme_name }}</td>
+                        <td>{{ strtoupper($certificate->programme_name) }}</td>
                     </tr>
-                    {{--<tr>--}}
-                        {{--<th>No Batch :</th>--}}
-                        {{--<td>{{ $certificate->batch_id }}</td>--}}
-                    {{--</tr>--}}
                     <tr>
                         <th>Tahap :</th>
-                        <td>{{ $certificate->level }}</td>
+                        <td>{{  strtoupper($certificate->level) }}</td>
                     </tr>
                     <tr>
                         <th>Nama Pusat Bertauliah/Agensi :</th>
-                        <td>{{ $certificate->pb_name }}</td>
+                        <td>{{ strtoupper($certificate->pb_name) }}</td>
                     </tr>
                     <tr>
                         <th>Negeri :</th>
-                        <td>{{ $certificate->state->name }}</td>
+                        <td>{{ strtoupper($certificate->state->name) }}</td>
                     </tr>
                     <tr>
                     <th>No Sijil</th>
@@ -55,7 +61,11 @@
                     </tr>
                     <tr>
                         <th>Tarikh PPL</th>
+                    @if ($certificate->type == 'NDT')
+                        <td>Tiada</td>
+                        @else
                         <td>{{ $certificate->date_ppl }}</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Tarikh Cetak Sijil</th>

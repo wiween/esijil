@@ -30,8 +30,8 @@
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $certificate->name }}</td>
-                                                <td>{{ $certificate->batch_id }}</td>
                                                 <td>{{ $certificate->ic_number }}</td>
+                                                <td>{{ $certificate->batch_id }}</td>
                                                 <td>{{ ucwords($certificate->current_status) }}</td>
                                                 <td>{{ $certificate->tracking_number }}</td>
                                                 @if ($certificate->current_status == 'telah dicetak' || $certificate->current_status == 'telah dipos' || $certificate->current_status == 'telah diterima')
