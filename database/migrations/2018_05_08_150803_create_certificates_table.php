@@ -41,7 +41,7 @@ class CreateCertificatesTable extends Migration
             $table->string('status')->default('active');
             $table->string('current_status')->default('dalam proses percetakan');
             $table->string('updated_by')->default('super.admin@gmail.com');
-            $table->unique(['ic_number', 'batch_id']);
+            $table->unique(['ic_number', 'batch_id', 'programme_code', 'level']);
             $table->softDeletes();
             $table->timestamps();
         });
