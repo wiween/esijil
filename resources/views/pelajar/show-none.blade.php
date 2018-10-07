@@ -5,7 +5,19 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><img src="{{ asset('images/jatasmall.jpg') }}"> Maklumat Persijilan Pelatih</div>
+                    <div class="row justify-content-center">
+                        <img src="{{ asset('images/jata.png') }}" alt="Jata Malaysia">
+                    </div>
+                    <div class="row justify-content-center">
+                        <h2 style="text-align: center"><b>MAKLUMAT PERSIJILAN PELATIH DIBAWAH SISTEM PERSIJILAN
+                                KEMAHIRAN MALAYSIA(SPKM)</b></h2>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h3>JABATAN PEMBANGUNAN KEMAHIRAN</h3>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h3>KEMENTERIAN SUMBER MANUSIA</h3>
+                    </div>
 
                     <div class="card-body">
                         <div class="panel panel-default">

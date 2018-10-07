@@ -11,10 +11,10 @@
                 <h2 style="text-align: center"><b>MAKLUMAT PERSIJILAN PELATIH DIBAWAH SISTEM PERSIJILAN KEMAHIRAN MALAYSIA(SPKM)</b></h2>
             </div>
             <div class="row justify-content-center">
-                <h3>JABATAN PEMBANGUNAN KEMAHIRAN</h2>
+                <h3>JABATAN PEMBANGUNAN KEMAHIRAN</h3>
             </div>
              <div class="row justify-content-center">
-                <h3>KEMENTERIAN SUMBER MANUSIA</h2>
+                <h3>KEMENTERIAN SUMBER MANUSIA</h3>
             </div>
             <div class="card">
                 <div class="card-body">
