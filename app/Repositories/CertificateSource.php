@@ -73,19 +73,41 @@ class CertificateSource
 
     public function numToWord($num)
     {
-        $data = [
-            0 => 'kosong',
-            1 => 'satu',
-            2 => 'dua',
-            3 => 'tiga',
-            4 => 'empat',
-            5 => 'lima',
-            6 => 'ename',
-            7 => 'tujuh',
-            8 => 'lapan',
-            9 => 'sembilan',
-        ];
-
-        return $data[trim($num)];
+        switch(trim($num))
+        {
+            case '0':
+                return 'kosong';
+                break;
+            case '1':
+                return 'satu';
+                break;
+            case '2':
+                return 'dua';
+                break;
+            case '3':
+                return 'tiga';
+                break;
+            case '4':
+                return 'empat';
+                break;
+            case '5':
+                return 'lima';
+                break;
+            case '6':
+                return 'enam';
+                break;
+            case '7':
+                return 'tujuh';
+                break;
+            case '8':
+                return 'lapan';
+                break;
+            case '9':
+                return 'sembilan';
+                break;
+            default:
+                return trim($num);
+                break;
+        }
     }
 }
