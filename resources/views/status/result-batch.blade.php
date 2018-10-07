@@ -17,7 +17,7 @@
                                             <th>#</th>
                                             <th>Nama</th>
                                             <th>No KP</th>
-                                            <th>Batch No</th>
+                                            <th>Batch No/Angka Giliran</th>
                                             <th>Status Semasa</th>
                                             <th>No Tracking</th>
                                             <th>Tarikh Cetak</th>
