@@ -641,7 +641,7 @@ class CompanyController extends Controller
             $certificates->certificate_number = $new_siries;
             $certificates->date_print = $request->input('date_print');
             $certificates->current_status = 'telah dicetak';
-            $certificates->qrlink = 'http://skkm.gov.my/esijil/pelajar/'. $certificates->id;
+            $certificates->qrlink = url('pelajar/'. $certificates->id);
             $certificates->save();
 
         }
