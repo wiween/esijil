@@ -185,7 +185,7 @@ class CertificateController extends Controller
                 $certificate->officer = $request->input('officer');
                 $certificate->source = $request->input('source');
                 $certificate->session = $request->input('session');
-                $certificate->qrlink = 'http://skkm.gov.my/esijil/pelajar/'. $certificate->id;
+                $certificate->qrlink = url('pelajar/' . $certificates->id);
                 $certificate->save();
             }
 //
