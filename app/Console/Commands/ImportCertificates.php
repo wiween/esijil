@@ -54,12 +54,17 @@ class ImportCertificates extends Command
         $bar = $this->output->createProgressBar(count($data));
 
         foreach($data as $row)
-        {            
+        {   
             if($this->getOutput()->isVerbose())
                 $this->info("\nImport ". $row->name);
 
             Certificate::updateOrCreate(
-                ['ic_number' => $row->ic_number, 'batch_id' => $row->batch_id, 'programme_code' => $row->programme_code, 'level' => strtoupper($this->contructLevel($row->programme_code, 'tahap'))],
+                [
+                    'ic_number' => $row->ic_number,
+                    'batch_id' => $row->batch_id,
+                    'programme_code' => $row->programme_code,
+                    'level' => strtoupper($this->contructLevel($row->programme_code, 'tahap'))
+                ],
                 [
                     'name' => $row->name,
                     'ic_number' => $row->ic_number,
@@ -67,12 +72,23 @@ class ImportCertificates extends Command
                     'programme_code' => $row->programme_code,
                     'type' => $row->type,
                     'level' => strtoupper($this->contructLevel($row->programme_code, 'tahap')),
+                    'kod_pusat' => $row->kod_pusat,
                     'pb_name' => $row->pb_name,
                     'state_id' => $row->state_id,
                     'date_ppl' => $row->date_ppl,
                     'result_ppl' => $row->result_ppl,
                     'batch_id' => $row->batch_id,
                     'address' => $row->address,
+                    'tarikh_ppl' => $row->tarikh_ppl,
+                    'nama_syarikat' => $row->nama_syarikat,
+                    'negeri_syarikat' => $row->negeri_syarikat,
+                    'ndt_sah_mula' => $row->ndt_sah_mula,
+                    'ndt_sah_tamat' => $row->ndt_sah_tamat,
+                    'tarikh_ndt_terdahulu' => $row->tarikh_ndt_terdahulu,
+                    'tarikh_mesy_ndt' => $row->tarikh_mesy_ndt,
+                    'nama_program_terdahulu' => $row->nama_program_terdahulu,
+                    'no_sijil_dahulu' => $row->no_sijil_dahulu,
+                    'tarikh_sijil_baru_mula' => $row->tarikh_sijil_baru_mula,
                 ]
             );
 
