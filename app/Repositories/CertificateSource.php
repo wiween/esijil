@@ -13,7 +13,10 @@ class CertificateSource
             substring_index(substring_index(d.kod_program,':', 1),'-',-1) as level,
             e.nama_pusat as pb_name, g.id as state_id,
             if(f.to_visit_date_tamat = '0000-00-00', null, date_format(to_visit_date_tamat,'%m%Y')) as date_ppl,
-            null as result_ppl, b.no_batch as batch_id, e.alamat as address
+            null as result_ppl, b.no_batch as batch_id, e.alamat as address,
+            null as tarikh_ppl, null as nama_syarikat, null as negeri_syarikat, null as ndt_sah_mula,
+            null as ndt_sah_tamat, null as tarikh_ndt_terdahulu, null as tarikh_mesy_ndt, null as nama_program_terdahulu,
+            null as no_sijil_dahulu, null as tarikh_sijil_baru_mula
             from mosq.penilaian_bukan_kredit as a
             join mosq.daftar_batch as b on a.batch_id = b.id
             join mosq.profil_pelatih as c on a.pelatih_id = c.id
@@ -33,11 +36,15 @@ class CertificateSource
             END as type,
             substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level,
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
-            a.no_batch as batch_id, c.alamat as address
+            a.no_batch as batch_id, c.alamat as address,
+            a.tarikh_ppl as tarikh_ppl, null as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
+            a.ndt_sah_tamat as ndt_sah_tamat, null as tarikh_ndt_terdahulu, null as tarikh_mesy_ndt, null as nama_program_terdahulu,
+            null as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat
             left join mosq.negeri as d on d.kod_negeri = c.kod_negeri
+            left join mosq.negeri as e on a.negeri_syarikat = e.kod_negeri
             where 1 = 1
             and a.sebab_cetak = 0
             and a.jenis_tauliah <> 3
@@ -50,11 +57,15 @@ class CertificateSource
             END as type,
             substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level,
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
-            a.no_batch as batch_id, a.alamat as address
+            a.no_batch as batch_id, a.alamat as address,
+            a.tarikh_ppl as tarikh_ppl, null as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
+            a.ndt_sah_tamat as ndt_sah_tamat, null as tarikh_ndt_terdahulu, null as tarikh_mesy_ndt, null as nama_program_terdahulu,
+            null as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat
             left join mosq.negeri as d on d.kod_negeri = c.kod_negeri
+            left join mosq.negeri as e on a.negeri_syarikat = e.kod_negeri
             where 1 = 1
             and a.sebab_cetak = 0
             and a.jenis_tauliah = 3");
