@@ -10,7 +10,7 @@ class CertificateSource
         return DB::select("select c.nama_pelatih as name, c.ic_or_passport as ic_number,
             d.nama_program as programme_name,
             d.kod_program as programme_code, 'pb' as type,
-            substring_index(substring_index(d.kod_program,':', 1),'-',-1) as level,
+            substring_index(substring_index(d.kod_program,':', 1),'-',-1) as level, e.kod_pusat as kod_pusat,
             e.nama_pusat as pb_name, g.id as state_id,
             if(f.to_visit_date_tamat = '0000-00-00', null, date_format(to_visit_date_tamat,'%m%Y')) as date_ppl,
             null as result_ppl, b.no_batch as batch_id, e.alamat as address,
@@ -18,8 +18,8 @@ class CertificateSource
             null as ndt_sah_tamat, null as tarikh_ndt_terdahulu, null as tarikh_mesy_ndt, null as nama_program_terdahulu,
             null as no_sijil_dahulu, null as tarikh_sijil_baru_mula
             from mosq.penilaian_bukan_kredit as a
-            join mosq.daftar_batch as b on a.batch_id = b.id
-            join mosq.profil_pelatih as c on a.pelatih_id = c.id
+            left join mosq.daftar_batch as b on a.batch_id = b.id
+            left join mosq.profil_pelatih as c on a.pelatih_id = c.id
             join mosq.program as d on b.program_id = d.id
             join mosq.pb as e on b.pusat_id = e.id
             left join mosq.urus_ppl as f on a.urus_ppl_id = f.id
@@ -34,7 +34,7 @@ class CertificateSource
             	when a.jenis_tauliah=3 then 'ppt'
             	when a.jenis_tauliah=4 then 'ndt'
             END as type,
-            substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level,
+            substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level, c.kod_pusat as kod_pusat,
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
             a.no_batch as batch_id, c.alamat as address,
             a.tarikh_ppl as tarikh_ppl, null as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
@@ -55,7 +55,7 @@ class CertificateSource
             	when a.jenis_tauliah=3 then 'ppt'
             	when a.jenis_tauliah=4 then 'ndt'
             END as type,
-            substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level,
+            substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level, c.kod_pusat as kod_pusat,
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
             a.no_batch as batch_id, a.alamat as address,
             a.tarikh_ppl as tarikh_ppl, null as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
