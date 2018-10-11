@@ -48,7 +48,7 @@ class DataExport implements FromQuery, WithHeadings, Responsable
             ->select('certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
                 'certificates.programme_code',DB::raw('ucase(certificates.level)'),'certificates.pb_name',
                 'states.name', 'certificates.batch_id',
-                'certificates.address', 'certificates.qrlink', DB::raw('concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\') )'))
+                'certificates.address', 'certificates.qrlink', DB::raw('if(certificates.qrlink=\'ndt\')(,concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\')))'))
             ->join('states', 'certificates.state_id', '=', 'states.id')
             ->where('certificates.batch_id', $this->batch)->where('certificates.flag_printed', 'N')
             ->where('certificates.source', 'syarikat')->orderBy('certificates.Name','asc');

@@ -38,8 +38,8 @@ class CertificateSource
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
             a.no_batch as batch_id, c.alamat as address,
             a.tarikh_ppl as tarikh_ppl, null as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
-            a.ndt_sah_tamat as ndt_sah_tamat, null as tarikh_ndt_terdahulu, null as tarikh_mesy_ndt, null as nama_program_terdahulu,
-            null as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula
+            a.ndt_sah_tamat as ndt_sah_tamat, a.tarikh_ndt_dahulu as tarikh_ndt_terdahulu, a.tarikh_mesyuarat_ndt as tarikh_mesy_ndt, a.nama_program_terdahulu as nama_program_terdahulu,
+            a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat
@@ -59,8 +59,8 @@ class CertificateSource
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
             a.no_batch as batch_id, a.alamat as address,
             a.tarikh_ppl as tarikh_ppl, null as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
-            a.ndt_sah_tamat as ndt_sah_tamat, null as tarikh_ndt_terdahulu, null as tarikh_mesy_ndt, null as nama_program_terdahulu,
-            null as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula
+            a.ndt_sah_tamat as ndt_sah_tamat, a.tarikh_ndt_dahulu as tarikh_ndt_terdahulu, a.tarikh_mesyuarat_ndt as tarikh_mesy_ndt, a.nama_program_terdahulu as nama_program_terdahulu,
+            a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat
