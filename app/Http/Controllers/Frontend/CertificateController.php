@@ -174,24 +174,22 @@ class CertificateController extends Controller
         }
     }
 
-    public function updateState(Request $request,$id, $type)
+    public function updateState(Request $request, $id, $type)
     {
         foreach ($request->input('batch') as $batch) {
 
             $certificates = Certificate::where('flag_printed','N')->where('batch_id', $batch)->where('state_id', $id)->where('type', $type)->get();
-            // dd($espkm);
+            
             foreach ($certificates as $certificate) {
-
                 $certificate->officer = $request->input('officer');
                 $certificate->source = $request->input('source');
                 $certificate->session = $request->input('session');
-                $certificate->qrlink = url('pelajar/' . $certificates->id);
+                $certificate->qrlink = url('pelajar/' . $certificate->id);
                 $certificate->save();
             }
-//
         }
 //            if ($batch->save()) {
-        return redirect('/certificate/statelist/'. $type)->with('successMessage', 'Maklumat telah disahkan');
+        return redirect('/certificate/statelist/'. $id . "/" . $type)->with('successMessage', 'Maklumat telah disahkan');
 //        } else {
 //            return back()->with('errorMessage', 'Unable to create new activity into database. Contact admin');
 //        }
