@@ -191,7 +191,7 @@ class CertificateController extends Controller
 //
         }
 //            if ($batch->save()) {
-        return redirect('/certificate/statelist/'.$id . '/' . $type)->with('successMessage', 'Maklumat telah disahkan');
+        return redirect('/certificate/statelist/'. $type)->with('successMessage', 'Maklumat telah disahkan');
 //        } else {
 //            return back()->with('errorMessage', 'Unable to create new activity into database. Contact admin');
 //        }

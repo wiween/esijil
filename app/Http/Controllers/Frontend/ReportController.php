@@ -129,4 +129,6 @@ class ReportController extends Controller
         //
         return view('report.search');
     }
+
+    //dapatan index f1
 }
