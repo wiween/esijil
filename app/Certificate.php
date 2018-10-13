@@ -16,7 +16,7 @@ class Certificate extends Model
     protected $fillable = ['name', 'ic_number', 'programme_name', 'programme_code', 'type', 'level', 'kod_pusat', 'pb_name',
         'state_id', 'date_ppl', 'result_ppl', 'batch_id', 'address', 'ikh_ppl ', 'nama_syarikat', 'negeri_syarikat',
         'ndt_sah_mula', 'ndt_sah_tamat', 'tarikh_ndt_terdahulu', 'tarikh_mesy_ndt', 'nama_program_terdahulu', 'no_sijil_dahulu',
-        'tarikh_sijil_baru_mula',];
+        'tarikh_sijil_baru_mula, jenis_sijil_ndt',];
 
     public function post()
     {

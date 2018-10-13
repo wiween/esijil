@@ -29,7 +29,7 @@ class CertificateSource
             or (a.keputusan_jpp = 1 or a.keputusan_senat_induk = 1))
             union select a.nama as name, a.no_ic as ic_number, b.nama_program as programme_name, a.kod_program as programme_code, 
             case 
-            	when a.jenis_tauliah=1 then 'mosq'
+            	when a.jenis_tauliah=1 then 'pb'
             	when a.jenis_tauliah=2 then 'sldn'
             	when a.jenis_tauliah=3 then 'ppt'
             	when a.jenis_tauliah=4 then 'ndt'
@@ -39,7 +39,7 @@ class CertificateSource
             a.no_batch as batch_id, c.alamat as address,
             a.tarikh_ppl as tarikh_ppl, null as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
             a.ndt_sah_tamat as ndt_sah_tamat, a.tarikh_ndt_dahulu as tarikh_ndt_terdahulu, a.tarikh_mesyuarat_ndt as tarikh_mesy_ndt, a.nama_program_terdahulu as nama_program_terdahulu,
-            a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula
+            a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula, a.jenis_sijil_ndt as jenis_sijil
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat
@@ -50,7 +50,7 @@ class CertificateSource
             and a.jenis_tauliah <> 3
             union select a.nama as name, a.no_ic as ic_number, b.nama_program as programme_name, a.kod_program as programme_code, 
             case 
-            	when a.jenis_tauliah=1 then 'mosq'
+            	when a.jenis_tauliah=1 then 'pb'
             	when a.jenis_tauliah=2 then 'sldn'
             	when a.jenis_tauliah=3 then 'ppt'
             	when a.jenis_tauliah=4 then 'ndt'
@@ -60,7 +60,7 @@ class CertificateSource
             a.no_batch as batch_id, a.alamat as address,
             a.tarikh_ppl as tarikh_ppl, null as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
             a.ndt_sah_tamat as ndt_sah_tamat, a.tarikh_ndt_dahulu as tarikh_ndt_terdahulu, a.tarikh_mesyuarat_ndt as tarikh_mesy_ndt, a.nama_program_terdahulu as nama_program_terdahulu,
-            a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula
+            a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula, a.jenis_sijil_ndt as jenis_sijil
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat
