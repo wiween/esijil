@@ -98,6 +98,26 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
                 ->where('certificates.source', 'syarikat')->orderBy('certificates.name', 'asc');
         }
 
+        if ($this->type == 'pb') {
+            return Certificate::query()
+                ->select(
+                    'certificates.Name',
+                    'certificates.ic_number',
+                    'certificates.programme_name',
+                    'certificates.programme_code',
+                    DB::raw('ucase(certificates.level)'),
+                    'certificates.pb_name',
+                    'states.name',
+                    'certificates.batch_id',
+                    'certificates.address',
+                    'certificates.qrlink',
+                    DB::raw('concat(ifnull(certificates.batch_id, \'\'),ifnull(certificates.date_ppl,\'\'))')
+                )
+                ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
+                ->where('certificates.ic_number', $this->id)->where('certificates.flag_printed', 'N')
+                ->where('certificates.source', 'syarikat')->orderBy('certificates.name', 'asc');
+        }
+
         return Certificate::query()
             ->select('certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
                 'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
@@ -149,6 +169,14 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
                 'Kod Program', 'Tahap', 'Nama PB',
                 'State ID', 'No Batch',
                 'Nama Syarikat', 'Negeri Syarikat', 'QR Code', 'Footer',
+            ];
+        }
+
+        if ($this->type == 'pb') {
+            return [
+                'Name', 'NoKP', 'Nama Program',
+                'Kod Program', 'Tahap', 'Nama PB',
+                'State ID', 'No Batch', 'Alamat', 'QR Code', 'Footer',
             ];
         }
 
