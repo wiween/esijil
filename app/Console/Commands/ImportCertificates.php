@@ -89,6 +89,7 @@ class ImportCertificates extends Command
                     'nama_program_terdahulu' => $row->nama_program_terdahulu,
                     'no_sijil_dahulu' => $row->no_sijil_dahulu,
                     'tarikh_sijil_baru_mula' => $row->tarikh_sijil_baru_mula,
+                    'jenis_sijil' => $row->jenis_sijil,
                 ]
             );
 
