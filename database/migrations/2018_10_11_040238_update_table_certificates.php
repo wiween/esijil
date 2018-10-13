@@ -17,7 +17,7 @@ class UpdateTableCertificates extends Migration
             $table->string('kod_pusat')->after('level')->nullable();
             $table->date('tarikh_ppl')->after('updated_by')->nullable();
             $table->string('nama_syarikat')->after('tarikh_ppl')->nullable();
-            $table->string('negeri_syarikat')->after('nama_syarikat')->nullable();
+            $table->integer('negeri_syarikat')->after('nama_syarikat')->nullable();
             $table->date('ndt_sah_mula')->after('negeri_syarikat')->nullable();
             $table->date('ndt_sah_tamat')->after('ndt_sah_mula')->nullable();
             $table->date('tarikh_ndt_terdahulu')->after('ndt_sah_tamat')->nullable();

@@ -14,6 +14,7 @@ class AlterTableCertificatesAddJenisSijil extends Migration
     public function up()
     {
         Schema::table('certicates', function (Blueprint $table) {
+            // jenis_sijil_ndt 1-baharu, 2-pembaharuan 3-persijilan semula
             $table->string('jenis_sijil')->nullable;
         });
     }
