@@ -52,27 +52,14 @@ class DataExport implements FromQuery, WithHeadings, Responsable
             case 'ndt':
                 return Certificate::query()
                     ->select(
-                        'certificates.Name',
-                        'certificates.ic_number',
-                        'certificates.programme_name',
-                        'certificates.programme_code',
-                        DB::raw('ucase(certificates.level)'),
-                        'certificates.pb_name',
-                        'states.name',
-                        'certificates.batch_id',
-                        'certificates.address',
-                        'certificates.qrlink',
-                        'tarikh_ppl',
-                        'nama_syarikat',
-                        'states2.name',
-                        'ndt_sah_mula',
-                        'ndt_sah_tamat',
-                        'tarikh_ndt_terdahulu',
-                        'tarikh_mesy_ndt',
-                        'nama_program_terdahulu',
-                        'no_sijil_dahulu',
-                        'tarikh_sijil_baru_mula',
-                        'jenis_sijil',
+                        'certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
+                        'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
+                        'states.name', 'certificates.batch_id',
+                        'certificates.address', 'certificates.qrlink',
+                        'certificates.tarikh_ppl', 'certificates.nama_syarikat', 'states2.name as name2',
+                        'certificates.ndt_sah_mula', 'certificates.ndt_sah_tamat', 'tarikh_ndt_terdahulu',
+                        'certificates.tarikh_mesy_ndt', 'certificates.nama_program_terdahulu', 'certificates.no_sijil_dahulu',
+                        'certificates.tarikh_sijil_baru_mula', 'certificates.jenis_sijil',
                         DB::raw('concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(certificates.date_ppl,\'\'))')
                     )
                     ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
@@ -93,7 +80,7 @@ class DataExport implements FromQuery, WithHeadings, Responsable
                         'states.name',
                         'certificates.batch_id',
                         'nama_syarikat',
-                        'states2.name',
+                        'states2.name as name2',
                         'certificates.qrlink',
                         DB::raw('concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\'))')
                     )
@@ -149,17 +136,11 @@ class DataExport implements FromQuery, WithHeadings, Responsable
                     'Kod Program', 'Tahap', 'Nama PB',
                     'State ID', 'No Batch',
                     'Alamat', 'QR Code',
-                    'Tarikh ppl',
-                    'Nama Syarikat',
-                    'Negeri Syarikat',
-                    'NDT Sah Mula',
-                    'NDT Sah Tamat',
-                    'Tarikh NDT Terdahulu',
-                    'Tarikh Mesyuarat NDT',
-                    'Nama Program Terdahulu',
-                    'No Sijil Terdahulu',
-                    'Tarikh Sijil Baru Mula',
-                    'jenis_sijil',
+
+                    'Tarikh ppl', 'Nama Syarikat', 'Negeri Syarikat',
+                    'NDT Sah Mula', 'NDT Sah Tamat', 'Tarikh NDT Terdahulu',
+                    'Tarikh Mesyuarat NDT','Nama Program Terdahulu', 'No Sijil Terdahulu',
+                    'Tarikh Sijil Baru Mula', 'jenis_sijil',
                     'Footer',
                 ];
                 break;

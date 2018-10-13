@@ -58,7 +58,7 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
                     'certificates.qrlink',
                     'tarikh_ppl',
                     'nama_syarikat',
-                    'states2.name',
+                    'states2.name as name2',
                     'ndt_sah_mula',
                     'ndt_sah_tamat',
                     'tarikh_ndt_terdahulu',
@@ -88,8 +88,7 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
                     'states.name',
                     'certificates.batch_id',
                     'nama_syarikat',
-                    'states2.name',
-                    'certificates.address',
+                    'states2.name as name2',
                     'certificates.qrlink',
                     DB::raw('concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\'))')
                 )
@@ -144,7 +143,7 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
             ];
         }
 
-        if ($this->type == 'ndt') {
+        if ($this->type == 'sldn') {
             return [
                 'Name', 'NoKP', 'Nama Program',
                 'Kod Program', 'Tahap', 'Nama PB',
