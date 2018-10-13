@@ -16,7 +16,7 @@ class CertificateSource
             null as result_ppl, b.no_batch as batch_id, e.alamat as address,
             null as tarikh_ppl, null as nama_syarikat, null as negeri_syarikat, null as ndt_sah_mula,
             null as ndt_sah_tamat, null as tarikh_ndt_terdahulu, null as tarikh_mesy_ndt, null as nama_program_terdahulu,
-            null as no_sijil_dahulu, null as tarikh_sijil_baru_mula
+            null as no_sijil_dahulu, null as tarikh_sijil_baru_mula, null as jenis_sijil
             from mosq.penilaian_bukan_kredit as a
             left join mosq.daftar_batch as b on a.batch_id = b.id
             left join mosq.profil_pelatih as c on a.pelatih_id = c.id

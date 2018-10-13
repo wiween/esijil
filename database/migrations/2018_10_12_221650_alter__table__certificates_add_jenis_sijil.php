@@ -13,7 +13,7 @@ class AlterTableCertificatesAddJenisSijil extends Migration
      */
     public function up()
     {
-        Schema::table('certicates', function (Blueprint $table) {
+        Schema::table('certificates', function (Blueprint $table) {
             // jenis_sijil_ndt 1-baharu, 2-pembaharuan 3-persijilan semula
             $table->string('jenis_sijil')->nullable;
         });
@@ -26,7 +26,7 @@ class AlterTableCertificatesAddJenisSijil extends Migration
      */
     public function down()
     {
-        Schema::table('certicates', function (Blueprint $table) {
+        Schema::table('certificates', function (Blueprint $table) {
             $table->dropColumn('jenis_sijil');
         });
     }
