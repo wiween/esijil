@@ -47,48 +47,82 @@ class DataExport implements FromQuery, WithHeadings, Responsable
 
     public function query()
     {
-
-        if($this->type == 'ndt')
+        switch($this->type)
         {
-            return Certificate::query()
-                ->select(
-                    'certificates.Name',
-                    'certificates.ic_number',
-                    'certificates.programme_name',
-                    'certificates.programme_code',
-                    DB::raw('ucase(certificates.level)'),
-                    'certificates.pb_name',
-                    'states.name',
-                    'certificates.batch_id',
-                    'certificates.address',
-                    'certificates.qrlink',
-                    'tarikh_ppl',
-                    'nama_syarikat',
-                    'negeri_syarikat',
-                    'ndt_sah_mula',
-                    'ndt_sah_tamat',
-                    'tarikh_ndt_terdahulu',
-                    'tarikh_mesy_ndt',
-                    'nama_program_terdahulu',
-                    'no_sijil_dahulu',
-                    'tarikh_sijil_baru_mula',
-                    DB::raw('if(certificates.type=\'ndt\', concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(certificates.date_ppl,\'\')), concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\')))')
-                )
-                ->join('states', 'certificates.state_id', '=', 'states.id')
-                ->where('certificates.batch_id', $this->batch)->where('certificates.flag_printed', 'N')
-                ->where('certificates.source', 'syarikat')->orderBy('certificates.Name', 'asc');
-        }
+            case 'ndt':
+                return Certificate::query()
+                    ->select(
+                        'certificates.Name',
+                        'certificates.ic_number',
+                        'certificates.programme_name',
+                        'certificates.programme_code',
+                        DB::raw('ucase(certificates.level)'),
+                        'certificates.pb_name',
+                        'states.name',
+                        'certificates.batch_id',
+                        'certificates.address',
+                        'certificates.qrlink',
+                        'tarikh_ppl',
+                        'nama_syarikat',
+                        'states2.name',
+                        'ndt_sah_mula',
+                        'ndt_sah_tamat',
+                        'tarikh_ndt_terdahulu',
+                        'tarikh_mesy_ndt',
+                        'nama_program_terdahulu',
+                        'no_sijil_dahulu',
+                        'tarikh_sijil_baru_mula',
+                        'jenis_sijil',
+                        DB::raw('concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(certificates.date_ppl,\'\'))')
+                    )
+                    ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
+                    ->leftJoin('states as states2', 'certificates.negeri_syarikat', '=', 'states2.id')
+                    ->where('certificates.batch_id', $this->batch)->where('certificates.flag_printed', 'N')
+                    ->where('certificates.source', 'syarikat')->orderBy('certificates.Name', 'asc');
+                break;
 
-        return Certificate::query()
-            ->select('certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
-                'certificates.programme_code',DB::raw('ucase(certificates.level)'),'certificates.pb_name',
-                'states.name', 'certificates.batch_id',
-                'certificates.address', 'certificates.qrlink',
-                DB::raw('if(certificates.type=\'ndt\', concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(certificates.date_ppl,\'\')), concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\')))')
-            )
-            ->join('states', 'certificates.state_id', '=', 'states.id')
-            ->where('certificates.batch_id', $this->batch)->where('certificates.flag_printed', 'N')
-            ->where('certificates.source', 'syarikat')->orderBy('certificates.Name','asc');
+            case 'sldn':
+                return Certificate::query()
+                    ->select(
+                        'certificates.Name',
+                        'certificates.ic_number',
+                        'certificates.programme_name',
+                        'certificates.programme_code',
+                        DB::raw('ucase(certificates.level)'),
+                        'certificates.pb_name',
+                        'states.name',
+                        'certificates.batch_id',
+                        'nama_syarikat',
+                        'states2.name',
+                        'certificates.qrlink',
+                        DB::raw('concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\'))')
+                    )
+                    ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
+                    ->leftJoin('states as states2', 'certificates.negeri_syarikat', '=', 'states2.id')
+                    ->where('certificates.batch_id', $this->batch)->where('certificates.flag_printed', 'N')
+                    ->where('certificates.source', 'syarikat')->orderBy('certificates.Name', 'asc');
+                break;
+
+            default:
+                return Certificate::query()
+                    ->select(
+                        'certificates.Name',
+                        'certificates.ic_number',
+                        'certificates.programme_name',
+                        'certificates.programme_code',
+                        DB::raw('ucase(certificates.level)'),
+                        'certificates.pb_name',
+                        'states.name',
+                        'certificates.batch_id',
+                        'certificates.address',
+                        'certificates.qrlink',
+                        DB::raw('concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\'))')
+                    )
+                    ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
+                    ->where('certificates.batch_id', $this->batch)->where('certificates.flag_printed', 'N')
+                    ->where('certificates.source', 'syarikat')->orderBy('certificates.Name', 'asc');
+                break;
+        }
     }
 
 
@@ -107,31 +141,46 @@ class DataExport implements FromQuery, WithHeadings, Responsable
     public function headings(): array
     {
         //Ini untuk beri nama column
-        if ($this->type == 'ndt') {
-            return [
-                'Name', 'NoKP', 'Nama Program',
-                'Kod Program', 'Tahap', 'Nama PB',
-                'State ID', 'No Batch',
-                'Alamat', 'QR Code',
-                'Tarikh ppl',
-                'Nama Syarikat',
-                'Negeri Syarikat',
-                'NDT Sah Mula',
-                'NDT Sah Tamat',
-                'Tarikh NDT Terdahulu',
-                'Tarikh Mesyuarat NDT',
-                'Nama Program Terdahulu',
-                'No Sijil Terdahulu',
-                'Tarikh Sijil Baru Mula',
-                'Footer',
-            ];
+        switch($this->type)
+        {
+            case 'ndt':
+                return [
+                    'Name', 'NoKP', 'Nama Program',
+                    'Kod Program', 'Tahap', 'Nama PB',
+                    'State ID', 'No Batch',
+                    'Alamat', 'QR Code',
+                    'Tarikh ppl',
+                    'Nama Syarikat',
+                    'Negeri Syarikat',
+                    'NDT Sah Mula',
+                    'NDT Sah Tamat',
+                    'Tarikh NDT Terdahulu',
+                    'Tarikh Mesyuarat NDT',
+                    'Nama Program Terdahulu',
+                    'No Sijil Terdahulu',
+                    'Tarikh Sijil Baru Mula',
+                    'jenis_sijil',
+                    'Footer',
+                ];
+                break;
+
+            case 'sldn':
+                return [
+                    'Name', 'NoKP', 'Nama Program',
+                    'Kod Program', 'Tahap', 'Nama PB',
+                    'State ID', 'No Batch',
+                    'Nama Syarikat', 'Negeri Syarikat', 'QR Code', 'Footer',
+                ];
+                break;
+
+            default:
+                return [
+                    'Name', 'NoKP', 'Nama Program',
+                    'Kod Program', 'Tahap', 'Nama PB',
+                    'State ID', 'No Batch', 'Alamat', 'QR Code', 'Footer',
+                ];
+                break;
         }
 
-        return [
-            'Name', 'NoKP', 'Nama Program',
-            'Kod Program', 'Tahap', 'Nama PB',
-            'State ID', 'No Batch',
-            'Alamat', 'QR Code', 'Footer',
-        ];
     }
 }

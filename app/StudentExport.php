@@ -58,7 +58,7 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
                     'certificates.qrlink',
                     'tarikh_ppl',
                     'nama_syarikat',
-                    'negeri_syarikat',
+                    'states2.name',
                     'ndt_sah_mula',
                     'ndt_sah_tamat',
                     'tarikh_ndt_terdahulu',
@@ -66,21 +66,47 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
                     'nama_program_terdahulu',
                     'no_sijil_dahulu',
                     'tarikh_sijil_baru_mula',
-                    DB::raw('if(certificates.type=\'ndt\', concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(certificates.date_ppl,\'\')), concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\')))')
+                    'jenis_sijil',
+                    DB::raw('concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(certificates.date_ppl,\'\'))')
                 )
-                ->join('states', 'certificates.state_id', '=', 'states.id')
+                ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
+                ->leftJoin('states as states2', 'certificates.negeri_syarikat', '=', 'states2.id')
                 ->where('certificates.ic_number', $this->id)->where('certificates.flag_printed', 'N')
                 ->where('certificates.source', 'syarikat')->orderBy('certificates.name', 'asc');
 
         }
+
+        if ($this->type == 'sldn') {
+            return Certificate::query()
+                ->select(
+                    'certificates.Name',
+                    'certificates.ic_number',
+                    'certificates.programme_name',
+                    'certificates.programme_code',
+                    DB::raw('ucase(certificates.level)'),
+                    'certificates.pb_name',
+                    'states.name',
+                    'certificates.batch_id',
+                    'nama_syarikat',
+                    'states2.name',
+                    'certificates.address',
+                    'certificates.qrlink',
+                    DB::raw('concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\'))')
+                )
+                ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
+                ->leftJoin('states as states2', 'certificates.negeri_syarikat', '=', 'states2.id')
+                ->where('certificates.ic_number', $this->id)->where('certificates.flag_printed', 'N')
+                ->where('certificates.source', 'syarikat')->orderBy('certificates.name', 'asc');
+        }
+
         return Certificate::query()
             ->select('certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
                 'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
                 'states.name',
                 'certificates.batch_id', 'certificates.address', 'certificates.qrlink',
-                DB::raw('if(certificates.type=\'ndt\', concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(certificates.date_ppl,\'\')), concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\')))')
+                DB::raw('concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\'))')
                 )
-            ->join('states', 'certificates.state_id', '=', 'states.id')
+            ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
             ->where('certificates.ic_number', $this->id)->where('certificates.flag_printed', 'N')
             ->where('certificates.source', 'syarikat')->orderBy('certificates.name','asc');
     }
@@ -118,11 +144,19 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
             ];
         }
 
+        if ($this->type == 'ndt') {
+            return [
+                'Name', 'NoKP', 'Nama Program',
+                'Kod Program', 'Tahap', 'Nama PB',
+                'State ID', 'No Batch',
+                'Nama Syarikat', 'Negeri Syarikat', 'QR Code', 'Footer',
+            ];
+        }
+
         return [
             'Name', 'NoKP', 'Nama Program',
             'Kod Program', 'Tahap', 'Nama PB',
-            'State ID',
-            'No Batch', 'Alamat', 'QR Code', 'Footer',
+            'State ID','No Batch', 'Alamat', 'QR Code', 'Footer',
         ];
     }
 
