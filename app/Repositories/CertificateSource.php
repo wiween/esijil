@@ -37,7 +37,7 @@ class CertificateSource
             substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level, c.kod_pusat as kod_pusat,
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
             a.no_batch as batch_id, c.alamat as address,
-            a.tarikh_ppl as tarikh_ppl, null as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
+            a.tarikh_ppl as tarikh_ppl, a.nama_syarikat as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
             a.ndt_sah_tamat as ndt_sah_tamat, a.tarikh_ndt_dahulu as tarikh_ndt_terdahulu, a.tarikh_mesyuarat_ndt as tarikh_mesy_ndt, a.nama_program_terdahulu as nama_program_terdahulu,
             a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula, a.jenis_sijil_ndt as jenis_sijil
             from mosq.skm as a
@@ -58,7 +58,7 @@ class CertificateSource
             substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level, c.kod_pusat as kod_pusat,
             c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
             a.no_batch as batch_id, a.alamat as address,
-            a.tarikh_ppl as tarikh_ppl, null as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
+            a.tarikh_ppl as tarikh_ppl, a.nama_syarikat as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
             a.ndt_sah_tamat as ndt_sah_tamat, a.tarikh_ndt_dahulu as tarikh_ndt_terdahulu, a.tarikh_mesyuarat_ndt as tarikh_mesy_ndt, a.nama_program_terdahulu as nama_program_terdahulu,
             a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula, a.jenis_sijil_ndt as jenis_sijil
             from mosq.skm as a
