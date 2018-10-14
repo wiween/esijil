@@ -39,7 +39,12 @@ class CertificateSource
             a.no_batch as batch_id, c.alamat as address,
             a.tarikh_ppl as tarikh_ppl, a.nama_syarikat as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
             a.ndt_sah_tamat as ndt_sah_tamat, a.tarikh_ndt_dahulu as tarikh_ndt_terdahulu, a.tarikh_mesyuarat_ndt as tarikh_mesy_ndt, a.nama_program_terdahulu as nama_program_terdahulu,
-            a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula, a.jenis_sijil_ndt as jenis_sijil
+            a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula,
+            CASE
+                when a.jenis_sijil_ndt=1 then 'BAHARU'
+                when a.jenis_sijil_ndt=2 then 'PEMBAHARUAN'
+                when a.jenis_sijil_ndt=3 then 'PERSIJILAN SEMULA'
+            END as jenis_sijil
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat
@@ -60,7 +65,12 @@ class CertificateSource
             a.no_batch as batch_id, a.alamat as address,
             a.tarikh_ppl as tarikh_ppl, a.nama_syarikat as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
             a.ndt_sah_tamat as ndt_sah_tamat, a.tarikh_ndt_dahulu as tarikh_ndt_terdahulu, a.tarikh_mesyuarat_ndt as tarikh_mesy_ndt, a.nama_program_terdahulu as nama_program_terdahulu,
-            a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula, a.jenis_sijil_ndt as jenis_sijil
+            a.no_sijil_dahulu as no_sijil_dahulu, a.ndt_sah_mula as tarikh_sijil_baru_mula,
+            CASE
+                when a.jenis_sijil_ndt=1 then 'BAHARU'
+                when a.jenis_sijil_ndt=2 then 'PEMBAHARUAN'
+                when a.jenis_sijil_ndt=3 then 'PERSIJILAN SEMULA'
+            END as jenis_sijil
             from mosq.skm as a
             left join mosq.program as b on b.kod_program = a.kod_program
             left join mosq.pb as c on a.kod_pusat = c.kod_pusat

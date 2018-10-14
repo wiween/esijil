@@ -49,10 +49,11 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
                     'certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
                     'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
                     'states.name', 'certificates.batch_id', 'certificates.address',
-                    'certificates.qrlink', 'certificates.tarikh_ppl', 'certificates.ndt_sah_mula',
-                    'certificates.ndt_sah_tamat', 'tarikh_ndt_terdahulu', 'certificates.tarikh_mesy_ndt',
-                    'certificates.nama_program_terdahulu', 'certificates.no_sijil_dahulu', 'certificates.tarikh_sijil_baru_mula',
-                    'certificates.jenis_sijil', DB::raw('concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(date_format(certificates.tarikh_mesy_ndt, \'%Y-%m-%d\'),\'\'))')
+                    'certificates.qrlink', DB::raw('ifnull(date_format(certificates.tarikh_ppl,\'%Y-%m-%d\'),\'\')'), DB::raw('ifnull(date_format(certificates.ndt_sah_mula, \'%Y-%m-%d\'),\'\')'),
+                    DB::raw('ifnull(date_format(certificates.ndt_sah_tamat,\'%Y-%m-%d\'),\'\')'), DB::raw('ifnull(date_format(tarikh_ndt_terdahulu,\'%Y-%m-%d\'),\'\')'), DB::raw('ifnull(date_format(certificates.tarikh_mesy_ndt,\'%Y-%m-%d\'),\'\')'),
+                    'certificates.nama_program_terdahulu', 'certificates.no_sijil_dahulu', DB::raw('ifnull(date_format(certificates.tarikh_sijil_baru_mula,\'%Y-%m-%d\'),\'\')'),
+                    'certificates.jenis_sijil',
+                    DB::raw('concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(date_format(certificates.tarikh_mesy_ndt, \'%Y-%m-%d\'),\'\'))')
                 )
                 ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
                 ->where('certificates.ic_number', $this->id)->where('certificates.flag_printed', 'N')
@@ -116,10 +117,10 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
                 'Name', 'NoKP', 'Nama Program',
                 'Kod Program', 'Tahap', 'Nama PB',
                 'State ID', 'No Batch', 'Alamat',
-                'QR Code', 'Tarikh ppl', 'NDT Sah Mula',
+                'QR Code', 'Tarikh PPL', 'NDT Sah Mula',
                 'NDT Sah Tamat', 'Tarikh NDT Terdahulu', 'Tarikh Mesyuarat NDT',
                 'Nama Program Terdahulu', 'No Sijil Terdahulu', 'Tarikh Sijil Baru Mula',
-                'jenis_sijil', 'Footer',
+                'Jenis Sijil', 'Footer',
             ];
         }
 
