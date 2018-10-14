@@ -66,7 +66,7 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
                     'certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
                     'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
                     'states.name', 'certificates.batch_id', 'nama_syarikat',
-                    'states2.name as name2', 'certificates.qrlink', DB::raw('ifnull(certificates.batch_id, \'\'), "-", ifnull(date_format(certificates.tarikh_ppl, \'%Y-%m-%d\'),\'\'))')
+                    'states2.name as name2', 'certificates.qrlink', DB::raw('concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(date_format(certificates.tarikh_ppl, \'%Y-%m-%d\'),\'\'))')
                 )
                 ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
                 ->leftJoin('states as states2', 'certificates.negeri_syarikat', '=', 'states2.id')
