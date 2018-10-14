@@ -15,16 +15,16 @@ class UpdateTableCertificates extends Migration
     {
         Schema::table('certificates', function (Blueprint $table) {
             $table->string('kod_pusat')->after('level')->nullable();
-            $table->date('tarikh_ppl')->after('updated_by')->nullable();
+            $table->dateTime('tarikh_ppl')->after('updated_by')->nullable();
             $table->string('nama_syarikat')->after('tarikh_ppl')->nullable();
             $table->integer('negeri_syarikat')->after('nama_syarikat')->nullable();
-            $table->date('ndt_sah_mula')->after('negeri_syarikat')->nullable();
-            $table->date('ndt_sah_tamat')->after('ndt_sah_mula')->nullable();
-            $table->date('tarikh_ndt_terdahulu')->after('ndt_sah_tamat')->nullable();
-            $table->date('tarikh_mesy_ndt')->after('tarikh_ndt_terdahulu')->nullable();
+            $table->dateTime('ndt_sah_mula')->after('negeri_syarikat')->nullable();
+            $table->dateTime('ndt_sah_tamat')->after('ndt_sah_mula')->nullable();
+            $table->dateTime('tarikh_ndt_terdahulu')->after('ndt_sah_tamat')->nullable();
+            $table->dateTime('tarikh_mesy_ndt')->after('tarikh_ndt_terdahulu')->nullable();
             $table->string('nama_program_terdahulu')->after('tarikh_mesy_ndt')->nullable();
             $table->string('no_sijil_dahulu')->after('nama_program_terdahulu')->nullable();
-            $table->date('tarikh_sijil_baru_mula')->after('no_sijil_dahulu')->nullable();
+            $table->dateTime('tarikh_sijil_baru_mula')->after('no_sijil_dahulu')->nullable();
         });
     }
 

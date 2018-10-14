@@ -54,16 +54,13 @@ class DataExport implements FromQuery, WithHeadings, Responsable
                     ->select(
                         'certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
                         'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
-                        'states.name', 'certificates.batch_id',
-                        'certificates.address', 'certificates.qrlink',
-                        'certificates.tarikh_ppl', 'certificates.nama_syarikat', 'states2.name as name2',
-                        'certificates.ndt_sah_mula', 'certificates.ndt_sah_tamat', 'tarikh_ndt_terdahulu',
-                        'certificates.tarikh_mesy_ndt', 'certificates.nama_program_terdahulu', 'certificates.no_sijil_dahulu',
-                        'certificates.tarikh_sijil_baru_mula', 'certificates.jenis_sijil',
-                        DB::raw('concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(certificates.date_ppl,\'\'))')
+                        'states.name', 'certificates.batch_id', 'certificates.address',
+                        'certificates.qrlink', 'certificates.tarikh_ppl', 'certificates.ndt_sah_mula',
+                        'certificates.ndt_sah_tamat', 'tarikh_ndt_terdahulu', 'certificates.tarikh_mesy_ndt',
+                        'certificates.nama_program_terdahulu', 'certificates.no_sijil_dahulu', 'certificates.tarikh_sijil_baru_mula',
+                        'certificates.jenis_sijil', DB::raw('concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.kod_pusat,\'\'), "-", ifnull(date_format(certificates.tarikh_mesy_ndt, \'%Y-%m-%d\'),\'\'))')
                     )
                     ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
-                    ->leftJoin('states as states2', 'certificates.negeri_syarikat', '=', 'states2.id')
                     ->where('certificates.batch_id', $this->batch)->where('certificates.flag_printed', 'N')
                     ->where('certificates.source', 'syarikat')->orderBy('certificates.Name', 'asc');
                 break;
@@ -71,18 +68,10 @@ class DataExport implements FromQuery, WithHeadings, Responsable
             case 'sldn':
                 return Certificate::query()
                     ->select(
-                        'certificates.Name',
-                        'certificates.ic_number',
-                        'certificates.programme_name',
-                        'certificates.programme_code',
-                        DB::raw('ucase(certificates.level)'),
-                        'certificates.pb_name',
-                        'states.name',
-                        'certificates.batch_id',
-                        'nama_syarikat',
-                        'states2.name as name2',
-                        'certificates.qrlink',
-                        DB::raw('concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\'))')
+                        'certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
+                        'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
+                        'states.name', 'certificates.batch_id', 'nama_syarikat',
+                        'states2.name as name2', 'certificates.qrlink', DB::raw('ifnull(certificates.batch_id, \'\'), "-", ifnull(date_format(certificates.tarikh_ppl, \'%Y-%m-%d\'),\'\'))')
                     )
                     ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
                     ->leftJoin('states as states2', 'certificates.negeri_syarikat', '=', 'states2.id')
@@ -93,17 +82,10 @@ class DataExport implements FromQuery, WithHeadings, Responsable
             case 'pb':
                 return Certificate::query()
                     ->select(
-                        'certificates.Name',
-                        'certificates.ic_number',
-                        'certificates.programme_name',
-                        'certificates.programme_code',
-                        DB::raw('ucase(certificates.level)'),
-                        'certificates.pb_name',
-                        'states.name',
-                        'certificates.batch_id',
-                        'certificates.address',
-                        'certificates.qrlink',
-                        DB::raw('concat(ifnull(certificates.batch_id, \'\'),ifnull(certificates.date_ppl,\'\'))')
+                        'certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
+                        'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
+                        'states.name', 'certificates.batch_id', 'certificates.address',
+                        'certificates.qrlink', DB::raw('concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(certificates.date_ppl,\'\'))')
                     )
                     ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
                     ->where('certificates.batch_id', $this->batch)->where('certificates.flag_printed', 'N')
@@ -113,17 +95,10 @@ class DataExport implements FromQuery, WithHeadings, Responsable
             default:
                 return Certificate::query()
                     ->select(
-                        'certificates.Name',
-                        'certificates.ic_number',
-                        'certificates.programme_name',
-                        'certificates.programme_code',
-                        DB::raw('ucase(certificates.level)'),
-                        'certificates.pb_name',
-                        'states.name',
-                        'certificates.batch_id',
-                        'certificates.address',
-                        'certificates.qrlink',
-                        DB::raw('concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\'))')
+                        'certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
+                        'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
+                        'states.name', 'certificates.batch_id', 'certificates.address',
+                        'certificates.qrlink', DB::raw('concat(ifnull(certificates.programme_code,\'\'), "-", ifnull(certificates.date_ppl,\'\'), "-", ifnull(certificates.batch_id, \'\'))')
                     )
                     ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
                     ->where('certificates.batch_id', $this->batch)->where('certificates.flag_printed', 'N')
@@ -154,14 +129,11 @@ class DataExport implements FromQuery, WithHeadings, Responsable
                 return [
                     'Name', 'NoKP', 'Nama Program',
                     'Kod Program', 'Tahap', 'Nama PB',
-                    'State ID', 'No Batch',
-                    'Alamat', 'QR Code',
-
-                    'Tarikh ppl', 'Nama Syarikat', 'Negeri Syarikat',
-                    'NDT Sah Mula', 'NDT Sah Tamat', 'Tarikh NDT Terdahulu',
-                    'Tarikh Mesyuarat NDT','Nama Program Terdahulu', 'No Sijil Terdahulu',
-                    'Tarikh Sijil Baru Mula', 'jenis_sijil',
-                    'Footer',
+                    'State ID', 'No Batch', 'Alamat',
+                    'QR Code', 'Tarikh ppl', 'NDT Sah Mula',
+                    'NDT Sah Tamat', 'Tarikh NDT Terdahulu', 'Tarikh Mesyuarat NDT',
+                    'Nama Program Terdahulu', 'No Sijil Terdahulu', 'Tarikh Sijil Baru Mula',
+                    'jenis_sijil', 'Footer',
                 ];
                 break;
 
@@ -169,8 +141,8 @@ class DataExport implements FromQuery, WithHeadings, Responsable
                 return [
                     'Name', 'NoKP', 'Nama Program',
                     'Kod Program', 'Tahap', 'Nama PB',
-                    'State ID', 'No Batch',
-                    'Nama Syarikat', 'Negeri Syarikat', 'QR Code', 'Footer',
+                    'State ID', 'No Batch', 'Nama Syarikat',
+                    'Negeri Syarikat', 'QR Code', 'Footer',
                 ];
                 break;
 
@@ -178,7 +150,8 @@ class DataExport implements FromQuery, WithHeadings, Responsable
                 return [
                     'Name', 'NoKP', 'Nama Program',
                     'Kod Program', 'Tahap', 'Nama PB',
-                    'State ID', 'No Batch', 'Alamat', 'QR Code', 'Footer',
+                    'State ID', 'No Batch', 'Alamat',
+                    'QR Code', 'Footer',
                 ];
                 break;
         }
