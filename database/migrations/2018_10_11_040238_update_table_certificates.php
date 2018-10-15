@@ -15,7 +15,7 @@ class UpdateTableCertificates extends Migration
     {
         Schema::table('certificates', function (Blueprint $table) {
             $table->string('kod_pusat')->after('level')->nullable();
-            $table->dateTime('tarikh_ppl')->after('updated_by')->nullable();
+            $table->string('tarikh_ppl')->after('updated_by')->nullable();
             $table->string('nama_syarikat')->after('tarikh_ppl')->nullable();
             $table->integer('negeri_syarikat')->after('nama_syarikat')->nullable();
             $table->dateTime('ndt_sah_mula')->after('negeri_syarikat')->nullable();

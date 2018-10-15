@@ -49,7 +49,7 @@ class StudentExport implements FromQuery, WithHeadings, Responsable
                     'certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
                     'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
                     'states.name', 'certificates.batch_id', 'certificates.address',
-                    'certificates.qrlink', DB::raw('ifnull(date_format(certificates.tarikh_ppl,\'%Y-%m-%d\'),\'\')'), DB::raw('ifnull(date_format(certificates.ndt_sah_mula, \'%Y-%m-%d\'),\'\')'),
+                    'certificates.qrlink', 'certificates.tarikh_ppl', DB::raw('ifnull(date_format(certificates.ndt_sah_mula, \'%Y-%m-%d\'),\'\')'),
                     DB::raw('ifnull(date_format(certificates.ndt_sah_tamat,\'%Y-%m-%d\'),\'\')'), DB::raw('ifnull(date_format(tarikh_ndt_terdahulu,\'%Y-%m-%d\'),\'\')'), DB::raw('ifnull(date_format(certificates.tarikh_mesy_ndt,\'%Y-%m-%d\'),\'\')'),
                     'certificates.nama_program_terdahulu', 'certificates.no_sijil_dahulu', DB::raw('ifnull(date_format(certificates.tarikh_sijil_baru_mula,\'%Y-%m-%d\'),\'\')'),
                     'certificates.jenis_sijil',

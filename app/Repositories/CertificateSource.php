@@ -35,7 +35,7 @@ class CertificateSource
             	when a.jenis_tauliah=4 then 'ndt'
             END as type,
             substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level, c.kod_pusat as kod_pusat,
-            c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, ifnull(date_format(a.tarikh_ppl,'%m%Y'),'') as date_ppl, null as result_ppl,
+            c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
             a.no_batch as batch_id, c.alamat as address,
             a.tarikh_ppl as tarikh_ppl, a.nama_syarikat as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
             a.ndt_sah_tamat as ndt_sah_tamat, a.tarikh_ndt_dahulu as tarikh_ndt_terdahulu, a.tarikh_mesyuarat_ndt as tarikh_mesy_ndt, a.nama_program_terdahulu as nama_program_terdahulu,
@@ -61,7 +61,7 @@ class CertificateSource
             	when a.jenis_tauliah=4 then 'ndt'
             END as type,
             substring_index(substring_index(a.kod_program,':', 1),'-',-1) as level, c.kod_pusat as kod_pusat,
-            c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, ifnull(date_format(a.tarikh_ppl,'%m%Y'),'') as date_ppl, null as result_ppl,
+            c.nama_pusat as pb_name, ifnull(d.id,1) as state_id, a.tarikh_ppl as date_ppl, null as result_ppl,
             a.no_batch as batch_id, a.alamat as address,
             a.tarikh_ppl as tarikh_ppl, a.nama_syarikat as nama_syarikat, e.id as negeri_syarikat, a.ndt_sah_mula as ndt_sah_mula,
             a.ndt_sah_tamat as ndt_sah_tamat, a.tarikh_ndt_dahulu as tarikh_ndt_terdahulu, a.tarikh_mesyuarat_ndt as tarikh_mesy_ndt, a.nama_program_terdahulu as nama_program_terdahulu,
