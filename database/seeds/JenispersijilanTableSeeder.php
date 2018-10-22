@@ -21,22 +21,22 @@ class JenispersijilanTableSeeder extends Seeder
         ]);
 
         Jenispersijilan::create([
-            'name'      => 'NDT',
+            'name'      => 'ndt',
             'status'    => 'active'
         ]);
 
         Jenispersijilan::create([
-            'name'      => 'SLDN',
+            'name'      => 'sldn',
             'status'    => 'active'
         ]);
 
         Jenispersijilan::create([
-            'name'      => 'PB',
+            'name'      => 'pb',
             'status'    => 'active'
         ]);
 
         Jenispersijilan::create([
-            'name'      => 'PPT',
+            'name'      => 'ppt',
             'status'    => 'active'
         ]);
     }
