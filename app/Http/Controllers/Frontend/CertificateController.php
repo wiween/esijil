@@ -7,6 +7,7 @@ use App\Lookup;
 use App\Source;
 use App\State;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -56,7 +57,7 @@ class CertificateController extends Controller
     public function stateList($id, $type)
     {
         //
-        $batches = Certificate::distinct('batch_id')->whereNull('source')->where('state_id', $id)
+         $batches = Certificate::distinct('batch_id')->whereNull('source')->where('state_id', $id)
             ->where('type',$type)->where('flag_printed', 'N')
             ->groupBy('batch_id')->get();
 //        $batches = Batch::where('state_id', $id)->get();
@@ -221,7 +222,8 @@ class CertificateController extends Controller
     public function doneBatch()
     {
         //
-        $certificates = Certificate::distinct('batch_id')->whereNotNull('source')->where('flag_printed', 'N')
+        $user_type = Auth::user()->user_type;
+        $certificates = Certificate::distinct('batch_id')->whereNotNull('source')->where('flag_printed', 'N')->where('type', $user_type)
            ->groupBy('batch_id')->orderBy('id', 'desc')->get();
         //dd($certificates);
 //        $batch = Batch::findOrFail($batch);
