@@ -152,22 +152,26 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     //replacement
     Route::get('/replacement', 'Frontend\ReplacementController@index');
     Route::get('/replacement/list/{id}', 'Frontend\ReplacementController@list');
-    Route::post('/replacement/payment/{id}', 'Frontend\ReplacementController@payNow');
     Route::get('/replacement/destroy/{id}', 'Frontend\ReplacementController@destroy');
     Route::get('/replacement/epayment/{id}', 'Frontend\ReplacementController@payment');
     Route::get('/replacement/create/{id}/{cn}', 'Frontend\ReplacementController@create');
+    Route::post('/replacement/payment/{id}', 'Frontend\ReplacementController@payNow');
     Route::post('/replacement/create/{id}/{cn}', 'Frontend\ReplacementController@store');
     Route::post('/replacement/epayment/{id}', 'Frontend\ReplacementController@storePayment');
 
     //report
-    Route::get('/report', 'Frontend\ReportController@index');
-    Route::get('/report/F2', 'Frontend\ReportController@reportF2');
-    Route::get('/report/F3', 'Frontend\ReportController@reportF3');
-    Route::get('/report/F4', 'Frontend\ReportController@reportF4');
-    Route::post('/report/f1', 'Frontend\ReportController@reportF1');
-    Route::get('/report/download', 'Frontend\ReportController@export');
-    Route::get('/report/f1', 'Frontend\ReportController@reportSearch');
+    Route::get('/report', 'Frontend\ReportController@index');    
+    //Route::get('/report/f2', 'Frontend\ReportController@reportF2'); // ndt
+    //Route::get('/report/f3', 'Frontend\ReportController@reportF3'); // pb
+    //Route::get('/report/f4', 'Frontend\ReportController@reportF4'); // sldn
+    //Route::get('/report/f1', 'Frontend\ReportController@reportF'); // ppt
+    Route::get('/report/f/{type}', 'Frontend\ReportController@searchf');
+    Route::post('/report/f/{type}', 'Frontend\ReportController@reportf');
+    Route::get('/report/g/{type}', 'Frontend\ReportController@searchg');
+    Route::post('/report/g/{type}', 'Frontend\ReportController@reportg');
 
+    Route::get('/report/download', 'Frontend\ReportController@export');
+    Route::post('/report/f1', 'Frontend\ReportController@reportF1');
 });
 
 Route::group(['middleware' => ['audit', 'role:akauntan']], function () {
