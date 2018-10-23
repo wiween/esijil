@@ -65,7 +65,7 @@
     <div class="container">
     <div>
         <div>
-            <strong>SESI : {{  $siries_number->session }} </strong>
+            <strong>SESI : {{  ($siries_number) ? $siries_number->session : 'nan' }} </strong>
         </div>
        <div align="right">
            <strong>LAMPIRAN F
@@ -81,13 +81,13 @@
     
     <table class="top" width="100%">
         <tr>
-            <td width="50%"><b>Kaedah Penilaian :</b>  @if (Request::segment(5) == 'pb')
+            <td width="50%"><b>Kaedah Penilaian :</b>  @if ($first->type == 'pb')
                     Pusat Bertauliah
-                @elseif (Request::segment(5) == 'sldn')
+                @elseif ($first->type == 'sldn')
                     SLDN
-                @elseif (Request::segment(5) == 'ndt')
+                @elseif ($first->type == 'ndt')
                     NDT
-                @elseif (Request::segment(5) == 'ppt')
+                @elseif ($first->type == 'ppt')
                     PPT
                 @endif
             </td>
@@ -122,7 +122,7 @@
                 <td>{{  $first->level }}</td>
                 <td>{{  $certificate->certificate_number }}</td>
                 <td>{{  $certificate->tracking_number }}</td>
-                <td>{{  $certificate->date_post->format('d/m/Y') ?? 'empty' }}</td>
+                <td>{{  ($certificate->date_post) ? $certificate->date_post->format('d/m/Y') : 'nan' }}</td>
                 <td>{{  $certificate->receiver ?? 'empty' }}</td>
             </tr>
         @endforeach
