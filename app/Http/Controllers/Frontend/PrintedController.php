@@ -298,14 +298,13 @@ class PrintedController extends Controller
 
     public function updateSingle(Request $request, $id)
     {
-        //
         $certificate = Certificate::findOrFail($id);
         $certificate->address = $request->input('address');
 //        $certificate->status = $request->input('status');
 //        $certificate->flag_printed = $request->input('flag');
         $certificate->flag_printed = 'Y';
         $certificate->current_status = 'telah dicetak';
-        $certificate->certificate_number = $request->input('start_series') . $request->input('series');
+        $certificate->certificate_number = $request->input('start_siries') . $request->input('siries');
         $certificate->date_print = Carbon::now();
         $certificate->remark = $request->input('remark');
 
