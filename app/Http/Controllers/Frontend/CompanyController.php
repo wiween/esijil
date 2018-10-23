@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
+use App\Repositories\LaporanRepository;
 
 class CompanyController extends Controller
 {
@@ -657,51 +658,33 @@ class CompanyController extends Controller
         return view('company.report_list', compact('batches', 'statuses'));
     }
 
-    public function showFReport($batch, $type)
+    public function showFReport($batch, $type, LaporanRepository $laporanRepository)
     {
-        $certificates = Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id')
-            ->select('certificates.name','certificates.ic_number', 'certificates.batch_id', 'certificates.programme_name','certificates.programme_code','certificates.date_print','certificates.certificate_number','certificates.pb_name','certificates.level','posts.tracking_number as tracking_number', 'posts.date_post as date_post', 'posts.receiver as receiver')
-            ->where('certificates.batch_id', $batch)
-            ->where('certificates.flag_printed', 'Y')
-            ->where('certificates.source', 'syarikat')
-            ->where('certificates.type',$type)
-            ->orderBy('certificates.name', 'asc')
-            ->get();
-        $siries_number = Certificate::distinct('session')->where('batch_id', $batch)->where('type',$type)->groupBy('session')->first();
+        $certificates = $laporanRepository->laporanFData($batch, $type);
+        $siries_number = $laporanRepository->siriesNumber($batch, $type);
         $first = $certificates->first();
+        
         $pdf = PDF::loadView('report.f', compact('certificates', 'siries_number', 'first'))->setPaper('a4', 'landscape');
         //return $pdf->download('report.pdf');
         return $pdf->stream('F.pdf');
     }
 
-    public function showGReport($batch, $type)
+    public function showGReport($batch, $type, LaporanRepository $laporanRepository)
     {
-        $certificates = Certificate::where('batch_id', $batch)->where('flag_printed', 'Y')->orderBy('name', 'asc')
-            ->where('source', 'syarikat')->where('type',$type)->first();
-        $siries_number = Certificate::distinct('session')->where('batch_id', $batch)->where('type',$type)->groupBy('session')->first();
-        $rate = Sysvars::where('code', 'TUNTUT_G')->first()->value * 1.0;
+        $certificates = $laporanRepository->laporanGData($batch, $type);
+        $siries_number = $laporanRepository->siriesNumber($batch, $type);
+        $rate = $laporanRepository->rateTuntut();
 
         $pdf = PDF::loadView('report.g1', compact('certificates', 'siries_number', 'rate'))->setPaper('a4', 'landscape');
         //return $pdf->download('report.pdf');
         return $pdf->stream('G.pdf');
     }
 
-    public function showGMultiReport(Request $request)
-    {
-        $batchs = [];
-        $types = [];
-        $col = collect($request->batch_id);
-        $col->map(function ($item, $key) use (&$batchs, &$types) {
-                $row = explode('|', $item);
-                 //dd($row);
-                array_push($batchs, $row[0]);
-                array_push($types, $row[1]);
-            return;
-        });
-        
-        $certificates = Certificate::select('type', 'pb_name', 'batch_id', 'session')->distinct('type', 'pb_name', 'batch_id', 'session')->whereIn('batch_id', $batchs)->where('flag_printed', 'Y')->orderBy('name', 'asc')
-            ->where('source', 'syarikat')->whereIn('type', $types)->groupBy('type', 'pb_name', 'batch_id', 'session')->get();
-        $rate = Sysvars::where('code', 'TUNTUT_G')->first()->value * 1.0;        
+    public function showGMultiReport(Request $request, LaporanRepository $laporanRepository)
+    {        
+        $certificates = $laporanRepository->laporanMultiGData($request);
+        $rate = $laporanRepository->rateTuntut();
+
         $pdf = PDF::loadView('report.g2', compact('certificates', 'rate'))->setPaper('a4', 'landscape');
         //return $pdf->download('report.pdf');
         return $pdf->stream('G.pdf');

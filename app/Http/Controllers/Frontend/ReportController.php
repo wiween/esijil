@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Certificate;
+use PDF;
 use App\Report;
+use App\Certificate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use PDF;
+use App\Repositories\LaporanRepository;
 
 class ReportController extends Controller
 {
+    private $laporanRepository;
+    
+    public function __construct(LaporanRepository $laporanRepository)
+    {
+        $this->laporanRepository = $laporanRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -124,11 +132,48 @@ class ReportController extends Controller
         return $pdf->stream('F4.pdf');
     }
 
-    public function reportSearch()
+    public function searchf($type)
     {
-        //
         return view('report.search');
     }
 
+    public function reportf($type, Request $request)
+    {
+        $batch = $request->input('batch');
+        $type = $this->laporanRepository->getCons($type);
+
+        $certificates = $this->laporanRepository->laporanFData($batch, $type);
+
+        if ($certificates->isEmpty())
+        {
+            abort(404);
+        }
+
+        $siries_number = $this->laporanRepository->siriesNumber($batch, $type);
+        $first = $certificates->first();
+
+        $pdf = PDF::loadView('report.f', compact('certificates', 'siries_number', 'first'))->setPaper('a4', 'landscape');
+        //return $pdf->download('report.pdf');
+        return $pdf->stream('F.pdf');
+    }
+
+    public function searchg($type)
+    {
+        return view('report.search');
+    }
+
+    public function reportg($type, Request $request)
+    {
+        $batch = $request->input('batch');
+        $type = $this->laporanRepository->getCons($type);
+
+        $certificates = $this->laporanRepository->laporanGData($batch, $type);
+        $siries_number = $this->laporanRepository->siriesNumber($batch, $type);
+        $rate = $this->laporanRepository->rateTuntut();
+
+        $pdf = PDF::loadView('report.g1', compact('certificates', 'siries_number', 'rate'))->setPaper('a4', 'landscape');
+        //return $pdf->download('report.pdf');
+        return $pdf->stream('G.pdf');
+    }
     //dapatan index f1
 }
