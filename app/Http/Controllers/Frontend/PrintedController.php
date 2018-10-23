@@ -71,7 +71,14 @@ class PrintedController extends Controller
         //
         $certificate = Certificate::findOrFail($id);
         $statuses = Lookup::where('name', 'user_status')->get();
-        return view('print.edit', compact('certificate', 'statuses'));
+
+        foreach (CertSeq::get() as $seq) {
+            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
+        }
+
+        $seqs = Config::get('esijil.cert');
+
+        return view('print.edit', compact('certificate', 'statuses', 'seqs'));
     }
 
     public function update(Request $request, $id)
@@ -279,7 +286,14 @@ class PrintedController extends Controller
         //
         $certificate = Certificate::findOrFail($id);
         $statuses = Lookup::where('name', 'user_status')->get();
-        return view('print.single', compact('certificate', 'statuses'));
+
+        foreach (CertSeq::get() as $seq) {
+            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
+        }
+
+        $seqs = Config::get('esijil.cert');
+
+        return view('print.single', compact('certificate', 'statuses', 'seqs'));
     }
 
     public function updateSingle(Request $request, $id)
