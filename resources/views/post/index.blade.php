@@ -8,10 +8,7 @@
 @endsection
 
 @section('topButton')
-    <a href="{{ url('') }}/printpost/print" class="btn btn-link btn-float has-text">
-        <i class="icon-printer2 text-primary"></i>
-        <span>Cetak Senarai Ini</span>
-    </a>
+
 @endsection
 
 @section('content')
@@ -56,8 +53,8 @@
 
                                             <ul class="dropdown-menu dropdown-menu-right">
                                                 <li><a href="{{ url('') }}/post/show/{{ $post->id }}"><i class="icon-display"></i>Lihat & Edit</a></li>
-                                                <li><a href="{{ url('') }}/post/{{ $post->id }}"><i class="icon-printer text-success"></i>Cetak</a></li>
-                                                <li><a href="{{ url('') }}/post/destroy/{{ $post->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>
+                                                {{--<li><a href="{{ url('') }}/post/{{ $post->id }}"><i class="icon-printer text-success"></i>Cetak</a></li>--}}
+                                                {{--<li><a href="{{ url('') }}/post/destroy/{{ $post->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>--}}
                                             </ul>
                                         </li>
                                     </ul>
