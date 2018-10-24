@@ -61,7 +61,7 @@ class CertificateController extends Controller
             ->where('type',$type)->where('flag_printed', 'N')
             ->groupBy('batch_id')->get();
 //        $batches = Batch::where('state_id', $id)->get();
-        $users = User::where('role','pencetak')->get();
+        $users = User::where('role','pencetak')->where('user_type',$type)->get();
         $sources = Source::all();
         $state = State::findOrFail($id);
         //dd($batches);
@@ -101,7 +101,7 @@ class CertificateController extends Controller
     {
         //
         $certificate = Certificate::findOrFail($id);
-        $users = User::all();
+        $users = User::where('role','pencetak')->where('user_type',Auth::user()->user_type)->get();
         $sources = Source::all();
         return view('print_certificate.job', compact('certificate', 'users', 'sources'));
     }

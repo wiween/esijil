@@ -94,18 +94,24 @@ class StatusController extends Controller
     public function adminStatus($id)
     {
         //
-        $certificate = Certificate::where('ic_number',$id)->first();
-        $current_status = $certificate->current_status;
-//        /cho $current_status;
+        $exist = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $id)->count();
+        if ($exist <= 0) {
+            return view('status.noresult');
+        } else {
+            $certificates = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $id)->get();
 
-        if ($current_status == 'dalam proses percetakan' || $current_status == 'telah dicetak') {
-            return view('status.show', compact('certificate'));
-
-        } else if ($current_status == 'telah dipos' || $current_status == 'telah diterima') {
-
-            $post = Post::where('certificate_id', $certificate->id)->first();
-            return view('status.show', compact('certificate', 'post'));
+//        $certificate = Certificate::where('ic_number',$id)->first();
+//        $current_status = $certificate->current_status;
+////        /cho $current_status;
+//
+//        if ($current_status == 'dalam proses percetakan' || $current_status == 'telah dicetak') {
+            return view('status.show', compact('certificates'));
         }
+//        } else if ($current_status == 'telah dipos' || $current_status == 'telah diterima') {
+//
+//            $post = Post::where('certificate_id', $certificate->id)->first();
+//            return view('status.show', compact('certificate', 'post'));
+//        }
 
 
         //return $post;
@@ -116,6 +122,30 @@ class StatusController extends Controller
 //        }
 
 //        return view('status.show', compact('post'));
+    }
+
+    public function search()
+    {
+        //
+        return view('search.index');
+    }
+
+    public function searchResult(Request $request)
+    {
+        //
+        $a = $request->input('ic_number');
+        $b = $request->input('batch');
+        //dd ($a);
+        if ($a <> '') {
+            $certificates = Certificate::where('ic_number', 'like', '%' . $a .'%')->get();
+        }
+
+        if ($b <> '') {
+            $certificates = Certificate::where('batch_id', $b)->get();
+        }
+
+        //dd ($certificates);
+        return view('search.result', compact('certificates'));
     }
 
 
