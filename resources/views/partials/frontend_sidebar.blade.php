@@ -39,8 +39,10 @@
     <li @if (Request::segment(1) == 'certificate') class="active" @endif><a href="{{ url('') }}/certificate/list"><i
                     class="icon-add-to-list"></i> <span>Agihan Tugasan</span></a>
         <ul>
-            <li><a href="{{ url('') }}/certificate/type">Agihan Tugasan</a></li>
-            <li><a href="{{ url('') }}/certificate/done-batch">Selesai Agihan Tugasan</a></li>
+            <li><a href="{{ url('') }}/certificate/type">Agihan Tugasan Baru</a></li>
+            <li><a href="{{ url('') }}/certificate/done-batch">Selesai Agihan Tugasan Baru</a></li>
+            <li><a href="{{ url('') }}/certificate/type/redistribute">Agihan Semula</a></li>
+            <li><a href="{{ url('') }}/certificate/done-batch/redistribute">Selesai Agihan Semula</a></li>
         </ul>
     </li>
 
@@ -62,12 +64,12 @@
 {{--payment--}}
 @if (Auth::user()->access_power >= 1000)
     <li class="navigation-header"><span>Pegawai</span> <i class="icon-menu" title="Main pages"></i></li>
-    <li @if (Request::segment(1) == 'search') class="active" @endif><a href="{{ url('') }}/search"><i class="icon-search4"></i>
-            <span>Carian</span></a>
-        <ul>
-            <li><a href="{{ url('') }}/search">Carian Baru</a></li>
-        </ul>
-    </li> {{--  DONE --}}
+    {{--<li @if (Request::segment(1) == 'search') class="active" @endif><a href="{{ url('') }}/search"><i class="icon-search4"></i>--}}
+            {{--<span>Carian</span></a>--}}
+        {{--<ul>--}}
+            {{--<li><a href="{{ url('') }}/search">Carian Baru</a></li>--}}
+        {{--</ul>--}}
+    {{--</li> --}}{{--  DONE --}}
     {{--<li @if (Request::segment(1) == 'payment') class="active" @endif><a href="/payment"><i class="icon-coin-dollar"></i>--}}
             {{--<span>ePayment</span></a>--}}
         {{--<ul>--}}
@@ -77,19 +79,19 @@
     {{--</li> --}}{{--  DONE --}}
     <li @if (Request::segment(1) == 'status') class="active" @endif><a href="/status"><i class="icon-grid"></i> <span>Status</span></a>
         <ul>
-            <li><a href="{{ url('') }}/search">Semak Status</a></li>
+            <li><a href="{{ url('') }}/status/search">Semak Status</a></li>
         </ul>
     </li> {{--  DONE --}}
     <li @if (Request::segment(1) == 'replacement') class="active" @endif><a href="{{ url('') }}/replacement"><i
                     class="icon-add-to-list"></i> <span>Penggantian</span></a>
         <ul>
-            <li><a href="{{ url('') }}/search">Penggantian Baru</a></li>
+            <li><a href="{{ url('') }}/replacement/search">Penggantian Baru</a></li>
             <li><a href="{{ url('') }}/replacement">Senarai Penggantian</a></li>
         </ul>
     </li> {{--  DONE --}}
     <li @if (Request::segment(1) == 'post') class="active" @endif><a href="{{ url('') }}/post"><i class="icon-mailbox"></i> <span>Pembungkusan</span></a>
         <ul>
-            <li><a href="{{ url('') }}/search">Pembungkusan Baru</a></li>
+            <li><a href="{{ url('') }}/post/search">Pembungkusan Baru</a></li>
             <li><a href="{{ url('') }}/post">Senarai Selesai</a></li>
             <li><a href="{{ url('') }}/post/company">Senarai Syarikat Luar</a></li>
         </ul>

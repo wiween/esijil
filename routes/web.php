@@ -102,6 +102,7 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     //Cetificates
     Route::get('/certificate/type', 'Frontend\CertificateController@type');
     Route::get('/certificate/job/{id}', 'Frontend\CertificateController@job');
+    Route::post('/certificate/job/{id}', 'Frontend\CertificateController@jobRotation');
     Route::get('/certificate/edit/{id}', 'Frontend\CertificateController@edit');
     Route::get('/certificate/show/{id}', 'Frontend\CertificateController@show');
     Route::post('/certificate/edit/{id}', 'Frontend\CertificateController@update');
@@ -110,7 +111,6 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/certificate/list-done', 'Frontend\CertificateController@list_done');
     Route::get('/certificate/destroy/{id}', 'Frontend\CertificateController@destroy');
     Route::get('/certificate/done-batch', 'Frontend\CertificateController@doneBatch');
-    Route::post('/certificate/job/{id}', 'Frontend\CertificateController@jobRotation');
     Route::post('/certificate/batch/{batch}', 'Frontend\CertificateController@update');
     Route::get('/certificate/job-done/{batch}', 'Frontend\CertificateController@jobDone');
     Route::get('/certificate/list/{batch}/{type}', 'Frontend\CertificateController@index');
@@ -137,12 +137,19 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
 
 
     //post
+    Route::get('/post/search', 'Frontend\PostController@search');
+    Route::post('/post/search', 'Frontend\PostController@searchResult');
     Route::get('/post', 'Frontend\PostController@index');
     Route::get('/post/company', 'Frontend\PostController@company');
     Route::post('post/create/{id}', 'Frontend\PostController@store');
     Route::get('/post/create/{id}', 'Frontend\PostController@create');
+    Route::get('/post/create-batch/{batch}/{type}', 'Frontend\PostController@createBatch');
+    Route::post('/post/create-batch/{batch}/{type}', 'Frontend\PostController@storeBatch');
+    Route::get('/post/list/{batch}/{type}', 'Frontend\PostController@searchList');
 
     //status
+    Route::get('/status/search', 'Frontend\StatusController@search');
+    Route::post('/status/search', 'Frontend\StatusController@searchResult');
     Route::get('/status/{id}', 'Frontend\StatusController@adminStatus');
 
     //carian
@@ -151,6 +158,8 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
 
     //replacement
     Route::get('/replacement', 'Frontend\ReplacementController@index');
+    Route::get('/replacement/search', 'Frontend\ReplacementController@search');
+    Route::post('/replacement/search', 'Frontend\ReplacementController@searchResult');
     Route::get('/replacement/list/{id}', 'Frontend\ReplacementController@list');
     Route::get('/replacement/destroy/{id}', 'Frontend\ReplacementController@destroy');
     Route::get('/replacement/epayment/{id}', 'Frontend\ReplacementController@payment');
