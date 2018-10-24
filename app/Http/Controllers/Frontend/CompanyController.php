@@ -608,7 +608,6 @@ class CompanyController extends Controller
 
         for($i = 1;$i<=$total_certificates;$i++) {
 
-
             $new_number = $mynumber++;
 
 //           echo "new number" . $new_number;

@@ -4,13 +4,13 @@
 @endsection
 
 @section('mainTitle')
-    Hasil Carian
+    Senarai Pelajar Batch : {{ Request::segment(3) }}
 @endsection
 
 @section('topButton')
-    {{--<a href="/printcertificate/print" class="btn btn-link btn-float has-text">--}}
-        {{--<i class="icon-printer2 text-primary"></i>--}}
-        {{--<span>Cetak Senarai Ini</span>--}}
+    {{--<a href="{{ url('') }}/certificate/print" class="btn btn-link btn-float has-text">--}}
+    {{--<i class="icon-printer2 text-primary"></i>--}}
+    {{--<span>Cetak Senarai Ini</span>--}}
     {{--</a>--}}
 @endsection
 
@@ -22,9 +22,12 @@
                     <table class="table">
                         <tr>
                             <th>#</th>
-                            <th>No KP</th>
-                            <th>Nama</th>
-                            <th>Batch No</th>
+                            <th>No ID</th>
+                            <th>Name</th>
+                            <th>Nama Program</th>
+                            <th>Kod Program</th>
+                            {{--<th>Keputusan PPL</th>--}}
+                            <th>Tahap</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -32,8 +35,11 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="{{ url('') }}/certificate/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
-                                <td>{{ $certificate->batch_id }}</td>
+                                <td>{{ $certificate->name }}</td>
+                                <td>{{ $certificate->programme_name }}</td>
+                                <td>{{ $certificate->programme_code }}</td>
+                                {{--<td>{{ $certificate->result_ppl }}</td>--}}
+                                <td>{{ $certificate->level }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
                                         <span class="label label-success">{{ $certificate->status }}</span>
@@ -51,9 +57,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="{{ url('') }}/replacement/list/{{ $certificate->ic_number }}"><i class="icon-add-to-list text-success"></i>Penggantian</a></li>
-                                                {{--<li><a href="post/create/{{ $certificate->id }}"><i class="icon-mailbox text-success"></i>Pembungkusan</a></li>--}}
-                                                <li><a href="{{ url('') }}/status/{{ $certificate->ic_number }}"><i class="icon-reading text-success"></i>Semak Status</a></li>
+                                                <li><a href="{{ url('') }}/post/create/{{ $certificate->id }}"><i class="icon-database-edit2 text-primary"></i>Pengeposan</a></li>
                                             </ul>
                                         </li>
                                     </ul>

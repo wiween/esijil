@@ -235,4 +235,29 @@ class ReplacementController extends Controller
      * @param  \App\Replacement  $replacement
      * @return \Illuminate\Http\Response
      */
+
+    public function search()
+    {
+        //
+        return view('search.index');
+    }
+
+    public function searchResult(Request $request)
+    {
+        //
+        $a = $request->input('ic_number');
+        $b = $request->input('batch');
+        //dd ($a);
+        if ($a <> '') {
+            $certificates = Certificate::where('ic_number', 'like', '%' . $a .'%')->get();
+        }
+
+        if ($b <> '') {
+            $certificates = Certificate::where('batch_id', $b)->get();
+        }
+
+        //dd ($certificates);
+        return view('search.result', compact('certificates'));
+    }
+
 }
