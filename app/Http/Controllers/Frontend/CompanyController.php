@@ -43,7 +43,7 @@ class CompanyController extends Controller
     {
         //
         $certificates = Certificate::where('flag_printed', 'N')
-            ->where('batch_id', $batch)->orderBy('id', 'desc')
+            ->where('batch_id', $batch)->orderBy('name', 'asc')
             ->where('source', 'syarikat')->get();
         //dd($certificates);
         return view('company.list', compact('certificates'));
@@ -476,7 +476,7 @@ class CompanyController extends Controller
     {
         //
         $certificates = Certificate::where('flag_printed', 'Y')
-            ->where('batch_id', $batch)->where('type', $type)->orderBy('id', 'desc')->get();
+            ->where('batch_id', $batch)->where('type', $type)->orderBy('name', 'asc')->get();
         //dd($certificates);
         return view('company.search-list', compact('certificates'));
     }
