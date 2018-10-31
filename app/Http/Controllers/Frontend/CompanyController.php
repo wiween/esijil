@@ -670,6 +670,11 @@ class CompanyController extends Controller
         $siries_number = $laporanRepository->siriesNumber($batch, $type);
         $first = $certificates->first();
         
+        if($certificates->isEmpty())
+        {
+            return view('errors.exists');
+        }
+
         $pdf = PDF::loadView('report.f', compact('certificates', 'siries_number', 'first'))->setPaper('a4', 'landscape');
         //return $pdf->download('report.pdf');
         return $pdf->stream('F.pdf');
@@ -680,6 +685,11 @@ class CompanyController extends Controller
         $certificates = $laporanRepository->laporanGData($batch, $type);
         $siries_number = $laporanRepository->siriesNumber($batch, $type);
         $rate = $laporanRepository->rateTuntut();
+
+
+        if (! $certificates) {
+            return view('errors.exists');
+        }
 
         $pdf = PDF::loadView('report.g1', compact('certificates', 'siries_number', 'rate'))->setPaper('a4', 'landscape');
         //return $pdf->download('report.pdf');

@@ -38,8 +38,13 @@ class LaporanRepository
 
     public function laporanGData($batch, $type)
     {
-        return Certificate::where('batch_id', $batch)->where('flag_printed', 'Y')->orderBy('name', 'asc')
-            ->where('source', 'syarikat')->where('type', $type)->firstOrFail();
+        return Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id') 
+            ->where('certificates.batch_id', $batch)
+            ->where('certificates.flag_printed', 'Y')
+            ->where('certificates.source', 'syarikat')
+            ->where('certificates.type', $type)
+            ->orderBy('certificates.name', 'asc')
+            ->first();
     }
 
     public function laporanMultiGData(Request $request)
