@@ -79,10 +79,10 @@
 
     <div class="content">
         <div class="title m-b-md">
-        Sorry, We Can't Find The Page.
+        Harap maaf. Maklumat perlu melalui proses Pengeposan
         </div>
         <div class="links">
-        <a href="{{ url()->previous() }}">Back to previous</a>
+        <a href="{{ url()->previous() }}">Kembali</a>
         </div>
         <br/>
         <div class="links">
