@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-   Cetak Sijil - Maklumat Terperinci : {{ $certificate->name }}
+    Maklumat Terperinci : {{ $certificate->name }}
 @endsection
 
 @section('topButton')
@@ -33,9 +33,13 @@
                         <td>{{ $certificate->ic_number }}</td>
                     </tr>
                     <tr>
-                        <th class=" col-md-5">Name :</th>
+                        <th class=" col-md-5">Nama :</th>
                         <td>{{ $certificate->name }}</td>
                     </tr>
+                    {{--<tr>--}}
+                    {{--<th>No Kumpulan :</th>--}}
+                    {{--<td>{{ $certificate->training_group_number }}</td>--}}
+                    {{--</tr>--}}
                     <tr>
                         <th>Kod Program :</th>
                         <td>{{ $certificate->programme_code }}</td>
@@ -45,7 +49,7 @@
                         <td>{{ $certificate->programme_name }}</td>
                     </tr>
                     <tr>
-                        <th>No Batch :</th>
+                        <th>Batch No :</th>
                         <td>{{ $certificate->batch_id }}</td>
                     </tr>
                     <tr>
@@ -60,8 +64,12 @@
                         <th>Negeri :</th>
                         <td>{{ $certificate->state->name }}</td>
                     </tr>
+                    {{--<tr>--}}
+                    {{--<th>Keputusan PPL</th>--}}
+                    {{--<td>{{ $certificate->result_ppl }}</td>--}}
+                    {{--</tr>--}}
                     <tr>
-                        <th>Address</th>
+                        <th>Alamat</th>
                         <td>{{ $certificate->address }}</td>
                     </tr>
                     <tr>
@@ -84,34 +92,30 @@
                         <th>No Sijil</th>
                         <td>{{ $certificate->certificate_number }}</td>
                     </tr>
-                    <tr>
-                        <th>Tarikh Dicetak</th>
-                        <td>{{ $certificate->date_print }}</td>
-                    </tr>
                     {{--<tr>--}}
                         {{--<th>Description</th>--}}
                         {{--<td>{{ $certificate->description }}</td>--}}
                     {{--</tr>--}}
 
-                    <tr>
-                        <th>Remark</th>
-                        <td>{{ $certificate->remark }}</td>
-                    </tr>
-                    <tr>
-                        <th>Created At</th>
-                        <td>
-                            {{ $certificate->created_at->format('d M, Y') }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Updated At</th>
-                        <td>
-                            {{ $certificate->updated_at->format('d M, Y') }}
-                        </td>
-                    </tr>
+                    {{--<tr>--}}
+                        {{--<th>Remark</th>--}}
+                        {{--<td>{{ $certificate->remark }}</td>--}}
+                    {{--</tr>--}}
+                    {{--<tr>--}}
+                        {{--<th>Created At</th>--}}
+                        {{--<td>--}}
+                            {{--{{ $certificate->created_at->format('d M, Y') }}--}}
+                        {{--</td>--}}
+                    {{--</tr>--}}
+                    {{--<tr>--}}
+                        {{--<th>Updated At</th>--}}
+                        {{--<td>--}}
+                            {{--{{ $certificate->updated_at->format('d M, Y') }}--}}
+                        {{--</td>--}}
+                    {{--</tr>--}}
                 </table>
                 <br>
-                <a href="{{ url('') }}/print/edit/{{ $certificate->id }}" class="btn btn-primary btn-block">Kemaskini Rekod</a>
+                <a href="{{ url('') }}/replacement/create/{{ $certificate->id }}/{{ $certificate->certificate_number }}" class="btn btn-primary btn-block">Kemaskini Rekod</a>
 
             </div>
         </div>

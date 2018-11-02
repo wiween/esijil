@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Senarai Sijil Yang Telah Selesai Dicetak
+    Hasil Carian : Edit Maklumat Percetakan
 @endsection
 
 @section('topButton')
@@ -23,7 +23,7 @@
                         <tr>
                             <th>#</th>
                             <th>No KP</th>
-                            <th>Name</th>
+                            <th>Nama</th>
                             <th>Batch No</th>
                             <th>No Sijil</th>
                             <th>Status</th>
@@ -33,7 +33,7 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $certificate->ic_number }}</td>
-                                <td><a href="/print/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+                                <td><a href="/company-print/edit/{{$certificate->id}}">{{ $certificate->name }}</a></td>
                                 <td>{{ $certificate->batch_id }}</td>
                                 <td>{{ $certificate->certificate_number }}</td>
                                 <td>
@@ -53,8 +53,8 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="/print/print/{{ $certificate->id }}"><i class="icon-printer text-success"></i>Cetak Semula</a></li>
-                                                <li><a href="{{ url('') }}/print/edit/{{ $certificate->id }}"><i class="icon-pencil3 text-success"></i>Edit Sijil</a></li>
+                                                <li><a href="/company-print/edit/{{ $certificate->id }}"><i class="icon-display4 text-success"></i>Lihat & Edit</a></li>
+                                                {{--<li><a href="/company-list/set-flag/Y/{{ $certificate->id }}"><i class="icon-flag8 text-black-600"></i>Set Flag Cetak</a></li>--}}
                                             </ul>
                                         </li>
                                     </ul>

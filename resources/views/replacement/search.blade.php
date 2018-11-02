@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Carian : Semak Status
+    Carian : Penggantian
 @endsection
 
 @section('topButton')

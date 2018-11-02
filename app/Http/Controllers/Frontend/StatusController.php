@@ -95,6 +95,7 @@ class StatusController extends Controller
     {
         //
         $exist = Certificate::leftjoin('posts', 'certificates.id', '=', 'posts.certificate_id')->where('certificates.ic_number', $id)->count();
+
         if ($exist <= 0) {
             return view('status.noresult');
         } else {
@@ -141,7 +142,7 @@ class StatusController extends Controller
         }
 
         if ($b <> '') {
-            $certificates = Certificate::where('batch_id', $b)->get();
+            $certificates = Certificate::where('batch_id', $b)->orderBy('name', 'asc')->get();
         }
 
         //dd ($certificates);
