@@ -71,7 +71,7 @@ class DataExport implements FromQuery, WithHeadings, Responsable
                     ->select(
                         'certificates.Name', 'certificates.ic_number', 'certificates.programme_name',
                         'certificates.programme_code', DB::raw('ucase(certificates.level)'), 'certificates.pb_name',
-                        'states.name', 'certificates.batch_id', 'nama_syarikat',
+                        'states.name', 'certificates.batch_id', 'nama_syarikat', 'address',
                         'states2.name as name2', 'certificates.qrlink', DB::raw('concat(ifnull(certificates.batch_id, \'\'), "-", ifnull(date_format(certificates.tarikh_ppl, \'%Y-%m-%d\'),\'\'))')
                     )
                     ->leftJoin('states', 'certificates.state_id', '=', 'states.id')
@@ -142,7 +142,7 @@ class DataExport implements FromQuery, WithHeadings, Responsable
                 return [
                     'Name', 'NoKP', 'Nama Program',
                     'Kod Program', 'Tahap', 'Nama PB',
-                    'State ID', 'No Batch', 'Nama Syarikat',
+                    'State ID', 'No Batch', 'Nama Syarikat', 'Alamat',
                     'Negeri Syarikat', 'QR Code', 'Footer',
                 ];
                 break;
