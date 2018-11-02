@@ -111,11 +111,11 @@ class ReplacementController extends Controller
      * @param  \App\Replacement  $replacement
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$cn)
     {
         //
-        $certificates = Certificate::where('ic_number', $id)->get();
-        return view('replacement.list', compact('certificates'));
+        $certificate = Certificate::where('certificate_number', $cn)->where('id', $id)->first();
+        return view('replacement.show', compact('certificate'));
     }
 
     public function list($id)
@@ -239,7 +239,7 @@ class ReplacementController extends Controller
     public function search()
     {
         //
-        return view('search.index');
+        return view('replacement.search');
     }
 
     public function searchResult(Request $request)
@@ -253,11 +253,11 @@ class ReplacementController extends Controller
         }
 
         if ($b <> '') {
-            $certificates = Certificate::where('batch_id', $b)->get();
+            $certificates = Certificate::where('batch_id', $b)->orderBy('name', 'asc')->get();
         }
 
         //dd ($certificates);
-        return view('search.result', compact('certificates'));
+        return view('replacement.result', compact('certificates'));
     }
 
 }

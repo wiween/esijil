@@ -86,15 +86,15 @@ class PrintedController extends Controller
         //
         $certificate = Certificate::findOrFail($id);
         $certificate->address = $request->input('address');
-        $certificate->status = $request->input('status');
+//        $certificate->status = $request->input('status');
 //        $certificate->flag_printed = $request->input('flag');
-//        $certificate->flag_printed = 'Y';
-//        $certificate->current_status = 'telah dicetak';
-        $certificate->certificate_number = $request->input('start_series') . $request->input('series');
-        $certificate->date_print = Carbon::now();
+        $certificate->flag_printed = 'Y';
+        $certificate->current_status = 'telah dicetak';
+        $certificate->certificate_number = $request->input('start_siries') . $request->input('siries');
+        $certificate->date_print = $request->input('date_print');
         $certificate->remark = $request->input('remark');
 
-        if ($certificate->save()) {
+       if ($certificate->save()) {
             return redirect('/print/show/'.$id)->with('successMessage', 'Maklumat telah dikemaskini');
         } else {
             return back()->with('errorMessage', 'Tidak dapat kemaskini rekod. Hubungi Admin');
@@ -135,15 +135,15 @@ class PrintedController extends Controller
 
 ////        tgk jenis certificate
         foreach ($certificates as $certificate) {
-            if ($certificate->level == 'pc') {
+            if ($certificate->level == 'PC') {
                 $pdf = PDF::loadView('print.certificate', compact('certificates'));
             }
 
-            if ($certificate->level == 'Tahap Empat' || $certificate->level == 'Tahap Lima') {
+            if ($certificate->level == 'TAHAP EMPAT' || $certificate->level == 'TAHAP LIMA') {
                 $pdf = PDF::loadView('print.certificate45', compact('certificates'))->setPaper('a4', 'landscape');
             }
 
-            if ($certificate->level == 'Tahap Satu' || $certificate->level == 'Tahap Dua' || $certificate->level == 'Tahap Tiga') {
+            if ($certificate->level == 'TAHAP SATU' || $certificate->level == 'TAHAP DUA' || $certificate->level == 'TAHAP TIGA') {
                 if ($certificate->type == 'ndt') {
                     $pdf = PDF::loadView('print.certificatendt', compact('certificates'));
                 } else {
@@ -314,6 +314,70 @@ class PrintedController extends Controller
             return back()->with('errorMessage', 'Tidak dapat kemaskini rekod. Hubungi Admin');
         }
     }
+
+
+    public function searchEditPrint()
+    {
+        //
+        return view('print.print-edit');
+    }
+
+    public function printResult(Request $request)
+    {
+        //
+        $a = $request->input('ic_number');
+        $b = $request->input('batch');
+//        echo "a" . $a;
+//        echo "b" . $b;
+        if ($a <> '') {
+            $certificates = Certificate::where('ic_number', 'like', '%' . $a .'%')->
+            where('flag_printed', 'N')->where('source', 'dalaman')->get();
+            //dd ($certificates);
+            return view('print.result-print', compact('certificates'));
+        }
+
+        if ($b <> '') {
+            $certificates = Certificate::where('batch_id', $b)->
+            where('flag_printed', 'N')->groupBy('batch_id')->where('source', 'dalaman')->get();
+            //dd ($certificates);
+            return view('print.result-batch', compact('certificates'));
+        }
+
+
+    }
+
+    public function printEditResult(Request $request)
+    {
+        //
+        $a = $request->input('ic_number');
+        $b = $request->input('batch');
+//        echo "a" . $a;
+//        echo "b" . $b;
+        if ($a <> '') {
+            $certificates = Certificate::where('ic_number', 'like', '%' . $a .'%')->
+            where('flag_printed', 'Y')->where('source', 'dalaman')->get();
+            //dd ($certificates);
+            return view('print.edit-result', compact('certificates'));
+        }
+
+        if ($b <> '') {
+            $certificates = Certificate::where('batch_id', $b)->
+            where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'dalaman')->get();
+            //dd ($certificates);
+            return view('print.edit-batch', compact('certificates'));
+        }
+
+
+    }
+
+    public function editList($batch)
+    {
+        //
+        $certificates = Certificate::where('batch_id', $batch)->where('flag_printed', 'Y')->where('source', 'dalaman')->orderBy('name', 'asc')->get();
+        //dd($certificates);
+        return view('print.edit-batchlist', compact('certificates'));
+    }
+
 
 
 }

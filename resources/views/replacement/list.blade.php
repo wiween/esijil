@@ -20,6 +20,7 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>No KP</th>
                             <th>No Sijil</th>
                             <th>Jenis Pentauliahan</th>
                             <th>Status</th>
@@ -29,6 +30,7 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td><a href="{{ url('') }}/replacement/show/{{ $certificate->id }}">{{ $certificate->name }}</a> </td>
+                                <td>{{ $certificate->ic_number }}</td>
                                 <td>{{ $certificate->certificate_number }}</td>
                                 <td>{{ $certificate->type }}</td>
                                 <td>

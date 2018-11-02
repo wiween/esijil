@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Kemaskini Maklumat Pengeposan (Syarikat): {{ $post->certificate->ic_number }}
+    Kemaskini Maklumat Pengeposan (Dalaman): {{ $post->certificate->batch_id }}
 @endsection
 
 @section('topButton')

@@ -4,7 +4,7 @@
 @endsection
 
 @section('mainTitle')
-    Senarai Batch Yang Selesai Pengeposan - Syarikat Percetakan
+    Senarai Batch Yang Selesai Pengeposan - Dalaman
 @endsection
 
 @section('topButton')
@@ -29,12 +29,12 @@
                             <th>Penerima</th>
                             <th>No KP Penerima</th>
                             <th>Status</th>
-                            {{--<th>Action</th>--}}
+                            <th>Action</th>
                         </tr>
                         @foreach ($posts as $post)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="{{ url('') }}/company-search/detail-batch/{{ $post->tracking_number }}">{{ $post->certificate->batch_id }}</a></td>
+                                <td><a href="{{ url('') }}/post/detail-student/{{ $post->batch_id }}">{{ $post->certificate->batch_id }}</a></td>
                                 <td>{{ $post->tracking_number }}</td>
                                 <td>{{ $post->date_post->format('d M, Y') }}</td>
                                 @if($post->flag_received == 'Y')
@@ -46,30 +46,31 @@
                                     <td>Tiada Penerima</td>
                                     <td>Tiada Penerima</td>
                                 @endif
+                                <td>{{ ucwords($post->current_status) }}</td>
 
-                                <td>
-                                    @if ($post->status == 'active')
-                                        <span class="label label-success">{{ $post->status }}</span>
-                                    @elseif($post->status == 'banned')
-                                        <span class="label label-warning">{{ $post->status }}</span>
-                                    @else
-                                        <span class="label label-default">{{ $post->status }}</span>
-                                    @endif
-                                </td>
                                 {{--<td>--}}
-                                    {{--<ul class="icons-list">--}}
-                                        {{--<li class="dropdown">--}}
-                                            {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                                                {{--<i class="icon-menu9"></i>--}}
-                                            {{--</a>--}}
-
-                                            {{--<ul class="dropdown-menu dropdown-menu-right">--}}
-                                                {{--<li><a href="/company-search/detail-student/{{ $post->batch_id }}"><i class="icon-display"></i>Senarai Pelajar</a></li>--}}
-                                                {{--<li><a href="/company-search/detail-batch/{{ $post->tracking_number }}"><i class="icon-display"></i>Kemaskini Semula</a></li>--}}
-                                            {{--</ul>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
+                                    {{--@if ($post->status == 'active')--}}
+                                        {{--<span class="label label-success">{{ $post->status }}</span>--}}
+                                    {{--@elseif($post->status == 'banned')--}}
+                                        {{--<span class="label label-warning">{{ $post->status }}</span>--}}
+                                    {{--@else--}}
+                                        {{--<span class="label label-default">{{ $post->status }}</span>--}}
+                                    {{--@endif--}}
                                 {{--</td>--}}
+                                <td>
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="icon-menu9"></i>
+                                            </a>
+
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="{{ url('') }}/post/detail-student/{{ $post->batch_id }}"><i class="icon-display"></i>Senarai Pelajar</a></li>
+                                                <li><a href="{{ url('') }}/post/detail-batch/{{ $post->tracking_number }}"><i class="icon-display"></i>Kemaskini Semula</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
                             </tr>
                         @endforeach
                     </table>
