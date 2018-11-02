@@ -133,11 +133,15 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/print/print-list/{batch}/{type}', 'Frontend\PrintedController@index');
     Route::get('/print/print/{batch}/{type}', 'Frontend\PrintedController@createSiries');
     Route::post('/print/print/{batch}/{type}', 'Frontend\PrintedController@storeSiries');
+    Route::get('/print/reedit', 'Frontend\PrintedController@searchEditPrint');
+    Route::post('/print/reedit', 'Frontend\PrintedController@printEditResult');
+    Route::get('/print/edit-batchlist/{batch}', 'Frontend\PrintedController@editList');
 
 
     //post
     Route::get('/post/search', 'Frontend\PostController@search');
     Route::post('/post/search', 'Frontend\PostController@searchResult');
+    Route::get('/post/batch', 'Frontend\PostController@listDoneBatch');
     Route::get('/post', 'Frontend\PostController@index');
     Route::get('/post/company', 'Frontend\PostController@company');
     Route::post('post/create/{id}', 'Frontend\PostController@store');
@@ -145,6 +149,12 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/post/create-batch/{batch}/{type}', 'Frontend\PostController@createBatch');
     Route::post('/post/create-batch/{batch}/{type}', 'Frontend\PostController@storeBatch');
     Route::get('/post/list/{batch}/{type}', 'Frontend\PostController@searchList');
+    Route::get('/post/detail-batch/{id}', 'Frontend\PostController@editPostBatch');
+    Route::post('/post/detail-batch/{id}', 'Frontend\PostController@updatePostBatch');
+    Route::get('/post/detail-student/{id}', 'Frontend\PostController@detailStudentPost');
+//    /edit after post -- single
+    Route::get('/post/detail/{id}', 'Frontend\PostController@editPost');
+    Route::post('/post/detail/{id}', 'Frontend\PostController@updatePost');
 
     //status
     Route::get('/status/search', 'Frontend\StatusController@search');
@@ -160,6 +170,7 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/replacement/search', 'Frontend\ReplacementController@search');
     Route::post('/replacement/search', 'Frontend\ReplacementController@searchResult');
     Route::get('/replacement/list/{id}', 'Frontend\ReplacementController@list');
+    Route::get('/replacement/show/{id}/{cn}', 'Frontend\ReplacementController@show');
     Route::get('/replacement/destroy/{id}', 'Frontend\ReplacementController@destroy');
     Route::get('/replacement/epayment/{id}', 'Frontend\ReplacementController@payment');
     Route::get('/replacement/create/{id}/{cn}', 'Frontend\ReplacementController@create');

@@ -55,11 +55,11 @@
     <li class="navigation-header"><span>Pegawai Pencetak</span> <i class="icon-menu" title="Main pages"></i></li>
 
     <li @if (Request::segment(1) == 'print') class="active" @endif><a href="{{ url('') }}/print/list"><i class="icon-printer2"></i>
-            <span>Cetak</span></a>
-
+            <span>Cetak Sijil</span></a>
         <ul>
             <li><a href="{{ url('') }}/print">Cetak Sijil</a></li>
             <li><a href="{{ url('') }}/print/list-done">Selesai Cetak Sijil</a></li>
+            <li><a href="{{ url('') }}/print/reedit">Edit Sijil</a></li>
         </ul>
     </li>
 @endif
@@ -85,18 +85,18 @@
             <li><a href="{{ url('') }}/status/search">Semak Status</a></li>
         </ul>
     </li> {{--  DONE --}}
+    <li @if (Request::segment(1) == 'post') class="active" @endif><a href="{{ url('') }}/post"><i class="icon-mailbox"></i> <span>Pengeposan</span></a>
+        <ul>
+            <li><a href="{{ url('') }}/post/search">Pengeposan Baru</a></li>
+            <li><a href="{{ url('') }}/post/batch">Selesai Pengeposan</a></li>
+            <li><a href="{{ url('') }}/post/company">Pengeposan Syarikat Luar</a></li>
+        </ul>
+    </li> {{--  DONE --}}
     <li @if (Request::segment(1) == 'replacement') class="active" @endif><a href="{{ url('') }}/replacement"><i
                     class="icon-add-to-list"></i> <span>Penggantian</span></a>
         <ul>
-            <li><a href="{{ url('') }}/replacement/search">Penggantian Baru</a></li>
+            <li><a href="{{ url('') }}/replacement/search">Penggantian Sijil Baru</a></li>
             <li><a href="{{ url('') }}/replacement">Senarai Penggantian</a></li>
-        </ul>
-    </li> {{--  DONE --}}
-    <li @if (Request::segment(1) == 'post') class="active" @endif><a href="/post"><i class="icon-mailbox"></i> <span>Pembungkusan</span></a>
-        <ul>
-            <li><a href="{{ url('') }}/post/search">Pembungkusan Baru</a></li>
-            <li><a href="{{ url('') }}/post">Senarai Selesai</a></li>
-            <li><a href="{{ url('') }}/post/company">Senarai Syarikat Luar</a></li>
         </ul>
     </li> {{--  DONE --}}
 @endif
