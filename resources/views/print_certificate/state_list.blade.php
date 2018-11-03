@@ -17,26 +17,26 @@
             <form class="form-horizontal" role="form" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
-                    <label for="state" class="col-md-4 control-label">
+                    <label for="state" class="col-md-3 control-label">
                         Negeri
                         <span class="text-danger"> * </span>
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         {{ Request::segment(3) }} : {{ $state->name }}
                         @include('partials.error_block', ['item' => 'state'])
                     </div>
                 </div>
 
                 <div class="form-group{{ $errors->has('batch') ? ' has-error' : '' }}">
-                    <label for="batch" class="col-md-4 control-label">
+                    <label for="batch" class="col-md-3 control-label">
                         Senarai Batch No
                         <span class="text-danger"> * </span>
                     </label>
 
-                    <div class="col-md-6">
+                    <div class="col-md-7 form-group">
                         @foreach($batches as $batch)
                         <input name="batch[]" type="checkbox" value="{{ old('batch',$batch->batch_id) }}">
-                        <a href="{{ url('') }}/certificate/list/{{ $batch->batch_id }}/{{ $batch->type }}">[ {{  $batch->batch_id }} ]</a>
+                        <a href="{{ url('') }}/certificate/list/{{ $batch->batch_id }}/{{ $batch->type }}">[ {{  $batch->batch_id }} ]</a>  :  {{ $batch->pb_name }}
                         <br>
                         @include('partials.error_block', ['item' => 'batch'])
                         @endforeach
@@ -81,10 +81,10 @@
 
                 {{-- Maklumat Dihantar --}}
                 <div class="form-group{{ $errors->has('source') ? ' has-error' : '' }}">
-                    <label class="col-md-4 control-label">Cetakan Oleh
+                    <label class="col-md-3 control-label">Cetakan Oleh
                     <span class="text-danger"> * </span>
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <select name="source" class="form-control" v-model="officer" required>
                             <option selected>Pilih Sumber..</option>
                             @foreach ($sources as $source)
@@ -100,11 +100,11 @@
                  {{--Pegawai--}}
 
                 <div v-if="officer =='dalaman'" class="form-group{{ $errors->has('officer') ? ' has-error' : '' }}">
-                    <label class="col-md-4 control-label">
+                    <label class="col-md-3 control-label">
                         Pegawai Bertanggungjawab
                         <span class="text-danger"> * </span>
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <select name="officer" class="form-control">
                             <option selected>Select one..</option>
                             @foreach ($users as $user)
@@ -120,11 +120,11 @@
                 {{--sesi--}}
 
                 <div v-if="officer =='syarikat'" class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
-                    <label class="col-md-4 control-label">
+                    <label class="col-md-3 control-label">
                         Ref
                         <span class="text-danger"> * </span>
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <input name="session" type="text" class="form-control" value="{{ old('session') }}" required>
                         @include('partials.error_block', ['item' => 'session'])
                     </div>
