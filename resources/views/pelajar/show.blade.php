@@ -46,16 +46,16 @@
                             @endif
                     </tr>
                     <tr>
+                        <th>Tahap :</th>
+                        <td>{{  strtoupper($certificate->level) }}</td>
+                    </tr>
+                    <tr>
                         <th>Kod Program :</th>
                         <td>{{ $certificate->programme_code }}</td>
                     </tr>
                     <tr>
                         <th>Nama Program :</th>
                         <td>{{ strtoupper($certificate->programme_name) }}</td>
-                    </tr>
-                    <tr>
-                        <th>Tahap :</th>
-                        <td>{{  strtoupper($certificate->level) }}</td>
                     </tr>
                     <tr>
                         <th>Nama Pusat Bertauliah/Agensi :</th>
