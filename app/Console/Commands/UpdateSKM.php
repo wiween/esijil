@@ -52,7 +52,7 @@ class UpdateSKM extends Command
         {
             $skm = MosqSKM::find($row->id_skm);
             $skm->no_sijil = $row->certificate_number;
-            $skm->tarikh_cetak = $row->date_print;
+            $skm->tarikh_sijil = $row->date_print;
             $skm->sebab_cetak = 1;
             $skm->save();
             $bar->advance();

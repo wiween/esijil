@@ -8,4 +8,5 @@ class MosqSKM extends Model
 {
     protected $table = "mosq.skm";
     protected $primaryKey = "id_skm";
+    public $timestamps = false;
 }
