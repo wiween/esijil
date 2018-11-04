@@ -27,8 +27,7 @@
                             <th>Action</th>
                         </tr>
                         @foreach ($certificates as $certificate)
-                            {{--@if($certificate )--}}
-                            <tr>
+                           <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td><a href="{{ url('') }}/diploma/edit-batch/{{ $certificate->batch_id }}">{{ $certificate->batch_id }}</a> </td>
                                 <td>{{ $certificate->programme_name }}</td>
