@@ -25,7 +25,8 @@ class DiplomaController extends Controller
     public function batch()
     {
         //
-        $certificates = Certificate::orWhere('level','TAHAP EMPAT')->orWhere('level','TAHAP LIMA')->groupBy('batch_id')->get();
+//        $diplomas = Diploma::all();
+        $certificates = Certificate::whereIn('level',['TAHAP EMPAT','TAHAP LIMA'])->whereNull('flag_dkm')->groupBy('batch_id')->get();
         return view('diploma.batch', compact('certificates'));
     }
 
@@ -104,6 +105,7 @@ class DiplomaController extends Controller
 
         foreach($certificates as $certificate) {
             $certificate->programme_name = $request->input('diploma');
+            $certificate->flag_dkm = 'Y';
             $certificate->save();
         }
 
