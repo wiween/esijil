@@ -52,6 +52,9 @@ return [
             'prefix' => '',
             'strict' => false, //awin ubah 9/6 - sbb tak leh group by
             'engine' => null,
+            'options' => [
+                \PDO::ATTR_EMULATE_PREPARES => true
+            ],
         ],
 
         'pgsql' => [
