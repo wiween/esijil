@@ -36,7 +36,7 @@
                     <div class="col-md-7 form-group">
                         @foreach($batches as $batch)
                         <input name="batch[]" type="checkbox" value="{{ old('batch',$batch->batch_id) }}">
-                        <a href="{{ url('') }}/certificate/list/{{ $batch->batch_id }}/{{ $batch->type }}">[ {{  $batch->batch_id }} ]</a>  :  {{ $batch->pb_name }}
+                        <a href="{{ url('') }}/certificate/list/{{ $batch->batch_id }}/{{ $batch->type }}">[ {{  $batch->batch_id }} ]</a>  :  {{ $batch->pb_name }} : @if($batch->type == 'ndt'){{ $batch->tarikh_mesy_ndt->format('d/m/Y') }} @else {{ $batch->date_ppl }} @endif
                         <br>
                         @include('partials.error_block', ['item' => 'batch'])
                         @endforeach
