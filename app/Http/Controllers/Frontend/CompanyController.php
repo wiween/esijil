@@ -727,5 +727,91 @@ class CompanyController extends Controller
         return view('company.post-batchdetail', compact('posts'));
     }
 
+    public function editCertificate($batch, $type)
+    {
+
+        $total_certificates = Certificate::where('batch_id', $batch)->where('type', $type)
+            ->where('flag_printed', 'Y')->where('source', 'syarikat')->whereNotNull('certificate_number')->count();
+        $certificate = Certificate::where('batch_id', $batch)->where('type', $type)
+            ->where('flag_printed', 'Y')->where('source', 'syarikat')->whereNotNull('certificate_number')->first();
+        $a  = Certificate::where('batch_id', $batch)->where('type', $type)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('certificate_number', 'desc')->first();
+        $b  = Certificate::where('batch_id', $batch)->where('type', $type)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('certificate_number', 'desc')->first();
+
+        foreach(CertSeq::get() as $seq)
+        {
+            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
+        }
+
+        $seqs = Config::get('esijil.cert');
+
+        return view('company.edit-certificatebatch', compact('total_certificates', 'a', 'b', 'seqs','certificate'));
+
+    }
+
+    public function updateCertificate($batch, $type, Request $request)
+    {
+
+        $request->validate([
+            'date_print' => 'required',
+            'start_siries' => 'required|min:1',
+            'siries' => 'required'
+        ]);
+
+        $total_certificates = Certificate::where('batch_id', $batch)->where('type', $type)
+            ->where('flag_printed', 'Y')->where('source', 'syarikat')->whereNotNull('certificate_number')->count();
+
+        $no = $request->input('siries');
+        $number_siries = substr($no,1);
+        $mynumber = (int)$number_siries;
+//
+//        echo ($number_siries);
+//        echo "<br>after tolak" . $mynumber;
+
+        for($i = 1;$i<=$total_certificates;$i++) {
+
+            $new_number = $mynumber++;
+
+//           echo "new number" . $new_number;
+
+            //runing number untuk cetak sijil betulkan untuk 10
+
+            if ($new_number > 0 && $new_number < 10) {
+                $new_siries = $request->input('start_siries') . '00000' . $new_number;
+            }
+            if ($new_number >= 10 && $new_number < 100) {
+                $new_siries = $request->input('start_siries') . '0000' . $new_number;
+            }
+            if ($new_number >= 100 && $new_number < 1000) {
+                $new_siries = $request->input('start_siries') . '000' . $new_number;
+            }
+            if ($new_number >= 1000 && $new_number < 10000) {
+                $new_siries = $request->input('start_siries') . '00' . $new_number;
+            }
+            if ($new_number >= 10000 && $new_number < 100000) {
+                $new_siries = $request->input('start_siries') . '0' . $new_number;
+            }
+            if ($new_number >= 100000)  {
+                $new_siries = $request->input('start_siries') . $new_number;
+            }
+            //echo "<br>new siri" . $new_siries;
+            $certificates = Certificate::where('batch_id', $batch)->where('type', $type)
+                ->where('flag_printed', 'Y')->where('source', 'syarikat')->whereNotNull('certificate_number')->orderBy('name', 'asc')->first();
+
+            //save
+//            $certificates->flag_printed = 'Y';
+            $certificates->certificate_number = $new_siries;
+            $certificates->date_print = $request->input('date_print');
+//            $certificates->current_status = 'telah dicetak';
+//            $certificates->qrlink = url('pelajar/'. $certificates->id);
+            $certificates->save();
+
+        }
+
+//            if ($batch->save()) {
+//        return redirect('/print/printed/'. $batch);
+        return redirect('/company-print/edit-batchlist/'.$batch)->with('successMessage', 'Maklumat telah disimpan');
+
+    }
+
 
 }

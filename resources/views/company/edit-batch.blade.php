@@ -40,6 +40,7 @@
 
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li><a href="{{ url('') }}/company-print/edit-batchlist/{{ $certificate->batch_id }}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
+                                            <li><a href="{{ url('') }}/company-print/edit-certificatebatch/{{ $certificate->batch_id }}/{{ $certificate->type }}"><i class="icon-pencil4 text-primary"></i>Kemaskini Batch</a></li>
                                         </ul>
                                     </li>
                                 </ul>
