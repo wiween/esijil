@@ -31,7 +31,6 @@ class LaporanRepository
             ->where('certificates.flag_printed', 'Y')
             ->where('certificates.source', 'syarikat')
             ->where('certificates.type', $type)
-            ->orderBy('certificates.name', 'asc')
             ->get();
 
     }
@@ -43,7 +42,6 @@ class LaporanRepository
             ->where('certificates.flag_printed', 'Y')
             ->where('certificates.source', 'syarikat')
             ->where('certificates.type', $type)
-            ->orderBy('certificates.name', 'asc')
             ->first();
     }
 
@@ -54,21 +52,22 @@ class LaporanRepository
         $col = collect($request->batch_id);
         $col->map(function ($item, $key) use (&$batchs, &$types) {
             $row = explode('|', $item);
-                 //dd($row);
             array_push($batchs, $row[0]);
             array_push($types, $row[1]);
             return;
         });
 
-        $return = Certificate::select('type', 'pb_name', 'batch_id', 'session')
-            ->distinct('type', 'pb_name', 'batch_id', 'session')
-            ->where('flag_printed', 'Y')
-            ->where('source', 'syarikat')
-            ->whereIn('batch_id', $batchs)
-            ->whereIn('type', $types)
-            ->groupBy('type', 'pb_name', 'batch_id', 'session')
-            ->orderBy('name', 'asc')
+        $sql = Certificate::select('certificates.type', 'certificates.pb_name', 'certificates.batch_id', 'certificates.session')
+            ->join('posts', 'certificates.id', '=', 'posts.certificate_id') 
+            ->whereIn('certificates.batch_id', $batchs)
+            ->whereIn('certificates.type', $types)
+            ->where('certificates.flag_printed', 'Y')
+            ->where('certificates.source', 'syarikat')
+            ->groupBy('certificates.type', 'certificates.pb_name', 'certificates.batch_id', 'certificates.session')
+            ->orderBy('certificates.pb_name', 'asc')
             ->get();
+
+        return $sql;
     }
 
     public function rateTuntut()
