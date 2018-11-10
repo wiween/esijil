@@ -8,7 +8,7 @@ Route::get('/semak-status', 'Frontend\StatusController@checkStatus');
 
 ################### BAck end #######################################
 
-Route::get('logout', 'Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout');
 
 //
 Route::group(['middleware' => ['audit', 'role:company']], function () {
