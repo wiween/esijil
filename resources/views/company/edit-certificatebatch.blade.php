@@ -61,7 +61,7 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input name="date_print" type="date" class="form-control" value="{{ old('date_print') }}"
+                        <input name="date_print" type="date" class="form-control" value="{{ old('date_print',$certificate->date_print->format('Y-m-d')) }}"
                                required>
                         @include('partials.error_block', ['item' => 'date_print'])
                     </div>
@@ -96,13 +96,13 @@
                         @include('partials.error_block', ['item' => 'start_siries'])
                     </div>
                     {{--<div class="col-md-2">No Akhir ialah : @if ($a == '')--}}
-                            {{--000000--}}
-                        {{--@else--}}
-                            {{--{{ $a->certificate_number }}--}}
-                        {{--@endif--}}
+                    {{--000000--}}
+                    {{--@else--}}
+                    {{--{{ $a->certificate_number }}--}}
+                    {{--@endif--}}
                     {{--</div>--}}
                     <div class="col-md-3 {{ $errors->has('siries') ? ' has-error' : '' }}">
-                        <input id="siries" name="siries" type="text" class="form-control" value="{{ old('siries') }}" 
+                        <input id="siries" name="siries" type="text" class="form-control" value="{{ old('siries') }}"
                                placeholder="6 Digit No cth: 000998" required>
                         @include('partials.error_block', ['item' => 'siries'])
                     </div>
@@ -126,31 +126,26 @@
 @endsection
 
 @section('footer_script')
-<script>
-    $(document).ready(function() {
-        $('#start_siries').on('change', function(){
-            var runnum = $(this).find(':selected').data('runnum');
-            if($(this).val() != '0')
-            {
-                return $('#siries').val(padLeft(parseInt(runnum)+1, 6))
-            }
+    <script>
+        $(document).ready(function() {
+            $('#start_siries').on('change', function() {
+                var runnum = $(this).find(':selected').data('runnum');
+                $('#siries').val(padLeft(parseInt(runnum)+1, 6));
+            });
 
-            $('#siries').val('');
+            $('form').on('submit', function() {
+                var runnum = $('#start_siries').find(':selected').data('runnum');
+
+                if(runnum >=  $('#siries').val())
+                {
+                    alert('Pastikan No Siri lebih besar daripada Panduan No. Siri');
+                    return false;
+                }
+            });
         });
 
-        $('form').on('submit', function() {
-            var runnum = $('#start_siries').find(':selected').data('runnum');
-
-            if(runnum >=  $('#siries').val())
-            {
-                alert('Pastikan No Siri lebih besar daripada Panduan No. Siri');
-                return false;
-            }
-        });
-    });
-
-    function padLeft(nr, n, str){
-        return Array(n-String(nr).length+1).join(str||'0')+nr;
-    }
-</script>
+        function padLeft(nr, n, str){
+            return Array(n-String(nr).length+1).join(str||'0')+nr;
+        }
+    </script>
 @endsection
