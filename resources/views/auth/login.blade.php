@@ -60,14 +60,15 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            {{--<div class="col-md-8 offset-md-4">--}}
+                            <div class="col-md-10 offset-md-9">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
+                                {{--<a class="btn btn-link" href="{{ route('password.request') }}">--}}
+                                    {{--{{ __('Forgot Your Password?') }}--}}
+                                {{--</a>--}}
                             </div>
                         </div>
                     </form>
