@@ -661,9 +661,10 @@ class CompanyController extends Controller
 
     public function reportList($type)
     {
-        //
-        $batches = Certificate::select('batch_id', 'type', DB::raw("count(id) as jumlahstudent"))->where('flag_printed', 'Y')
-            ->where('source', 'syarikat')->where('type', $type)->groupBy('batch_id')->get();
+        $batches = Certificate::select('certificates.batch_id', 'certificates.type', DB::raw("count(certificates.id) as jumlahstudent"))
+            ->join('posts', 'certificates.id', '=', 'posts.certificate_id') 
+            ->where('certificates.flag_printed', 'Y')
+            ->where('certificates.source', 'syarikat')->where('certificates.type', $type)->groupBy('certificates.batch_id')->get();
         $statuses = Lookup::where('name', 'user_status')->get();
 
         return view('company.report_list', compact('batches', 'statuses'));
