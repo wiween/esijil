@@ -125,9 +125,9 @@
                     </div>
                     <div class="col-md-6">
                         @php
-                            foreach($seqs as $key => $val)
+                            foreach($seqs as $seq)
                             {
-                                echo strtoupper($key) . " - " . str_pad($val, 6, '0', STR_PAD_LEFT) . "<br/>";
+                                echo strtoupper($seq->datatype) . " - " . str_pad($seq->value, 6, '0', STR_PAD_LEFT) . "<br/>";
                             }
                         @endphp
                     </div>
@@ -143,11 +143,9 @@
                     <div class="col-md-2 {{ $errors->has('start_siries') ? ' has-error' : '' }}">
                         <select id="start_siries" name="start_siries" class="form-control">
                             <option value="0"><< Sila Pilih >></option>
-                            <?php
-                            foreach ($seqs as $key => $val) {
-                                echo "<option value=\"" . strtoupper($key) . "\" data-runnum=\"" . $val . "\">" . strtoupper($key) . "</option>";
-                            }
-                            ?>
+                            @foreach($seqs as $seq)
+                                <option value="{{ $seq->datatype }}" data-runnum="{{ $seq->value }}">{{ $seq->datatype }}</option>
+                            @endforeach
                         </select>
                         @include('partials.error_block', ['item' => 'start_siries'])
                     </div>
@@ -200,6 +198,16 @@
             }
 
             $('#siries').val('');
+        });
+
+        $('form').on('submit', function() {
+            var runnum = $('#start_siries').find(':selected').data('runnum');
+
+            if(runnum >=  $('#siries').val())
+            {
+                alert('Pastikan No Siri lebih besar daripada Panduan No. Siri');
+                return false;
+            }
         });
     });
 
