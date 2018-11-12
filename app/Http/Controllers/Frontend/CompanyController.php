@@ -566,11 +566,6 @@ class CompanyController extends Controller
         $a  = Certificate::where('batch_id', $batch)->where('type', $type)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('certificate_number', 'desc')->first();
         $b  = Certificate::where('batch_id', $batch)->where('type', $type)->where('flag_printed', 'Y')->where('source', 'syarikat')->orderBy('certificate_number', 'desc')->first();
         
-        foreach(CertSeq::get() as $seq)
-        {
-            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
-        }
-
         $seqs = Sysvars::where('code', 'like', 'SYARIKAT%')->get();
 
         return view('company.siries', compact('total_certificates', 'a', 'b', 'seqs'));

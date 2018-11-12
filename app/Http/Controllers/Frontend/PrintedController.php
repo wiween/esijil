@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use DB;
 use Auth;
-use App\Lookup;
 use App\CertSeq;
+use App\Lookup;
+use App\Sysvars;
 use Carbon\Carbon;
 use App\Certificate;
 use Illuminate\Http\Request;
@@ -72,33 +74,36 @@ class PrintedController extends Controller
         $certificate = Certificate::findOrFail($id);
         $statuses = Lookup::where('name', 'user_status')->get();
 
-        foreach (CertSeq::get() as $seq) {
-            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
-        }
-
-        $seqs = Config::get('esijil.cert');
+        $seqs = Sysvars::where('code', 'like', 'DALAMAN%')->get();
 
         return view('print.edit', compact('certificate', 'statuses', 'seqs'));
     }
 
     public function update(Request $request, $id)
     {
-        //
         $certificate = Certificate::findOrFail($id);
-        $certificate->address = $request->input('address');
-//        $certificate->status = $request->input('status');
-//        $certificate->flag_printed = $request->input('flag');
-        $certificate->flag_printed = 'Y';
-        $certificate->current_status = 'telah dicetak';
-        $certificate->certificate_number = $request->input('start_siries') . $request->input('siries');
-        $certificate->date_print = $request->input('date_print');
-        $certificate->remark = $request->input('remark');
+        $siries = (int)$request->input('siries');
+        $sysSiri = Sysvars::where('code', 'DALAMAN_' . $request->input('start_siries'))->first();
 
-       if ($certificate->save()) {
-            return redirect('/print/show/'.$id)->with('successMessage', 'Maklumat telah dikemaskini');
-        } else {
-            return back()->with('errorMessage', 'Tidak dapat kemaskini rekod. Hubungi Admin');
-        }
+        DB::transaction(function () use ($certificate, $sysSiri, $request, $siries) {
+            if ($request->input('start_siries') == 'NULL') {
+                $certificate->certificate_number = str_pad((string)$siries, 6, "0", STR_PAD_LEFT);
+            } else {
+                $certificate->certificate_number = $request->input('start_siries') . str_pad((string)$siries, 6, "0", STR_PAD_LEFT);
+            }
+
+            $certificate->address = $request->input('address');
+            $certificate->flag_printed = 'Y';
+            $certificate->date_print = $request->input('date_print');
+            $certificate->current_status = 'telah dicetak';
+            $certificate->remark = $request->input('remark');
+            $certificate->save();
+
+            $sysSiri->value = $siries;
+            $sysSiri->save();
+        });
+
+        return redirect('/print/show/' . $id)->with('successMessage', 'Maklumat telah dikemaskini');       
     }
 
     public function destroy($id)
@@ -205,12 +210,7 @@ class PrintedController extends Controller
         $total_certificates = Certificate::where('batch_id', $batch)->where('type', $type)
             ->where('flag_printed', 'N')->count();
 
-        foreach (CertSeq::get() as $seq) {
-            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
-        }
-
-        $seqs = Config::get('esijil.cert');
-
+        $seqs = Sysvars::where('code', 'like', 'DALAMAN%')->get();
 
         return view('print.siries', compact('total_certificates', 'seqs'));
     }
@@ -222,57 +222,33 @@ class PrintedController extends Controller
      */
     public function storeSiries(Request $request, $batch, $type)
     {
-        $total_certificates = Certificate::where('batch_id', $batch)->where('type', $type)
-            ->where('flag_printed', 'N')->count();
+        $certificates = Certificate::where('batch_id', $batch)->where('type', $type)
+            ->where('flag_printed', 'N')->get();
 
-        $no = $request->input('siries');
-        $number_siries = substr($no,1);
-        $mynumber = (int)$number_siries;
-//
-//        echo ($number_siries);
-//        echo "<br>after tolak" . $mynumber;
+        $siries = (int) $request->input('siries');
 
-        for($i = 1;$i<=$total_certificates;$i++) {
+        $sysSiri = Sysvars::where('code', 'DALAMAN_' . $request->input('start_siries'))->first();
 
-
-            $new_number = $mynumber++;
-
-//           echo "new number" . $new_number;
-
-            //runing number untuk cetak sijil betulkan untuk 10
-
-            if ($new_number > 0 && $new_number < 10) {
-                $new_siries = $request->input('start_siries') . '00000' . $new_number;
-            }
-                if ($new_number >= 10 && $new_number < 100) {
-                    $new_siries = $request->input('start_siries') . '0000' . $new_number;
+        foreach ($certificates as $certificate) {
+            DB::transaction(function () use ($certificate, $sysSiri, $request, $siries) {
+                if ($request->input('start_siries') == 'NULL') {
+                    $certificate->certificate_number = str_pad((string)$siries, 6, "0", STR_PAD_LEFT);
+                } else {
+                    $certificate->certificate_number = $request->input('start_siries') . str_pad((string)$siries, 6, "0", STR_PAD_LEFT);
                 }
-                    if ($new_number >= 100 && $new_number < 1000) {
-                        $new_siries = $request->input('start_siries') . '000' . $new_number;
-                    }
-                        if ($new_number >= 1000 && $new_number < 10000) {
-                            $new_siries = $request->input('start_siries') . '00' . $new_number;
-                        }
-                            if ($new_number >= 10000 && $new_number < 100000) {
-                                $new_siries = $request->input('start_siries') . '0' . $new_number;
-                            }
-                                if ($new_number >= 100000)  {
-                                    $new_siries = $request->input('start_siries') . $new_number;
-                                }
-            //echo "<br>new siri" . $new_siries;
-            $certificates = Certificate::where('batch_id', $batch)->where('type', $type)
-                ->where('flag_printed', 'N')->orderBy('name', 'asc')->first();
 
-            //save
-            $certificates->flag_printed = 'Y';
-            $certificates->certificate_number = $new_siries;
-            $certificates->date_print = Carbon::now();
-            $certificates->current_status = 'telah dicetak';
-            $certificates->qrlink = url('pelajar/' . $certificates->id);
-            $certificates->save();
+                $certificate->flag_printed = 'Y';
+                $certificate->date_print = Carbon::now();
+                $certificate->current_status = 'telah dicetak';
+                $certificate->qrlink = url('pelajar/' . $certificate->id);
+                $certificate->save();
 
+                $sysSiri->value = $siries;
+                $sysSiri->save();
+            });
+
+            $siries++;
         }
-
 //            if ($batch->save()) {
         return redirect('/print/printed/'. $batch);
 //        return redirect('/print/print/'. $batch . '/' . $type)->with('successMessage', 'Maklumat telah disimpan');
