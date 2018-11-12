@@ -53,6 +53,8 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
     Route::get('/company-print/edit-batchlist/{batch}', 'Frontend\CompanyController@editList');
     Route::get('/company-report/pdf/F/{batch}/{type}', 'Frontend\CompanyController@showFReport');
     Route::get('/company-report/pdf/G/{batch}/{type}', 'Frontend\CompanyController@showGReport');
+    Route::get('/company-print/edit-certificatebatch/{batch}/{type}', 'Frontend\CompanyController@editCertificate');
+    Route::post('/company-print/edit-certificatebatch/{batch}/{type}', 'Frontend\CompanyController@UpdateCertificate');
 
     // User session
     Route::get('/user/profile', 'Frontend\UserController@profile');
