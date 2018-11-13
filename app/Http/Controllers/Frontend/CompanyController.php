@@ -78,7 +78,7 @@ class CompanyController extends Controller
     {
         foreach ($request->input('batch') as $batch) {
 
-            $certificates = Certificate::where('flag_printed','N')->where('batch_id', $batch)->where('state_id', $id)->get();
+            $certificates = Certificate::where('flag_printed','N')->where('batch_id', $batch)->where('state_id', $id)->orderBy('name', 'asc')->get();
             // dd($espkm);
             foreach ($certificates as $certificate) {
 
