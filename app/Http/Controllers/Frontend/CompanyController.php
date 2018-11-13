@@ -592,7 +592,7 @@ class CompanyController extends Controller
         ]);
 
         $certificates = Certificate::where('batch_id', $batch)->where('type', $type)
-            ->where('flag_printed', 'N')->where('source', 'syarikat')->get();
+            ->where('flag_printed', 'N')->where('source', 'syarikat')->orderBy('name', 'asc')->get();
 
         $siries = (int)$request->input('siries');
 
@@ -735,7 +735,7 @@ class CompanyController extends Controller
         
         $siries = (int) $request->input('siries');
 
-        $sysSiri = Sysvars::where('code', 'SYARIKAT_' . $request->input('start_siries') )->first();
+        $sysSiri = Sysvars::where('code', 'SYARIKAT_' . $request->input('start_siries'))->first();
         
         foreach($certificates as $certificate) {
             DB::transaction(function () use ($certificate, $sysSiri, $request, $siries) {
