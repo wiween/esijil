@@ -56,8 +56,7 @@ class ImportCertificates extends Command
         foreach($data as $row)
         {   
             if($this->getOutput()->isVerbose())
-                print_r($row);
-                //$this->info("\nImport ". $row->name);
+                $this->info("\nImport ". $row->name);
 
             Certificate::updateOrCreate(
                 [
@@ -85,7 +84,7 @@ class ImportCertificates extends Command
                     'ndt_sah_mula' => ($row->ndt_sah_mula) ? trim ($row->ndt_sah_mula) : null,
                     'ndt_sah_tamat' => ($row->ndt_sah_tamat) ? trim ($row->ndt_sah_tamat) : null,
                     'tarikh_ndt_terdahulu' => ($row->tarikh_ndt_terdahulu)?trim ($row->tarikh_ndt_terdahulu) : null,
-                    'tarikh_mesy_ndt' => ($row->tarikh_mesy_ndt) ? trim ($row->tarikh_mesy_ndt) : null,
+                    'tarikh_mesy_ndt' => ($row->tarikh_mesy_ndt && $row->tarikh_mesy_ndt !== '0000-00-00') ? trim ($row->tarikh_mesy_ndt) : null,
                     'nama_program_terdahulu' => trim ($row->nama_program_terdahulu),
                     'no_sijil_dahulu' => trim ($row->no_sijil_dahulu),
                     'tarikh_sijil_baru_mula' => ($row->tarikh_sijil_baru_mula) ? trim ($row->tarikh_sijil_baru_mula) : null,
