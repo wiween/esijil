@@ -12,7 +12,7 @@ class Certificate extends Model
 {
     //
     use SoftDeletes;
-    protected $dates = ['date_print', 'date_post','date_receive', 'tarikh_mesy_ndt'];
+    protected $dates = ['date_print', 'date_post', 'date_receive', 'tarikh_mesy_ndt'];
     protected $fillable = [
         'name', 'ic_number', 'programme_name',
         'programme_code', 'type', 'level',

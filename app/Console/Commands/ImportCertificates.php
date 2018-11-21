@@ -56,14 +56,14 @@ class ImportCertificates extends Command
         foreach($data as $row)
         {   
             if($this->getOutput()->isVerbose())
-                $this->info("\nImport ". $row->name);
+                print_r($row);
+                //$this->info("\nImport ". $row->name);
 
             Certificate::updateOrCreate(
                 [
                     'ic_number' => trim($row->ic_number),
                     'batch_id' => trim($row->batch_id),
                     'programme_code' => trim($row->programme_code),
-                    'level' => strtoupper($this->contructLevel(trim($row->programme_code), 'tahap'))
                 ],
                 [
                     'name' => trim($row->name),
@@ -71,7 +71,7 @@ class ImportCertificates extends Command
                     'programme_name' => trim ($row->programme_name),
                     'programme_code' => trim ($row->programme_code),
                     'type' => trim ($row->type),
-                    'level' => strtoupper($this->contructLevel(trim($row->programme_code), 'tahap')),
+                    'level' => strtoupper($this->constructLevel($row, 'tahap')),
                     'kod_pusat' => trim($row->kod_pusat),
                     'pb_name' => trim ($row->pb_name),
                     'state_id' => trim ($row->state_id),
@@ -101,21 +101,25 @@ class ImportCertificates extends Command
         $this->info("\nDone!");
     }
 
-    private function contructLevel($code, $pre = '')
+    private function constructLevel($record, $pre = '')
     {
-        if (strpos($code, ':') || strpos($code, ';'))
+        if($record->type == 'pb')
         {
-            if(strpos($code, ':'))
-                return $this->hasYearDeli($code, $pre, ':');
-            elseif (strpos($code, ';'))
-                return $this->hasYearDeli($code, $pre, ';');
+            if (strpos($record->programme_code, ':') || strpos($record->programme_code, ';')) {
+                if (strpos($record->programme_code, ':'))
+                    return $this->hasYearDeli($record->programme_code, $pre, ':');
+                elseif (strpos($record->programme_code, ';'))
+                    return $this->hasYearDeli($record->programme_code, $pre, ';');
+            } else {
+                if (isset(explode('-', $record->programme_code)[2]))
+                    return ($pre) ? trim($pre) . " " . $this->certificateSource->numToWord(explode('-', $record->programme_code)[2]) : $this->certificateSource->numToWord(explode('-', $record->programme_code)[2]);
+
+                return null;
+            }
         }
         else
         {
-            if(isset(explode('-', $code)[2]))
-                return ($pre) ? trim($pre) . " " . $this->certificateSource->numToWord(explode('-', $code)[2]) : $this->certificateSource->numToWord(explode('-', $code)[2]);
-            
-            return 'pc';
+            return trim($pre) . " " . $this->certificateSource->numToWord($record->level);
         }
     }
 
