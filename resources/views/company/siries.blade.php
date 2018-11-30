@@ -102,7 +102,7 @@
                         {{--@endif--}}
                     {{--</div>--}}
                     <div class="col-md-3 {{ $errors->has('siries') ? ' has-error' : '' }}">
-                        <input id="siries" name="siries" type="text" class="form-control" value="{{ old('siries') }}" 
+                        <input id="siries" name="siries" type="text" class="form-control" maxlength="6" value="{{ old('siries') }}" 
                                placeholder="6 Digit No cth: 000998" required>
                         @include('partials.error_block', ['item' => 'siries'])
                     </div>
