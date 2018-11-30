@@ -84,7 +84,7 @@
                         @include('partials.error_block', ['item' => 'start_siries'])
                     </div>
                     <div class="col-md-4 {{ $errors->has('siries') ? ' has-error' : '' }}">
-                        <input id="siries" name="siries" type="text" class="form-control" value="{{ old('siries') }}" required>
+                        <input id="siries" name="siries" type="text" class="form-control" maxlength="6" value="{{ old('siries') }}" required>
                         @include('partials.error_block', ['item' => 'siries'])
                     </div>
                 </div>
