@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
 
 use PDF;
+
 class PrintedController extends Controller
 {
     //
@@ -21,7 +22,7 @@ class PrintedController extends Controller
     {
         //
         $officer = Auth::user()->email;
-        if ($officer == 'super.admin@gmail.com'){
+        if ($officer == 'super.admin@gmail.com') {
 
             $certificates = Certificate::where('batch_id', $batch)->where('type', $type)
                 ->where('flag_printed', 'N')->orderBy('name', 'asc')->get();
@@ -41,7 +42,7 @@ class PrintedController extends Controller
         //
         $officer = Auth::user()->email;
 
-        if ($officer == 'super.admin@gmail.com'){
+        if ($officer == 'super.admin@gmail.com') {
 
             $certificates = Certificate::distinct('batch_id')->whereNotNull('officer')
                 ->where('flag_printed', 'N')->orderBy('id', 'desc')
@@ -99,11 +100,13 @@ class PrintedController extends Controller
             $certificate->remark = $request->input('remark');
             $certificate->save();
 
-            $sysSiri->value = $siries;
-            $sysSiri->save();
+            if ($siries > $sysSiri->value) {
+                $sysSiri->value = $siries;
+                $sysSiri->save();
+            }
         });
 
-        return redirect('/print/show/' . $id)->with('successMessage', 'Maklumat telah dikemaskini');       
+        return redirect('/print/show/' . $id)->with('successMessage', 'Maklumat telah dikemaskini');
     }
 
     public function destroy($id)
@@ -111,7 +114,7 @@ class PrintedController extends Controller
         //
         $certificate = Certificate::findOrFail($id);
 
-        if($certificate->delete()) {
+        if ($certificate->delete()) {
             return back()->with('successMessage', 'Data telah dihapuskan');
         } else {
             return back()->with('errorMessage', 'Tidak dapat hapuskan data');
@@ -126,7 +129,7 @@ class PrintedController extends Controller
         $certificate->current_status = 'telah dicetak';
 
         if ($certificate->save()) {
-            return redirect('/print/print-list/'. $batch_id)->with('successMessage', 'Maklumat telah disahkan.');
+            return redirect('/print/print-list/' . $batch_id)->with('successMessage', 'Maklumat telah disahkan.');
         } else {
             return back()->with('errorMessage', 'Tidak dapat sahkan maklumat. Hubungi Admin.');
         }
@@ -179,7 +182,7 @@ class PrintedController extends Controller
     {
         //
         $officer = Auth::user()->email;
-        if ($officer == 'super.admin@gmail.com'){
+        if ($officer == 'super.admin@gmail.com') {
 
             $certificates = Certificate::where('flag_printed', 'Y')->groupBy('batch_id')->orderBy('id', 'desc')->get();
             return view('print.list_done', compact('certificates'));
@@ -194,7 +197,7 @@ class PrintedController extends Controller
     {
         //
         $officer = Auth::user()->email;
-        if ($officer == 'super.admin@gmail.com'){
+        if ($officer == 'super.admin@gmail.com') {
 
             $certificates = Certificate::where('batch_id', $batch)->where('flag_printed', 'Y')->orderBy('id', 'desc')->get();
             return view('print.list-detail', compact('certificates'));
@@ -225,7 +228,7 @@ class PrintedController extends Controller
         $certificates = Certificate::where('batch_id', $batch)->where('type', $type)
             ->where('flag_printed', 'N')->get();
 
-        $siries = (int) $request->input('siries');
+        $siries = (int)$request->input('siries');
 
         $sysSiri = Sysvars::where('code', 'DALAMAN_' . $request->input('start_siries'))->first();
 
@@ -243,14 +246,16 @@ class PrintedController extends Controller
                 $certificate->qrlink = url('pelajar/' . $certificate->id);
                 $certificate->save();
 
-                $sysSiri->value = $siries;
-                $sysSiri->save();
+                if ($siries > $sysSiri->value) {
+                    $sysSiri->value = $siries;
+                    $sysSiri->save();
+                }
             });
 
             $siries++;
         }
 //            if ($batch->save()) {
-        return redirect('/print/printed/'. $batch);
+        return redirect('/print/printed/' . $batch);
 //        return redirect('/print/print/'. $batch . '/' . $type)->with('successMessage', 'Maklumat telah disimpan');
 //        } else {
 //            return back()->with('errorMessag/e', 'Unable to create new activity into database. Contact admin');
@@ -267,28 +272,38 @@ class PrintedController extends Controller
             Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
         }
 
-        $seqs = Config::get('esijil.cert');
+        $seqs = Sysvars::where('code', 'like', 'DALAMAN%')->get();
 
         return view('print.single', compact('certificate', 'statuses', 'seqs'));
     }
 
     public function updateSingle(Request $request, $id)
     {
+        $siries = (int)$request->input('siries');
+
+        $sysSiri = Sysvars::where('code', 'DALAMAN_' . $request->input('start_siries'))->first();
+
         $certificate = Certificate::findOrFail($id);
+
+        if ($request->input('start_siries') == 'NULL') {
+            $certificate->certificate_number = str_pad((string)$siries, 6, "0", STR_PAD_LEFT);
+        } else {
+            $certificate->certificate_number = $request->input('start_siries') . str_pad((string)$siries, 6, "0", STR_PAD_LEFT);
+        }
+
         $certificate->address = $request->input('address');
-//        $certificate->status = $request->input('status');
-//        $certificate->flag_printed = $request->input('flag');
         $certificate->flag_printed = 'Y';
         $certificate->current_status = 'telah dicetak';
-        $certificate->certificate_number = $request->input('start_siries') . $request->input('siries');
         $certificate->date_print = Carbon::now();
         $certificate->remark = $request->input('remark');
+        $certificate->save();
 
-        if ($certificate->save()) {
-            return redirect('/print/print/'.$id);
-        } else {
-            return back()->with('errorMessage', 'Tidak dapat kemaskini rekod. Hubungi Admin');
+        if ($siries > $sysSiri->value) {
+            $sysSiri->value = $siries;
+            $sysSiri->save();
         }
+
+        return redirect('/print/print/' . $id);
     }
 
 
@@ -306,15 +321,13 @@ class PrintedController extends Controller
 //        echo "a" . $a;
 //        echo "b" . $b;
         if ($a <> '') {
-            $certificates = Certificate::where('ic_number', 'like', '%' . $a .'%')->
-            where('flag_printed', 'N')->where('source', 'dalaman')->get();
+            $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->where('flag_printed', 'N')->where('source', 'dalaman')->get();
             //dd ($certificates);
             return view('print.result-print', compact('certificates'));
         }
 
         if ($b <> '') {
-            $certificates = Certificate::where('batch_id', $b)->
-            where('flag_printed', 'N')->groupBy('batch_id')->where('source', 'dalaman')->get();
+            $certificates = Certificate::where('batch_id', $b)->where('flag_printed', 'N')->groupBy('batch_id')->where('source', 'dalaman')->get();
             //dd ($certificates);
             return view('print.result-batch', compact('certificates'));
         }
@@ -330,15 +343,13 @@ class PrintedController extends Controller
 //        echo "a" . $a;
 //        echo "b" . $b;
         if ($a <> '') {
-            $certificates = Certificate::where('ic_number', 'like', '%' . $a .'%')->
-            where('flag_printed', 'Y')->where('source', 'dalaman')->get();
+            $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->where('flag_printed', 'Y')->where('source', 'dalaman')->get();
             //dd ($certificates);
             return view('print.edit-result', compact('certificates'));
         }
 
         if ($b <> '') {
-            $certificates = Certificate::where('batch_id', $b)->
-            where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'dalaman')->get();
+            $certificates = Certificate::where('batch_id', $b)->where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'dalaman')->get();
             //dd ($certificates);
             return view('print.edit-batch', compact('certificates'));
         }
