@@ -664,6 +664,17 @@ class CompanyController extends Controller
         return $pdf->stream('G.pdf');
     }
 
+    public function showFMultiReport(Request $request, LaporanRepository $laporanRepository)
+    {
+        $batches = collect($request->input('batch_id'));
+
+        $certificates = $laporanRepository->laporanMultiFData($request);
+        PDF::setOptions(['isPhpEnabled' => true]);
+        $pdf = PDF::loadView('report.fmulti', compact('batches', 'certificates', 'rate'))->setPaper('a4', 'landscape');
+
+        return $pdf->stream('F.pdf');
+    }
+
     public function showGMultiReport(Request $request, LaporanRepository $laporanRepository)
     {
         $certificates = $laporanRepository->laporanMultiGData($request);

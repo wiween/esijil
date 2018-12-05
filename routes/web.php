@@ -48,6 +48,7 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
     Route::post('/company-print/edit/{id}', 'Frontend\CompanyController@update');
     Route::get('/company-print/search', 'Frontend\CompanyController@searchPrint');
     Route::post('/company-print/search', 'Frontend\CompanyController@printResult');
+    Route::post('/company-report/pdf/F', 'Frontend\CompanyController@showFMultiReport');
     Route::post('/company-report/pdf/G', 'Frontend\CompanyController@showGMultiReport');
     Route::get('/company-print/search-edit', 'Frontend\CompanyController@searchEditPrint');
     Route::post('/company-print/search-edit', 'Frontend\CompanyController@printEditResult');

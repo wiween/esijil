@@ -65,7 +65,7 @@
     <div class="container">
     <div>
         <div>
-            <strong>SESI : {{  ($siries_number) ? $siries_number->session : 'nan' }} </strong>
+            <strong>SESI : {{ $student->session ?? 'nan' }} </strong>
         </div>
        <div align="right">
            <strong>LAMPIRAN F

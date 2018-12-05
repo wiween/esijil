@@ -37,12 +37,37 @@ class LaporanRepository
 
     public function laporanGData($batch, $type)
     {
-        return Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id') 
+        return Certificate::join('posts', 'certificates.id', '=', 'posts.certificate_id')
             ->where('certificates.batch_id', $batch)
             ->where('certificates.flag_printed', 'Y')
             ->where('certificates.source', 'syarikat')
             ->where('certificates.type', $type)
             ->first();
+    }
+
+    public function laporanMultiFData(Request $request)
+    {
+        $batchs = [];
+        $types = [];
+        $col = collect($request->batch_id);
+        $col->map(function ($item, $key) use (&$batchs, &$types) {
+            $row = explode('|', $item);
+            array_push($batchs, $row[0]);
+            array_push($types, $row[1]);
+            return;
+        });
+
+        $sql = Certificate::select('certificates.name', 'certificates.ic_number', 'certificates.batch_id', 'certificates.session', 'certificates.programme_name', 'certificates.programme_code', 'certificates.date_print', 'certificates.type', 'certificates.certificate_number', 'certificates.pb_name', 'certificates.level', 'posts.tracking_number as tracking_number', 'posts.date_post as date_post', 'posts.receiver as receiver')
+            ->join('posts', 'certificates.id', '=', 'posts.certificate_id')
+            ->whereIn('certificates.batch_id', $batchs)
+            ->whereIn('certificates.type', $types)
+            ->where('certificates.flag_printed', 'Y')
+            ->where('certificates.source', 'syarikat')
+            ->orderBy('certificates.batch_id', 'asc')
+            ->orderBy('certificates.pb_name', 'asc')
+            ->get();
+
+        return $sql;
     }
 
     public function laporanMultiGData(Request $request)
@@ -58,7 +83,7 @@ class LaporanRepository
         });
 
         $sql = Certificate::select('certificates.type', 'certificates.pb_name', 'certificates.batch_id', 'certificates.session')
-            ->join('posts', 'certificates.id', '=', 'posts.certificate_id') 
+            ->join('posts', 'certificates.id', '=', 'posts.certificate_id')
             ->whereIn('certificates.batch_id', $batchs)
             ->whereIn('certificates.type', $types)
             ->where('certificates.flag_printed', 'Y')
@@ -77,8 +102,7 @@ class LaporanRepository
 
     public function getCons($type)
     {
-        switch($type)
-        {
+        switch ($type) {
             case 'F1':
                 return SELF::F1;
                 break;
