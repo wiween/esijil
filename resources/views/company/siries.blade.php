@@ -137,16 +137,6 @@
 
             $('#siries').val('');
         });
-
-        $('form').on('submit', function() {
-            var runnum = $('#start_siries').find(':selected').data('runnum');
-
-            if(runnum >=  $('#siries').val())
-            {
-                alert('Pastikan No Siri lebih besar daripada Panduan No. Siri');
-                return false;
-            }
-        });
     });
 
     function padLeft(nr, n, str){
