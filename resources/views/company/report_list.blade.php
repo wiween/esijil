@@ -23,6 +23,7 @@
                             <th>#</th>
                             {{--<th></th>--}}
                             <th>No Batch</th>
+                            <th>Siri</th>
                             <th>Jumlah Data</th>
                             <th>Jenis Pengajian</th>
                             <th>Action</th>
@@ -35,6 +36,7 @@
                                 </td>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{  $batch->batch_id }}</td>
+                                <td>{{  $batch->session }}</td>
                                 <td>{{ $batch->jumlahstudent }}</td>
                                 <td>{{ strtoupper($batch->type) }}</td>
                                 <td>
