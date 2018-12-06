@@ -46,6 +46,7 @@
                             <th>#</th>
                             {{--<th></th>--}}
                             <th>No Batch</th>
+                            <th>Siri</th>
                             {{--<th>Jumlah Data</th>--}}
                             {{--<th>Status</th>--}}
                             <th>Action</th>
@@ -55,6 +56,7 @@
                                 <td>{{ $loop->index + 1 }}</td>
                                 {{--<td><input name="batch[]" type="checkbox" value="{{ old('batch',$batch->batch_id) }}"></td>--}}
                                 <td><a href="{{ url('') }}/company-download/list/{{ $batch->batch_id }}">[ {{  $batch->batch_id }} ]</a></td>
+                                <td>{{ $batch->session }}</td>
                                 {{--<td>{{ $batch->count() }}</td>--}}
                                 <td>
                                     <ul class="icons-list">
