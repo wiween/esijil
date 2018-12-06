@@ -68,7 +68,7 @@ class CompanyController extends Controller
     {
         //
         $batches = Certificate::distinct('batch_id')->where('state_id', $id)->where('type', $type)->where('flag_printed', 'N')
-            ->where('source', 'syarikat')->groupBy('batch_id')->get();
+            ->where('source', 'syarikat')->groupBy('batch_id')->orderBy('session')->get();
          //dd($batches);
         $state = State::findOrFail($id);
         return view('company.state_list', compact('batches', 'state'));
@@ -611,12 +611,23 @@ class CompanyController extends Controller
         return view('company.report-choice');
     }
 
-    public function reportList($type)
+    public function reportListSession($type)
     {
-        $batches = Certificate::select('certificates.batch_id', 'certificates.type', DB::raw("count(certificates.id) as jumlahstudent"))
+        $certificates = Certificate::select('certificates.batch_id','certificates.session','certificates.type', DB::raw("count(certificates.id) as jumlahstudent"))
             ->join('posts', 'certificates.id', '=', 'posts.certificate_id')
             ->where('certificates.flag_printed', 'Y')
-            ->where('certificates.source', 'syarikat')->where('certificates.type', $type)->groupBy('certificates.batch_id')->get();
+            ->where('certificates.source', 'syarikat')->where('certificates.type', $type)->groupBy('certificates.session')->get();
+        $statuses = Lookup::where('name', 'user_status')->get();
+
+        return view('company.report_session', compact('certificates', 'statuses'));
+    }
+
+    public function reportList($type)
+    {
+        $batches = Certificate::select('certificates.batch_id', 'certificates.session','certificates.type', DB::raw("count(certificates.id) as jumlahstudent"))
+            ->join('posts', 'certificates.id', '=', 'posts.certificate_id')
+            ->where('certificates.flag_printed', 'Y')
+            ->where('certificates.source', 'syarikat')->where('certificates.type', $type)->groupBy('certificates.batch_id')->orderBy('certificates.session')->get();
         $statuses = Lookup::where('name', 'user_status')->get();
 
         return view('company.report_list', compact('batches', 'statuses'));

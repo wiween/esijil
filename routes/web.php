@@ -43,6 +43,7 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
 
     Route::get('/company-report', 'Frontend\CompanyController@reportChoice');
     Route::get('/company-report/{type}', 'Frontend\CompanyController@reportList');
+    Route::get('/company-report/{type}/{siri}', 'Frontend\CompanyController@reportListSession');
     Route::get('/company-print/edit/{id}', 'Frontend\CompanyController@edit');
     Route::post('/company-print/edit/{id}', 'Frontend\CompanyController@update');
     Route::get('/company-print/search', 'Frontend\CompanyController@searchPrint');
