@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Certificate;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use App\Repositories\CertificateSource;
 
 class ImportCertificates extends Command
@@ -88,6 +89,7 @@ class ImportCertificates extends Command
                     ]
                 );
             } catch (\Exception $e) {
+                Log::error($e->getMessage());
                 echo "WARNING!: " . $e->getMessage();
             }
 
