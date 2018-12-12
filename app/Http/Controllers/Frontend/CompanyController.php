@@ -427,7 +427,7 @@ class CompanyController extends Controller
         $a = $request->input('ic_number');
         $b = $request->input('batch');
 
-        if ($request->has('ic_number') && $request->field('ic_number')) {
+        if ($request->has('ic_number') && $request->filled('ic_number')) {
 
             $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.source', 'syarikat')->where('certificates.ic_number', 'like', '%' . $a . '%')->count();
 
