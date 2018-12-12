@@ -85,7 +85,7 @@ class CertificateSource
     {
         return DB::select("select b.`id_skm`, a.`name`, a.`ic_number`, a.`certificate_number`, a.`date_print`
             from certificates a
-            join mosq.skm b on on (a.ic_number = b.no_ic 
+            join mosq.skm b on (a.ic_number = b.no_ic 
             and a.batch_id = b.no_batch 
             and a.`programme_code`=b.`kod_program`)
             where 1 = 1
