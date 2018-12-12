@@ -426,29 +426,29 @@ class CompanyController extends Controller
         //
         $a = $request->input('ic_number');
         $b = $request->input('batch');
-        //dd ($a);
-        if ($a <> '') {
+
+        if ($request->has('ic_number') && $request->field('ic_number')) {
 
             $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.source', 'syarikat')->where('certificates.ic_number', 'like', '%' . $a . '%')->count();
 
             if ($post <= 0) {
                 $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->where('flag_printed', 'Y')->where('source', 'syarikat')->get();
-                //dd ($certificates);
 
                 return view('company.result', compact('certificates'));
             }
+        }
 
-            if ($b <> '') {
-                $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.batch_id', $b)->where('certificates.source', 'syarikat')->count();
+        if ($request->has('batch') && $request->filled('batch')) {
+            $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.batch_id', $b)->where('certificates.source', 'syarikat')->count();
 
-                if ($post <= 0) {
-                    $certificates = Certificate::select('batch_id', 'type', DB::raw("count(id) as jumlahstudent"))->where('batch_id', $b)->where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->get();
-                //dd ($certificates);
-                    return view('company.result_post', compact('certificates'));
-                } else {
-                    $certificates = "tiada";
-                    return view('company.result_post', compact('certificates'));
-                }
+            if ($post <= 0) {
+                $certificates = Certificate::select('batch_id', 'type', DB::raw("count(id) as jumlahstudent"))->where('batch_id', $b)->where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->get();
+
+                return view('company.result_post', compact('certificates'));
+            } else {
+                $certificates = "tiada";
+
+                return view('company.result_post', compact('certificates'));
             }
         }
     }
@@ -613,7 +613,7 @@ class CompanyController extends Controller
 
     public function reportListSession($type)
     {
-        $certificates = Certificate::select('certificates.batch_id','certificates.session','certificates.type', DB::raw("count(certificates.id) as jumlahstudent"))
+        $certificates = Certificate::select('certificates.batch_id', 'certificates.session', 'certificates.type', DB::raw("count(certificates.id) as jumlahstudent"))
             ->join('posts', 'certificates.id', '=', 'posts.certificate_id')
             ->where('certificates.flag_printed', 'Y')
             ->where('certificates.source', 'syarikat')->where('certificates.type', $type)->groupBy('certificates.session')->get();
@@ -624,7 +624,7 @@ class CompanyController extends Controller
 
     public function reportList($type)
     {
-        $batches = Certificate::select('certificates.batch_id', 'certificates.session','certificates.type', DB::raw("count(certificates.id) as jumlahstudent"))
+        $batches = Certificate::select('certificates.batch_id', 'certificates.session', 'certificates.type', DB::raw("count(certificates.id) as jumlahstudent"))
             ->join('posts', 'certificates.id', '=', 'posts.certificate_id')
             ->where('certificates.flag_printed', 'Y')
             ->where('certificates.source', 'syarikat')->where('certificates.type', $type)->groupBy('certificates.batch_id')->orderBy('certificates.session')->get();
