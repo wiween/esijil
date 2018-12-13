@@ -431,8 +431,14 @@ class CompanyController extends Controller
 
             $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.source', 'syarikat')->where('certificates.ic_number', 'like', '%' . $a . '%')->count();
 
-            if ($post <= 0) {
-                $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->where('flag_printed', 'Y')->where('source', 'syarikat')->get();
+            if ($post > 0) {
+
+                $certificates = Certificate::leftjoin('posts', 'posts.certificate_id', '=', 'certificates.id')
+                    ->where('certificates.ic_number', 'like', '%' . $a . '%')
+                    ->where('certificates.flag_printed', 'Y')
+                    ->where('certificates.source', 'syarikat')
+                    ->whereNull('posts.id')
+                    ->get();
 
                 return view('company.result', compact('certificates'));
             }
@@ -441,8 +447,20 @@ class CompanyController extends Controller
         if ($request->has('batch') && $request->filled('batch')) {
             $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.batch_id', $b)->where('certificates.source', 'syarikat')->count();
 
-            if ($post <= 0) {
-                $certificates = Certificate::select('batch_id', 'type', DB::raw("count(id) as jumlahstudent"))->where('batch_id', $b)->where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->get();
+            $post = Certificate::leftjoin('posts', 'posts.certificate_id', '=', 'certificates.id')
+                ->where('certificates.batch_id', $b)
+                ->where('certificates.source', 'syarikat')
+                ->whereNull('posts.id')
+                ->count();
+
+            if ($post > 0) {
+
+                $certificates = Certificate::leftjoin('posts', 'posts.certificate_id', '=', 'certificates.id')
+                    ->select('certificates.batch_id', 'type', DB::raw("count(certificates.id) as jumlahstudent"))
+                    ->where('certificates.batch_id', $b)
+                    ->where('certificates.flag_printed', 'Y')
+                    ->where('certificates.source', 'syarikat')
+                    ->groupBy('certificates.batch_id')->get();
 
                 return view('company.result_post', compact('certificates'));
             } else {
