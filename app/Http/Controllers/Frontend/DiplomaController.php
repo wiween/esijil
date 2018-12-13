@@ -22,13 +22,46 @@ class DiplomaController extends Controller
         return view('diploma.index', compact('diplomas'));
     }
 
-    public function batch()
+    public function type()
+    {
+        return view('diploma.type');
+    }
+
+    public function batch($type)
     {
         //
 //        $diplomas = Diploma::all();
-        $certificates = Certificate::whereIn('level',['TAHAP EMPAT','TAHAP LIMA'])->whereNull('flag_dkm')->groupBy('batch_id')->get();
+        $certificates = Certificate::where('type', $type)->whereIn('level',['TAHAP EMPAT','TAHAP LIMA'])->whereNull('flag_dkm')->groupBy('batch_id')->get();
         return view('diploma.batch', compact('certificates'));
     }
+
+    public function diplomaList($id)
+    {
+        $certificates = Certificate::where('batch_id', $id)->whereIn('level',['TAHAP EMPAT','TAHAP LIMA'])->whereNull('flag_dkm')->get();
+        return view('diploma.list', compact('certificates'));
+    }
+
+    public function diplomaeditList($id)
+    {
+        $diplomas = Diploma::all();
+        $certificate = Certificate::findOrFail($id);
+        return view('diploma.edit-list', compact('certificate', 'diplomas'));
+    }
+
+    public function diplomaupdateList(Request $request,$id)
+    {
+        //
+        $certificate = Certificate::findOrFail($id);
+        $certificate->programme_name = $request->input('diploma');
+        $certificate->flag_dkm = 'Y';
+
+        if ($certificate->save()) {
+            return redirect('/diploma/list/'. $certificate->batch_id)->with('successMessage', 'DKM/DLKM pelajar telah dikemaskini ');
+        } else {
+            return back()->with('errorMessage', 'Tidak dapat kemaskini. Contact Admin');
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
