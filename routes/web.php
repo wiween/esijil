@@ -91,7 +91,11 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     //Route::get('/board/mark/{id}/{batch}', 'Frontend\BoardController@mark');
 
     //diploma
-    Route::get('/diploma/batch', 'Frontend\DiplomaController@batch');
+    Route::get('/diploma/batch', 'Frontend\DiplomaController@type');
+    Route::get('/diploma/batch/{type}', 'Frontend\DiplomaController@batch');
+    Route::get('/diploma/list/{id}', 'Frontend\DiplomaController@diplomaList');
+    Route::get('/diploma/edit-list/{id}', 'Frontend\DiplomaController@diplomaeditList');
+    Route::post('/diploma/edit-list/{id}', 'Frontend\DiplomaController@diplomaupdateList');
     Route::get('/diploma', 'Frontend\DiplomaController@index');
     Route::get('/diploma/create', 'Frontend\DiplomaController@create');
     Route::post('/diploma/create', 'Frontend\DiplomaController@store');
