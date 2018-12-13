@@ -8,10 +8,10 @@
 @endsection
 
 @section('topButton')
-    <a href="{{ url('') }}/certificate/print" class="btn btn-link btn-float has-text">
-    <i class="icon-printer2 text-primary"></i>
-    <span>Cetak Senarai Ini</span>
-    </a>
+    {{--<a href="{{ url('') }}/certificate/print" class="btn btn-link btn-float has-text">--}}
+    {{--<i class="icon-printer2 text-primary"></i>--}}
+    {{--<span>Cetak Senarai Ini</span>--}}
+    {{--</a>--}}
 @endsection
 
 @section('content')

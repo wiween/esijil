@@ -429,7 +429,9 @@ class CompanyController extends Controller
 
         if ($request->has('ic_number') && $request->filled('ic_number')) {
 
-            $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.source', 'syarikat')->where('certificates.ic_number', 'like', '%' . $a . '%')->count();
+            $post = Certificate::leftjoin('posts', 'posts.certificate_id', '=', 'certificates.id')
+                ->where('certificates.source', 'syarikat')
+                ->where('certificates.ic_number', 'like', '%' . $a . '%')->count();
 
             if ($post > 0) {
 
@@ -437,7 +439,10 @@ class CompanyController extends Controller
                     ->where('certificates.ic_number', 'like', '%' . $a . '%')
                     ->where('certificates.flag_printed', 'Y')
                     ->where('certificates.source', 'syarikat')
+                    << << <<< HEAD
                     ->whereNull('posts.id')
+=======
+>>>>>>> 1cc6a58... diploma dan leftjoin
                     ->get();
 
                 return view('company.result', compact('certificates'));
@@ -450,7 +455,6 @@ class CompanyController extends Controller
         }
 
         if ($request->has('batch') && $request->filled('batch')) {
-            $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.batch_id', $b)->where('certificates.source', 'syarikat')->count();
 
             $post = Certificate::leftjoin('posts', 'posts.certificate_id', '=', 'certificates.id')
                 ->where('certificates.batch_id', $b)
@@ -465,6 +469,7 @@ class CompanyController extends Controller
                     ->where('certificates.batch_id', $b)
                     ->where('certificates.flag_printed', 'Y')
                     ->where('certificates.source', 'syarikat')
+                    ->whereNull('posts.id')
                     ->groupBy('certificates.batch_id')->get();
 
                 return view('company.result_post', compact('certificates'));
@@ -506,13 +511,15 @@ class CompanyController extends Controller
         $b = $request->input('batch');
 //        echo "a" . $a;
 //        echo "b" . $b;
-        if ($a <> '') {
+        if ($request->has('ic_number') && $request->filled('ic_number')) {
+
             $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->where('flag_printed', 'N')->where('source', 'syarikat')->get();
             //dd ($certificates);
             return view('company.result_print', compact('certificates'));
         }
 
-        if ($b <> '') {
+        if ($request->has('batch') && $request->filled('batch')) {
+
             $certificates = Certificate::where('batch_id', $b)->where('flag_printed', 'N')->groupBy('batch_id')->where('source', 'syarikat')->get();
             //dd ($certificates);
             return view('company.result_batch', compact('certificates'));
@@ -528,13 +535,13 @@ class CompanyController extends Controller
         $b = $request->input('batch');
 //        echo "a" . $a;
 //        echo "b" . $b;
-        if ($a <> '') {
+        if ($request->has('ic_number') && $request->filled('ic_number')) {
             $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->where('flag_printed', 'Y')->where('source', 'syarikat')->get();
             //dd ($certificates);
             return view('company.edit-result', compact('certificates'));
         }
 
-        if ($b <> '') {
+        if ($request->has('batch') && $request->filled('batch')) {
             $certificates = Certificate::where('batch_id', $b)->where('flag_printed', 'Y')->groupBy('batch_id')->where('source', 'syarikat')->get();
             //dd ($certificates);
             return view('company.edit-batch', compact('certificates'));

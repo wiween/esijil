@@ -23,6 +23,7 @@
                             <th>Nama Program</th>
                             <th>Kod Program NOSS</th>
                             <th>Tahap</th>
+                            <th>Jenis Pentauliahan</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -33,6 +34,7 @@
                                 <td>{{ $certificate->programme_name }}</td>
                                 <td>{{ $certificate->programme_code }}</td>
                                 <td>{{ $certificate->level }}</td>
+                                <td>{{ $certificate->type }}</td>
                                 <td>
                                     @if ($certificate->status == 'active')
                                         <span class="label label-success">{{ $certificate->status }}</span>
@@ -50,8 +52,8 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="{{ url('') }}/diploma/edit-batch/{{ $certificate->batch_id }}"><i class="icon-display text-primary"></i>Edit</a></li>
-                                                {{--<li><a href="{{ url('') }}/diploma/destroy/{{ $certificate->batch_id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>--}}
+                                                <li><a href="{{ url('') }}/diploma/list/{{ $certificate->batch_id }}"><i class="icon-display text-primary"></i>Lihat Senarai</a></li>
+                                                <li><a href="{{ url('') }}/diploma/edit-batch/{{ $certificate->batch_id }}"><i class="icon-pencil text-primary"></i>Edit</a></li>
                                             </ul>
                                         </li>
                                     </ul>

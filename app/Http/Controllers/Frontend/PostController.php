@@ -139,7 +139,7 @@ class PostController extends Controller
         $a = $request->input('ic_number');
         $b = $request->input('batch');
         //dd ($a);
-        if ($a <> '') {
+        if ($request->has('ic_number') && $request->filled('ic_number')) {
 
             $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.source', 'dalaman')->where('certificates.ic_number', 'like', '%' . $a . '%')->count();
 
@@ -158,7 +158,7 @@ class PostController extends Controller
 
         }
 
-        if ($b <> '') {
+        if ($request->has('batch') && $request->filled('batch')) {
 
             $post = Post::join('certificates', 'posts.certificate_id', '=', 'certificates.id')->where('certificates.batch_id', $b)->where('certificates.source', 'dalaman')->count();
 
