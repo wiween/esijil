@@ -439,10 +439,7 @@ class CompanyController extends Controller
                     ->where('certificates.ic_number', 'like', '%' . $a . '%')
                     ->where('certificates.flag_printed', 'Y')
                     ->where('certificates.source', 'syarikat')
-                    << << <<< HEAD
                     ->whereNull('posts.id')
-=======
->>>>>>> 1cc6a58... diploma dan leftjoin
                     ->get();
 
                 return view('company.result', compact('certificates'));
