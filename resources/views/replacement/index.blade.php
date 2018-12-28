@@ -59,7 +59,7 @@
                                                 {{--@if (($replacement->type_replacement == 'rosak') || ($replacement->type_replacement == 'ganti'))--}}
                                                 <li><a href="{{ url('') }}/replacement/epayment/{{ $replacement->id }}"><i class="icon-coins"></i>Pembayaran</a></li>
                                                 {{--@endif--}}
-                                                <li><a href="{{ url('') }}/print/print/{{ $replacement->certificate_id }}"><i class="icon-printer text-success"></i>Cetak</a></li>
+                                                {{--<li><a href="{{ url('') }}/print/print/{{ $replacement->certificate_id }}"><i class="icon-printer text-success"></i>Cetak</a></li>--}}
                                                 <li><a href="{{ url('') }}/replacement/destroy/{{ $replacement->id }}"><i class="icon-trash text-danger-600"></i>Hapus</a></li>
                                             </ul>
                                         </li>

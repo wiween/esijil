@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Certificate;
+use App\Payment;
 use App\Replacement;
 use App\TypeReplacement;
 use Illuminate\Http\Request;
@@ -21,6 +22,12 @@ class ReplacementController extends Controller
         $replacements = Replacement::all();
         $types = TypeReplacement::all();
         return view('replacement.index', compact('replacements', 'types'));
+    }
+
+    public function indexpayment()
+    {
+        //
+        return view('replacement.testpayment');
     }
 
     /**
@@ -100,9 +107,37 @@ class ReplacementController extends Controller
         }
     }
 
-    public function payNow()
+    public function payNow($id)
     {
-        return view('replacement.pay');
+        //$certificate = Certificate::findOrFail($id);
+        $replacement = Replacement::where('certificate_id', $id)->first();
+        return view('replacement.pay', compact('certificate', 'replacement'));
+    }
+
+    public function receipt($id)
+    {
+        //
+        $replacement = Replacement::findOrFail($id);
+
+        //update flag bayaran Y
+        $replacement->flag_payment = 'Y';
+        $replacement->save();
+
+        //insert table payment
+        $payment = New Payment();
+        $payment->transaction_id = '1';
+        $payment->replacement_id = $id;
+        $payment->receipt_no = '2';
+        $payment->payment_date = now();
+        $payment->transaction_type = 'FPX';
+        $payment->save();
+
+        if($payment->save()) {
+            return view('replacement.receipt', compact('replacement'));
+        } else {
+            return back()->with('errorMessage', 'Tidak');
+        }
+
     }
 
     /**
