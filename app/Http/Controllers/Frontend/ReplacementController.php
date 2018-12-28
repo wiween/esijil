@@ -40,7 +40,7 @@ class ReplacementController extends Controller
         //
         $certificate = Certificate::where('id', $id)->where('certificate_number', $cn)->first();
         $types = TypeReplacement::all();
-        return view('replacement.create', compact('certificate','types'));
+        return view('replacement.create', compact('certificate', 'types'));
     }
 
     /**
@@ -56,29 +56,23 @@ class ReplacementController extends Controller
         $countreplacement = Replacement::where('id', $id)->where('old_certificate_number', $cn)->count();
 //        echo $countreplacement;
 //        exit();
-        if ($countreplacement == 0){
+        if ($countreplacement == 0) {
             $cetakan = "cetakan kedua";
         } elseif ($countreplacement == 1) {
             $cetakan = "cetakan ketiga";
         } elseif ($countreplacement == 2) {
             $cetakan = "cetakan keempat";
-        }
-        elseif ($countreplacement == 3) {
+        } elseif ($countreplacement == 3) {
             $cetakan = "cetakan kelima";
-        }
-        elseif ($countreplacement == 4) {
+        } elseif ($countreplacement == 4) {
             $cetakan = "cetakan keeenam";
-        }
-        elseif ($countreplacement == 5) {
+        } elseif ($countreplacement == 5) {
             $cetakan = "cetakan ketujuh";
-        }
-        elseif ($countreplacement == 6) {
+        } elseif ($countreplacement == 6) {
             $cetakan = "cetakan kelapan";
-        }
-        elseif ($countreplacement == 7) {
+        } elseif ($countreplacement == 7) {
             $cetakan = "cetakan kesembilan";
-        }
-        elseif ($countreplacement == 8) {
+        } elseif ($countreplacement == 8) {
             $cetakan = "cetakan kesepuluh";
         }
 
@@ -96,7 +90,7 @@ class ReplacementController extends Controller
         $certificate = Certificate::where('certificate_number', $cn)->first();
 
         //masukkan dalam table
-        $agihan = New Certificate();
+        $agihan = new Certificate();
         $agihan->name = $certificate->name;
 
 
@@ -124,7 +118,7 @@ class ReplacementController extends Controller
         $replacement->save();
 
         //insert table payment
-        $payment = New Payment();
+        $payment = new Payment();
         $payment->transaction_id = '1';
         $payment->replacement_id = $id;
         $payment->receipt_no = '2';
@@ -132,7 +126,7 @@ class ReplacementController extends Controller
         $payment->transaction_type = 'FPX';
         $payment->save();
 
-        if($payment->save()) {
+        if ($payment->save()) {
             return view('replacement.receipt', compact('replacement'));
         } else {
             return back()->with('errorMessage', 'Tidak');
@@ -146,7 +140,7 @@ class ReplacementController extends Controller
      * @param  \App\Replacement  $replacement
      * @return \Illuminate\Http\Response
      */
-    public function show($id,$cn)
+    public function show($id, $cn)
     {
         //
         $certificate = Certificate::where('certificate_number', $cn)->where('id', $id)->first();
@@ -194,7 +188,7 @@ class ReplacementController extends Controller
         //
         $replacement = Replacement::findOrFail($id);
 
-        if($replacement->delete()) {
+        if ($replacement->delete()) {
             return back()->with('successMessage', 'Data telah dihapuskan');
         } else {
             return back()->with('errorMessage', 'Tidak dapat hapuskan data');
@@ -222,29 +216,23 @@ class ReplacementController extends Controller
         $countreplacement = Replacement::where('id', $id)->where('old_certificate_number', $cn)->count();
 //        echo $countreplacement;
 //        exit();
-        if ($countreplacement == 0){
+        if ($countreplacement == 0) {
             $cetakan = "cetakan kedua";
         } elseif ($countreplacement == 1) {
             $cetakan = "cetakan ketiga";
         } elseif ($countreplacement == 2) {
             $cetakan = "cetakan keempat";
-        }
-        elseif ($countreplacement == 3) {
+        } elseif ($countreplacement == 3) {
             $cetakan = "cetakan kelima";
-        }
-        elseif ($countreplacement == 4) {
+        } elseif ($countreplacement == 4) {
             $cetakan = "cetakan keeenam";
-        }
-        elseif ($countreplacement == 5) {
+        } elseif ($countreplacement == 5) {
             $cetakan = "cetakan ketujuh";
-        }
-        elseif ($countreplacement == 6) {
+        } elseif ($countreplacement == 6) {
             $cetakan = "cetakan kelapan";
-        }
-        elseif ($countreplacement == 7) {
+        } elseif ($countreplacement == 7) {
             $cetakan = "cetakan kesembilan";
-        }
-        elseif ($countreplacement == 8) {
+        } elseif ($countreplacement == 8) {
             $cetakan = "cetakan kesepuluh";
         }
 
@@ -284,7 +272,7 @@ class ReplacementController extends Controller
         $b = $request->input('batch');
         //dd ($a);
         if ($a <> '') {
-            $certificates = Certificate::where('ic_number', 'like', '%' . $a .'%')->get();
+            $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->get();
         }
 
         if ($b <> '') {
@@ -295,4 +283,8 @@ class ReplacementController extends Controller
         return view('replacement.result', compact('certificates'));
     }
 
+    public function paymentResponse(Request $request, $id)
+    {
+        print_r($request->all());
+    }
 }
