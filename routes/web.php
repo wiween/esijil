@@ -2,6 +2,7 @@
 
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/replacement/test', 'Frontend\ReplacementController@indexpayment');
 Route::get('/pelajar/{id}', 'Api\PelajarController@view');
 Route::post('/semak-status', 'Frontend\StatusController@show');
 Route::get('/semak-status', 'Frontend\StatusController@checkStatus');
@@ -127,6 +128,13 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/certificate/statelist/{id}/{type}', 'Frontend\CertificateController@stateList');
     Route::post('/certificate/statelist/{id}/{type}', 'Frontend\CertificateController@updateState');
 
+    //agihan semula
+    Route::get('/certificate/type/redistribute', 'Frontend\CertificateController@typeredistribute');
+    Route::get('/certificate/redistribute/{type}', 'Frontend\CertificateController@redistribute');
+    Route::get('/certificate/done-batch/redistribute', 'Frontend\CertificateController@doneredistribute');
+    Route::get('/certificate/agih/{id}', 'Frontend\CertificateController@redistributeSource');
+    Route::post('/certificate/agih/{id}', 'Frontend\CertificateController@redistributeupdateSource');
+
     //untuk print
     Route::get('/print', 'Frontend\PrintedController@inbox');
     Route::get('/print/show/{id}', 'Frontend\PrintedController@show');
@@ -184,9 +192,11 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/replacement/destroy/{id}', 'Frontend\ReplacementController@destroy');
     Route::get('/replacement/epayment/{id}', 'Frontend\ReplacementController@payment');
     Route::get('/replacement/create/{id}/{cn}', 'Frontend\ReplacementController@create');
-    Route::post('/replacement/payment/{id}', 'Frontend\ReplacementController@payNow');
+    Route::get('/replacement/payment/{id}', 'Frontend\ReplacementController@payNow');
     Route::post('/replacement/create/{id}/{cn}', 'Frontend\ReplacementController@store');
-    Route::post('/replacement/epayment/{id}', 'Frontend\ReplacementController@storePayment');
+//    Route::post('/replacement/epayment/{id}', 'Frontend\ReplacementController@storePayment');
+    Route::get('/replacement/receipt/{id}', 'Frontend\ReplacementController@receipt');
+
 
     //report
     Route::get('/report', 'Frontend\ReportController@index');    

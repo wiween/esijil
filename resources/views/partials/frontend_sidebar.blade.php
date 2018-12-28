@@ -41,8 +41,8 @@
         <ul>
             <li><a href="{{ url('') }}/certificate/type">Agihan Tugasan Baru</a></li>
             <li><a href="{{ url('') }}/certificate/done-batch">Selesai Agihan Tugasan Baru</a></li>
-            <li><a href="{{ url('') }}/certificate/type/redistribute">Agihan Semula</a></li>
-            <li><a href="{{ url('') }}/certificate/done-batch/redistribute">Selesai Agihan Semula</a></li>
+            <li><a href="{{ url('') }}/certificate/type/redistribute">Agihan Semula (Penggantian)</a></li>
+            {{--<li><a href="{{ url('') }}/certificate/done-batch/redistribute">Selesai Agihan Semula</a></li>--}}
         </ul>
     </li>
 

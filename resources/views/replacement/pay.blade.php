@@ -14,7 +14,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form-horizontal" role="form" method="POST" action="http://mohrwallet.mohr.gov.my">
+            <form class="form-horizontal" role="form" method="POST" action="http://mohrwallet.mohr.gov.my/vip/vip.aspx">
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="col-md-4 control-label">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                {{-- date_post--}}
+                {{-- sbb --}}
                 <div class="form-group{{ $errors->has('date_replacement') ? ' has-error' : '' }}">
                     <label for="date_replacement" class="col-md-4 control-label">
                         Tarikh Permohonan Ganti
@@ -103,24 +103,24 @@
                         <input type="text" name="RUSERNM" value="TEST2010JKKPPJBH"><BR>
                         <input type="text" name="RPASSWD" value="TEST2010JKKPPJBH"><br>
                         <input type="text" name="RACCODE" value="TEST2010JKKPPJBH"><br>
-                        <input type="text" name="RRTNPGE" value="http://myhos.mohr.gov.my/mohrwallet/test3.php"><br>
+                        <input type="text" name="RRTNPGE" value="{{ url('') }}/replacement/receipt/{{ $replacement->id }}"><br>
                         <input type="text" name="RTXNTYP" value="FPX"><br>
                         <input type="text" name="RUNIQID" value="ABCD1236"><br>
                         <input type="text" name="OTRXNID" value="20180117014401068"><br>
-                        <input type="text" name="OFLNAME" value="Ahmad bin Muhammad"><br>
+                        <input type="text" name="OFLNAME" value='{{ $replacement->certificate->name }}'><br>
                         <input type="text" name="OCURRCD" value="MYR"><br>
-                        <input type="text" name="OCEMAIL" value="nornadia@mohr.gov.my"><br>
+                        <input type="text" name="OCEMAIL" value="norazwin@mohr.gov.my"><br>
                         <input type="text" name="OCMDTYP" value="P"><br>
-                        <input type="text" name="ORTNVR0" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR1" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR2" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR3" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR4" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR5" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR6" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR7" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR8" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR9" value="ABCtestabc123"><br>
+                        <input type="text" name="ORTNVR0" value="{{ $replacement->certificate->ic_number}}"><br>
+                        <input type="text" name="ORTNVR1" value="{{ $replacement->certificate->batch_id }}"><br>
+                        <input type="text" name="ORTNVR2" value="{{ $replacement->id }}"><br>
+                        {{--<input type="text" name="ORTNVR3" value="ABCtestabc123"><br>--}}
+                        {{--<input type="text" name="ORTNVR4" value="ABCtestabc123"><br>--}}
+                        {{--<input type="text" name="ORTNVR5" value="ABCtestabc123"><br>--}}
+                        {{--<input type="text" name="ORTNVR6" value="ABCtestabc123"><br>--}}
+                        {{--<input type="text" name="ORTNVR7" value="ABCtestabc123"><br>--}}
+                        {{--<input type="text" name="ORTNVR8" value="ABCtestabc123"><br>--}}
+                        {{--<input type="text" name="ORTNVR9" value="ABCtestabc123"><br>--}}
                         @include('partials.error_block', ['item' => 'fee'])
                     </div>
                 </div>
