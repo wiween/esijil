@@ -100,27 +100,25 @@
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <input type="text" name="RUSERNM" value="TEST2010JKKPPJBH"><BR>
-                        <input type="text" name="RPASSWD" value="TEST2010JKKPPJBH"><br>
-                        <input type="text" name="RACCODE" value="TEST2010JKKPPJBH"><br>
-                        <input type="text" name="RRTNPGE" value="http://myhos.mohr.gov.my/mohrwallet/test3.php"><br>
-                        <input type="text" name="RTXNTYP" value="FPX"><br>
-                        <input type="text" name="RUNIQID" value="ABCD1236"><br>
-                        <input type="text" name="OTRXNID" value="20180117014401068"><br>
-                        <input type="text" name="OFLNAME" value="Ahmad bin Muhammad"><br>
-                        <input type="text" name="OCURRCD" value="MYR"><br>
-                        <input type="text" name="OCEMAIL" value="nornadia@mohr.gov.my"><br>
-                        <input type="text" name="OCMDTYP" value="P"><br>
-                        <input type="text" name="ORTNVR0" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR1" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR2" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR3" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR4" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR5" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR6" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR7" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR8" value="ABCtestabc123"><br>
-                        <input type="text" name="ORTNVR9" value="ABCtestabc123"><br>
+                        echo $IFSTATUS.'<br>';
+                        echo $IUNIQID.'<br>';
+                        echo $ITRXNID.'<br>';
+                        echo $IMESSAGE.'<br>';
+                        echo $IDATETXN.'<br>';
+                        echo $IRECPTNO.'<br>';
+                        echo $ORTNVR0.'<br>';
+                        echo $ORTNVR1.'<br>';
+                        echo $ORTNVR2.'<br>';
+                        echo $ORTNVR3.'<br>';
+                        echo $ORTNVR4.'<br>';
+                        echo $ORTNVR5.'<br>';
+                        echo $ORTNVR6.'<br>';
+                        echo $ORTNVR7.'<br>';
+                        echo $ORTNVR8.'<br>';
+                        echo $ORTNVR9.'<br>';
+                        echo $IPYMTID.'<br>';
+                        echo $IORDERNO.'<br>';
+                        echo $ISRCPYMT;
                         @include('partials.error_block', ['item' => 'fee'])
                     </div>
                 </div>
