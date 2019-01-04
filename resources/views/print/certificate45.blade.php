@@ -38,20 +38,6 @@ if ( isset($pdf) ) {
         <table width="100%">
             <tr><td>
                 <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
                 <div class="center">
                     <h2 align="center">{{ strtoupper($certificate->programme_name) }}</h2>
                 </div>
