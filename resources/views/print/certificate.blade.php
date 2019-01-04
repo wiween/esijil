@@ -1,13 +1,30 @@
-<style type="text/css">
-    table td, table th{
-        border:1px solid black;
-    }
+<html>
+<head>
+    <style>
+        @page { margin: 0px 70px; }
+        header { position: fixed; top: -60px; left: 0px; right: 0px; background-color: white; height: 50px; font-size: 9px; }
+        footer { position: fixed; bottom: 0px; left: 40px; left: 60px; background-color: white; height: 50px; font-size: 17px; }
+        p { page-break-after: always; }
+        p:last-child { page-break-after: never; }
 
-    .page-break {
-        page-break-after: always;
+        .page-break {
+            page-break-after: always;
+        }
+
+        .text-sijil {
+            font-family: "Arial", Times, serif;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+<script type="text/php">
+if ( isset($pdf) ) {
+        $font = Font_Metrics::get_font("helvetica", "bold");
+        {{--$pdf->page_text(72, 18, "Header: {PAGE_NUM} of {PAGE_COUNT}", $font, 6, array(0,0,0));--}}
     }
-</style>
-<div class="container">
+</script>
+<main>
     @foreach($certificates as $certificate)
     <br/>
     <br/>
@@ -59,4 +76,6 @@
         </div>
 
     @endforeach
-</div>
+    </main>
+        </body>
+        </html>

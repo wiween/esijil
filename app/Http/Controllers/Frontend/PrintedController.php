@@ -135,6 +135,8 @@ class PrintedController extends Controller
         }
     }
 
+    //tgk balik dari sini
+
     public function reportPdf($batch)
     {
         //$certificates = Certificate::all();
@@ -170,7 +172,26 @@ class PrintedController extends Controller
         $certificate = Certificate::findOrFail($id);
         $pdf = PDF::loadView('print_certificate.single_certificate', compact('certificate'));
         //return $pdf->download('report.pdf');
-        return $pdf->stream('singlereport.pdf');
+        // tgk tahap
+        if ($certificate->level == 'PC') {
+            $pdf = PDF::loadView('print.certificate', compact('certificates'));
+        }
+
+        if ($certificate->level == 'TAHAP EMPAT' || $certificate->level == 'TAHAP LIMA') {
+            $pdf = PDF::loadView('print.certificate45', compact('certificates'))->setPaper('a4', 'landscape');
+        }
+
+        if ($certificate->level == 'TAHAP SATU' || $certificate->level == 'TAHAP DUA' || $certificate->level == 'TAHAP TIGA') {
+            if ($certificate->type == 'ndt') {
+                $pdf = PDF::loadView('print.certificatendt', compact('certificates'));
+            } else {
+                $pdf = PDF::loadView('print.certificate13', compact('certificates'));
+            }
+        }
+
+
+        //yag lama
+        //return $pdf->stream('singlereport.pdf');
     }
 
 //    public function collection()
