@@ -8,7 +8,7 @@
 @endsection
 
 @section('topButton')
-    <a href="{{ url('') }}/print/printed/{{ Request::segment(3) }}" class="btn btn-link btn-float has-text">
+    <a href="{{ url('') }}/print/print/{{ Request::segment(3) }}/{{ Request::segment(4) }}" class="btn btn-link btn-float has-text">
         <i class="icon-printer2 text-primary"></i>
         <span>Cetak Senarai Ini</span>
     </a>
