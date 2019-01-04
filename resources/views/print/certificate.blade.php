@@ -26,6 +26,8 @@ if ( isset($pdf) ) {
 </script>
 <main>
     @foreach($certificates as $certificate)
+        <table width="100%">
+            <tr><td>
     <br/>
     <br/>
     <br/>
@@ -70,10 +72,26 @@ if ( isset($pdf) ) {
         <br/>
         <br/>
 
-        <div>
-            <h5>{{ $certificate->programme_code }} <br>
-           {{ $certificate->date_print->format('d/m/Y') }}</h5>
+        </td></tr>
+        </table>
+
+        <div class="information" style="position: absolute; bottom: 0;">
+            <table width="100%">
+                <tr>
+                    <td align="left" style="width: 50%; height: 150px; vertical-align: top; padding-left: 100px; ">
+                    <h5>
+                        {{ $certificate->programme_code }}
+                        <br>
+                        {{ strtoupper($certificate->date_print->format('d/m/Y')) }}
+                    </h5>
+                    </td>
+                </tr>
+            </table>
         </div>
+        
+        @if (! $loop->last)
+            <div class="page-break"></div>
+        @endif
 
     @endforeach
     </main>

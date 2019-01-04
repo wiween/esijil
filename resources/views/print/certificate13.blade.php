@@ -35,6 +35,8 @@ if ( isset($pdf) ) {
 </script>
 <main>
     @foreach($certificates as $certificate)
+    <table width="100%">
+            <tr><td>
         <br/>
         <br/>
         <br/>
@@ -83,11 +85,29 @@ if ( isset($pdf) ) {
         <br/>
         <br/>
         <br/>
-        <div class="footer">
-                <h5>{{  strtoupper($certificate->batch_id) }}<br>
-                {{  strtoupper($certificate->date_print->format('d/m/Y')) }}<br>
-                {{  strtoupper($certificate->printed_remark) }}</h5>
-            </div>
+    </td></tr>
+        </table>
+
+        <div class="information" style="position: absolute; bottom: 0;">
+            <table width="100%">
+                <tr>
+                    <td align="left" style="width: 50%; height: 150px; vertical-align: top; padding-left: 100px; ">
+                    <h5>
+                        {{ strtoupper($certificate->batch_id) }}
+                        <br>
+                        {{ strtoupper($certificate->date_print->format('d/m/Y')) }}
+                        <br>
+                        {{ strtoupper($certificate->printed_remark) }}
+                    </h5>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        @if (! $loop->last)
+            <div class="page-break"></div>
+        @endif
+        
         @endforeach
 </main>
 </body>
