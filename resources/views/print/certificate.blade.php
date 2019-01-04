@@ -3,7 +3,20 @@
     <style>
         @page { margin: 0px 70px; }
         header { position: fixed; top: -60px; left: 0px; right: 0px; background-color: white; height: 50px; font-size: 9px; }
-        footer { position: fixed; bottom: 0px; left: 40px; left: 60px; background-color: white; height: 50px; font-size: 17px; }
+        h2 {
+            font-size: 12px;
+        }
+        h3 {
+            font-size: 11px;
+        }
+
+        h5 {
+            font-size: 10px;
+        }
+        .footer-sijil {
+            position: fixed; bottom: 0px; left: 40px;
+            font-size: 10px;
+        }
         p { page-break-after: always; }
         p:last-child { page-break-after: never; }
 
@@ -11,10 +24,6 @@
             page-break-after: always;
         }
 
-        .text-sijil {
-            font-family: "Arial", Times, serif;
-            font-size: 40px;
-        }
     </style>
 </head>
 <body>
@@ -28,72 +37,78 @@ if ( isset($pdf) ) {
     @foreach($certificates as $certificate)
         <table width="100%">
             <tr><td>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-    <div class="center">
-     <h2 align="center">{{ strtoupper($certificate->programme_name) }}</h2>
-        <h2 align="center">{{ strtoupper($certificate->level) }}</h2>
-        <br/>
-        <br/>
-        <br/>
-                <h2 align="center">{{ $certificate->name }}</h2>
-                <h2 align="center">{{  $certificate->ic_number }}</h2>
-        <br/>
-        <br/>
-        <h2 align="center">PENILAIAN TELAH DILAKSANAKAN DI PUSAT BERTAULIAH</h2>
-        <h2 align="center">{{  $certificate->pb_name }}</h2>
-        <h2 align="center">{{  $certificate->state->name }}</h2>
-   </div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-
-        </td></tr>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="center">
+                        <h2 align="center">{{ strtoupper($certificate->programme_name) }}</h2>
+                        {{--<h2 align="center">{{ strtoupper($certificate->level) }}</h2>--}}
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h2 align="center">{{ strtoupper($certificate->name) }}</h2>
+                        <h2 align="center">{{  strtoupper($certificate->ic_number) }}</h2>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h2 align="center">PENILAIAN TELAH DILAKSANAKAN DI PUSAT BERTAULIAH</h2>
+                        <h2 align="center">{{  strtoupper($certificate->pb_name) }}</h2>
+                        <h2 align="center">{{  strtoupper($certificate->state->name) }}</h2>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </td></tr>
         </table>
 
         <div class="information" style="position: absolute; bottom: 0;">
             <table width="100%">
                 <tr>
-                    <td align="left" style="width: 50%; height: 150px; vertical-align: top; padding-left: 100px; ">
-                    <h5>
-                        {{ $certificate->programme_code }}
-                        <br>
-                        {{ strtoupper($certificate->date_print->format('d/m/Y')) }}
-                    </h5>
+                    <td align="left" style="width: 50%; height: 100px; vertical-align: top; padding-left: 100px; ">
+                        <h5>
+                            {{ strtoupper($certificate->batch_id) }}
+                            <br>
+                            {{ strtoupper($certificate->date_print->format('d/m/Y')) }}
+                            <br>
+                            {{ strtoupper($certificate->printed_remark) }}
+                        </h5>
                     </td>
                 </tr>
             </table>
         </div>
-        
+
         @if (! $loop->last)
             <div class="page-break"></div>
         @endif
 
     @endforeach
-    </main>
-        </body>
-        </html>
+</main>
+</body>
+</html>
