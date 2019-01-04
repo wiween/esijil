@@ -1,14 +1,40 @@
-<style type="text/css">
-    table td, table th{
-        border:1px solid black;
-    }
+<html>
+    <head>
+        <style>
+            @page { margin: 0px 70px; }
+            header { position: fixed; top: -60px; left: 0px; right: 0px; background-color: white; height: 50px; font-size: 9px; }
+            h2 {
+                font-size: 14px;
+            }
+            h3 {
+                font-size: 12px;
+            }
 
-    .page-break {
-        page-break-after: always;
-    }
-</style>
-<div class="container">
-    @foreach($certificates as $certificate)
+            h5 {
+                font-size: 10px;
+            }
+            .footer-sijil {
+                position: fixed; bottom: 0px; left: 40px;
+                font-size: 10px;
+            }
+            p { page-break-after: always; }
+            p:last-child { page-break-after: never; }
+
+            .page-break {
+                page-break-after: always;
+            }
+
+           </style>
+    </head>
+    <body>
+    <script type="text/php">
+if ( isset($pdf) ) {
+        $font = Font_Metrics::get_font("helvetica", "bold");
+        {{--$pdf->page_text(72, 18, "Header: {PAGE_NUM} of {PAGE_COUNT}", $font, 6, array(0,0,0));--}}
+        }
+</script>
+    <main>
+   @foreach($certificates as $certificate)
         <br/>
         <br/>
         <br/>
@@ -24,27 +50,37 @@
         <br/>
         <br/>
         <br/>
-         <div class="center">
+        <div class="center">
             <h2 align="center">{{ strtoupper($certificate->programme_name) }}</h2>
         </div>
         <br/>
         <br/>
+        <br/>
         <div class="center">
             <h2 align="center">{{ strtoupper($certificate->name) }}</h2>
-            <h2 align="center">( {{  $certificate->ic_number }} )</h2>
+            <h2 align="center">{{  $certificate->ic_number }}</h2>
+        </div>
+        <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="center">
+            <h3 align="center">PENILAIAN TELAH DILAKSANAKAN DI PUSAT BERTAULIAH <BR></h3>
+            <h3 align="center">{{  strtoupper($certificate->pb_name) }}</h3>
         </div>
         <br/>
         <br/>
-        <div class="center">
-            <h2 align="center">PENILAIAN TELAH DILAKSANAKAN DI PUSAT BERTAULIAH <BR></h2>
-            <h2 align="center">{{  strtoupper($certificate->pb_name) }}</h2>
-        </div>
         <br/>
-        <br/>
-        <div>
-            <h5 align="center">{{  strtoupper($certificate->batch_id) }}</h5>
-            <h5 align="center">{{  strtoupper($certificate->date_print->format('d/m/Y')) }}</h5>
+            <br/>
+
+           <div class="footer">
+            <h5>{{  strtoupper($certificate->batch_id) }}<br>
+            {{  strtoupper($certificate->date_print->format('d/m/Y')) }}<br>
+           {{  strtoupper($certificate->printed_remark) }}</h5>
         </div>
 
     @endforeach
-</div>
+</main>
+</body>
+</html>
+
