@@ -282,9 +282,4 @@ class ReplacementController extends Controller
         //dd ($certificates);
         return view('replacement.result', compact('certificates'));
     }
-
-    public function paymentResponse(Request $request, $id)
-    {
-        print_r($request->all());
-    }
 }
