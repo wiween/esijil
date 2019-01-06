@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Certificate;
 use Illuminate\Support\Facades\DB;
 
 class CertificateSource
@@ -131,5 +132,11 @@ class CertificateSource
                 return trim($num);
                 break;
         }
+    }
+
+    public function updateCertificateToY()
+    {
+        Certificate::whereNotNull('certificate_number')
+            ->update(['flag_printed' => 'Y']);
     }
 }
