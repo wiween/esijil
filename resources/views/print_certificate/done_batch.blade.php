@@ -21,6 +21,7 @@
                             <th>#</th>
                             <th>Batch No</th>
                             <th>Agihan Kepada</th>
+                            <th>Pegawai Bertanggungjawab</th>
                             <th>Negeri</th>
                             {{--<th>Action</th>--}}
                         </tr>
@@ -29,6 +30,7 @@
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td><a href="{{ url('') }}/certificate/job-done/{{ $certificate->batch_id }}">{{ $certificate->batch_id }}</a></td>
                                 <td>{{ $certificate->source }}</td>
+                                <td>{{ $certificate->officer }}</td>
                                 <td>{{ $certificate->state->name }}</td>
                                 {{--<td>--}}
                                 {{--<ul class="icons-list">--}}

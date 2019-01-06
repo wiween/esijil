@@ -6,6 +6,9 @@ Route::get('/replacement/test', 'Frontend\ReplacementController@indexpayment');
 Route::get('/pelajar/{id}', 'Api\PelajarController@view');
 Route::post('/semak-status', 'Frontend\StatusController@show');
 Route::get('/semak-status', 'Frontend\StatusController@checkStatus');
+Route::get('/ganti/create/{id}', 'Frontend\PenggantianController@create');
+Route::get('/ganti', 'Frontend\PenggantianController@index');
+Route::post('/ganti', 'Frontend\PenggantianController@carian');
 
 ################### BAck end #######################################
 
