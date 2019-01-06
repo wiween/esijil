@@ -9,4 +9,13 @@ class Payment extends Model
 {
     //
     use SoftDeletes;
+
+    protected $fillable = [
+        'transaction_id',
+        'receipt_no',
+        'flag',
+        'payment_date',
+        'transaction_type',
+        'replacement_id',
+    ];
 }

@@ -14,7 +14,10 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form-horizontal" role="form" method="POST" action="http://mohrwallet.mohr.gov.my/vip/vip.aspx">
+            <form id="frmcheckout" class="form-horizontal" role="form" method="POST"
+        {{-- action="http://mohrwallet.mohr.gov.my/vip/vip.aspx" --}}
+        action="/epayment/replacement/{{ $replacement->id }}/paying" > {{-- epayment/replacementchargeprocess/ --}}
+            
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="col-md-4 control-label">
@@ -83,50 +86,13 @@
                     <div class="col-md-6">
                        @if ($replacement->type_replacement == 'rosak')
                             RM 20
-                            <input type="text" name="RAMOUNT" value="20.00">
                         @endif
                        @if ($replacement->type_replacement == 'hilang')
                                RM 50
-                               <input type="text" name="RAMOUNT" value="50.00">
                            @endif
                         @include('partials.error_block', ['item' => 'fee'])
                     </div>
                 </div>
-
-                {{-- jumlah--}}
-                <div class="form-group{{ $errors->has('fee') ? ' has-error' : '' }}">
-                    <label for="fee" class="col-md-4 control-label">
-                        Jumlah Bayaran
-                        <span class="text-danger"> * </span>
-                    </label>
-                    <div class="col-md-6">
-                        <input type="text" name="RUSERNM" value="TEST2010JKKPPJBH"><BR>
-                        <input type="text" name="RPASSWD" value="TEST2010JKKPPJBH"><br>
-                        <input type="text" name="RACCODE" value="TEST2010JKKPPJBH"><br>
-                        <input type="text" name="RRTNPGE" value="{{ url('') }}/replacement/receipt/{{ $replacement->id }}"><br>
-                        <input type="text" name="RTXNTYP" value="FPX"><br>
-                        <input type="text" name="RUNIQID" value="ABCD1236"><br>
-                        <input type="text" name="OTRXNID" value="20180117014401068"><br>
-                        <input type="text" name="OFLNAME" value='{{ $replacement->certificate->name }}'><br>
-                        <input type="text" name="OCURRCD" value="MYR"><br>
-                        <input type="text" name="OCEMAIL" value="norazwin@mohr.gov.my"><br>
-                        <input type="text" name="OCMDTYP" value="P"><br>
-                        <input type="text" name="ORTNVR0" value="{{ $replacement->certificate->ic_number}}"><br>
-                        <input type="text" name="ORTNVR1" value="{{ $replacement->certificate->batch_id }}"><br>
-                        <input type="text" name="ORTNVR2" value="{{ $replacement->id }}"><br>
-                        {{--<input type="text" name="ORTNVR3" value="ABCtestabc123"><br>--}}
-                        {{--<input type="text" name="ORTNVR4" value="ABCtestabc123"><br>--}}
-                        {{--<input type="text" name="ORTNVR5" value="ABCtestabc123"><br>--}}
-                        {{--<input type="text" name="ORTNVR6" value="ABCtestabc123"><br>--}}
-                        {{--<input type="text" name="ORTNVR7" value="ABCtestabc123"><br>--}}
-                        {{--<input type="text" name="ORTNVR8" value="ABCtestabc123"><br>--}}
-                        {{--<input type="text" name="ORTNVR9" value="ABCtestabc123"><br>--}}
-                        @include('partials.error_block', ['item' => 'fee'])
-                    </div>
-                </div>
-
-
-
 
                 {{-- Submit Button --}}
                 <div class="form-group">
@@ -142,4 +108,12 @@
 @endsection
 
 @section('footer_script')
+<script>
+    $(document).ready(function() {
+        $('#frmcheckout').on('submit', function(e) {
+            parentW=window.open('', 'formpopup', 'width=750,height=450,resizeable,scrollbars');
+            this.target = 'formpopup';
+        });
+    });
+</script>
 @endsection
