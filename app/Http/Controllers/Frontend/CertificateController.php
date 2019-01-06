@@ -24,8 +24,7 @@ class CertificateController extends Controller
     public function index($batch, $type)
     {
         //
-        $certificates = Certificate::where('flag_printed', 'N')
-            ->where('batch_id', $batch)->where('type', $type)->orderBy('id', 'desc')->get();
+        $certificates = Certificate::where('flag_printed', 'N')->where('batch_id', $batch)->where('type', $type)->whereNull('source')->orderBy('id', 'desc')->get();
         //dd($certificates);
         return view('print_certificate.index', compact('certificates'));
     }

@@ -75,7 +75,9 @@
                 </div>
             </div>
         </div>
-    <div><a href="{{ url('semak-status') }}"><button class="btn btn-primary">Semak Status</button></a></div>
+    <div class="col-md-4"><a href="{{ url('semak-status') }}"><button class="btn btn-primary">Semak Status</button></a>
+        <a href="{{ url('ganti') }}"><button class="btn btn-success">Penggantian Sijil</button></a>
     </div>
+   </div>
 </div>
 @endsection

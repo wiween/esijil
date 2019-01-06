@@ -31,7 +31,7 @@ class DiplomaController extends Controller
     {
         //
 //        $diplomas = Diploma::all();
-        $certificates = Certificate::where('type', $type)->whereIn('level',['TAHAP EMPAT','TAHAP LIMA'])->whereNull('flag_dkm')->groupBy('batch_id')->get();
+        $certificates = Certificate::where('type', $type)->whereNull('source')->where('flag_printed', 'N')->whereIn('level',['TAHAP EMPAT','TAHAP LIMA'])->whereNull('flag_dkm')->groupBy('batch_id')->get();
         return view('diploma.batch', compact('certificates'));
     }
 
