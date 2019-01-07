@@ -111,7 +111,7 @@
 <script>
     $(document).ready(function() {
         $('#frmcheckout').on('submit', function(e) {
-            parentW=window.open('', 'formpopup', 'width=750,height=450,resizeable,scrollbars');
+            parentW=window.open('', 'formpopup', 'width=750,height=700,resizeable,scrollbars');
             this.target = 'formpopup';
         });
     });
