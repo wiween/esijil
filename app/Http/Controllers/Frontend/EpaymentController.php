@@ -116,7 +116,7 @@ class EpaymentController extends Controller
 
         $url = $base_url . "vip.aspx";
 
-        return view('payment.replacementChargeProcess', compact('replacement', 'url', 'data'));
+        return view('payment.replacementchargeprocess', compact('replacement', 'url', 'data'));
     }
 
     public function replacementPayingStore(Request $request, Replacement $replacement)
