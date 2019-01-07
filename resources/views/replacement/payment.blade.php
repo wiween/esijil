@@ -16,7 +16,7 @@
         <div class="panel-body">
             <form id="frmcheckout" class="form-horizontal" role="form" method="POST"
         {{-- action="http://mohrwallet.mohr.gov.my/vip/vip.aspx" --}}
-        action="{{ url('epayment/replacement/'.$replacement->id ./paying) }}" > {{-- epayment/replacementchargeprocess/ --}}
+        action="{{ url('epayment/replacement/'.$replacement->id .'/paying') }}" > {{-- epayment/replacementchargeprocess/ --}}
             
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
