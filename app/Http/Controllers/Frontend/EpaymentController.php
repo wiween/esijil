@@ -136,6 +136,6 @@ class EpaymentController extends Controller
             ]
         );
 
-        return view('payment.invoice');
+        return view('payment.invoice', ['paymentGatewayResponse' => $request->input(), 'replacement' => $replacement]);
     }
 }

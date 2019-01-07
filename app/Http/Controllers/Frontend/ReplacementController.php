@@ -95,7 +95,7 @@ class ReplacementController extends Controller
 
 
         if ($replacement->save()) {
-            return redirect('/replacement/payment/' . $id)->with('successMessage', 'Maklumat Penggantian Telah Dijana');
+            return redirect('/replacement/epayment/' . $replacement->id)->with('successMessage', 'Maklumat Penggantian Telah Dijana');
         } else {
             return back()->with('errorMessage', 'Tidak boleh jana maklumat penggantian. Sila hubungi Admin');
         }
