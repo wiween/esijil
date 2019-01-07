@@ -6,10 +6,8 @@ use App\Payment;
 use App\Epayment;
 use Carbon\Carbon;
 use App\Replacement;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Exception\GuzzleException;
 
 class EpaymentController extends Controller
 {
@@ -111,10 +109,10 @@ class EpaymentController extends Controller
             'ORTNVR3' => csrf_token(),
         ];
 
-        $client = new Client(); //GuzzleHttp\Client
-        $response = $client->post($base_url . "vip.aspx", [
-            'form_params' => $data,
-        ]);
+        //$client = new Client(); //GuzzleHttp\Client
+        //$response = $client->post($base_url . "vip.aspx", [
+        //    'form_params' => $data,
+        //]);
 
         $url = $base_url . "vip.aspx";
 
