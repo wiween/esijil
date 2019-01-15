@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Payment;
 use App\Epayment;
-use Carbon\Carbon;
 use App\Replacement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -109,30 +108,14 @@ class EpaymentController extends Controller
             'ORTNVR3' => csrf_token(),
         ];
 
-        //$client = new Client(); //GuzzleHttp\Client
-        //$response = $client->post($base_url . "vip.aspx", [
-        //    'form_params' => $data,
-        //]);
-
         $url = $base_url . "vip.aspx";
 
         return view('payment.replacementchargeprocess', compact('replacement', 'url', 'data'));
     }
 
-    public function replacementPayingStore(Request $request, Replacement $replacement)
+    public function replacementPayingStore(Replacement $replacement, Request $request, Payment $payment)
     {
-        $payment = Payment::firstOrCreate(
-            [
-                'transaction_id' => $request->input('ITRXNID'),
-                'receipt_no' => $request->input('IRECPTNO')
-            ],
-            [
-                'flag' => $request->input('IFSTATUS'),
-                'payment_date' => Carbon::createFromFormat('d/m/Y H:i:s', $request->input('IDATETXN'))->toDateTimeString(),
-                'transaction_type' => $replacement->type_replacement,
-                'replacement_id' => $replacement->id,
-            ]
-        );
+        $payment->storePayment($request, $replacement);
 
         return view('payment.invoice', ['paymentGatewayResponse' => $request->input(), 'replacement' => $replacement]);
     }
