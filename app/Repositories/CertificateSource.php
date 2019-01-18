@@ -26,8 +26,8 @@ class CertificateSource
             left join mosq.urus_ppl as f on a.urus_ppl_id = f.id
             join mosq.negeri as g on g.kod_negeri = e.kod_negeri
             where 1 = 1
-            and (a.keputusan_ppl = 1
-            or (a.keputusan_jpp = 1 or a.keputusan_senat_induk = 1))
+            and a.keputusan_ppl = 1
+            and a.keputusan_jpp = 1
             union select a.nama as name, a.no_ic as ic_number, b.nama_program as programme_name, a.kod_program as programme_code, 
             case 
             	when a.jenis_tauliah=1 then 'pb'
