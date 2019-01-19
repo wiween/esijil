@@ -32,7 +32,8 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $replacement->certificate->ic_number }}</td>
-                                <td><a href="{{ url('') }}/replacement/show/{{ $replacement->id }}">{{ $replacement->certificate->name }}</a> </td>
+                                {{--<td><a href="{{ url('') }}/replacement/show/{{ $replacement->id }}">{{ $replacement->certificate->name }}</a> </td>--}}
+                                <td>{{ $replacement->certificate->name }}</td>
                                 <td>{{ $replacement->certificate->batch_id }}</td>
                                 <td>{{ $replacement->type_replacement }}</td>
                                 <td>

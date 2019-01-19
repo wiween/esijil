@@ -69,12 +69,10 @@ if ( isset($pdf) ) {
                 <tr>
                     <td align="left" style="width: 50%; height: 150px; vertical-align: top; padding-left: 100px; ">
                     <h5>
-                        {{ strtoupper($certificate->batch_id) }}
+                        {{ strtoupper($certificate->batch_id) }}  - {{ strtoupper($certificate->tarikh_ppl) }}
                         <br>
                         {{ strtoupper($certificate->date_print->format('d/m/Y')) }}
-                        <br>
-                        {{ strtoupper($certificate->printed_remark) }}
-                    </h5>
+                       </h5>
                     </td>
                 </tr>
             </table>

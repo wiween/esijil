@@ -113,6 +113,33 @@ class EpaymentController extends Controller
         return view('payment.replacementchargeprocess', compact('replacement', 'url', 'data'));
     }
 
+    public function replacementChargeProcessOut(Replacement $replacement)
+    {
+        $base_url = "http://mohrwallet.mohr.gov.my/vip/";
+        $data = [
+            'RAMOUNT' => (($replacement->type_replacement == 'hilang') ? "50.00" : "20.00"),
+            'RUSERNM' => config('esijil.pg_user'),
+            'RPASSWD' => config('esijil.pg_passwd'),
+            'RACCODE' => 'TEST2010JKKPPJBH',
+            'RRTNPGE' => url('epayment/ganti/' . $replacement->id . '/receipt'),
+            'RTXNTYP' => 'FPX',
+            'RUNIQID' => 'ABCtestabc123',
+            'OTRXNID' => str_random(20),
+            'OFLNAME' => $replacement->certificate->name,
+            'OCURRCD' => 'MYR',
+            'OCEMAIL' => 'norazwin@mohr.gov.my',
+            'OCMDTYP' => 'P',
+            'ORTNVR0' => $replacement->certificate->ic_number,
+            'ORTNVR1' => $replacement->certificate->batch_id,
+            'ORTNVR2' => $replacement->id,
+            'ORTNVR3' => csrf_token(),
+        ];
+
+        $url = $base_url . "vip.aspx";
+
+        return view('payment.replacementchargeprocess', compact('replacement', 'url', 'data'));
+    }
+
     public function replacementPayingStore(Replacement $replacement, Request $request, Payment $payment)
     {
         $payment->storePayment($request, $replacement);

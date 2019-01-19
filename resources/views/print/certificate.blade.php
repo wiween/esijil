@@ -96,8 +96,6 @@ if ( isset($pdf) ) {
                             {{ strtoupper($certificate->batch_id) }}
                             <br>
                             {{ strtoupper($certificate->date_print->format('d/m/Y')) }}
-                            <br>
-                            {{ strtoupper($certificate->printed_remark) }}
                         </h5>
                     </td>
                 </tr>
