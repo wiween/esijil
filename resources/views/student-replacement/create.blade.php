@@ -18,29 +18,26 @@
                         <h3>KEMENTERIAN SUMBER MANUSIA</h3>
                     </div>
                     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-body has-padding">
             <form class="form-horizontal" role="form" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="col-md-4 control-label">
-                        Nama Pelajar
-
+                        Nama Pelajar :
                     </label>
-                    <div class="col-md-6">
-                        {{ $certificate->name }}
+                                        {{ $certificate->name }}
                         @include('partials.error_block', ['item' => 'name'])
-                    </div>
-                </div>
+                  </div>
 
                 <div class="form-group{{ $errors->has('ic_number') ? ' has-error' : '' }}">
                     <label for="ic_number" class="col-md-4 control-label">
                         No ID
 
                     </label>
-                    <div class="col-md-6">
+
                         {{ $certificate->ic_number }}
                         @include('partials.error_block', ['item' => 'ic_number'])
-                    </div>
+
                 </div>
 
                 {{-- old certificate --}}
@@ -49,10 +46,10 @@
                         No Sijil Lama
 
                     </label>
-                    <div class="col-md-6">
+
                         {{ $certificate->certificate_number }}
                         @include('partials.error_block', ['item' => 'old_certificate_number'])
-                    </div>
+
                 </div>
 
                 {{-- type replacement--}}
@@ -61,7 +58,7 @@
                         Jenis Penggantian
                         <span class="text-danger"> * </span>
                     </label>
-                    <div class="col-md-6">
+
                         <select name="type" class="form-control">
                             <option selected>Sila Pilih..</option>
                             @foreach ($types as $type)
@@ -69,41 +66,27 @@
                             @endforeach
                         </select>
                         @include('partials.error_block', ['item' => 'type'])
-                    </div>
+
                 </div>
 
                 {{-- reason --}}
                 <div class="form-group{{ $errors->has('reason') ? ' has-error' : '' }}">
                     <label for="reason" class="col-md-4 control-label">
-                        Sebab Penggantian
-                        <span class="text-danger"> * </span>
-                    </label>
-                    <div class="col-md-6">
-                        <input name="reason" type="text" class="form-control" value="{{ old('reason') }}" required autofocus>
+                        Sebab Penggantian :
+                        <span class="text-danger"> * </span></label>
+                    <input name="reason" type="text" class="form-control" value="{{ old('reason') }}" required autofocus>
                         @include('partials.error_block', ['item' => 'reason'])
-                    </div>
-                </div>
-
-                {{-- Remark --}}
-                <div class="form-group{{ $errors->has('remark') ? ' has-error' : '' }}">
-                    <label class="col-md-4 control-label">Remark</label>
-                    <div class="col-md-6">
-                        <textarea name="remark" class="form-control" rows="3"></textarea>
-                    </div>
-                    @include('partials.error_block', ['item' => 'remark'])
                 </div>
 
                 {{-- date_post--}}
-                <div class="form-group{{ $errors->has('date_replacement') ? ' has-error' : '' }}">
-                    <label for="date_posdate_replacement" class="col-md-4 control-label">
-                        Tarikh Permohonan Ganti
-                        <span class="text-danger"> * </span>
-                    </label>
-                    <div class="col-md-6">
-                        <input name="date_replacement" type="date" class="form-control" value="{{ old('date_replacement') }}" required>
-                        @include('partials.error_block', ['item' => 'date_post'])
-                    </div>
-                </div>
+                {{--<div class="form-group{{ $errors->has('date_replacement') ? ' has-error' : '' }}">--}}
+                    {{--<label for="date_posdate_replacement" class="col-md-4 control-label">--}}
+                        {{--Tarikh Permohonan Ganti :--}}
+                        {{--<span class="text-danger"> * </span>--}}
+                    {{--</label>--}}
+                        {{--<input name="date_replacement" type="date" class="form-control" value="{{ old('date_replacement') }}" required>--}}
+                        {{--@include('partials.error_block', ['item' => 'date_post'])--}}
+                {{--</div>--}}
 
 
                 {{-- Submit Button --}}

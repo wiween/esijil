@@ -34,7 +34,7 @@
                                             <th>Tahap</th>
                                             {{--<th>Jenis Pentauliahan</th>--}}
                                             <th>Tarikh Cetak</th>
-                                            <th>Action</th>
+                                            <th>Penngantian Sijil</th>
                                             {{--<th>No KP Penerima</th>--}}
                                         </tr>
                                         @foreach ($certificates as $certificate)
@@ -47,8 +47,8 @@
                                                 {{--<td>{{ $certificate->pb_name }}</td>--}}
                                                 <td>{{ $certificate->level }}</td>
                                                 {{--<td>{{ $certificate->type }}</td>--}}
-                                                <td>{{ $certificate->date_print }}</td>
-                                                <td><a href="/ganti/create/{{ $certificate->id }}"><input type="button" value="Penggantian Sijil"></a> </td>
+                                                <td>{{ $certificate->date_print->format('d/m/Y') }}</td>
+                                                <td align="center"><a href="/ganti/create/{{ $certificate->id }}/{{ $certificate->certificate_number }}"><button type="button" class="btn btn-primary">Mohon</button></a> </td>
                                             </tr>
                                         @endforeach
                                     </table>

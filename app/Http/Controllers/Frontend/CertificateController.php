@@ -245,6 +245,7 @@ class CertificateController extends Controller
             ->select('replacements.*','certificates.name','certificates.ic_number','certificates.batch_id')
             ->where('replacements.flag_certificate','N')
             ->where('certificates.type',$type)
+            ->where('replacements.flag_lulus','Y')
             ->get();
         //dd($batches);
         return view('print_certificate.state-redistribute', compact('replacements'));

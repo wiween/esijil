@@ -1,23 +1,28 @@
-@extends('layouts.frontend')
-
-@section('header_script')
-@endsection
-
-@section('mainTitle')
-    Pembayaran Penggantian Sijil :
-@endsection
-
-@section('topButton')
-
-@endsection
+@extends('layouts.app')
 
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form id="frmcheckout" class="form-horizontal" role="form" method="POST"
-        {{-- action="http://mohrwallet.mohr.gov.my/vip/vip.aspx" --}}
-        action="{{ url('epayment/replacement/'.$replacement->id .'/paying') }}" > {{-- epayment/replacementchargeprocess/ --}}
-            
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="row justify-content-center">
+                        <img src="{{ asset('images/jata.png') }}" alt="Jata Malaysia">
+                    </div>
+                    <div class="row justify-content-center">
+                        <h2 style="text-align: center"><b>SEMAKAN STATUS PENGELUARAN SIJIL</b></h2>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h3>JABATAN PEMBANGUNAN KEMAHIRAN</h3>
+                    </div>
+                    <div class="row justify-content-center">
+                        <h3>KEMENTERIAN SUMBER MANUSIA</h3>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body has-padding">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+
+                                <form class="form-horizontal" role="form" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="col-md-4 control-label">
@@ -65,56 +70,85 @@
                     </div>
                 </div>
 
-               {{-- date_post--}}
+                {{-- date_post--}}
                 <div class="form-group{{ $errors->has('date_replacement') ? ' has-error' : '' }}">
                     <label for="date_replacement" class="col-md-4 control-label">
                         Tarikh Permohonan Ganti
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                       {{  $replacement->date_replacement->format('d, M Y') }}
+                        {{  $replacement->date_replacement->format('d, M Y') }}
                         @include('partials.error_block', ['item' => 'date_replacement'])
                     </div>
                 </div>
-                @if ($replacement->type_replacement <> 'Kesilapan JPK')
+
                 {{-- jumlah--}}
                 <div class="form-group{{ $errors->has('fee') ? ' has-error' : '' }}">
                     <label for="fee" class="col-md-4 control-label">
-                       Jumlah Bayaran
+                        Jumlah Bayaran
                         <span class="text-danger"> * </span>
                     </label>
                     <div class="col-md-6">
-                       @if ($replacement->type_replacement == 'rosak')
+                        @if ($replacement->type_replacement == 'rosak')
                             RM 20
+                            <input type="text" name="RAMOUNT" value="20.00">
                         @endif
-                       @if ($replacement->type_replacement == 'hilang')
-                               RM 50
-                           @endif
+                        @if ($replacement->type_replacement == 'hilang')
+                            RM 50
+                            <input type="text" name="RAMOUNT" value="50.00">
+                        @endif
                         @include('partials.error_block', ['item' => 'fee'])
                     </div>
                 </div>
+
+                {{-- jumlah--}}
+                <div class="form-group{{ $errors->has('fee') ? ' has-error' : '' }}">
+                    <label for="fee" class="col-md-4 control-label">
+                        Jumlah Bayaran
+                        <span class="text-danger"> * </span>
+                    </label>
+                    <div class="col-md-6">
+                        echo $IFSTATUS.'<br>';
+                        echo $IUNIQID.'<br>';
+                        echo $ITRXNID.'<br>';
+                        echo $IMESSAGE.'<br>';
+                        echo $IDATETXN.'<br>';
+                        echo $IRECPTNO.'<br>';
+                        echo $ORTNVR0.'<br>';
+                        echo $ORTNVR1.'<br>';
+                        echo $ORTNVR2.'<br>';
+                        echo $ORTNVR3.'<br>';
+                        echo $ORTNVR4.'<br>';
+                        echo $ORTNVR5.'<br>';
+                        echo $ORTNVR6.'<br>';
+                        echo $ORTNVR7.'<br>';
+                        echo $ORTNVR8.'<br>';
+                        echo $ORTNVR9.'<br>';
+                        echo $IPYMTID.'<br>';
+                        echo $IORDERNO.'<br>';
+                        echo $ISRCPYMT;
+                        @include('partials.error_block', ['item' => 'fee'])
+                    </div>
+                </div>
+
+
+
 
                 {{-- Submit Button --}}
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
-                            Mulakan Bayaran
+                            Cetak Resit
                         </button>
                     </div>
                 </div>
-                    @endif
             </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-@endsection
-
-@section('footer_script')
-<script>
-    $(document).ready(function() {
-        $('#frmcheckout').on('submit', function(e) {
-            parentW=window.open('', 'formpopup', 'width=750,height=700,resizeable,scrollbars');
-            this.target = 'formpopup';
-        });
-    });
-</script>
 @endsection

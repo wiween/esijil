@@ -6,9 +6,14 @@ Route::get('/replacement/test', 'Frontend\ReplacementController@indexpayment');
 Route::get('/pelajar/{id}', 'Api\PelajarController@view');
 Route::post('/semak-status', 'Frontend\StatusController@show');
 Route::get('/semak-status', 'Frontend\StatusController@checkStatus');
-Route::get('/ganti/create/{id}', 'Frontend\PenggantianController@create');
+Route::get('/ganti/create/{id}/{cn}', 'Frontend\PenggantianController@create');
+Route::post('/ganti/create/{id}/{cn}', 'Frontend\PenggantianController@store');
 Route::get('/ganti', 'Frontend\PenggantianController@index');
 Route::post('/ganti', 'Frontend\PenggantianController@carian');
+Route::get('/ganti/epayment/{id}', 'Frontend\PenggantianController@payNow');
+Route::get('/ganti/receipt/{id}', 'Frontend\PenggantianController@receipt');
+Route::post('/epayment/ganti/{replacement}/paying', 'Frontend\EpaymentController@replacementChargeProcessOut');
+Route::post('/epayment/ganti/{replacement}/receipt', 'Frontend\EpaymentController@replacementPayingStore');
 
 ################### BAck end #######################################
 
@@ -19,6 +24,7 @@ Route::group(['middleware' => ['audit', 'role:company']], function () {
 
     //company
     Route::get('/company-download', 'Frontend\CompanyController@index');
+    Route::get('/company-download/replacement', 'Frontend\CompanyController@replacement');
     Route::get('/company-search/post', 'Frontend\CompanyController@search');
     Route::post('/company-search/post', 'Frontend\CompanyController@searchResult');
     Route::get('/company-post/create/{id}', 'Frontend\CompanyController@create');
@@ -191,13 +197,16 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::post('/replacement/search', 'Frontend\ReplacementController@searchResult');
     Route::get('/replacement/list/{id}', 'Frontend\ReplacementController@list');
     Route::get('/replacement/show/{id}/{cn}', 'Frontend\ReplacementController@show');
+    Route::get('/replacement/show-after/{id}/{replaceid}', 'Frontend\ReplacementController@showAfter');
     Route::get('/replacement/destroy/{id}', 'Frontend\ReplacementController@destroy');
     Route::get('/replacement/epayment/{id}', 'Frontend\ReplacementController@payment');
     Route::get('/replacement/create/{id}/{cn}', 'Frontend\ReplacementController@create');
-    Route::get('/replacement/payment/{id}', 'Frontend\ReplacementController@payNow');
     Route::post('/replacement/create/{id}/{cn}', 'Frontend\ReplacementController@store');
+    Route::get('/replacement/payment/{id}', 'Frontend\ReplacementController@payNow');
+
 //    Route::post('/replacement/epayment/{id}', 'Frontend\ReplacementController@storePayment');
     Route::get('/replacement/receipt/{id}', 'Frontend\ReplacementController@receipt');
+    Route::get('/replacement/flag/{flag}/{id}', 'Frontend\ReplacementController@setFlag');
 
     Route::post('/epayment/replacement/{replacement}/paying', 'Frontend\EpaymentController@replacementChargeProcess');
     Route::post('/epayment/replacement/{replacement}/receipt', 'Frontend\EpaymentController@replacementPayingStore');

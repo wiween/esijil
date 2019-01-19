@@ -781,5 +781,18 @@ class CompanyController extends Controller
 
     }
 
+    public function replacement()
+    {
+        //select yg flag_printed = N , source = syarikat yang cetakan <> 'cetakan pertama'
+        $certificates = Certificate::where('flag_printed', 'N')
+            ->where('printed_remark','<>', 'cetakan pertama')
+            ->where('source', 'syarikat')
+            ->orderBy('name', 'asc')
+            ->get();
+        //dd($certificates);
+        return view('company.replacement', compact('certificates'));
+    }
+
+
 
 }

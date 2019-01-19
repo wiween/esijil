@@ -34,6 +34,11 @@ class Certificate extends Model
         return $this->hasMany('App\Replacement');
     }
 
+    public function penggantian()
+    {
+        return $this->hasMany('App\Penggantian');
+    }
+
     public function finance()
     {
         return $this->hasMany('App\Finance');

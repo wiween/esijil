@@ -36,6 +36,7 @@
             <li><a href="{{ url('') }}/diploma">Senarai DKM/DLKM</a></li>
         </ul>
     </li>
+    {{--@if (Auth::user()->role <> 'super_admin')--}}
     <li @if (Request::segment(1) == 'certificate') class="active" @endif><a href="{{ url('') }}/certificate/list"><i
                     class="icon-add-to-list"></i> <span>Agihan Tugasan</span></a>
         <ul>
@@ -45,6 +46,7 @@
             {{--<li><a href="{{ url('') }}/certificate/done-batch/redistribute">Selesai Agihan Semula</a></li>--}}
         </ul>
     </li>
+        {{--@endif--}}
 
 @endif
 
@@ -120,6 +122,7 @@
         <a href="{{ url('') }}/company-download"><i class="icon-download7"></i> <span>Muat Turun</span></a>
         <ul>
             <li><a href="{{ url('') }}/company-download">Muat Turun Senarai</a></li>
+            <li><a href="{{ url('') }}/company-download/replacement">Muat Turun Gantian</a></li>
         </ul>
     </li>
 
