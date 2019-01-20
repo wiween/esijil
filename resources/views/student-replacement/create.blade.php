@@ -58,7 +58,7 @@
                         Jenis Penggantian
                         <span class="text-danger"> * </span>
                     </label>
-
+                    <div style="padding: 0 15px;">
                         <select name="type" class="form-control">
                             <option selected>Sila Pilih..</option>
                             @foreach ($types as $type)
@@ -66,7 +66,7 @@
                             @endforeach
                         </select>
                         @include('partials.error_block', ['item' => 'type'])
-
+                    </div>
                 </div>
 
                 {{-- reason --}}
@@ -74,8 +74,10 @@
                     <label for="reason" class="col-md-4 control-label">
                         Sebab Penggantian :
                         <span class="text-danger"> * </span></label>
-                    <input name="reason" type="text" class="form-control" value="{{ old('reason') }}" required autofocus>
-                        @include('partials.error_block', ['item' => 'reason'])
+                        <div style="padding: 0 15px;">
+                            <input name="reason" type="text" class="form-control" value="{{ old('reason') }}" required autofocus>
+                            @include('partials.error_block', ['item' => 'reason'])
+                        </div>
                 </div>
 
                 {{-- date_post--}}

@@ -21,7 +21,6 @@
                         <div class="panel-body has-padding">
                             <div class="panel panel-default has-padding">
                                 <div class="panel-body has-padding">
-                                    {{--error message-- nape tak kuar ? wan tlg }}--}}
                                    @if (Session::has('successMessage'))
                                         <div class="alert alert-success alert-styled-left alert-bordered">
                                             <button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
