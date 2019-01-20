@@ -42,7 +42,7 @@
                                                 <td>{{ $certificate->certificate_number }}</td>
                                                 <td>{{ $certificate->level }}</td>
                                                 <td>{{ $certificate->date_print->format('d/m/Y')}}</td>
-                                            <td align="center"><a href="{{url('')}}ganti/create/{{ $certificate->id }}/{{ $certificate->certificate_number }}"><button type="button" class="btn btn-primary">Mohon</button></a> </td>
+                                            <td align="center"><a href="{{url('')}}/ganti/create/{{ $certificate->id }}/{{ $certificate->certificate_number }}"><button type="button" class="btn btn-primary">Mohon</button></a> </td>
                                             </tr>
                                         @endforeach
                                     </table>
