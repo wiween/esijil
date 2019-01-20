@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'eSijil') }}</title>
 
     <!-- Scripts -->
+    <script type="text/javascript" src="{{ url("themes/limitless/assets/js/core/libraries/jquery.min.js") }}"></script>
     <script src="{{ url('js/app.js') }}" defer></script>
 
     <!--vue -->
