@@ -16,25 +16,25 @@
         <div class="panel-body">
            <div class="row">
                 <h3>Jenis Pentauliahan: </h3>
-               @if ((Auth::user()->user_type == 'ppt') ||(Auth::user()->access_power >= '8000'))
+               @if ((Auth::user()->user_type == \App\User::USER_TYPE_PPT) ||(Auth::user()->access_power >= '8000'))
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="{{ url('') }}/images/dashboard/audit-min.jpg">
                     <a href="{{ url('') }}/certificate/state/ppt" class="btn btn-info btn-block" style="margin-top: 4px">PPT</a>
                 </div>
                @endif
-               @if ((Auth::user()->user_type == 'ndt') ||(Auth::user()->access_power >= '8000'))
+               @if ((Auth::user()->user_type == \App\User::USER_TYPE_NDT) ||(Auth::user()->access_power >= '8000'))
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="{{ url('') }}/images/dashboard/lookups-min.jpg">
                     <a href="{{ url('') }}/certificate/state/ndt" class="btn btn-info btn-block" style="margin-top: 4px">NDT</a>
                 </div>
                @endif
-               @if ((Auth::user()->user_type == 'pb') ||(Auth::user()->access_power >= '8000'))
+               @if ((Auth::user()->user_type == \App\User::USER_TYPE_PB) ||(Auth::user()->access_power >= '8000'))
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="{{ url('') }}/images/dashboard/target-min.jpg">
                     <a href="{{ url('') }}/certificate/state/pb" class="btn btn-info btn-block" style="margin-top: 4px">PUSAT BERTAULIAH</a>
                 </div>
                @endif
-               @if ((Auth::user()->user_type == 'sldn') ||(Auth::user()->access_power >= '8000'))
+               @if ((Auth::user()->user_type == \App\User::USER_TYPE_SLDN) ||(Auth::user()->access_power >= '8000'))
                 <div class="col-md-3 col-xs-6 thumbnail">
                     <img class="img-responsive img-rounded" src="{{ url('') }}/images/dashboard/user-min.jpg">
                     <a href="{{ url('') }}/certificate/state/sldn" class="btn btn-info btn-block" style="margin-top: 4px">SLDN</a>
