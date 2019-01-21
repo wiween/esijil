@@ -36,7 +36,8 @@ if ( isset($pdf) ) {
 <main>
     @foreach($certificates as $certificate)
     <table width="100%">
-            <tr><td>
+            <tr>
+                <td>
         <br/>
         <br/>
         <br/>
@@ -85,7 +86,8 @@ if ( isset($pdf) ) {
         <br/>
         <br/>
         <br/>
-    </td></tr>
+                </td>
+            </tr>
         </table>
 
         <div class="information" style="position: absolute; bottom: 0;">
@@ -95,7 +97,7 @@ if ( isset($pdf) ) {
                     <h5>
                         {{ strtoupper($certificate->batch_id) }} - {{ strtoupper($certificate->tarikh_ppl) }}
                         <br>
-                        {{ strtoupper($certificate->date_print->format('d/m/Y')) }}
+                        {{ strtoupper(optional($certificate->date_print)->format('d/m/Y')) }}
                     </h5>
                     </td>
                 </tr>

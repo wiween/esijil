@@ -169,12 +169,10 @@ class PrintedController extends Controller
         return $pdf->stream('reports.pdf');
     }
 
-    public function singleReportPdf($id)
+    public function singleReportPdf(Certificate $certificate)
     {
-        $certificate = Certificate::findOrFail($id);
-        $pdf = PDF::loadView('print_certificate.single_certificate', compact('certificate'));
-        //return $pdf->download('report.pdf');
-        // tgk tahap
+        $certificates = Certificate::where('id', $certificate->id)->get();
+
         if ($certificate->level == 'PC') {
             $pdf = PDF::loadView('print.certificate', compact('certificates'));
         }
@@ -191,9 +189,7 @@ class PrintedController extends Controller
             }
         }
 
-
-        //yag lama
-        //return $pdf->stream('singlereport.pdf');
+        return $pdf->stream('report.pdf');
     }
 
 //    public function collection()
