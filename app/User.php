@@ -50,6 +50,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
+    const USER_TYPE_PB = 'PB';
+    const USER_TYPE_SLDN = 'SLDN';
+    const USER_TYPE_NDT = 'NDT';
+    const USER_TYPE_PPT = 'PPT';
+
     use Notifiable;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
@@ -61,7 +66,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','ic_number','phone_number',
+        'name', 'email', 'password', 'ic_number', 'phone_number',
     ];
 
     /**
