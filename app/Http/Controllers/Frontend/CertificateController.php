@@ -24,8 +24,8 @@ class CertificateController extends Controller
     public function index($batch, $type)
     {
         //
-        $certificates = Certificate::where('flag_printed', 'N')
-            ->where('batch_id', $batch)->where('type', $type)->orderBy('id', 'desc')->get();
+        $certificates = Certificate::where('flag_printed', 'N')->where('batch_id', $batch)
+            ->where('type', $type)->whereNull('source')->orderBy('id', 'desc')->get();
         //dd($certificates);
         return view('print_certificate.index', compact('certificates'));
     }
@@ -52,7 +52,7 @@ class CertificateController extends Controller
     public function state($type)
     {
         //salah kalau ade state yag sama
-        $certificates = Certificate::groupBy('state_id')->where('type',$type)
+        $certificates = Certificate::groupBy('state_id')->where('type', $type)
             ->whereNull('source')->where('flag_printed', 'N')->get();
         return view('print_certificate.state', compact('certificates'));
     }
@@ -60,15 +60,15 @@ class CertificateController extends Controller
     public function stateList($id, $type)
     {
         //
-         $batches = Certificate::distinct('batch_id')->whereNull('source')->where('state_id', $id)
-            ->where('type',$type)->where('flag_printed', 'N')
+        $batches = Certificate::distinct('batch_id')->whereNull('source')->where('state_id', $id)
+            ->where('type', $type)->where('flag_printed', 'N')
             ->groupBy('batch_id')->get();
 //        $batches = Batch::where('state_id', $id)->get();
-        $users = User::where('role','pencetak')->where('user_type',$type)->get();
+        $users = User::where('role', 'pencetak')->where('user_type', $type)->get();
         $sources = Source::all();
         $state = State::findOrFail($id);
         //dd($batches);
-        return view('print_certificate.state_list', compact('batches',  'users', 'sources', 'state'));
+        return view('print_certificate.state_list', compact('batches', 'users', 'sources', 'state'));
     }
 
     public function create()
@@ -104,7 +104,7 @@ class CertificateController extends Controller
     {
         //
         $certificate = Certificate::findOrFail($id);
-        $users = User::where('role','pencetak')->where('user_type',Auth::user()->user_type)->get();
+        $users = User::where('role', 'pencetak')->where('user_type', Auth::user()->user_type)->get();
         $sources = Source::all();
         return view('print_certificate.job', compact('certificate', 'users', 'sources'));
     }
@@ -139,10 +139,10 @@ class CertificateController extends Controller
         $certificate->status = $request->input('status');
         $certificate->flag_printed = $request->input('flag');
         $certificate->remark = $request->input('remark');
-        $certificate->qrlink = url('pelajar/'. $id);
+        $certificate->qrlink = url('pelajar/' . $id);
 
         if ($certificate->save()) {
-            return redirect('/certificate/show/'.$id)->with('successMessage', 'Maklumat telah dikemaskini');
+            return redirect('/certificate/show/' . $id)->with('successMessage', 'Maklumat telah dikemaskini');
         } else {
             return back()->with('errorMessage', 'Tidak dapat kemaskini rekod. Hubungi Admin');
         }
@@ -159,7 +159,7 @@ class CertificateController extends Controller
         //
         $certificate = Certificate::findOrFail($id);
 
-        if($certificate->delete()) {
+        if ($certificate->delete()) {
             return back()->with('successMessage', 'Data telah dihapuskan');
         } else {
             return back()->with('errorMessage', 'Tidak dapat hapuskan data');
@@ -182,8 +182,8 @@ class CertificateController extends Controller
     {
         foreach ($request->input('batch') as $batch) {
 
-            $certificates = Certificate::where('flag_printed','N')->where('batch_id', $batch)->where('state_id', $id)->where('type', $type)->get();
-            
+            $certificates = Certificate::where('flag_printed', 'N')->where('batch_id', $batch)->where('state_id', $id)->where('type', $type)->get();
+
             foreach ($certificates as $certificate) {
                 $certificate->officer = $request->input('officer');
                 $certificate->source = $request->input('source');
@@ -193,7 +193,7 @@ class CertificateController extends Controller
             }
         }
 //            if ($batch->save()) {
-        return redirect('/certificate/statelist/'. $id . "/" . $type)->with('successMessage', 'Maklumat telah disahkan');
+        return redirect('/certificate/statelist/' . $id . "/" . $type)->with('successMessage', 'Maklumat telah disahkan');
 //        } else {
 //            return back()->with('errorMessage', 'Unable to create new activity into database. Contact admin');
 //        }
@@ -203,13 +203,13 @@ class CertificateController extends Controller
     {
         //
         $certificate = Certificate::findOrFail($id);
-        $batch_id =  $certificate->batch_id;
+        $batch_id = $certificate->batch_id;
         $certificate->officer = $request->input('officer');
         $certificate->source = $request->input('source');
         $certificate->session = $request->input('session');
 
         if ($certificate->save()) {
-            return redirect('/certificate/job/'.$id)->with('successMessage', 'Maklumat telah dikemaskini');
+            return redirect('/certificate/job/' . $id)->with('successMessage', 'Maklumat telah dikemaskini');
         } else {
             return back()->with('errorMessage', 'Tidak dapat kemaskini rekod. Hubungi Admin');
         }
@@ -227,7 +227,7 @@ class CertificateController extends Controller
         //
         $user_type = Auth::user()->user_type;
         $certificates = Certificate::distinct('batch_id')->whereNotNull('source')->where('flag_printed', 'N')->where('type', $user_type)
-           ->groupBy('batch_id')->orderBy('id', 'desc')->get();
+            ->groupBy('batch_id')->orderBy('id', 'desc')->get();
         //dd($certificates);
 //        $batch = Batch::findOrFail($batch);
         return view('print_certificate.done_batch', compact('certificates'));
@@ -236,16 +236,16 @@ class CertificateController extends Controller
     public function typeRedistribute()
     {
         //
-       return view('print_certificate.type-redistribute', compact('states'));
+        return view('print_certificate.type-redistribute', compact('states'));
     }
 
     public function redistribute($type)
     {
         //
         $replacements = Replacement::join('certificates', 'certificates.id', '=', 'replacements.certificate_id')
-            ->select('replacements.*','certificates.name','certificates.ic_number','certificates.batch_id')
-            ->where('replacements.flag_certificate','N')
-            ->where('certificates.type',$type)
+            ->select('replacements.*', 'certificates.name', 'certificates.ic_number', 'certificates.batch_id')
+            ->where('replacements.flag_certificate', 'N')
+            ->where('certificates.type', $type)
             ->get();
         //dd($batches);
         return view('print_certificate.state-redistribute', compact('replacements'));
@@ -265,9 +265,9 @@ class CertificateController extends Controller
     public function redistributeSource($id)
     {
         $replacement = Replacement::findOrFail($id);
-        $users = User::where('role','pencetak')->get();
+        $users = User::where('role', 'pencetak')->get();
         $sources = Source::all();
-       return view('print_certificate.redistribute', compact('replacement', 'users', 'sources'));
+        return view('print_certificate.redistribute', compact('replacement', 'users', 'sources'));
     }
 
 
@@ -293,7 +293,7 @@ class CertificateController extends Controller
         $certificate->save();
 
        //set post id kat replacement
-        $post = Post::where('certificate_id',$student)->first();
+        $post = Post::where('certificate_id', $student)->first();
         //dd($post);
         $post_id = $post->id;
 
@@ -308,7 +308,7 @@ class CertificateController extends Controller
         //delete post lama
         $post->delete();
 
-       return view('print_certificate.type-redistribute');
+        return view('print_certificate.type-redistribute');
     }
 
 
