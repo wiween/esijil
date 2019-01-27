@@ -171,25 +171,20 @@ class PrintedController extends Controller
 
     public function singleReportPdf(Certificate $certificate)
     {
-        $certificates = Certificate::where('id', $certificate->id)->get();
+        $certificate = Certificate::findOrFail($id);
 
-        if ($certificate->level == 'PC') {
-            $pdf = PDF::loadView('print.certificate', compact('certificates'));
-        }
+        $pdf = PDF::loadView('print.layout.single', compact('certificate'));
 
-        if ($certificate->level == 'TAHAP EMPAT' || $certificate->level == 'TAHAP LIMA') {
-            $pdf = PDF::loadView('print.certificate45', compact('certificates'))->setPaper('a4', 'landscape');
-        }
+        return $pdf->stream('singlereport.pdf');
+    }
 
-        if ($certificate->level == 'TAHAP SATU' || $certificate->level == 'TAHAP DUA' || $certificate->level == 'TAHAP TIGA') {
-            if ($certificate->type == 'ndt') {
-                $pdf = PDF::loadView('print.certificatendt', compact('certificates'));
-            } else {
-                $pdf = PDF::loadView('print.certificate13', compact('certificates'));
-            }
-        }
+    public function multiReportPdf($batch)
+    {
+        $certificates = Certificate::where('batch_id', $batch)->get();
 
-        return $pdf->stream('report.pdf');
+        $pdf = PDF::loadView('print.layout.multi', compact('certificates'));
+
+        return $pdf->stream('multireport.pdf');
     }
 
 //    public function collection()
@@ -209,6 +204,14 @@ class PrintedController extends Controller
             $certificates = Certificate::where('flag_printed', 'Y')->where('officer', $officer)->groupBy('batch_id')->orderBy('id', 'desc')->get();
             return view('print.list_done', compact('certificates'));
         }
+
+    }
+
+    public function list($batch)
+    {
+        $certificates = Certificate::where('batch_id', $batch)->get();
+
+        return view('print.list', compact('certificates'));
 
     }
 
