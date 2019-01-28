@@ -171,8 +171,6 @@ class PrintedController extends Controller
 
     public function singleReportPdf(Certificate $certificate)
     {
-        $certificate = Certificate::findOrFail($id);
-
         $pdf = PDF::loadView('print.layout.single', compact('certificate'));
 
         return $pdf->stream('singlereport.pdf');
