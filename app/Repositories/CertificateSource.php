@@ -88,9 +88,7 @@ class CertificateSource
             join mosq.skm b on (a.ic_number = b.no_ic 
             and a.batch_id = b.no_batch 
             and a.`programme_code`=b.`kod_program`)
-            where 1 = 1
-            and b.sebab_cetak = 0
-            and a.certificate_number is not null
+            where a.certificate_number is not null
             and a.date_print is not null");
     }
 
