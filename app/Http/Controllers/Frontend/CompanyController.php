@@ -436,6 +436,7 @@ class CompanyController extends Controller
             if ($post > 0) {
 
                 $certificates = Certificate::leftjoin('posts', 'posts.certificate_id', '=', 'certificates.id')
+                    ->select('certificates.*')
                     ->where('certificates.ic_number', 'like', '%' . $a . '%')
                     ->where('certificates.flag_printed', 'Y')
                     ->where('certificates.source', 'syarikat')
@@ -793,7 +794,7 @@ class CompanyController extends Controller
     {
         //select yg flag_printed = N , source = syarikat yang cetakan <> 'cetakan pertama'
         $certificates = Certificate::where('flag_printed', 'N')
-            ->where('printed_remark','<>', 'cetakan pertama')
+            ->where('printed_remark', '<>', 'cetakan pertama')
             ->where('source', 'syarikat')
             ->orderBy('name', 'asc')
             ->get();
