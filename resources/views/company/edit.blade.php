@@ -124,9 +124,9 @@
                     </div>
                     <div class="col-md-6">
                         @php
-                            foreach($seqs as $key => $val)
+                            foreach($seqs as $seq)
                             {
-                                echo strtoupper($key) . " - " . str_pad($val, 6, '0', STR_PAD_LEFT) . "<br/>";
+                                echo strtoupper(explode('_', $seq->code)[1]) . " - " . str_pad($seq->value, 6, '0', STR_PAD_LEFT) . "<br/>";
                             }
                         @endphp
                     </div>
@@ -143,8 +143,8 @@
                         <select id="start_siries" name="start_siries" class="form-control">
                             <option value="0"><< Sila Pilih >></option>
                             <?php
-                            foreach ($seqs as $key => $val) {
-                                echo "<option value=\"" . strtoupper($key) . "\" data-runnum=\"" . $val . "\">" . strtoupper($key) . "</option>";
+                            foreach ($seqs as $seq) {
+                                echo "<option value=\"" . strtoupper(explode('_', $seq->code)[1]) . "\" data-runnum=\"" . $seq->value . "\">" . strtoupper(explode('_', $seq->code)[1]) . "</option>";
                             }
                             ?>
                         </select>

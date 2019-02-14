@@ -344,11 +344,12 @@ class CompanyController extends Controller
 //        $post = Post::where('certificate_id', $id)->first();
         $statuses = Lookup::where('name', 'user_status')->get();
 
-        foreach (CertSeq::get() as $seq) {
-            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
-        }
+        $seqs = Sysvars::where('code', 'like', 'DALAMAN%')->get();
 
-        $seqs = Config::get('esijil.cert');
+        foreach ($seqs as $seq) {
+            Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
+
+        }
 
         return view('company.edit', compact('certificate', 'statuses', 'seqs'));
     }
@@ -362,22 +363,33 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $certificate = Certificate::findOrFail($id);
-//        $certificate->address = $request->input('address');
-//        $certificate->status = $request->input('status');
-//        $certificate->flag_printed = $request->input('flag');
-        $certificate->flag_printed = 'Y';
-        $certificate->current_status = 'telah dicetak';
-        $certificate->certificate_number = $request->input('start_siries') . $request->input('siries');
-//        $certificate->date_print = $request->input('date_print');
-        $certificate->remark = $request->input('remark');
+        $siries = (int)$request->input('siries');
 
-        if ($certificate->save()) {
-            return redirect('/company-print/search-edit')->with('successMessage', 'Maklumat telah dikemaskini');
-        } else {
-            return back()->with('errorMessage', 'Tidak dapat kemaskini rekod. Hubungi Admin');
-        }
+        $sysSiri = Sysvars::where('code', 'DALAMAN_' . $request->input('start_siries'))->first();
+
+        $certificate = Certificate::findOrFail($id);
+
+        DB::transaction(function () use ($certificate, $sysSiri, $request, $siries) {
+
+            if ($request->input('start_siries') == 'NULL') {
+                $certificate->certificate_number = str_pad((string)$siries, 6, "0", STR_PAD_LEFT);
+            } else {
+                $certificate->certificate_number = $request->input('start_siries') . str_pad((string)$siries, 6, "0", STR_PAD_LEFT);
+            }
+
+            $certificate->flag_printed = 'Y';
+            $certificate->current_status = 'telah dicetak';
+            $certificate->remark = $request->input('remark');
+
+            $certificate->save();
+
+            if ($siries > $sysSiri->value) {
+                $sysSiri->value = $siries;
+                $sysSiri->save();
+            }
+        });
+
+        return redirect('/company-print/search-edit')->with('successMessage', 'Maklumat telah dikemaskini');
     }
 
     /**
