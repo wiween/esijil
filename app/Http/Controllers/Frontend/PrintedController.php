@@ -267,9 +267,9 @@ class PrintedController extends Controller
         $certificate = Certificate::findOrFail($id);
         $statuses = Lookup::where('name', 'user_status')->get();
 
-        foreach (CertSeq::get() as $seq) {
+        /* foreach (CertSeq::get() as $seq) {
             Config::set('esijil.cert.' . (($seq->abjad) ? $seq->abjad : 'null'), $seq->run_num);
-        }
+        } */
 
         $seqs = Sysvars::where('code', 'like', 'DALAMAN%')->get();
 
@@ -302,7 +302,7 @@ class PrintedController extends Controller
             $sysSiri->save();
         }
 
-        return redirect('/print/print/' . $id);
+        return redirect('/print/print-single2/' . $id);
     }
 
 
