@@ -143,29 +143,8 @@ class PrintedController extends Controller
         $certificates = Certificate::where('batch_id', $batch)->where('flag_printed', 'Y')
             ->whereNotNull('certificate_number')->get();
 
-       // dd($certificates);
+        $pdf = PDF::loadView('print.layout.multi', compact('certificates'));
 
-////        tgk jenis certificate
-        foreach ($certificates as $certificate) {
-
-            if ($certificate->level == 'PC') {
-                $pdf = PDF::loadView('print.certificate', compact('certificates'));
-            }
-            if ($certificate->level == 'TAHAP EMPAT' || $certificate->level == 'TAHAP LIMA') {
-                $pdf = PDF::loadView('print.certificate45', compact('certificates'))->setPaper('a4', 'landscape');
-            }
-            if ($certificate->level == 'TAHAP SATU' || $certificate->level == 'TAHAP DUA' || $certificate->level == 'TAHAP TIGA') {
-
-                if ($certificate->type == 'ndt') {
-                    $pdf = PDF::loadView('print.certificatendt', compact('certificates'));
-                } else {
-                    $pdf = PDF::loadView('print.certificate13', compact('certificates'));
-                }
-            }
-        }
-
-//        $pdf = PDF::loadView('print.certificate', compact('certificates'));
-        //return $pdf->download('report.pdf');
         return $pdf->stream('reports.pdf');
     }
 
