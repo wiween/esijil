@@ -205,6 +205,8 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/replacement/create/{id}/{cn}', 'Frontend\ReplacementController@create');
     Route::post('/replacement/create/{id}/{cn}', 'Frontend\ReplacementController@store');
     Route::get('/replacement/payment/{id}', 'Frontend\ReplacementController@payNow');
+    Route::get('/replacement/{certificate}/edit', 'Frontend\ReplacementController@edit');
+    Route::put('/replacement/{certificate}', 'Frontend\ReplacementController@update');
 
 //    Route::post('/replacement/epayment/{id}', 'Frontend\ReplacementController@storePayment');
     Route::get('/replacement/receipt/{id}', 'Frontend\ReplacementController@receipt');

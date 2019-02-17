@@ -114,7 +114,7 @@
                     </tr>
                 </table>
                 <br>
-                <a href="{{ url('') }}/replacement/edit/{{ $certificate->id }}/{{ $certificate->certificate_number }}" class="btn btn-primary btn-block">Kemaskini Rekod</a>
+                <a href="{{ url('') }}/replacement/{{ $certificate->id }}/edit" class="btn btn-primary btn-block">Kemaskini Rekod</a>
                 <a href="{{ url('') }}/replacement/flag/Y/{{ $replacement->id }}" class="btn btn-success btn-block">Sahkan Rekod</a>
                 <a href="{{ url('') }}/replacement/flag/N/{{ $replacement->id }}" class="btn btn-danger btn-block">Batalkan Rekod</a>
 

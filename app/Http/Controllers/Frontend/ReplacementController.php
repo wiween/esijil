@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Certificate;
-use App\Payment;
 use App\Post;
+use App\Payment;
 use App\Replacement;
+use App\Certificate;
 use App\TypeReplacement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -94,7 +94,7 @@ class ReplacementController extends Controller
         $replacement->certificate_id = $id;
         $replacement->old_certificate_number = $cn;
         $replacement->status_old = $certificate->status;
-        $replacement->date_printed_old =  $certificate->date_print;
+        $replacement->date_printed_old = $certificate->date_print;
 
         if ($request->input('type') == 'Kesilapan JPK') {
             $replacement->flag_payment = 'Z'; //zero cost - tiada bayaran
@@ -104,23 +104,23 @@ class ReplacementController extends Controller
         //post - ade tak?
         $post = Post::where('certificate_id', $id)->count();
 
-        if($post > 0) {
+        if ($post > 0) {
             $post = Post::where('certificate_id', $id)->first();
-            $replacement->post_id =  $post->id;
-        }else {
+            $replacement->post_id = $post->id;
+        } else {
             $replacement->post_id = 'tiada';
         }
 
         //buat agihan semula masukkan dalam senarai agihan - update certificate
-          $certificate->flag_printed = 'N';
-          $certificate->source = null;
-          $certificate->printed_remark = $cetakan;
-          $certificate->certificate_number = null;
-          $certificate->date_print = null;
-          $certificate->qrlink = null;
-          $certificate->session = null;
-          $certificate->current_status = 'dalam proses percetakan';
-          $certificate->save();
+        $certificate->flag_printed = 'N';
+        $certificate->source = null;
+        $certificate->printed_remark = $cetakan;
+        $certificate->certificate_number = null;
+        $certificate->date_print = null;
+        $certificate->qrlink = null;
+        $certificate->session = null;
+        $certificate->current_status = 'dalam proses percetakan';
+        $certificate->save();
 
         if ($replacement->save()) {
             return redirect('/replacement/epayment/' . $replacement->id)->with('successMessage', 'Maklumat Penggantian Telah Dijana');
@@ -180,7 +180,7 @@ class ReplacementController extends Controller
         //
         $certificate = Certificate::findOrFail($id);
         $replacement = Replacement::findOrFail($replaceid);
-        return view('replacement.show-after', compact('certificate','replacement'));
+        return view('replacement.show-after', compact('certificate', 'replacement'));
     }
 
     public function list($id)
@@ -208,9 +208,9 @@ class ReplacementController extends Controller
      * @param  \App\Replacement  $replacement
      * @return \Illuminate\Http\Response
      */
-    public function edit(Replacement $replacement)
+    public function edit(Certificate $certificate)
     {
-        //
+        return view("replacement.edit", compact('certificate'));
     }
 
     /**
@@ -220,9 +220,18 @@ class ReplacementController extends Controller
      * @param  \App\Replacement  $replacement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Replacement $replacement)
+    public function update(Request $request, Certificate $certificate)
     {
-        //
+        $certificate->name = $request->name;
+        $certificate->ic_number = $request->ic_number;
+        $certificate->level = $request->level;
+        $certificate->programme_code = $request->programme_code;
+        $certificate->programme_name = $request->programme_name;
+        $certificate->nama_syarikat = $request->nama_syarikat;
+
+        $certificate->save();
+
+        return back()->with('successMessage', 'Maklumat sijil telah dikemaskini');
     }
 
     /**
@@ -257,7 +266,7 @@ class ReplacementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     /**
+    /**
      * Display the specified resource.
      *
      * @param  \App\Replacement  $replacement
