@@ -93,6 +93,22 @@ class CertificateSource
             and a.date_print is not null");
     }
 
+    public function fallbackFalse()
+    {
+        return DB::select("select c.ic_or_passport as ic_number,
+	        b.no_batch as batch_id
+            from mosq.penilaian_bukan_kredit as a
+            left join mosq.daftar_batch as b on a.batch_id = b.id
+            left join mosq.profil_pelatih as c on a.pelatih_id = c.id
+            join mosq.program as d on b.program_id = d.id
+            join mosq.pb as e on b.pusat_id = e.id
+            left join mosq.urus_ppl as f on a.urus_ppl_id = f.id
+            join mosq.negeri as g on g.kod_negeri = e.kod_negeri
+            where 1 = 1
+            and a.keputusan_ppl = 0
+            and a.keputusan_jpp = 0");
+    }
+
     public function numToWord($num)
     {
         switch (trim($num)) {
