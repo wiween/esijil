@@ -13,20 +13,20 @@ class CertificateSource
             d.kod_program as programme_code, 'pb' as type,
             substring_index(substring_index(d.kod_program,':', 1),'-',-1) as level, e.kod_pusat as kod_pusat,
             e.nama_pusat as pb_name, g.id as state_id,
-            if(f.to_visit_date_tamat = '0000-00-00', null, date_format(to_visit_date_tamat,'%m%Y')) as date_ppl,
+            if(a_s.date_ppl = '0000-00-00', null, date_format(a_s.date_ppl,'%m%Y')) as date_ppl,
             null as result_ppl, b.no_batch as batch_id, e.alamat as address,
-            if(f.to_visit_date_tamat = '0000-00-00', null, date_format(to_visit_date_tamat,'%m%Y')) as tarikh_ppl, null as nama_syarikat, null as negeri_syarikat, null as ndt_sah_mula,
+            if(a_s.date_ppl = '0000-00-00', null, date_format(a_s.date_ppl,'%m%Y')) as tarikh_ppl, null as nama_syarikat, null as negeri_syarikat, null as ndt_sah_mula,
             null as ndt_sah_tamat, null as tarikh_ndt_terdahulu, null as tarikh_mesy_ndt, null as nama_program_terdahulu,
             null as no_sijil_dahulu, null as tarikh_sijil_baru_mula, null as jenis_sijil
             from mosq.penilaian_bukan_kredit as a
+            left join mosq.penilaian_bukan_kredit_summary as a_s on a.batch_id = a_s.batch_id
             left join mosq.daftar_batch as b on a.batch_id = b.id
             left join mosq.profil_pelatih as c on a.pelatih_id = c.id
             join mosq.program as d on b.program_id = d.id
             join mosq.pb as e on b.pusat_id = e.id
             left join mosq.urus_ppl as f on a.urus_ppl_id = f.id
             join mosq.negeri as g on g.kod_negeri = e.kod_negeri
-            where 1 = 1
-            and a.keputusan_ppl = 1
+            where a.keputusan_ppl = 1
             and a.keputusan_jpp = 1
             union select a.nama as name, a.no_ic as ic_number, b.nama_program as programme_name, a.kod_program as programme_code, 
             case 
