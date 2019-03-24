@@ -276,10 +276,11 @@ class CertificateController extends Controller
     {
         $replacement = Replacement::findOrFail($id);
         $student = $replacement->certificate_id;
-        $bil_cetakan = $replacement->printed_remark;
+//        $bil_cetakan = $replacement->printed_remark; 24/3 buang sbb dalam penggantian dah cater cetakan kedua ni
 
         //kemasini
         $certificate = Certificate::findOrFail($student);
+        $myid = $certificate->id;
         $date_printed_old = $certificate->date_printed;
         $current_status_old = $certificate->current_status;
         $printed_old = $certificate->printed_remark;
@@ -287,14 +288,15 @@ class CertificateController extends Controller
         $certificate->officer = $request->input('officer');
         $certificate->source = $request->input('source');
         $certificate->session = $request->input('session');
-        $certificate->printed_remark = $bil_cetakan;
+//        $certificate->printed_remark = $bil_cetakan;
+        $certificate->qrlink = url('pelajar/' . $myid);
         $certificate->flag_printed = 'N';
         $certificate->certificate_number = null;
         $certificate->current_status = 'dalam proses cetakan';
         $certificate->save();
 
-       //set post id kat replacement
-        $post = Post::where('certificate_id', $student)->first();
+        //set post id kat replacement
+        $post = Post::where('certificate_id', $myid)->first();
         //dd($post);
         $post_id = $post->id;
 
@@ -307,9 +309,16 @@ class CertificateController extends Controller
         $replacement->save();
 
         //delete post lama
-        $post->delete();
+//        $post->delete();
+        $delpost = Post::findOrFail($post_id);
 
-        return view('print_certificate.type-redistribute');
+        if ($delpost->delete()) {
+            return redirect('/certificate/type/redistribute')->with('successMessage', 'Maklumat telah dikemaskini');
+        } else {
+            return back()->with('errorMessage', 'Tidak dapat kemaskini rekod. Hubungi Admin');
+        }
+
+//        return view('print_certificate.type-redistribute');
     }
 
 

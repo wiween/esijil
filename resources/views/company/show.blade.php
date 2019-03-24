@@ -111,7 +111,7 @@
                     </tr>
                 </table>
                 <br>
-                <a href="{{ url('') }}/company-download/download/{{ $certificate->id }}" class="btn btn-primary btn-block">Muat Turun Rekod</a>
+                <a href="{{ url('') }}/company-download/single/{{ $certificate->ic_number }}" class="btn btn-primary btn-block">Muat Turun Rekod</a>
 
             </div>
         </div>

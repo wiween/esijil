@@ -66,13 +66,14 @@ class StatusController extends Controller
 //sijil Gantian join dengan repalcement
         } else if ($category == 'gantian') {
             if ($ic_number <> '' && $batch <> '') {
-                $certificates = Certificate::join('replacement', 'certificates.id', '=', 'replacements.certificate_id')->where('ic_number', $ic_number)->where('batch_id', $batch)->get();
+                $certificates = Certificate::join('replacements', 'certificates.id', '=', 'replacements.certificate_id')->where('certificates.ic_number', $ic_number)->where('certificates.batch_id', $batch)->get();
                 return view('status.result', compact('certificates'));
             } else if ($ic_number <> '' && $batch == '') {
-                $certificates = Certificate::join('replacement', 'certificates.id', '=', 'replacements.certificate_id')->where('ic_number', $ic_number)->get();
+                $certificates = Certificate::join('replacements', 'certificates.id', '=', 'replacements.certificate_id')->where('certificates.ic_number', $ic_number)->get();
+//                dd($certificates);
                 return view('status.result', compact('certificates'));
             } else if ($ic_number == '' && $batch <> '') {
-                $certificates = Certificate::join('replacement', 'certificates.id', '=', 'replacements.certificate_id')->where('batch_id', $batch)->get();
+                $certificates = Certificate::join('replacements', 'certificates.id', '=', 'replacements.certificate_id')->where('certificates.batch_id', $batch)->get();
                 return view('status.result', compact('certificates'));
             } else {
                 return view('status.noresult');

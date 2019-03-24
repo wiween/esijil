@@ -46,7 +46,7 @@
 
                       </label>
                       <div class="col-md-6">
-                          {{ $replacement->certificate->certificate_number }}
+                          {{ $replacement->old_certificate_number }}
                           @include('partials.error_block', ['item' => 'old_certificate_number'])
                       </div>
                   </div>

@@ -116,7 +116,7 @@ class ReplacementController extends Controller
         $certificate->source = null;
         $certificate->printed_remark = $cetakan;
         $certificate->certificate_number = null;
-        $certificate->date_print = null;
+        $certificate->date_print = '0000-00-00';
         $certificate->qrlink = null;
         $certificate->session = null;
         $certificate->current_status = 'dalam proses percetakan';

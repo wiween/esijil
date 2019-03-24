@@ -136,7 +136,7 @@ Route::group(['middleware' => ['audit', 'role:pencetak']], function () {
     Route::get('/certificate/statelist/{id}/{type}', 'Frontend\CertificateController@stateList');
     Route::post('/certificate/statelist/{id}/{type}', 'Frontend\CertificateController@updateState');
 
-    //agihan semula
+    //agihan
     Route::get('/certificate/type/redistribute', 'Frontend\CertificateController@typeredistribute');
     Route::get('/certificate/redistribute/{type}', 'Frontend\CertificateController@redistribute');
     Route::get('/certificate/done-batch/redistribute', 'Frontend\CertificateController@doneredistribute');
