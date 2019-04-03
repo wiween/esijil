@@ -12,7 +12,9 @@ class Certificate extends Model
 {
     //
     use SoftDeletes;
-    protected $dates = ['date_print', 'date_post', 'date_receive', 'tarikh_mesy_ndt'];
+
+    protected $dates = ['date_print', 'date_post', 'date_receive', 'tarikh_mesy_ndt', 'deleted_at', 'created_at', 'updated_at'];
+
     protected $fillable = [
         'name', 'ic_number', 'programme_name',
         'programme_code', 'type', 'level',
@@ -44,7 +46,8 @@ class Certificate extends Model
         return $this->hasMany('App\Finance');
     }
 
-    public function state() {
+    public function state()
+    {
         return $this->belongsTo('App\State');
     }
 }

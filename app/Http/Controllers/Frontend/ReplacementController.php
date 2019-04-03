@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Carbon\Carbon;
 use App\Post;
 use App\Payment;
 use App\Replacement;
@@ -38,7 +39,10 @@ class ReplacementController extends Controller
      */
     public function create($id, $cn)
     {
-        //
+        //phpinfo();
+        //die();
+        //return;
+
         $certificate = Certificate::where('id', $id)->where('certificate_number', $cn)->first();
         $types = TypeReplacement::all();
         return view('replacement.create', compact('certificate', 'types'));
@@ -52,11 +56,11 @@ class ReplacementController extends Controller
      */
     public function store(Request $request, $id, $cn)
     {
-//        return $request->all();
-//        return $id;
+        //      return $request->all();
+        //      return $id;
         $countreplacement = Replacement::where('certificate_id', $id)->where('old_certificate_number', $cn)->count();
-       //return $countreplacement;
-//        exit();
+        //return $countreplacement;
+        //        exit();
         if ($countreplacement == 0) {
             $cetakan = "cetakan kedua";
         } elseif ($countreplacement == 1) {
@@ -81,8 +85,8 @@ class ReplacementController extends Controller
 
         // select dulu certificate
         $certificate = Certificate::where('id', $id)->where('certificate_number', $cn)->first();
-//        echo $certificate;
-//        exit();
+        // dd($certificate);
+        // exit();
 
 
         $replacement = new Replacement();
@@ -116,13 +120,30 @@ class ReplacementController extends Controller
         $certificate->source = null;
         $certificate->printed_remark = $cetakan;
         $certificate->certificate_number = null;
-        $certificate->date_print = '0000-00-00';
+        $certificate->date_print = null;
         $certificate->qrlink = null;
         $certificate->session = null;
         $certificate->current_status = 'dalam proses percetakan';
         $certificate->save();
 
         if ($replacement->save()) {
+            if ($request->input('cara_bayar') == 'MANUAL') {
+                $payment = Payment::firstOrCreate(
+                    [
+                        'transaction_id' => Carbon::now()->toDateTimeString(),
+                        'receipt_no' => $request->input('txt-resit')
+                    ],
+                    [
+                        'flag' => 'Y',
+                        'payment_date' => Carbon::now()->toDateTimeString(),
+                        'transaction_type' => $replacement->type_replacement,
+                        'replacement_id' => $replacement->id,
+                    ]
+                );
+
+                return redirect('/replacement/search')->with('successMessage', 'Maklumat Penggantian Telah Dijana');
+            }
+
             return redirect('/replacement/epayment/' . $replacement->id)->with('successMessage', 'Maklumat Penggantian Telah Dijana');
         } else {
             return back()->with('errorMessage', 'Tidak boleh jana maklumat penggantian. Sila hubungi Admin');
@@ -159,7 +180,6 @@ class ReplacementController extends Controller
         } else {
             return back()->with('errorMessage', 'Tidak');
         }
-
     }
 
     /**
@@ -256,7 +276,7 @@ class ReplacementController extends Controller
     {
         //
         $replacement = Replacement::findOrFail($id);
-//        $types = TypeReplacement::all();
+        //        $types = TypeReplacement::all();
         return view('replacement.payment', compact('replacement'));
     }
 
@@ -286,11 +306,11 @@ class ReplacementController extends Controller
         $b = $request->input('batch');
         //dd ($a);
         if ($a <> '') {
-            $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->get();
+            $certificates = Certificate::where('ic_number', 'like', '%' . $a . '%')->whereNotNull('certificate_number')->get();
         }
 
         if ($b <> '') {
-            $certificates = Certificate::where('batch_id', $b)->orderBy('name', 'asc')->get();
+            $certificates = Certificate::where('batch_id', $b)->orderBy('name', 'asc')->whereNotNull('certificate_number')->get();
         }
 
         //dd ($certificates);

@@ -100,6 +100,29 @@
                     </div>
                 </div>
 
+                <div class="form-group{{ $errors->has('cara_bayar') ? ' has-error' : '' }}">
+                    <label for="type" class="col-md-4 control-label">
+                       Cara Bayar
+                        <span class="text-danger"> * </span>
+                    </label>
+                    <div class="col-md-6">
+                        <select id="cara_bayar" name="cara_bayar" class="form-control">
+                            <option value="ONLINE">Pembayaran Online</option>
+                            <option value="MANUAL">Pembayaran Manual</option>
+                        </select>
+                        @include('partials.error_block', ['item' => 'type'])
+                    </div>
+                </div>
+
+                <div id="no-resit-ph" class="form-group" style="display: none;">
+                    <label for="reason" class="col-md-4 control-label">
+                       No Resit Sebagai bukti pembayaran
+                        <span class="text-danger"> * </span>
+                    </label>
+                    <div class="col-md-6">
+                        <input id="txt-resit" name="txt-resit" type="text" class="form-control" required disabled>
+                    </div>
+                </div>
 
                 {{-- Submit Button --}}
                 <div class="form-group">
@@ -115,4 +138,18 @@
 @endsection
 
 @section('footer_script')
+    <script>
+        $(function() {
+            $('#cara_bayar').on('change', function(e) {
+                if(e.target.value == 'MANUAL') {
+                    $('#no-resit-ph').toggle();
+                    $("#txt-resit").prop('disabled', false);
+                } else {
+                    $('#no-resit-ph').toggle();
+                    $("#txt-resit").prop('disabled', true);
+                }
+            });
+        });
+
+    </script>
 @endsection
